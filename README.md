@@ -1,2 +1,2 @@
-# clicksend-csharp-v2
-Repo for a new and improved csharp SDKs
+# Created with Openapi Generator
+See the project's [REAMDE](src/ClickSend/README.md)
