@@ -44,7 +44,7 @@ namespace ClickSend.Model
         /// <param name="postTotal">postTotal</param>
         /// <param name="emailTotal">emailTotal</param>
         [JsonConstructor]
-        public ViewAccountUsageData(Option<List<ViewAccountUsageDataSmsInner>?> sms = default, Option<List<ViewAccountUsageDataSmsInner>?> voice = default, Option<List<ViewAccountUsageDataSmsInner>?> fax = default, Option<List<ViewAccountUsageDataSmsInner>?> post = default, Option<List<ViewAccountUsageDataEmailInner>?> email = default, Option<ViewAccountUsageDataSmsTotal?> smsTotal = default, Option<ViewAccountUsageDataSmsTotal?> voiceTotal = default, Option<ViewAccountUsageDataSmsTotal?> faxTotal = default, Option<ViewAccountUsageDataSmsTotal?> postTotal = default, Option<ViewVoiceStatisticsDataTotalOutbound?> emailTotal = default)
+        public ViewAccountUsageData(Option<List<ViewAccountUsageDataSmsInner>?> sms = default, Option<List<ViewAccountUsageDataVoiceInner>?> voice = default, Option<List<ViewAccountUsageDataVoiceInner>?> fax = default, Option<List<ViewAccountUsageDataVoiceInner>?> post = default, Option<List<ViewAccountUsageDataEmailInner>?> email = default, Option<ViewAccountUsageDataSmsTotal?> smsTotal = default, Option<ViewAccountUsageDataSmsTotal?> voiceTotal = default, Option<ViewAccountUsageDataSmsTotal?> faxTotal = default, Option<ViewAccountUsageDataSmsTotal?> postTotal = default, Option<ViewAccountUsageDataEmailTotal?> emailTotal = default)
         {
             SmsOption = sms;
             VoiceOption = voice;
@@ -80,42 +80,42 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<ViewAccountUsageDataSmsInner>?> VoiceOption { get; private set; }
+        public Option<List<ViewAccountUsageDataVoiceInner>?> VoiceOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Voice
         /// </summary>
         /* <example>[{&quot;subaccount_id&quot;:1039,&quot;username&quot;:&quot;user1&quot;,&quot;total_count&quot;:&quot;6.00&quot;,&quot;total_price&quot;:&quot;0.1980&quot;},{&quot;subaccount_id&quot;:1047,&quot;username&quot;:&quot;user5&quot;,&quot;total_count&quot;:&quot;1.00&quot;,&quot;total_price&quot;:&quot;0.0330&quot;}]</example> */
         [JsonPropertyName("voice")]
-        public List<ViewAccountUsageDataSmsInner>? Voice { get { return this.VoiceOption.Value; } set { this.VoiceOption = new(value); } }
+        public List<ViewAccountUsageDataVoiceInner>? Voice { get { return this.VoiceOption.Value; } set { this.VoiceOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Fax
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<ViewAccountUsageDataSmsInner>?> FaxOption { get; private set; }
+        public Option<List<ViewAccountUsageDataVoiceInner>?> FaxOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Fax
         /// </summary>
         /* <example>[{&quot;subaccount_id&quot;:1039,&quot;username&quot;:&quot;user1&quot;,&quot;total_count&quot;:&quot;3.00&quot;,&quot;total_price&quot;:&quot;0.6943&quot;},{&quot;subaccount_id&quot;:1047,&quot;username&quot;:&quot;user5&quot;,&quot;total_count&quot;:&quot;1.00&quot;,&quot;total_price&quot;:&quot;0.2314&quot;}]</example> */
         [JsonPropertyName("fax")]
-        public List<ViewAccountUsageDataSmsInner>? Fax { get { return this.FaxOption.Value; } set { this.FaxOption = new(value); } }
+        public List<ViewAccountUsageDataVoiceInner>? Fax { get { return this.FaxOption.Value; } set { this.FaxOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Post
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<ViewAccountUsageDataSmsInner>?> PostOption { get; private set; }
+        public Option<List<ViewAccountUsageDataVoiceInner>?> PostOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Post
         /// </summary>
         /* <example>[{&quot;subaccount_id&quot;:1039,&quot;username&quot;:&quot;user1&quot;,&quot;total_count&quot;:&quot;10&quot;,&quot;total_price&quot;:&quot;8.5624&quot;},{&quot;subaccount_id&quot;:1047,&quot;username&quot;:&quot;user5&quot;,&quot;total_count&quot;:&quot;3&quot;,&quot;total_price&quot;:&quot;2.5586&quot;}]</example> */
         [JsonPropertyName("post")]
-        public List<ViewAccountUsageDataSmsInner>? Post { get { return this.PostOption.Value; } set { this.PostOption = new(value); } }
+        public List<ViewAccountUsageDataVoiceInner>? Post { get { return this.PostOption.Value; } set { this.PostOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Email
@@ -188,13 +188,13 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<ViewVoiceStatisticsDataTotalOutbound?> EmailTotalOption { get; private set; }
+        public Option<ViewAccountUsageDataEmailTotal?> EmailTotalOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets EmailTotal
         /// </summary>
         [JsonPropertyName("email_total")]
-        public ViewVoiceStatisticsDataTotalOutbound? EmailTotal { get { return this.EmailTotalOption.Value; } set { this.EmailTotalOption = new(value); } }
+        public ViewAccountUsageDataEmailTotal? EmailTotal { get { return this.EmailTotalOption.Value; } set { this.EmailTotalOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -252,15 +252,15 @@ namespace ClickSend.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<List<ViewAccountUsageDataSmsInner>?> sms = default;
-            Option<List<ViewAccountUsageDataSmsInner>?> voice = default;
-            Option<List<ViewAccountUsageDataSmsInner>?> fax = default;
-            Option<List<ViewAccountUsageDataSmsInner>?> post = default;
+            Option<List<ViewAccountUsageDataVoiceInner>?> voice = default;
+            Option<List<ViewAccountUsageDataVoiceInner>?> fax = default;
+            Option<List<ViewAccountUsageDataVoiceInner>?> post = default;
             Option<List<ViewAccountUsageDataEmailInner>?> email = default;
             Option<ViewAccountUsageDataSmsTotal?> smsTotal = default;
             Option<ViewAccountUsageDataSmsTotal?> voiceTotal = default;
             Option<ViewAccountUsageDataSmsTotal?> faxTotal = default;
             Option<ViewAccountUsageDataSmsTotal?> postTotal = default;
-            Option<ViewVoiceStatisticsDataTotalOutbound?> emailTotal = default;
+            Option<ViewAccountUsageDataEmailTotal?> emailTotal = default;
 
             while (utf8JsonReader.Read())
             {
@@ -281,13 +281,13 @@ namespace ClickSend.Model
                             sms = new Option<List<ViewAccountUsageDataSmsInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataSmsInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "voice":
-                            voice = new Option<List<ViewAccountUsageDataSmsInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataSmsInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            voice = new Option<List<ViewAccountUsageDataVoiceInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataVoiceInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "fax":
-                            fax = new Option<List<ViewAccountUsageDataSmsInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataSmsInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            fax = new Option<List<ViewAccountUsageDataVoiceInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataVoiceInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "post":
-                            post = new Option<List<ViewAccountUsageDataSmsInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataSmsInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            post = new Option<List<ViewAccountUsageDataVoiceInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataVoiceInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "email":
                             email = new Option<List<ViewAccountUsageDataEmailInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataEmailInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
@@ -305,7 +305,7 @@ namespace ClickSend.Model
                             postTotal = new Option<ViewAccountUsageDataSmsTotal?>(JsonSerializer.Deserialize<ViewAccountUsageDataSmsTotal>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "email_total":
-                            emailTotal = new Option<ViewVoiceStatisticsDataTotalOutbound?>(JsonSerializer.Deserialize<ViewVoiceStatisticsDataTotalOutbound>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            emailTotal = new Option<ViewAccountUsageDataEmailTotal?>(JsonSerializer.Deserialize<ViewAccountUsageDataEmailTotal>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;

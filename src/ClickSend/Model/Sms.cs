@@ -47,7 +47,7 @@ namespace ClickSend.Model
         /// <param name="country">The country of the recipient in two-letter format (e.g. US, UK, AU, NZ, etc).</param>
         /// <param name="status">The response code of the operation. Visit [this page](/#application-status-codes) for more information. This reflects the actual status of the individual message.</param>
         [JsonConstructor]
-        public Sms(Option<int?> date = default, Option<string?> to = default, Option<string?> body = default, Option<string?> from = default, Option<int?> schedule = default, Option<string?> messageId = default, Option<int?> messageParts = default, Option<decimal?> messagePrice = default, Option<string?> customString = default, Option<string?> contactId = default, Option<bool?> isSharedSystemNumber = default, Option<string?> country = default, Option<string?> status = default)
+        public Sms(Option<int?> date = default, Option<string?> to = default, Option<string?> body = default, Option<string?> from = default, Option<string?> schedule = default, Option<string?> messageId = default, Option<int?> messageParts = default, Option<string?> messagePrice = default, Option<string?> customString = default, Option<string?> contactId = default, Option<bool?> isSharedSystemNumber = default, Option<string?> country = default, Option<string?> status = default)
         {
             DateOption = date;
             ToOption = to;
@@ -132,7 +132,7 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<int?> ScheduleOption { get; private set; }
+        public Option<string?> ScheduleOption { get; private set; }
 
         /// <summary>
         /// The scheduled date of the message. It is in &lt;a href&#x3D;\&quot;http://help.clicksend.com/what-is-a-unix-timestamp\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Unix format&lt;/a&gt;.
@@ -140,7 +140,7 @@ namespace ClickSend.Model
         /// <value>The scheduled date of the message. It is in &lt;a href&#x3D;\&quot;http://help.clicksend.com/what-is-a-unix-timestamp\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Unix format&lt;/a&gt;.</value>
         /* <example>1436874701</example> */
         [JsonPropertyName("schedule")]
-        public int? Schedule { get { return this.ScheduleOption.Value; } set { this.ScheduleOption = new(value); } }
+        public string? Schedule { get { return this.ScheduleOption.Value; } set { this.ScheduleOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of MessageId
@@ -177,7 +177,7 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> MessagePriceOption { get; private set; }
+        public Option<string?> MessagePriceOption { get; private set; }
 
         /// <summary>
         /// The price of this message. This depends on the total number of parts of the message.
@@ -185,7 +185,7 @@ namespace ClickSend.Model
         /// <value>The price of this message. This depends on the total number of parts of the message.</value>
         /* <example>0.07</example> */
         [JsonPropertyName("message_price")]
-        public decimal? MessagePrice { get { return this.MessagePriceOption.Value; } set { this.MessagePriceOption = new(value); } }
+        public string? MessagePrice { get { return this.MessagePriceOption.Value; } set { this.MessagePriceOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of CustomString
@@ -324,10 +324,10 @@ namespace ClickSend.Model
             Option<string?> to = default;
             Option<string?> body = default;
             Option<string?> from = default;
-            Option<int?> schedule = default;
+            Option<string?> schedule = default;
             Option<string?> messageId = default;
             Option<int?> messageParts = default;
-            Option<decimal?> messagePrice = default;
+            Option<string?> messagePrice = default;
             Option<string?> customString = default;
             Option<string?> contactId = default;
             Option<bool?> isSharedSystemNumber = default;
@@ -362,7 +362,7 @@ namespace ClickSend.Model
                             from = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "schedule":
-                            schedule = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            schedule = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "message_id":
                             messageId = new Option<string?>(utf8JsonReader.GetString()!);
@@ -371,7 +371,7 @@ namespace ClickSend.Model
                             messageParts = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "message_price":
-                            messagePrice = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
+                            messagePrice = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "custom_string":
                             customString = new Option<string?>(utf8JsonReader.GetString()!);
@@ -469,8 +469,14 @@ namespace ClickSend.Model
             if (sms.FromOption.IsSet && sms.From == null)
                 throw new ArgumentNullException(nameof(sms.From), "Property is required for class Sms.");
 
+            if (sms.ScheduleOption.IsSet && sms.Schedule == null)
+                throw new ArgumentNullException(nameof(sms.Schedule), "Property is required for class Sms.");
+
             if (sms.MessageIdOption.IsSet && sms.MessageId == null)
                 throw new ArgumentNullException(nameof(sms.MessageId), "Property is required for class Sms.");
+
+            if (sms.MessagePriceOption.IsSet && sms.MessagePrice == null)
+                throw new ArgumentNullException(nameof(sms.MessagePrice), "Property is required for class Sms.");
 
             if (sms.CustomStringOption.IsSet && sms.CustomString == null)
                 throw new ArgumentNullException(nameof(sms.CustomString), "Property is required for class Sms.");
@@ -497,7 +503,7 @@ namespace ClickSend.Model
                 writer.WriteString("from", sms.From);
 
             if (sms.ScheduleOption.IsSet)
-                writer.WriteNumber("schedule", sms.ScheduleOption.Value!.Value);
+                writer.WriteString("schedule", sms.Schedule);
 
             if (sms.MessageIdOption.IsSet)
                 writer.WriteString("message_id", sms.MessageId);
@@ -506,7 +512,7 @@ namespace ClickSend.Model
                 writer.WriteNumber("message_parts", sms.MessagePartsOption.Value!.Value);
 
             if (sms.MessagePriceOption.IsSet)
-                writer.WriteNumber("message_price", sms.MessagePriceOption.Value!.Value);
+                writer.WriteString("message_price", sms.MessagePrice);
 
             if (sms.CustomStringOption.IsSet)
                 writer.WriteString("custom_string", sms.CustomString);

@@ -39,7 +39,7 @@ namespace ClickSend.Model
         /// <param name="data">data</param>
         /// <param name="currency">currency</param>
         [JsonConstructor]
-        public ViewAvailableNumbers(Option<int?> httpCode = default, Option<string?> responseCode = default, Option<string?> responseMsg = default, Option<List<ViewAvailableNumbersDataInner>?> data = default, Option<Currency?> currency = default)
+        public ViewAvailableNumbers(Option<int?> httpCode = default, Option<string?> responseCode = default, Option<string?> responseMsg = default, Option<ViewAvailableNumbersData?> data = default, Option<Currency?> currency = default)
         {
             HttpCodeOption = httpCode;
             ResponseCodeOption = responseCode;
@@ -101,14 +101,13 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<ViewAvailableNumbersDataInner>?> DataOption { get; private set; }
+        public Option<ViewAvailableNumbersData?> DataOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Data
         /// </summary>
-        /* <example>[{&quot;country&quot;:&quot;AU&quot;,&quot;country_name&quot;:&quot;Australia&quot;,&quot;dedicated_number&quot;:&quot;+61280662298&quot;,&quot;price_setup&quot;:&quot;0.0000&quot;,&quot;price_monthly&quot;:&quot;20.7100&quot;,&quot;price_total&quot;:&quot;20.7100&quot;,&quot;address_requirement&quot;:&quot;local&quot;},{&quot;country&quot;:&quot;AU&quot;,&quot;country_name&quot;:&quot;Australia&quot;,&quot;dedicated_number&quot;:&quot;+61280662299&quot;,&quot;price_setup&quot;:&quot;0.0000&quot;,&quot;price_monthly&quot;:&quot;20.7100&quot;,&quot;price_total&quot;:&quot;20.7100&quot;,&quot;address_requirement&quot;:&quot;local&quot;}]</example> */
         [JsonPropertyName("data")]
-        public List<ViewAvailableNumbersDataInner>? Data { get { return this.DataOption.Value; } set { this.DataOption = new(value); } }
+        public ViewAvailableNumbersData? Data { get { return this.DataOption.Value; } set { this.DataOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Currency
@@ -176,7 +175,7 @@ namespace ClickSend.Model
             Option<int?> httpCode = default;
             Option<string?> responseCode = default;
             Option<string?> responseMsg = default;
-            Option<List<ViewAvailableNumbersDataInner>?> data = default;
+            Option<ViewAvailableNumbersData?> data = default;
             Option<Currency?> currency = default;
 
             while (utf8JsonReader.Read())
@@ -204,7 +203,7 @@ namespace ClickSend.Model
                             responseMsg = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "data":
-                            data = new Option<List<ViewAvailableNumbersDataInner>?>(JsonSerializer.Deserialize<List<ViewAvailableNumbersDataInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            data = new Option<ViewAvailableNumbersData?>(JsonSerializer.Deserialize<ViewAvailableNumbersData>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "_currency":
                             currency = new Option<Currency?>(JsonSerializer.Deserialize<Currency>(ref utf8JsonReader, jsonSerializerOptions)!);

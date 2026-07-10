@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Outbound** | [**ViewVoiceStatisticsDataStatsInnerOutbound**](ViewVoiceStatisticsDataStatsInnerOutbound.md) |  | [optional] 
+**Outbound** | [**ViewVoiceStatisticsDataTotalOutbound**](ViewVoiceStatisticsDataTotalOutbound.md) |  | [optional] 
 **Inbound** | [**CancelAllSmsData**](CancelAllSmsData.md) |  | [optional] 
 **Bounced** | [**CancelAllSmsData**](CancelAllSmsData.md) |  | [optional] 
 

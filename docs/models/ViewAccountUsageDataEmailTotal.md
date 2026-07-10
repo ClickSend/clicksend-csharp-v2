@@ -1,11 +1,11 @@
-# ClickSend.Model.ViewVoiceStatisticsDataStatsInnerOutbound
+# ClickSend.Model.ViewAccountUsageDataEmailTotal
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Count** | **int** | The count of outbound calls. | [optional] 
-**Price** | **decimal** | The price of outbound calls. | [optional] 
+**Count** | **int** | The total count of emails. | [optional] 
+**Price** | **string** | The total price of emails. | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

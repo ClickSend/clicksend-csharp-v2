@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Date** | **decimal** | The date. | [optional] 
-**Outbound** | [**ViewVoiceStatisticsDataStatsInnerOutbound**](ViewVoiceStatisticsDataStatsInnerOutbound.md) |  | [optional] 
+**Outbound** | [**ViewVoiceStatisticsDataTotalOutbound**](ViewVoiceStatisticsDataTotalOutbound.md) |  | [optional] 
 **Inbound** | [**CancelAllSmsData**](CancelAllSmsData.md) |  | [optional] 
 **Bounced** | [**CancelAllSmsData**](CancelAllSmsData.md) |  | [optional] 
 

@@ -353,8 +353,10 @@ namespace ClickSend.Client
             _jsonOptions.Converters.Add(new ViewAccountUsageJsonConverter());
             _jsonOptions.Converters.Add(new ViewAccountUsageDataJsonConverter());
             _jsonOptions.Converters.Add(new ViewAccountUsageDataEmailInnerJsonConverter());
+            _jsonOptions.Converters.Add(new ViewAccountUsageDataEmailTotalJsonConverter());
             _jsonOptions.Converters.Add(new ViewAccountUsageDataSmsInnerJsonConverter());
             _jsonOptions.Converters.Add(new ViewAccountUsageDataSmsTotalJsonConverter());
+            _jsonOptions.Converters.Add(new ViewAccountUsageDataVoiceInnerJsonConverter());
             _jsonOptions.Converters.Add(new ViewAllEmailCampaignsJsonConverter());
             _jsonOptions.Converters.Add(new ViewAllEmailCampaignsDataJsonConverter());
             _jsonOptions.Converters.Add(new ViewAllMmsCampaignsJsonConverter());
@@ -368,7 +370,8 @@ namespace ClickSend.Client
             _jsonOptions.Converters.Add(new ViewAllowedEmailsJsonConverter());
             _jsonOptions.Converters.Add(new ViewAllowedEmailsDataInnerJsonConverter());
             _jsonOptions.Converters.Add(new ViewAvailableNumbersJsonConverter());
-            _jsonOptions.Converters.Add(new ViewAvailableNumbersDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new ViewAvailableNumbersDataJsonConverter());
+            _jsonOptions.Converters.Add(new ViewAvailableNumbersDataAllOfDataInnerJsonConverter());
             _jsonOptions.Converters.Add(new ViewClientAccountsJsonConverter());
             _jsonOptions.Converters.Add(new ViewClientAccountsDataJsonConverter());
             _jsonOptions.Converters.Add(new ViewCountriesJsonConverter());
@@ -398,6 +401,7 @@ namespace ClickSend.Client
             _jsonOptions.Converters.Add(new ViewLetterHistoryJsonConverter());
             _jsonOptions.Converters.Add(new ViewLetterHistoryDataJsonConverter());
             _jsonOptions.Converters.Add(new ViewListContactsJsonConverter());
+            _jsonOptions.Converters.Add(new ViewListContactsDataJsonConverter());
             _jsonOptions.Converters.Add(new ViewListsJsonConverter());
             _jsonOptions.Converters.Add(new ViewListsDataJsonConverter());
             _jsonOptions.Converters.Add(new ViewMasterEmailTemplateJsonConverter());
@@ -447,6 +451,7 @@ namespace ClickSend.Client
             _jsonOptions.Converters.Add(new ViewStrippedStringRulesDataJsonConverter());
             _jsonOptions.Converters.Add(new ViewStrippedStringRulesDataDataInnerJsonConverter());
             _jsonOptions.Converters.Add(new ViewSubaccountsJsonConverter());
+            _jsonOptions.Converters.Add(new ViewSubaccountsDataJsonConverter());
             _jsonOptions.Converters.Add(new ViewTemplateCategoriesJsonConverter());
             _jsonOptions.Converters.Add(new ViewTemplateCategoriesDataInnerJsonConverter());
             _jsonOptions.Converters.Add(new ViewTemplateCategoryJsonConverter());
@@ -462,7 +467,6 @@ namespace ClickSend.Client
             _jsonOptions.Converters.Add(new ViewVoiceStatisticsJsonConverter());
             _jsonOptions.Converters.Add(new ViewVoiceStatisticsDataJsonConverter());
             _jsonOptions.Converters.Add(new ViewVoiceStatisticsDataStatsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new ViewVoiceStatisticsDataStatsInnerOutboundJsonConverter());
             _jsonOptions.Converters.Add(new ViewVoiceStatisticsDataTotalJsonConverter());
             _jsonOptions.Converters.Add(new ViewVoiceStatisticsDataTotalOutboundJsonConverter());
             _jsonOptions.Converters.Add(new ViewYourNumbersJsonConverter());

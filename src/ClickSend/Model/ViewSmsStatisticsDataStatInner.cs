@@ -38,7 +38,7 @@ namespace ClickSend.Model
         /// <param name="inbound">inbound</param>
         /// <param name="bounced">bounced</param>
         [JsonConstructor]
-        public ViewSmsStatisticsDataStatInner(Option<decimal?> date = default, Option<ViewVoiceStatisticsDataStatsInnerOutbound?> outbound = default, Option<CancelAllSmsData?> inbound = default, Option<CancelAllSmsData?> bounced = default)
+        public ViewSmsStatisticsDataStatInner(Option<decimal?> date = default, Option<ViewVoiceStatisticsDataTotalOutbound?> outbound = default, Option<CancelAllSmsData?> inbound = default, Option<CancelAllSmsData?> bounced = default)
         {
             DateOption = date;
             OutboundOption = outbound;
@@ -69,13 +69,13 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<ViewVoiceStatisticsDataStatsInnerOutbound?> OutboundOption { get; private set; }
+        public Option<ViewVoiceStatisticsDataTotalOutbound?> OutboundOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Outbound
         /// </summary>
         [JsonPropertyName("outbound")]
-        public ViewVoiceStatisticsDataStatsInnerOutbound? Outbound { get { return this.OutboundOption.Value; } set { this.OutboundOption = new(value); } }
+        public ViewVoiceStatisticsDataTotalOutbound? Outbound { get { return this.OutboundOption.Value; } set { this.OutboundOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Inbound
@@ -153,7 +153,7 @@ namespace ClickSend.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<decimal?> date = default;
-            Option<ViewVoiceStatisticsDataStatsInnerOutbound?> outbound = default;
+            Option<ViewVoiceStatisticsDataTotalOutbound?> outbound = default;
             Option<CancelAllSmsData?> inbound = default;
             Option<CancelAllSmsData?> bounced = default;
 
@@ -176,7 +176,7 @@ namespace ClickSend.Model
                             date = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
                             break;
                         case "outbound":
-                            outbound = new Option<ViewVoiceStatisticsDataStatsInnerOutbound?>(JsonSerializer.Deserialize<ViewVoiceStatisticsDataStatsInnerOutbound>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            outbound = new Option<ViewVoiceStatisticsDataTotalOutbound?>(JsonSerializer.Deserialize<ViewVoiceStatisticsDataTotalOutbound>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "inbound":
                             inbound = new Option<CancelAllSmsData?>(JsonSerializer.Deserialize<CancelAllSmsData>(ref utf8JsonReader, jsonSerializerOptions)!);

@@ -43158,8 +43158,8 @@ components:
         schedule:
           description: The scheduled date of the message. It is in <a href="http://help.clicksend.com/what-is-a-unix-timestamp"
             target="_blank">Unix format</a>.
-          example: 1436874701
-          type: integer
+          example: "1436874701"
+          type: string
         message_id:
           description: The generated ID of the message. This ID is typically used
             as a reference for <a href="https://www.clicksend.com/au/help/" target="_blank">customer
@@ -43175,8 +43175,8 @@ components:
         message_price:
           description: The price of this message. This depends on the total number
             of parts of the message.
-          example: 0.07
-          type: number
+          example: "0.07"
+          type: string
         custom_string:
           description: A note that was sent from the request.
           example: this is a test
@@ -43943,8 +43943,8 @@ components:
         http_code:
           description: "The HTTP code of the response. Visit [this page](/#status-codes)\
             \ for more information."
-          example: "200"
-          type: string
+          example: 200
+          type: integer
         response_code:
           description: "The response code of the operation. Visit [this page](/#status-codes)\
             \ for more information."
@@ -45492,10 +45492,10 @@ components:
         from: from
         lang: en-au
         voice: female
-        schedule: 1436874701
+        schedule: "1436874701"
         message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-        message_parts: 1
-        message_price: 0.07
+        message_parts: "1"
+        message_price: "0.07"
         custom_string: this is a test
         user_id: 1
         subaccount_id: 1
@@ -45535,20 +45535,20 @@ components:
           type: string
         schedule:
           description: The timestamp when the message should be sent.
-          example: 1436874701
-          type: number
+          example: "1436874701"
+          type: string
         message_id:
           description: The ID of the message.
           example: BF7AD270-0DE2-418B-B606-71D527D9C1AE
           type: string
         message_parts:
           description: The number of parts in the message.
-          example: 1
-          type: number
+          example: "1"
+          type: string
         message_price:
           description: The price of the message.
-          example: 0.07
-          type: number
+          example: "0.07"
+          type: string
         custom_string:
           description: The custom string of the message.
           example: this is a test
@@ -45595,10 +45595,10 @@ components:
             from: from
             lang: en-au
             voice: female
-            schedule: 1436874701
+            schedule: "1436874701"
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: 1
-            message_price: 0.07
+            message_parts: "1"
+            message_price: "0.07"
             custom_string: this is a test
             user_id: 1
             subaccount_id: 1
@@ -45613,10 +45613,10 @@ components:
             from: from
             lang: en-au
             voice: female
-            schedule: 1436874701
+            schedule: "1436874701"
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: 1
-            message_price: 0.07
+            message_parts: "1"
+            message_price: "0.07"
             custom_string: this is a test
             user_id: 1
             subaccount_id: 1
@@ -45661,10 +45661,10 @@ components:
             from: from
             lang: en-au
             voice: female
-            schedule: 1436874701
+            schedule: "1436874701"
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: 1
-            message_price: 0.07
+            message_parts: "1"
+            message_price: "0.07"
             custom_string: this is a test
             user_id: 1
             subaccount_id: 1
@@ -45679,10 +45679,10 @@ components:
             from: from
             lang: en-au
             voice: female
-            schedule: 1436874701
+            schedule: "1436874701"
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: 1
-            message_price: 0.07
+            message_parts: "1"
+            message_price: "0.07"
             custom_string: this is a test
             user_id: 1
             subaccount_id: 1
@@ -45718,14 +45718,10 @@ components:
         data:
         - code: en-us
           country: "English, US"
-          gender:
-          - male
-          - female
+          gender: male
         - code: en-au
           country: "English, Australia"
-          gender:
-          - male
-          - female
+          gender: female
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -45743,14 +45739,10 @@ components:
           example:
           - code: en-us
             country: "English, US"
-            gender:
-            - male
-            - female
+            gender: male
           - code: en-au
             country: "English, Australia"
-            gender:
-            - male
-            - female
+            gender: female
           items:
             $ref: "#/components/schemas/view_voice_languages_data_inner"
           type: array
@@ -45925,10 +45917,10 @@ components:
             from: from
             lang: en-au
             voice: female
-            schedule: 1436874701
+            schedule: "1436874701"
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: 1
-            message_price: 0.07
+            message_parts: "1"
+            message_price: "0.07"
             custom_string: this is a test
             user_id: 1
             subaccount_id: 1
@@ -45943,10 +45935,10 @@ components:
             from: from
             lang: en-au
             voice: female
-            schedule: 1436874701
+            schedule: "1436874701"
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: 1
-            message_price: 0.07
+            message_parts: "1"
+            message_price: "0.07"
             custom_string: this is a test
             user_id: 1
             subaccount_id: 1
@@ -47904,19 +47896,19 @@ components:
           total:
             outbound:
               count: 1
-              price: "0"
+              price: 0
             bounced:
               count: 2
           stats:
           - date: 1441065600
             outbound:
-              count: 0
+              count: 1
               price: 0
             bounced:
               count: 2
           - date: 1441065600
             outbound:
-              count: 0
+              count: 1
               price: 0
             bounced:
               count: 2
@@ -47949,7 +47941,7 @@ components:
         data:
           total:
             outbound:
-              count: 0
+              count: 1
               price: 0
             inbound:
               count: 2
@@ -47958,7 +47950,7 @@ components:
           stat:
           - date: 1436918400
             outbound:
-              count: 0
+              count: 1
               price: 0
             inbound:
               count: 2
@@ -47966,7 +47958,7 @@ components:
               count: 2
           - date: 1436918400
             outbound:
-              count: 0
+              count: 1
               price: 0
             inbound:
               count: 2
@@ -48292,20 +48284,29 @@ components:
         response_code: SUCCESS
         response_msg: Here are some numbers.
         data:
-        - country: AU
-          country_name: Australia
-          dedicated_number: "+61280662298"
-          price_setup: "0.0000"
-          price_monthly: "20.7100"
-          price_total: "20.7100"
-          address_requirement: local
-        - country: AU
-          country_name: Australia
-          dedicated_number: "+61280662299"
-          price_setup: "0.0000"
-          price_monthly: "20.7100"
-          price_total: "20.7100"
-          address_requirement: local
+          total: 2
+          per_page: 15
+          current_page: 1
+          last_page: 1
+          next_page_url: next_page_url
+          prev_page_url: prev_page_url
+          from: 1
+          to: 2
+          data:
+          - country: AU
+            country_name: Australia
+            dedicated_number: "+61280662298"
+            price_setup: "0.0000"
+            price_monthly: "20.7100"
+            price_total: "20.7100"
+            address_requirement: local
+          - country: AU
+            country_name: Australia
+            dedicated_number: "+61280662299"
+            price_setup: "0.0000"
+            price_monthly: "20.7100"
+            price_total: "20.7100"
+            address_requirement: local
         _currency:
           currency_name_short: AUD
           currency_prefix_d: $
@@ -48325,24 +48326,7 @@ components:
           example: Here are some numbers.
           type: string
         data:
-          example:
-          - country: AU
-            country_name: Australia
-            dedicated_number: "+61280662298"
-            price_setup: "0.0000"
-            price_monthly: "20.7100"
-            price_total: "20.7100"
-            address_requirement: local
-          - country: AU
-            country_name: Australia
-            dedicated_number: "+61280662299"
-            price_setup: "0.0000"
-            price_monthly: "20.7100"
-            price_total: "20.7100"
-            address_requirement: local
-          items:
-            $ref: "#/components/schemas/view_available_numbers_data_inner"
-          type: array
+          $ref: "#/components/schemas/view_available_numbers_data"
         _currency:
           $ref: "#/components/schemas/currency"
       type: object
@@ -49471,8 +49455,8 @@ components:
             count: 33
             price: "2.4417"
           email_total:
-            count: 1
-            price: "0"
+            count: 4990
+            price: "9.0020"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -50056,7 +50040,7 @@ components:
         data:
           packages:
           - package_id: 1
-            package_price: 20
+            package_price: "20"
             price_rate: 0
             sms_price: 0.099
             sms_quantity: 202
@@ -50081,7 +50065,7 @@ components:
             postcard_quantity: 1
             automation_price: 0.0017
           - package_id: 1
-            package_price: 20
+            package_price: "20"
             price_rate: 0
             sms_price: 0.099
             sms_quantity: 202
@@ -50224,48 +50208,57 @@ components:
         response_code: SUCCESS
         response_msg: SUCCESS
         data:
-        - subaccount_id: 126
-          api_username: johndoe1
-          email: johndoe1@awesome.com
-          phone_number: "+15184811001"
-          first_name: John
-          last_name: Doe
-          api_key: F3702045-EB2C-0091-C211-7728048DCAE2
-          access_users: 1
-          access_billing: 1
-          access_reporting: 1
-          access_contacts: 1
-          access_settings: 1
-          access_sms: 1
-          access_email: 1
-          access_voice: 1
-          access_fax: 1
-          access_post: 1
-          access_reseller: 1
-          access_mms: 1
-          share_campaigns: 0
-          notes: notes
-        - subaccount_id: 126
-          api_username: johndoe1
-          email: johndoe1@awesome.com
-          phone_number: "+15184811001"
-          first_name: John
-          last_name: Doe
-          api_key: F3702045-EB2C-0091-C211-7728048DCAE2
-          access_users: 1
-          access_billing: 1
-          access_reporting: 1
-          access_contacts: 1
-          access_settings: 1
-          access_sms: 1
-          access_email: 1
-          access_voice: 1
-          access_fax: 1
-          access_post: 1
-          access_reseller: 1
-          access_mms: 1
-          share_campaigns: 0
-          notes: notes
+          total: 2
+          per_page: 15
+          current_page: 1
+          last_page: 1
+          next_page_url: next_page_url
+          prev_page_url: prev_page_url
+          from: 1
+          to: 2
+          data:
+          - subaccount_id: 126
+            api_username: johndoe1
+            email: johndoe1@awesome.com
+            phone_number: "+15184811001"
+            first_name: John
+            last_name: Doe
+            api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+            access_users: 1
+            access_billing: 1
+            access_reporting: 1
+            access_contacts: 1
+            access_settings: 1
+            access_sms: 1
+            access_email: 1
+            access_voice: 1
+            access_fax: 1
+            access_post: 1
+            access_reseller: 1
+            access_mms: 1
+            share_campaigns: 0
+            notes: notes
+          - subaccount_id: 126
+            api_username: johndoe1
+            email: johndoe1@awesome.com
+            phone_number: "+15184811001"
+            first_name: John
+            last_name: Doe
+            api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+            access_users: 1
+            access_billing: 1
+            access_reporting: 1
+            access_contacts: 1
+            access_settings: 1
+            access_sms: 1
+            access_email: 1
+            access_voice: 1
+            access_fax: 1
+            access_post: 1
+            access_reseller: 1
+            access_mms: 1
+            share_campaigns: 0
+            notes: notes
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -50280,9 +50273,7 @@ components:
           example: SUCCESS
           type: string
         data:
-          items:
-            $ref: "#/components/schemas/subaccount"
-          type: array
+          $ref: "#/components/schemas/view_subaccounts_data"
       type: object
     create-subaccount:
       example:
@@ -51157,48 +51148,57 @@ components:
         response_code: SUCCESS
         response_msg: Here's your list of contacts.
         data:
-        - contact_id: 552786
-          list_id: 428
-          phone_number: "+16783270696"
-          first_name: Ellen
-          last_name: Diaz
-          custom_1: ""
-          custom_2: ""
-          custom_3: ""
-          custom_4: ""
-          date_added: "1436157486"
-          date_updated: "1436157486"
-          fax_number: null
-          organization_name: null
-          email: null
-          address_line_1: null
-          address_line_2: null
-          address_city: null
-          address_state: null
-          address_postal_code: null
-          address_country: null
-          _list_name: List6eaG4lGIc9
-        - contact_id: 552787
-          list_id: 428
-          phone_number: "+16783270697"
-          first_name: Ellen
-          last_name: Diaz
-          custom_1: ""
-          custom_2: ""
-          custom_3: ""
-          custom_4: ""
-          date_added: "1436157925"
-          date_updated: "1436157925"
-          fax_number: null
-          organization_name: null
-          email: null
-          address_line_1: null
-          address_line_2: null
-          address_city: null
-          address_state: null
-          address_postal_code: null
-          address_country: null
-          _list_name: List6eaG4lGIc9
+          total: 2
+          per_page: 15
+          current_page: 1
+          last_page: 1
+          next_page_url: next_page_url
+          prev_page_url: prev_page_url
+          from: 1
+          to: 2
+          data:
+          - contact_id: 552786
+            list_id: 428
+            phone_number: "+16783270696"
+            first_name: John
+            last_name: Doe
+            custom_1: Custom 1
+            custom_2: Custom 2
+            custom_3: Custom 3
+            custom_4: Custom 4
+            date_added: 2015-07-05T14:51:26Z
+            date_updated: 2015-07-05T14:51:26Z
+            fax_number: "+61477141888"
+            organization_name: Awesome Company
+            email: john@doe.com
+            address_line_1: 1554 Buffalo Creek Road
+            address_line_2: address_line_2
+            address_city: Nashville
+            address_state: TN
+            address_postal_code: "37214"
+            address_country: US
+            _list_name: List6eaG4lGIc9
+          - contact_id: 552786
+            list_id: 428
+            phone_number: "+16783270696"
+            first_name: John
+            last_name: Doe
+            custom_1: Custom 1
+            custom_2: Custom 2
+            custom_3: Custom 3
+            custom_4: Custom 4
+            date_added: 2015-07-05T14:51:26Z
+            date_updated: 2015-07-05T14:51:26Z
+            fax_number: "+61477141888"
+            organization_name: Awesome Company
+            email: john@doe.com
+            address_line_1: 1554 Buffalo Creek Road
+            address_line_2: address_line_2
+            address_city: Nashville
+            address_state: TN
+            address_postal_code: "37214"
+            address_country: US
+            _list_name: List6eaG4lGIc9
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -51213,52 +51213,7 @@ components:
           example: Here's your list of contacts.
           type: string
         data:
-          example:
-          - contact_id: 552786
-            list_id: 428
-            phone_number: "+16783270696"
-            first_name: Ellen
-            last_name: Diaz
-            custom_1: ""
-            custom_2: ""
-            custom_3: ""
-            custom_4: ""
-            date_added: "1436157486"
-            date_updated: "1436157486"
-            fax_number: null
-            organization_name: null
-            email: null
-            address_line_1: null
-            address_line_2: null
-            address_city: null
-            address_state: null
-            address_postal_code: null
-            address_country: null
-            _list_name: List6eaG4lGIc9
-          - contact_id: 552787
-            list_id: 428
-            phone_number: "+16783270697"
-            first_name: Ellen
-            last_name: Diaz
-            custom_1: ""
-            custom_2: ""
-            custom_3: ""
-            custom_4: ""
-            date_added: "1436157925"
-            date_updated: "1436157925"
-            fax_number: null
-            organization_name: null
-            email: null
-            address_line_1: null
-            address_line_2: null
-            address_city: null
-            address_state: null
-            address_postal_code: null
-            address_country: null
-            _list_name: List6eaG4lGIc9
-          items:
-            $ref: "#/components/schemas/contact"
-          type: array
+          $ref: "#/components/schemas/view_list_contacts_data"
       type: object
     create-new-contact:
       example:
@@ -56445,13 +56400,13 @@ components:
         schedule:
           description: The scheduled date of the message. It is in <a href="http://help.clicksend.com/what-is-a-unix-timestamp"
             target="_blank">Unix format</a>.
-          example: 1436879372
-          type: integer
+          example: "1436879372"
+          type: string
         status_code:
           description: The status code sent from the <a href="https://en.wikipedia.org/wiki/SMS_gateway"
             target="_blank">SMS gateway</a>. Visit <a href="https://help.clicksend.com/article/8cc479qlbb-list-of-sms-gateway-error-codes"
             target="_blank">this page</a> for more information.
-          type: integer
+          type: string
           example: null
         status_text:
           description: A message describing the _status_code_ of the operation. Visit
@@ -56464,7 +56419,7 @@ components:
             \ target=\"_blank\">this page</a> for more information. If no error occurred,\
             \ the value is **null**."
           nullable: true
-          type: integer
+          type: string
           example: null
         error_text:
           description: "A message describing the _error_code_ of the operation. Visit\
@@ -56476,18 +56431,20 @@ components:
           example: null
         message_id:
           description: The generated ID of the message.
-          type: integer
+          example: 4E90F4C3-43A3-489D-9AB8-DA1F4332A0C3
+          type: string
         message_parts:
           description: "The number of parts the message was broken into. To look at\
             \ how many parts your message is broken down into, use the <a href=\"\
             http://smscharactercount.com/\" target=\"_blank\"><strong>SMS Character\
             \ Count</strong></a>."
-          type: integer
+          example: "1.00"
+          type: string
         message_price:
           description: The price of this message. This depends on the total number
             of parts of the message.
-          example: 0.070000
-          type: number
+          example: "0.070000"
+          type: string
         from_email:
           description: "The email address to which replies should be emailed to. If\
             \ omitted, the reply will be emailed back to the user who sent the outgoing\
@@ -57307,10 +57264,10 @@ components:
           from: from
           lang: en-au
           voice: female
-          schedule: 1436874701
+          schedule: "1436874701"
           message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-          message_parts: 1
-          message_price: 0.07
+          message_parts: "1"
+          message_price: "0.07"
           custom_string: this is a test
           user_id: 1
           subaccount_id: 1
@@ -57325,10 +57282,10 @@ components:
           from: from
           lang: en-au
           voice: female
-          schedule: 1436874701
+          schedule: "1436874701"
           message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-          message_parts: 1
-          message_price: 0.07
+          message_parts: "1"
+          message_price: "0.07"
           custom_string: this is a test
           user_id: 1
           subaccount_id: 1
@@ -57372,13 +57329,9 @@ components:
           example: "English, US"
           type: string
         gender:
-          example:
-          - male
-          - female
-          items:
-            description: The gender of the language.
-            type: string
-          type: array
+          description: The gender of the language.
+          example: male
+          type: string
       type: object
     view_voice_receipts_data:
       allOf:
@@ -57466,10 +57419,10 @@ components:
           from: from
           lang: en-au
           voice: female
-          schedule: 1436874701
+          schedule: "1436874701"
           message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-          message_parts: 1
-          message_price: 0.07
+          message_parts: "1"
+          message_price: "0.07"
           custom_string: this is a test
           user_id: 1
           subaccount_id: 1
@@ -57484,10 +57437,10 @@ components:
           from: from
           lang: en-au
           voice: female
-          schedule: 1436874701
+          schedule: "1436874701"
           message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-          message_parts: 1
-          message_price: 0.07
+          message_parts: "1"
+          message_price: "0.07"
           custom_string: this is a test
           user_id: 1
           subaccount_id: 1
@@ -58142,7 +58095,7 @@ components:
     view_voice_statistics_data_total_outbound:
       example:
         count: 1
-        price: "0"
+        price: 0
       properties:
         count:
           description: The total count of outbound calls.
@@ -58150,14 +58103,14 @@ components:
           type: integer
         price:
           description: The total price of outbound calls.
-          example: "0"
-          type: string
+          example: 0
+          type: number
       type: object
     view_voice_statistics_data_total:
       example:
         outbound:
           count: 1
-          price: "0"
+          price: 0
         bounced:
           count: 2
       properties:
@@ -58166,25 +58119,11 @@ components:
         bounced:
           $ref: "#/components/schemas/cancel_all_sms_data"
       type: object
-    view_voice_statistics_data_stats_inner_outbound:
-      example:
-        count: 0
-        price: 0
-      properties:
-        count:
-          description: The count of outbound calls.
-          example: 0
-          type: integer
-        price:
-          description: The price of outbound calls.
-          example: 0
-          type: number
-      type: object
     view_voice_statistics_data_stats_inner:
       example:
         date: 1441065600
         outbound:
-          count: 0
+          count: 1
           price: 0
         bounced:
           count: 2
@@ -58194,7 +58133,7 @@ components:
           example: 1441065600
           type: number
         outbound:
-          $ref: "#/components/schemas/view_voice_statistics_data_stats_inner_outbound"
+          $ref: "#/components/schemas/view_voice_statistics_data_total_outbound"
         bounced:
           $ref: "#/components/schemas/cancel_all_sms_data"
       type: object
@@ -58203,19 +58142,19 @@ components:
         total:
           outbound:
             count: 1
-            price: "0"
+            price: 0
           bounced:
             count: 2
         stats:
         - date: 1441065600
           outbound:
-            count: 0
+            count: 1
             price: 0
           bounced:
             count: 2
         - date: 1441065600
           outbound:
-            count: 0
+            count: 1
             price: 0
           bounced:
             count: 2
@@ -58237,7 +58176,7 @@ components:
     view_sms_statistics_data_total:
       example:
         outbound:
-          count: 0
+          count: 1
           price: 0
         inbound:
           count: 2
@@ -58245,7 +58184,7 @@ components:
           count: 2
       properties:
         outbound:
-          $ref: "#/components/schemas/view_voice_statistics_data_stats_inner_outbound"
+          $ref: "#/components/schemas/view_voice_statistics_data_total_outbound"
         inbound:
           $ref: "#/components/schemas/cancel_all_sms_data"
         bounced:
@@ -58255,7 +58194,7 @@ components:
       example:
         date: 1436918400
         outbound:
-          count: 0
+          count: 1
           price: 0
         inbound:
           count: 2
@@ -58267,7 +58206,7 @@ components:
           example: 1436918400
           type: number
         outbound:
-          $ref: "#/components/schemas/view_voice_statistics_data_stats_inner_outbound"
+          $ref: "#/components/schemas/view_voice_statistics_data_total_outbound"
         inbound:
           $ref: "#/components/schemas/cancel_all_sms_data"
         bounced:
@@ -58277,7 +58216,7 @@ components:
       example:
         total:
           outbound:
-            count: 0
+            count: 1
             price: 0
           inbound:
             count: 2
@@ -58286,7 +58225,7 @@ components:
         stat:
         - date: 1436918400
           outbound:
-            count: 0
+            count: 1
             price: 0
           inbound:
             count: 2
@@ -58294,7 +58233,7 @@ components:
             count: 2
         - date: 1436918400
           outbound:
-            count: 0
+            count: 1
             price: 0
           inbound:
             count: 2
@@ -58629,7 +58568,7 @@ components:
         _currency:
           $ref: "#/components/schemas/currency"
       type: object
-    view_available_numbers_data_inner:
+    view_available_numbers_data_allOf_data_inner:
       properties:
         country:
           description: The country code of the number.
@@ -58655,6 +58594,54 @@ components:
           nullable: true
           type: string
       type: object
+    view_available_numbers_data:
+      allOf:
+      - $ref: "#/components/schemas/pagination"
+      - properties:
+          data:
+            example:
+            - country: AU
+              country_name: Australia
+              dedicated_number: "+61280662298"
+              price_setup: "0.0000"
+              price_monthly: "20.7100"
+              price_total: "20.7100"
+              address_requirement: local
+            - country: AU
+              country_name: Australia
+              dedicated_number: "+61280662299"
+              price_setup: "0.0000"
+              price_monthly: "20.7100"
+              price_total: "20.7100"
+              address_requirement: local
+            items:
+              $ref: "#/components/schemas/view_available_numbers_data_allOf_data_inner"
+            type: array
+        type: object
+      example:
+        total: 2
+        per_page: 15
+        current_page: 1
+        last_page: 1
+        next_page_url: next_page_url
+        prev_page_url: prev_page_url
+        from: 1
+        to: 2
+        data:
+        - country: AU
+          country_name: Australia
+          dedicated_number: "+61280662298"
+          price_setup: "0.0000"
+          price_monthly: "20.7100"
+          price_total: "20.7100"
+          address_requirement: local
+        - country: AU
+          country_name: Australia
+          dedicated_number: "+61280662299"
+          price_setup: "0.0000"
+          price_monthly: "20.7100"
+          price_total: "20.7100"
+          address_requirement: local
     list_own_numbers__metadata_pagination:
       example:
         self: https://rest.clicksend.com/v3/own-numbers?offset=f99872cc-11a6-48ba-a9f2-bcfb6dd1e3d4#8fa5ebc2-777b-45db-a448-ec76a40d4384&page_size=10
@@ -58828,6 +58815,21 @@ components:
           type: string
         total_price:
           description: The total price of SMS.
+          type: number
+      type: object
+    view_account_usage_data_voice_inner:
+      properties:
+        subaccount_id:
+          description: The subaccount identifier.
+          type: integer
+        username:
+          description: The username associated with the subaccount.
+          type: string
+        total_count:
+          description: The total count of voice calls.
+          type: string
+        total_price:
+          description: The total price of voice calls.
           type: string
       type: object
     view_account_usage_data_email_inner:
@@ -58854,6 +58856,18 @@ components:
           type: string
         price:
           description: The total price of SMS.
+          type: string
+      type: object
+    view_account_usage_data_email_total:
+      example:
+        count: 4990
+        price: "9.0020"
+      properties:
+        count:
+          description: The total count of emails.
+          type: integer
+        price:
+          description: The total price of emails.
           type: string
       type: object
     view_account_usage_data:
@@ -58916,8 +58930,8 @@ components:
           count: 33
           price: "2.4417"
         email_total:
-          count: 1
-          price: "0"
+          count: 4990
+          price: "9.0020"
       properties:
         sms:
           example:
@@ -58943,7 +58957,7 @@ components:
             total_count: "1.00"
             total_price: "0.0330"
           items:
-            $ref: "#/components/schemas/view_account_usage_data_sms_inner"
+            $ref: "#/components/schemas/view_account_usage_data_voice_inner"
           type: array
         fax:
           example:
@@ -58956,7 +58970,7 @@ components:
             total_count: "1.00"
             total_price: "0.2314"
           items:
-            $ref: "#/components/schemas/view_account_usage_data_sms_inner"
+            $ref: "#/components/schemas/view_account_usage_data_voice_inner"
           type: array
         post:
           example:
@@ -58969,7 +58983,7 @@ components:
             total_count: "3"
             total_price: "2.5586"
           items:
-            $ref: "#/components/schemas/view_account_usage_data_sms_inner"
+            $ref: "#/components/schemas/view_account_usage_data_voice_inner"
           type: array
         email:
           example:
@@ -58993,7 +59007,7 @@ components:
         post_total:
           $ref: "#/components/schemas/view_account_usage_data_sms_total"
         email_total:
-          $ref: "#/components/schemas/view_voice_statistics_data_total_outbound"
+          $ref: "#/components/schemas/view_account_usage_data_email_total"
       type: object
     global_sending_registration_status:
       example:
@@ -59070,7 +59084,7 @@ components:
     view_recharge_packages_data_packages_inner:
       example:
         package_id: 1
-        package_price: 20
+        package_price: "20"
         price_rate: 0
         sms_price: 0.099
         sms_quantity: 202
@@ -59101,8 +59115,8 @@ components:
           type: number
         package_price:
           description: The price of the package.
-          example: 20
-          type: number
+          example: "20"
+          type: string
         price_rate:
           description: The pricing tier used to determine the cost per message.
           example: 0
@@ -59200,7 +59214,7 @@ components:
       example:
         packages:
         - package_id: 1
-          package_price: 20
+          package_price: "20"
           price_rate: 0
           sms_price: 0.099
           sms_quantity: 202
@@ -59225,7 +59239,7 @@ components:
           postcard_quantity: 1
           automation_price: 0.0017
         - package_id: 1
-          package_price: 20
+          package_price: "20"
           price_rate: 0
           sms_price: 0.099
           sms_quantity: 202
@@ -59350,6 +59364,67 @@ components:
           amount: 20
           currency: AUD
           date: 1443420094
+    view_subaccounts_data:
+      allOf:
+      - $ref: "#/components/schemas/pagination"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/subaccount"
+            type: array
+        type: object
+      example:
+        total: 2
+        per_page: 15
+        current_page: 1
+        last_page: 1
+        next_page_url: next_page_url
+        prev_page_url: prev_page_url
+        from: 1
+        to: 2
+        data:
+        - subaccount_id: 126
+          api_username: johndoe1
+          email: johndoe1@awesome.com
+          phone_number: "+15184811001"
+          first_name: John
+          last_name: Doe
+          api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+          access_users: 1
+          access_billing: 1
+          access_reporting: 1
+          access_contacts: 1
+          access_settings: 1
+          access_sms: 1
+          access_email: 1
+          access_voice: 1
+          access_fax: 1
+          access_post: 1
+          access_reseller: 1
+          access_mms: 1
+          share_campaigns: 0
+          notes: notes
+        - subaccount_id: 126
+          api_username: johndoe1
+          email: johndoe1@awesome.com
+          phone_number: "+15184811001"
+          first_name: John
+          last_name: Doe
+          api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+          access_users: 1
+          access_billing: 1
+          access_reporting: 1
+          access_contacts: 1
+          access_settings: 1
+          access_sms: 1
+          access_email: 1
+          access_voice: 1
+          access_fax: 1
+          access_post: 1
+          access_reseller: 1
+          access_mms: 1
+          share_campaigns: 0
+          notes: notes
     generate_new_api_key_data:
       example:
         api_key: E72D09F6-AC80-0A5C-F7F0-1A244A377A5C
@@ -59580,6 +59655,68 @@ components:
           access_mms: 1
           share_campaigns: 0
           notes: notes
+    view_list_contacts_data:
+      allOf:
+      - $ref: "#/components/schemas/pagination"
+      - properties:
+          data:
+            items:
+              $ref: "#/components/schemas/contact"
+            type: array
+            example: null
+        type: object
+      example:
+        total: 2
+        per_page: 15
+        current_page: 1
+        last_page: 1
+        next_page_url: next_page_url
+        prev_page_url: prev_page_url
+        from: 1
+        to: 2
+        data:
+        - contact_id: 552786
+          list_id: 428
+          phone_number: "+16783270696"
+          first_name: John
+          last_name: Doe
+          custom_1: Custom 1
+          custom_2: Custom 2
+          custom_3: Custom 3
+          custom_4: Custom 4
+          date_added: 2015-07-05T14:51:26Z
+          date_updated: 2015-07-05T14:51:26Z
+          fax_number: "+61477141888"
+          organization_name: Awesome Company
+          email: john@doe.com
+          address_line_1: 1554 Buffalo Creek Road
+          address_line_2: address_line_2
+          address_city: Nashville
+          address_state: TN
+          address_postal_code: "37214"
+          address_country: US
+          _list_name: List6eaG4lGIc9
+        - contact_id: 552786
+          list_id: 428
+          phone_number: "+16783270696"
+          first_name: John
+          last_name: Doe
+          custom_1: Custom 1
+          custom_2: Custom 2
+          custom_3: Custom 3
+          custom_4: Custom 4
+          date_added: 2015-07-05T14:51:26Z
+          date_updated: 2015-07-05T14:51:26Z
+          fax_number: "+61477141888"
+          organization_name: Awesome Company
+          email: john@doe.com
+          address_line_1: 1554 Buffalo Creek Road
+          address_line_2: address_line_2
+          address_city: Nashville
+          address_state: TN
+          address_postal_code: "37214"
+          address_country: US
+          _list_name: List6eaG4lGIc9
     remove_opted_out_contacts_data:
       example:
         deleted: 6

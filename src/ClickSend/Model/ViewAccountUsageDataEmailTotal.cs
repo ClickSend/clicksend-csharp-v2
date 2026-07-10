@@ -26,17 +26,17 @@ using ClickSend.Client;
 namespace ClickSend.Model
 {
     /// <summary>
-    /// ViewVoiceStatisticsDataStatsInnerOutbound
+    /// ViewAccountUsageDataEmailTotal
     /// </summary>
-    public partial class ViewVoiceStatisticsDataStatsInnerOutbound : IValidatableObject
+    public partial class ViewAccountUsageDataEmailTotal : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ViewVoiceStatisticsDataStatsInnerOutbound" /> class.
+        /// Initializes a new instance of the <see cref="ViewAccountUsageDataEmailTotal" /> class.
         /// </summary>
-        /// <param name="count">The count of outbound calls.</param>
-        /// <param name="price">The price of outbound calls.</param>
+        /// <param name="count">The total count of emails.</param>
+        /// <param name="price">The total price of emails.</param>
         [JsonConstructor]
-        public ViewVoiceStatisticsDataStatsInnerOutbound(Option<int?> count = default, Option<decimal?> price = default)
+        public ViewAccountUsageDataEmailTotal(Option<int?> count = default, Option<string?> price = default)
         {
             CountOption = count;
             PriceOption = price;
@@ -53,10 +53,9 @@ namespace ClickSend.Model
         public Option<int?> CountOption { get; private set; }
 
         /// <summary>
-        /// The count of outbound calls.
+        /// The total count of emails.
         /// </summary>
-        /// <value>The count of outbound calls.</value>
-        /* <example>0</example> */
+        /// <value>The total count of emails.</value>
         [JsonPropertyName("count")]
         public int? Count { get { return this.CountOption.Value; } set { this.CountOption = new(value); } }
 
@@ -65,15 +64,14 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> PriceOption { get; private set; }
+        public Option<string?> PriceOption { get; private set; }
 
         /// <summary>
-        /// The price of outbound calls.
+        /// The total price of emails.
         /// </summary>
-        /// <value>The price of outbound calls.</value>
-        /* <example>0</example> */
+        /// <value>The total price of emails.</value>
         [JsonPropertyName("price")]
-        public decimal? Price { get { return this.PriceOption.Value; } set { this.PriceOption = new(value); } }
+        public string? Price { get { return this.PriceOption.Value; } set { this.PriceOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -82,7 +80,7 @@ namespace ClickSend.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class ViewVoiceStatisticsDataStatsInnerOutbound {\n");
+            sb.Append("class ViewAccountUsageDataEmailTotal {\n");
             sb.Append("  Count: ").Append(Count).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
             sb.Append("}\n");
@@ -101,19 +99,19 @@ namespace ClickSend.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="ViewVoiceStatisticsDataStatsInnerOutbound" />
+    /// A Json converter for type <see cref="ViewAccountUsageDataEmailTotal" />
     /// </summary>
-    public class ViewVoiceStatisticsDataStatsInnerOutboundJsonConverter : JsonConverter<ViewVoiceStatisticsDataStatsInnerOutbound>
+    public class ViewAccountUsageDataEmailTotalJsonConverter : JsonConverter<ViewAccountUsageDataEmailTotal>
     {
         /// <summary>
-        /// Deserializes json to <see cref="ViewVoiceStatisticsDataStatsInnerOutbound" />
+        /// Deserializes json to <see cref="ViewAccountUsageDataEmailTotal" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override ViewVoiceStatisticsDataStatsInnerOutbound Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override ViewAccountUsageDataEmailTotal Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -123,7 +121,7 @@ namespace ClickSend.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<int?> count = default;
-            Option<decimal?> price = default;
+            Option<string?> price = default;
 
             while (utf8JsonReader.Read())
             {
@@ -144,7 +142,7 @@ namespace ClickSend.Model
                             count = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "price":
-                            price = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
+                            price = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         default:
                             break;
@@ -153,43 +151,46 @@ namespace ClickSend.Model
             }
 
             if (count.IsSet && count.Value == null)
-                throw new ArgumentNullException(nameof(count), "Property is not nullable for class ViewVoiceStatisticsDataStatsInnerOutbound.");
+                throw new ArgumentNullException(nameof(count), "Property is not nullable for class ViewAccountUsageDataEmailTotal.");
 
             if (price.IsSet && price.Value == null)
-                throw new ArgumentNullException(nameof(price), "Property is not nullable for class ViewVoiceStatisticsDataStatsInnerOutbound.");
+                throw new ArgumentNullException(nameof(price), "Property is not nullable for class ViewAccountUsageDataEmailTotal.");
 
-            return new ViewVoiceStatisticsDataStatsInnerOutbound(count, price);
+            return new ViewAccountUsageDataEmailTotal(count, price);
         }
 
         /// <summary>
-        /// Serializes a <see cref="ViewVoiceStatisticsDataStatsInnerOutbound" />
+        /// Serializes a <see cref="ViewAccountUsageDataEmailTotal" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="viewVoiceStatisticsDataStatsInnerOutbound"></param>
+        /// <param name="viewAccountUsageDataEmailTotal"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, ViewVoiceStatisticsDataStatsInnerOutbound viewVoiceStatisticsDataStatsInnerOutbound, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, ViewAccountUsageDataEmailTotal viewAccountUsageDataEmailTotal, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, viewVoiceStatisticsDataStatsInnerOutbound, jsonSerializerOptions);
+            WriteProperties(writer, viewAccountUsageDataEmailTotal, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="ViewVoiceStatisticsDataStatsInnerOutbound" />
+        /// Serializes the properties of <see cref="ViewAccountUsageDataEmailTotal" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="viewVoiceStatisticsDataStatsInnerOutbound"></param>
+        /// <param name="viewAccountUsageDataEmailTotal"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, ViewVoiceStatisticsDataStatsInnerOutbound viewVoiceStatisticsDataStatsInnerOutbound, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, ViewAccountUsageDataEmailTotal viewAccountUsageDataEmailTotal, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (viewVoiceStatisticsDataStatsInnerOutbound.CountOption.IsSet)
-                writer.WriteNumber("count", viewVoiceStatisticsDataStatsInnerOutbound.CountOption.Value!.Value);
+            if (viewAccountUsageDataEmailTotal.PriceOption.IsSet && viewAccountUsageDataEmailTotal.Price == null)
+                throw new ArgumentNullException(nameof(viewAccountUsageDataEmailTotal.Price), "Property is required for class ViewAccountUsageDataEmailTotal.");
 
-            if (viewVoiceStatisticsDataStatsInnerOutbound.PriceOption.IsSet)
-                writer.WriteNumber("price", viewVoiceStatisticsDataStatsInnerOutbound.PriceOption.Value!.Value);
+            if (viewAccountUsageDataEmailTotal.CountOption.IsSet)
+                writer.WriteNumber("count", viewAccountUsageDataEmailTotal.CountOption.Value!.Value);
+
+            if (viewAccountUsageDataEmailTotal.PriceOption.IsSet)
+                writer.WriteString("price", viewAccountUsageDataEmailTotal.Price);
         }
     }
 }

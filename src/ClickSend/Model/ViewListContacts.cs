@@ -38,7 +38,7 @@ namespace ClickSend.Model
         /// <param name="responseMsg">A message describing the outcome of the operation.</param>
         /// <param name="data">data</param>
         [JsonConstructor]
-        public ViewListContacts(Option<int?> httpCode = default, Option<string?> responseCode = default, Option<string?> responseMsg = default, Option<List<Contact>?> data = default)
+        public ViewListContacts(Option<int?> httpCode = default, Option<string?> responseCode = default, Option<string?> responseMsg = default, Option<ViewListContactsData?> data = default)
         {
             HttpCodeOption = httpCode;
             ResponseCodeOption = responseCode;
@@ -99,14 +99,13 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<Contact>?> DataOption { get; private set; }
+        public Option<ViewListContactsData?> DataOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Data
         /// </summary>
-        /* <example>[{&quot;contact_id&quot;:552786,&quot;list_id&quot;:428,&quot;phone_number&quot;:&quot;+16783270696&quot;,&quot;first_name&quot;:&quot;Ellen&quot;,&quot;last_name&quot;:&quot;Diaz&quot;,&quot;custom_1&quot;:&quot;&quot;,&quot;custom_2&quot;:&quot;&quot;,&quot;custom_3&quot;:&quot;&quot;,&quot;custom_4&quot;:&quot;&quot;,&quot;date_added&quot;:&quot;1436157486&quot;,&quot;date_updated&quot;:&quot;1436157486&quot;,&quot;fax_number&quot;:null,&quot;organization_name&quot;:null,&quot;email&quot;:null,&quot;address_line_1&quot;:null,&quot;address_line_2&quot;:null,&quot;address_city&quot;:null,&quot;address_state&quot;:null,&quot;address_postal_code&quot;:null,&quot;address_country&quot;:null,&quot;_list_name&quot;:&quot;List6eaG4lGIc9&quot;},{&quot;contact_id&quot;:552787,&quot;list_id&quot;:428,&quot;phone_number&quot;:&quot;+16783270697&quot;,&quot;first_name&quot;:&quot;Ellen&quot;,&quot;last_name&quot;:&quot;Diaz&quot;,&quot;custom_1&quot;:&quot;&quot;,&quot;custom_2&quot;:&quot;&quot;,&quot;custom_3&quot;:&quot;&quot;,&quot;custom_4&quot;:&quot;&quot;,&quot;date_added&quot;:&quot;1436157925&quot;,&quot;date_updated&quot;:&quot;1436157925&quot;,&quot;fax_number&quot;:null,&quot;organization_name&quot;:null,&quot;email&quot;:null,&quot;address_line_1&quot;:null,&quot;address_line_2&quot;:null,&quot;address_city&quot;:null,&quot;address_state&quot;:null,&quot;address_postal_code&quot;:null,&quot;address_country&quot;:null,&quot;_list_name&quot;:&quot;List6eaG4lGIc9&quot;}]</example> */
         [JsonPropertyName("data")]
-        public List<Contact>? Data { get { return this.DataOption.Value; } set { this.DataOption = new(value); } }
+        public ViewListContactsData? Data { get { return this.DataOption.Value; } set { this.DataOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -160,7 +159,7 @@ namespace ClickSend.Model
             Option<int?> httpCode = default;
             Option<string?> responseCode = default;
             Option<string?> responseMsg = default;
-            Option<List<Contact>?> data = default;
+            Option<ViewListContactsData?> data = default;
 
             while (utf8JsonReader.Read())
             {
@@ -187,7 +186,7 @@ namespace ClickSend.Model
                             responseMsg = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "data":
-                            data = new Option<List<Contact>?>(JsonSerializer.Deserialize<List<Contact>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            data = new Option<ViewListContactsData?>(JsonSerializer.Deserialize<ViewListContactsData>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;

@@ -26,12 +26,12 @@ using ClickSend.Client;
 namespace ClickSend.Model
 {
     /// <summary>
-    /// ViewAvailableNumbersDataInner
+    /// ViewAvailableNumbersDataAllOfDataInner
     /// </summary>
-    public partial class ViewAvailableNumbersDataInner : IValidatableObject
+    public partial class ViewAvailableNumbersDataAllOfDataInner : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ViewAvailableNumbersDataInner" /> class.
+        /// Initializes a new instance of the <see cref="ViewAvailableNumbersDataAllOfDataInner" /> class.
         /// </summary>
         /// <param name="country">The country code of the number.</param>
         /// <param name="countryName">The country name of the number.</param>
@@ -41,7 +41,7 @@ namespace ClickSend.Model
         /// <param name="priceTotal">The total price of the number.</param>
         /// <param name="addressRequirement">The address requirement for the number.  &lt;br&gt; &#x60;local&#x60;: requires an address that corresponds  to the phone number&#39;s prefix.</param>
         [JsonConstructor]
-        public ViewAvailableNumbersDataInner(Option<string?> country = default, Option<string?> countryName = default, Option<string?> dedicatedNumber = default, Option<string?> priceSetup = default, Option<string?> priceMonthly = default, Option<string?> priceTotal = default, Option<string?> addressRequirement = default)
+        public ViewAvailableNumbersDataAllOfDataInner(Option<string?> country = default, Option<string?> countryName = default, Option<string?> dedicatedNumber = default, Option<string?> priceSetup = default, Option<string?> priceMonthly = default, Option<string?> priceTotal = default, Option<string?> addressRequirement = default)
         {
             CountryOption = country;
             CountryNameOption = countryName;
@@ -160,7 +160,7 @@ namespace ClickSend.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class ViewAvailableNumbersDataInner {\n");
+            sb.Append("class ViewAvailableNumbersDataAllOfDataInner {\n");
             sb.Append("  Country: ").Append(Country).Append("\n");
             sb.Append("  CountryName: ").Append(CountryName).Append("\n");
             sb.Append("  DedicatedNumber: ").Append(DedicatedNumber).Append("\n");
@@ -184,19 +184,19 @@ namespace ClickSend.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="ViewAvailableNumbersDataInner" />
+    /// A Json converter for type <see cref="ViewAvailableNumbersDataAllOfDataInner" />
     /// </summary>
-    public class ViewAvailableNumbersDataInnerJsonConverter : JsonConverter<ViewAvailableNumbersDataInner>
+    public class ViewAvailableNumbersDataAllOfDataInnerJsonConverter : JsonConverter<ViewAvailableNumbersDataAllOfDataInner>
     {
         /// <summary>
-        /// Deserializes json to <see cref="ViewAvailableNumbersDataInner" />
+        /// Deserializes json to <see cref="ViewAvailableNumbersDataAllOfDataInner" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override ViewAvailableNumbersDataInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override ViewAvailableNumbersDataAllOfDataInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -256,89 +256,89 @@ namespace ClickSend.Model
             }
 
             if (country.IsSet && country.Value == null)
-                throw new ArgumentNullException(nameof(country), "Property is not nullable for class ViewAvailableNumbersDataInner.");
+                throw new ArgumentNullException(nameof(country), "Property is not nullable for class ViewAvailableNumbersDataAllOfDataInner.");
 
             if (countryName.IsSet && countryName.Value == null)
-                throw new ArgumentNullException(nameof(countryName), "Property is not nullable for class ViewAvailableNumbersDataInner.");
+                throw new ArgumentNullException(nameof(countryName), "Property is not nullable for class ViewAvailableNumbersDataAllOfDataInner.");
 
             if (dedicatedNumber.IsSet && dedicatedNumber.Value == null)
-                throw new ArgumentNullException(nameof(dedicatedNumber), "Property is not nullable for class ViewAvailableNumbersDataInner.");
+                throw new ArgumentNullException(nameof(dedicatedNumber), "Property is not nullable for class ViewAvailableNumbersDataAllOfDataInner.");
 
             if (priceSetup.IsSet && priceSetup.Value == null)
-                throw new ArgumentNullException(nameof(priceSetup), "Property is not nullable for class ViewAvailableNumbersDataInner.");
+                throw new ArgumentNullException(nameof(priceSetup), "Property is not nullable for class ViewAvailableNumbersDataAllOfDataInner.");
 
             if (priceMonthly.IsSet && priceMonthly.Value == null)
-                throw new ArgumentNullException(nameof(priceMonthly), "Property is not nullable for class ViewAvailableNumbersDataInner.");
+                throw new ArgumentNullException(nameof(priceMonthly), "Property is not nullable for class ViewAvailableNumbersDataAllOfDataInner.");
 
             if (priceTotal.IsSet && priceTotal.Value == null)
-                throw new ArgumentNullException(nameof(priceTotal), "Property is not nullable for class ViewAvailableNumbersDataInner.");
+                throw new ArgumentNullException(nameof(priceTotal), "Property is not nullable for class ViewAvailableNumbersDataAllOfDataInner.");
 
-            return new ViewAvailableNumbersDataInner(country, countryName, dedicatedNumber, priceSetup, priceMonthly, priceTotal, addressRequirement);
+            return new ViewAvailableNumbersDataAllOfDataInner(country, countryName, dedicatedNumber, priceSetup, priceMonthly, priceTotal, addressRequirement);
         }
 
         /// <summary>
-        /// Serializes a <see cref="ViewAvailableNumbersDataInner" />
+        /// Serializes a <see cref="ViewAvailableNumbersDataAllOfDataInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="viewAvailableNumbersDataInner"></param>
+        /// <param name="viewAvailableNumbersDataAllOfDataInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, ViewAvailableNumbersDataInner viewAvailableNumbersDataInner, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, ViewAvailableNumbersDataAllOfDataInner viewAvailableNumbersDataAllOfDataInner, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, viewAvailableNumbersDataInner, jsonSerializerOptions);
+            WriteProperties(writer, viewAvailableNumbersDataAllOfDataInner, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="ViewAvailableNumbersDataInner" />
+        /// Serializes the properties of <see cref="ViewAvailableNumbersDataAllOfDataInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="viewAvailableNumbersDataInner"></param>
+        /// <param name="viewAvailableNumbersDataAllOfDataInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, ViewAvailableNumbersDataInner viewAvailableNumbersDataInner, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, ViewAvailableNumbersDataAllOfDataInner viewAvailableNumbersDataAllOfDataInner, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (viewAvailableNumbersDataInner.CountryOption.IsSet && viewAvailableNumbersDataInner.Country == null)
-                throw new ArgumentNullException(nameof(viewAvailableNumbersDataInner.Country), "Property is required for class ViewAvailableNumbersDataInner.");
+            if (viewAvailableNumbersDataAllOfDataInner.CountryOption.IsSet && viewAvailableNumbersDataAllOfDataInner.Country == null)
+                throw new ArgumentNullException(nameof(viewAvailableNumbersDataAllOfDataInner.Country), "Property is required for class ViewAvailableNumbersDataAllOfDataInner.");
 
-            if (viewAvailableNumbersDataInner.CountryNameOption.IsSet && viewAvailableNumbersDataInner.CountryName == null)
-                throw new ArgumentNullException(nameof(viewAvailableNumbersDataInner.CountryName), "Property is required for class ViewAvailableNumbersDataInner.");
+            if (viewAvailableNumbersDataAllOfDataInner.CountryNameOption.IsSet && viewAvailableNumbersDataAllOfDataInner.CountryName == null)
+                throw new ArgumentNullException(nameof(viewAvailableNumbersDataAllOfDataInner.CountryName), "Property is required for class ViewAvailableNumbersDataAllOfDataInner.");
 
-            if (viewAvailableNumbersDataInner.DedicatedNumberOption.IsSet && viewAvailableNumbersDataInner.DedicatedNumber == null)
-                throw new ArgumentNullException(nameof(viewAvailableNumbersDataInner.DedicatedNumber), "Property is required for class ViewAvailableNumbersDataInner.");
+            if (viewAvailableNumbersDataAllOfDataInner.DedicatedNumberOption.IsSet && viewAvailableNumbersDataAllOfDataInner.DedicatedNumber == null)
+                throw new ArgumentNullException(nameof(viewAvailableNumbersDataAllOfDataInner.DedicatedNumber), "Property is required for class ViewAvailableNumbersDataAllOfDataInner.");
 
-            if (viewAvailableNumbersDataInner.PriceSetupOption.IsSet && viewAvailableNumbersDataInner.PriceSetup == null)
-                throw new ArgumentNullException(nameof(viewAvailableNumbersDataInner.PriceSetup), "Property is required for class ViewAvailableNumbersDataInner.");
+            if (viewAvailableNumbersDataAllOfDataInner.PriceSetupOption.IsSet && viewAvailableNumbersDataAllOfDataInner.PriceSetup == null)
+                throw new ArgumentNullException(nameof(viewAvailableNumbersDataAllOfDataInner.PriceSetup), "Property is required for class ViewAvailableNumbersDataAllOfDataInner.");
 
-            if (viewAvailableNumbersDataInner.PriceMonthlyOption.IsSet && viewAvailableNumbersDataInner.PriceMonthly == null)
-                throw new ArgumentNullException(nameof(viewAvailableNumbersDataInner.PriceMonthly), "Property is required for class ViewAvailableNumbersDataInner.");
+            if (viewAvailableNumbersDataAllOfDataInner.PriceMonthlyOption.IsSet && viewAvailableNumbersDataAllOfDataInner.PriceMonthly == null)
+                throw new ArgumentNullException(nameof(viewAvailableNumbersDataAllOfDataInner.PriceMonthly), "Property is required for class ViewAvailableNumbersDataAllOfDataInner.");
 
-            if (viewAvailableNumbersDataInner.PriceTotalOption.IsSet && viewAvailableNumbersDataInner.PriceTotal == null)
-                throw new ArgumentNullException(nameof(viewAvailableNumbersDataInner.PriceTotal), "Property is required for class ViewAvailableNumbersDataInner.");
+            if (viewAvailableNumbersDataAllOfDataInner.PriceTotalOption.IsSet && viewAvailableNumbersDataAllOfDataInner.PriceTotal == null)
+                throw new ArgumentNullException(nameof(viewAvailableNumbersDataAllOfDataInner.PriceTotal), "Property is required for class ViewAvailableNumbersDataAllOfDataInner.");
 
-            if (viewAvailableNumbersDataInner.CountryOption.IsSet)
-                writer.WriteString("country", viewAvailableNumbersDataInner.Country);
+            if (viewAvailableNumbersDataAllOfDataInner.CountryOption.IsSet)
+                writer.WriteString("country", viewAvailableNumbersDataAllOfDataInner.Country);
 
-            if (viewAvailableNumbersDataInner.CountryNameOption.IsSet)
-                writer.WriteString("country_name", viewAvailableNumbersDataInner.CountryName);
+            if (viewAvailableNumbersDataAllOfDataInner.CountryNameOption.IsSet)
+                writer.WriteString("country_name", viewAvailableNumbersDataAllOfDataInner.CountryName);
 
-            if (viewAvailableNumbersDataInner.DedicatedNumberOption.IsSet)
-                writer.WriteString("dedicated_number", viewAvailableNumbersDataInner.DedicatedNumber);
+            if (viewAvailableNumbersDataAllOfDataInner.DedicatedNumberOption.IsSet)
+                writer.WriteString("dedicated_number", viewAvailableNumbersDataAllOfDataInner.DedicatedNumber);
 
-            if (viewAvailableNumbersDataInner.PriceSetupOption.IsSet)
-                writer.WriteString("price_setup", viewAvailableNumbersDataInner.PriceSetup);
+            if (viewAvailableNumbersDataAllOfDataInner.PriceSetupOption.IsSet)
+                writer.WriteString("price_setup", viewAvailableNumbersDataAllOfDataInner.PriceSetup);
 
-            if (viewAvailableNumbersDataInner.PriceMonthlyOption.IsSet)
-                writer.WriteString("price_monthly", viewAvailableNumbersDataInner.PriceMonthly);
+            if (viewAvailableNumbersDataAllOfDataInner.PriceMonthlyOption.IsSet)
+                writer.WriteString("price_monthly", viewAvailableNumbersDataAllOfDataInner.PriceMonthly);
 
-            if (viewAvailableNumbersDataInner.PriceTotalOption.IsSet)
-                writer.WriteString("price_total", viewAvailableNumbersDataInner.PriceTotal);
+            if (viewAvailableNumbersDataAllOfDataInner.PriceTotalOption.IsSet)
+                writer.WriteString("price_total", viewAvailableNumbersDataAllOfDataInner.PriceTotal);
 
-            if (viewAvailableNumbersDataInner.AddressRequirementOption.IsSet)
-                if (viewAvailableNumbersDataInner.AddressRequirementOption.Value != null)
-                    writer.WriteString("address_requirement", viewAvailableNumbersDataInner.AddressRequirement);
+            if (viewAvailableNumbersDataAllOfDataInner.AddressRequirementOption.IsSet)
+                if (viewAvailableNumbersDataAllOfDataInner.AddressRequirementOption.Value != null)
+                    writer.WriteString("address_requirement", viewAvailableNumbersDataAllOfDataInner.AddressRequirement);
                 else
                     writer.WriteNull("address_requirement");
         }

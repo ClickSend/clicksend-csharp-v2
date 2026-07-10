@@ -36,7 +36,7 @@ namespace ClickSend.Model
         /// <param name="count">The total count of outbound calls.</param>
         /// <param name="price">The total price of outbound calls.</param>
         [JsonConstructor]
-        public ViewVoiceStatisticsDataTotalOutbound(Option<int?> count = default, Option<string?> price = default)
+        public ViewVoiceStatisticsDataTotalOutbound(Option<int?> count = default, Option<decimal?> price = default)
         {
             CountOption = count;
             PriceOption = price;
@@ -65,7 +65,7 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> PriceOption { get; private set; }
+        public Option<decimal?> PriceOption { get; private set; }
 
         /// <summary>
         /// The total price of outbound calls.
@@ -73,7 +73,7 @@ namespace ClickSend.Model
         /// <value>The total price of outbound calls.</value>
         /* <example>0</example> */
         [JsonPropertyName("price")]
-        public string? Price { get { return this.PriceOption.Value; } set { this.PriceOption = new(value); } }
+        public decimal? Price { get { return this.PriceOption.Value; } set { this.PriceOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -123,7 +123,7 @@ namespace ClickSend.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<int?> count = default;
-            Option<string?> price = default;
+            Option<decimal?> price = default;
 
             while (utf8JsonReader.Read())
             {
@@ -144,7 +144,7 @@ namespace ClickSend.Model
                             count = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "price":
-                            price = new Option<string?>(utf8JsonReader.GetString()!);
+                            price = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
                             break;
                         default:
                             break;
@@ -185,14 +185,11 @@ namespace ClickSend.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, ViewVoiceStatisticsDataTotalOutbound viewVoiceStatisticsDataTotalOutbound, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (viewVoiceStatisticsDataTotalOutbound.PriceOption.IsSet && viewVoiceStatisticsDataTotalOutbound.Price == null)
-                throw new ArgumentNullException(nameof(viewVoiceStatisticsDataTotalOutbound.Price), "Property is required for class ViewVoiceStatisticsDataTotalOutbound.");
-
             if (viewVoiceStatisticsDataTotalOutbound.CountOption.IsSet)
                 writer.WriteNumber("count", viewVoiceStatisticsDataTotalOutbound.CountOption.Value!.Value);
 
             if (viewVoiceStatisticsDataTotalOutbound.PriceOption.IsSet)
-                writer.WriteString("price", viewVoiceStatisticsDataTotalOutbound.Price);
+                writer.WriteNumber("price", viewVoiceStatisticsDataTotalOutbound.PriceOption.Value!.Value);
         }
     }
 }

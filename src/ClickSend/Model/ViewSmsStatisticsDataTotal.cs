@@ -37,7 +37,7 @@ namespace ClickSend.Model
         /// <param name="inbound">inbound</param>
         /// <param name="bounced">bounced</param>
         [JsonConstructor]
-        public ViewSmsStatisticsDataTotal(Option<ViewVoiceStatisticsDataStatsInnerOutbound?> outbound = default, Option<CancelAllSmsData?> inbound = default, Option<CancelAllSmsData?> bounced = default)
+        public ViewSmsStatisticsDataTotal(Option<ViewVoiceStatisticsDataTotalOutbound?> outbound = default, Option<CancelAllSmsData?> inbound = default, Option<CancelAllSmsData?> bounced = default)
         {
             OutboundOption = outbound;
             InboundOption = inbound;
@@ -52,13 +52,13 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<ViewVoiceStatisticsDataStatsInnerOutbound?> OutboundOption { get; private set; }
+        public Option<ViewVoiceStatisticsDataTotalOutbound?> OutboundOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Outbound
         /// </summary>
         [JsonPropertyName("outbound")]
-        public ViewVoiceStatisticsDataStatsInnerOutbound? Outbound { get { return this.OutboundOption.Value; } set { this.OutboundOption = new(value); } }
+        public ViewVoiceStatisticsDataTotalOutbound? Outbound { get { return this.OutboundOption.Value; } set { this.OutboundOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Inbound
@@ -134,7 +134,7 @@ namespace ClickSend.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<ViewVoiceStatisticsDataStatsInnerOutbound?> outbound = default;
+            Option<ViewVoiceStatisticsDataTotalOutbound?> outbound = default;
             Option<CancelAllSmsData?> inbound = default;
             Option<CancelAllSmsData?> bounced = default;
 
@@ -154,7 +154,7 @@ namespace ClickSend.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "outbound":
-                            outbound = new Option<ViewVoiceStatisticsDataStatsInnerOutbound?>(JsonSerializer.Deserialize<ViewVoiceStatisticsDataStatsInnerOutbound>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            outbound = new Option<ViewVoiceStatisticsDataTotalOutbound?>(JsonSerializer.Deserialize<ViewVoiceStatisticsDataTotalOutbound>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "inbound":
                             inbound = new Option<CancelAllSmsData?>(JsonSerializer.Deserialize<CancelAllSmsData>(ref utf8JsonReader, jsonSerializerOptions)!);

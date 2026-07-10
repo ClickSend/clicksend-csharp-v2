@@ -1,4 +1,4 @@
-# ClickSend.Model.ViewAvailableNumbersDataInner
+# ClickSend.Model.ViewAvailableNumbersDataAllOfDataInner
 
 ## Properties
 

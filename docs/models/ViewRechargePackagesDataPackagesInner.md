@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PackageId** | **decimal** | The ID of the package. | [optional] 
-**PackagePrice** | **decimal** | The price of the package. | [optional] 
+**PackagePrice** | **string** | The price of the package. | [optional] 
 **PriceRate** | **int** | The pricing tier used to determine the cost per message. | [optional] 
 **SmsPrice** | **decimal** | The price of the SMS. | [optional] 
 **SmsQuantity** | **decimal** | The quantity of the SMS. | [optional] 

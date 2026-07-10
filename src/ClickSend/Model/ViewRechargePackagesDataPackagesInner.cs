@@ -59,7 +59,7 @@ namespace ClickSend.Model
         /// <param name="postcardQuantity">The quantity of the postcard.</param>
         /// <param name="automationPrice">The price of the automation.</param>
         [JsonConstructor]
-        public ViewRechargePackagesDataPackagesInner(Option<decimal?> packageId = default, Option<decimal?> packagePrice = default, Option<int?> priceRate = default, Option<decimal?> smsPrice = default, Option<decimal?> smsQuantity = default, Option<decimal?> voiceMobilePrice = default, Option<decimal?> voiceMobileQuantity = default, Option<decimal?> voiceLandlinePrice = default, Option<decimal?> voiceLandlineQuantity = default, Option<decimal?> faxPrice = default, Option<decimal?> faxQuantity = default, Option<decimal?> emailPrice = default, Option<decimal?> emailQuantity = default, Option<decimal?> postLetterBlackPrice = default, Option<decimal?> postLetterColourPrice = default, Option<decimal?> postPageBlackPrice = default, Option<decimal?> postPageColourPrice = default, Option<decimal?> postLetterBlackQuantity = default, Option<decimal?> postLetterColourQuantity = default, Option<decimal?> postDirectMailDlPrice = default, Option<decimal?> postDirectMailA5Price = default, Option<decimal?> postDirectMailMinQuantity = default, Option<decimal?> postcardPrice = default, Option<decimal?> postcardQuantity = default, Option<decimal?> automationPrice = default)
+        public ViewRechargePackagesDataPackagesInner(Option<decimal?> packageId = default, Option<string?> packagePrice = default, Option<int?> priceRate = default, Option<decimal?> smsPrice = default, Option<decimal?> smsQuantity = default, Option<decimal?> voiceMobilePrice = default, Option<decimal?> voiceMobileQuantity = default, Option<decimal?> voiceLandlinePrice = default, Option<decimal?> voiceLandlineQuantity = default, Option<decimal?> faxPrice = default, Option<decimal?> faxQuantity = default, Option<decimal?> emailPrice = default, Option<decimal?> emailQuantity = default, Option<decimal?> postLetterBlackPrice = default, Option<decimal?> postLetterColourPrice = default, Option<decimal?> postPageBlackPrice = default, Option<decimal?> postPageColourPrice = default, Option<decimal?> postLetterBlackQuantity = default, Option<decimal?> postLetterColourQuantity = default, Option<decimal?> postDirectMailDlPrice = default, Option<decimal?> postDirectMailA5Price = default, Option<decimal?> postDirectMailMinQuantity = default, Option<decimal?> postcardPrice = default, Option<decimal?> postcardQuantity = default, Option<decimal?> automationPrice = default)
         {
             PackageIdOption = packageId;
             PackagePriceOption = packagePrice;
@@ -111,7 +111,7 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> PackagePriceOption { get; private set; }
+        public Option<string?> PackagePriceOption { get; private set; }
 
         /// <summary>
         /// The price of the package.
@@ -119,7 +119,7 @@ namespace ClickSend.Model
         /// <value>The price of the package.</value>
         /* <example>20</example> */
         [JsonPropertyName("package_price")]
-        public decimal? PackagePrice { get { return this.PackagePriceOption.Value; } set { this.PackagePriceOption = new(value); } }
+        public string? PackagePrice { get { return this.PackagePriceOption.Value; } set { this.PackagePriceOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of PriceRate
@@ -537,7 +537,7 @@ namespace ClickSend.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<decimal?> packageId = default;
-            Option<decimal?> packagePrice = default;
+            Option<string?> packagePrice = default;
             Option<int?> priceRate = default;
             Option<decimal?> smsPrice = default;
             Option<decimal?> smsQuantity = default;
@@ -581,7 +581,7 @@ namespace ClickSend.Model
                             packageId = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
                             break;
                         case "package_price":
-                            packagePrice = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
+                            packagePrice = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "price_rate":
                             priceRate = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
@@ -760,11 +760,14 @@ namespace ClickSend.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, ViewRechargePackagesDataPackagesInner viewRechargePackagesDataPackagesInner, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (viewRechargePackagesDataPackagesInner.PackagePriceOption.IsSet && viewRechargePackagesDataPackagesInner.PackagePrice == null)
+                throw new ArgumentNullException(nameof(viewRechargePackagesDataPackagesInner.PackagePrice), "Property is required for class ViewRechargePackagesDataPackagesInner.");
+
             if (viewRechargePackagesDataPackagesInner.PackageIdOption.IsSet)
                 writer.WriteNumber("package_id", viewRechargePackagesDataPackagesInner.PackageIdOption.Value!.Value);
 
             if (viewRechargePackagesDataPackagesInner.PackagePriceOption.IsSet)
-                writer.WriteNumber("package_price", viewRechargePackagesDataPackagesInner.PackagePriceOption.Value!.Value);
+                writer.WriteString("package_price", viewRechargePackagesDataPackagesInner.PackagePrice);
 
             if (viewRechargePackagesDataPackagesInner.PriceRateOption.IsSet)
                 writer.WriteNumber("price_rate", viewRechargePackagesDataPackagesInner.PriceRateOption.Value!.Value);
