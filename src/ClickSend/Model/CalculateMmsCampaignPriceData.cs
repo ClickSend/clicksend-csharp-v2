@@ -38,7 +38,7 @@ namespace ClickSend.Model
         /// <param name="data">data</param>
         /// <param name="currency">currency</param>
         [JsonConstructor]
-        public CalculateMmsCampaignPriceData(Option<string?> totalCount = default, Option<string?> totalPrice = default, Option<CalculateMmsCampaignPriceDataData?> data = default, Option<Currency?> currency = default)
+        public CalculateMmsCampaignPriceData(Option<int?> totalCount = default, Option<string?> totalPrice = default, Option<CalculateMmsCampaignPriceDataData?> data = default, Option<Currency?> currency = default)
         {
             TotalCountOption = totalCount;
             TotalPriceOption = totalPrice;
@@ -54,7 +54,7 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> TotalCountOption { get; private set; }
+        public Option<int?> TotalCountOption { get; private set; }
 
         /// <summary>
         /// The total number of records.
@@ -62,7 +62,7 @@ namespace ClickSend.Model
         /// <value>The total number of records.</value>
         /* <example>1</example> */
         [JsonPropertyName("total_count")]
-        public string? TotalCount { get { return this.TotalCountOption.Value; } set { this.TotalCountOption = new(value); } }
+        public int? TotalCount { get { return this.TotalCountOption.Value; } set { this.TotalCountOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of TotalPrice
@@ -154,7 +154,7 @@ namespace ClickSend.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> totalCount = default;
+            Option<int?> totalCount = default;
             Option<string?> totalPrice = default;
             Option<CalculateMmsCampaignPriceDataData?> data = default;
             Option<Currency?> currency = default;
@@ -175,7 +175,7 @@ namespace ClickSend.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "total_count":
-                            totalCount = new Option<string?>(utf8JsonReader.GetString()!);
+                            totalCount = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "total_price":
                             totalPrice = new Option<string?>(utf8JsonReader.GetString()!);
@@ -231,9 +231,6 @@ namespace ClickSend.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, CalculateMmsCampaignPriceData calculateMmsCampaignPriceData, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (calculateMmsCampaignPriceData.TotalCountOption.IsSet && calculateMmsCampaignPriceData.TotalCount == null)
-                throw new ArgumentNullException(nameof(calculateMmsCampaignPriceData.TotalCount), "Property is required for class CalculateMmsCampaignPriceData.");
-
             if (calculateMmsCampaignPriceData.TotalPriceOption.IsSet && calculateMmsCampaignPriceData.TotalPrice == null)
                 throw new ArgumentNullException(nameof(calculateMmsCampaignPriceData.TotalPrice), "Property is required for class CalculateMmsCampaignPriceData.");
 
@@ -244,7 +241,7 @@ namespace ClickSend.Model
                 throw new ArgumentNullException(nameof(calculateMmsCampaignPriceData.Currency), "Property is required for class CalculateMmsCampaignPriceData.");
 
             if (calculateMmsCampaignPriceData.TotalCountOption.IsSet)
-                writer.WriteString("total_count", calculateMmsCampaignPriceData.TotalCount);
+                writer.WriteNumber("total_count", calculateMmsCampaignPriceData.TotalCountOption.Value!.Value);
 
             if (calculateMmsCampaignPriceData.TotalPriceOption.IsSet)
                 writer.WriteString("total_price", calculateMmsCampaignPriceData.TotalPrice);

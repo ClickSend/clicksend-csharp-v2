@@ -38,7 +38,7 @@ namespace ClickSend.Model
         /// <param name="responseMsg">A message describing the outcome of the operation.</param>
         /// <param name="data">The parameters related to the scheduled SMS.  &lt;div class&#x3D;\&quot;warning-box\&quot;&gt;   &lt;h4&gt;&lt;i class&#x3D;\&quot;fas fa-exclamation-triangle\&quot;&gt;&lt;/i&gt; Warning:&lt;/h4&gt;   &lt;p&gt;This parameter is deprecated and will return &lt;strong&gt;null&lt;/strong/&gt;.&lt;/p&gt; &lt;/div&gt;</param>
         [JsonConstructor]
-        public CancelSms(Option<string?> httpCode = default, Option<string?> responseCode = default, Option<string?> responseMsg = default, Option<Object?> data = default)
+        public CancelSms(Option<int?> httpCode = default, Option<string?> responseCode = default, Option<string?> responseMsg = default, Option<Object?> data = default)
         {
             HttpCodeOption = httpCode;
             ResponseCodeOption = responseCode;
@@ -54,7 +54,7 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> HttpCodeOption { get; private set; }
+        public Option<int?> HttpCodeOption { get; private set; }
 
         /// <summary>
         /// The HTTP code of the response. Visit [this page](/#status-codes) for more information.
@@ -62,7 +62,7 @@ namespace ClickSend.Model
         /// <value>The HTTP code of the response. Visit [this page](/#status-codes) for more information.</value>
         /* <example>200</example> */
         [JsonPropertyName("http_code")]
-        public string? HttpCode { get { return this.HttpCodeOption.Value; } set { this.HttpCodeOption = new(value); } }
+        public int? HttpCode { get { return this.HttpCodeOption.Value; } set { this.HttpCodeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of ResponseCode
@@ -156,7 +156,7 @@ namespace ClickSend.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> httpCode = default;
+            Option<int?> httpCode = default;
             Option<string?> responseCode = default;
             Option<string?> responseMsg = default;
             Option<Object?> data = default;
@@ -177,7 +177,7 @@ namespace ClickSend.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "http_code":
-                            httpCode = new Option<string?>(utf8JsonReader.GetString()!);
+                            httpCode = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "response_code":
                             responseCode = new Option<string?>(utf8JsonReader.GetString()!);
@@ -233,9 +233,6 @@ namespace ClickSend.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, CancelSms cancelSms, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (cancelSms.HttpCodeOption.IsSet && cancelSms.HttpCode == null)
-                throw new ArgumentNullException(nameof(cancelSms.HttpCode), "Property is required for class CancelSms.");
-
             if (cancelSms.ResponseCodeOption.IsSet && cancelSms.ResponseCode == null)
                 throw new ArgumentNullException(nameof(cancelSms.ResponseCode), "Property is required for class CancelSms.");
 
@@ -246,7 +243,7 @@ namespace ClickSend.Model
                 throw new ArgumentNullException(nameof(cancelSms.Data), "Property is required for class CancelSms.");
 
             if (cancelSms.HttpCodeOption.IsSet)
-                writer.WriteString("http_code", cancelSms.HttpCode);
+                writer.WriteNumber("http_code", cancelSms.HttpCodeOption.Value!.Value);
 
             if (cancelSms.ResponseCodeOption.IsSet)
                 writer.WriteString("response_code", cancelSms.ResponseCode);

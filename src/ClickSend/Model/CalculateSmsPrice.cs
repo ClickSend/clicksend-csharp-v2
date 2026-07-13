@@ -38,7 +38,7 @@ namespace ClickSend.Model
         /// <param name="responseMsg">A message describing the outcome of the operation.</param>
         /// <param name="data">data</param>
         [JsonConstructor]
-        public CalculateSmsPrice(Option<string?> httpCode = default, Option<string?> responseCode = default, Option<string?> responseMsg = default, Option<CalculateSmsPriceData?> data = default)
+        public CalculateSmsPrice(Option<int?> httpCode = default, Option<string?> responseCode = default, Option<string?> responseMsg = default, Option<CalculateSmsPriceData?> data = default)
         {
             HttpCodeOption = httpCode;
             ResponseCodeOption = responseCode;
@@ -54,7 +54,7 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> HttpCodeOption { get; private set; }
+        public Option<int?> HttpCodeOption { get; private set; }
 
         /// <summary>
         /// The HTTP code of the response. Visit [this page](/#status-codes) for more information.  This parameter doesn’t reflect the status of each message. Check the status parameter of the message object to view the status of the individual message.
@@ -62,7 +62,7 @@ namespace ClickSend.Model
         /// <value>The HTTP code of the response. Visit [this page](/#status-codes) for more information.  This parameter doesn’t reflect the status of each message. Check the status parameter of the message object to view the status of the individual message.</value>
         /* <example>200</example> */
         [JsonPropertyName("http_code")]
-        public string? HttpCode { get { return this.HttpCodeOption.Value; } set { this.HttpCodeOption = new(value); } }
+        public int? HttpCode { get { return this.HttpCodeOption.Value; } set { this.HttpCodeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of ResponseCode
@@ -156,7 +156,7 @@ namespace ClickSend.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> httpCode = default;
+            Option<int?> httpCode = default;
             Option<string?> responseCode = default;
             Option<string?> responseMsg = default;
             Option<CalculateSmsPriceData?> data = default;
@@ -177,7 +177,7 @@ namespace ClickSend.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "http_code":
-                            httpCode = new Option<string?>(utf8JsonReader.GetString()!);
+                            httpCode = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "response_code":
                             responseCode = new Option<string?>(utf8JsonReader.GetString()!);
@@ -233,9 +233,6 @@ namespace ClickSend.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, CalculateSmsPrice calculateSmsPrice, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (calculateSmsPrice.HttpCodeOption.IsSet && calculateSmsPrice.HttpCode == null)
-                throw new ArgumentNullException(nameof(calculateSmsPrice.HttpCode), "Property is required for class CalculateSmsPrice.");
-
             if (calculateSmsPrice.ResponseCodeOption.IsSet && calculateSmsPrice.ResponseCode == null)
                 throw new ArgumentNullException(nameof(calculateSmsPrice.ResponseCode), "Property is required for class CalculateSmsPrice.");
 
@@ -246,7 +243,7 @@ namespace ClickSend.Model
                 throw new ArgumentNullException(nameof(calculateSmsPrice.Data), "Property is required for class CalculateSmsPrice.");
 
             if (calculateSmsPrice.HttpCodeOption.IsSet)
-                writer.WriteString("http_code", calculateSmsPrice.HttpCode);
+                writer.WriteNumber("http_code", calculateSmsPrice.HttpCodeOption.Value!.Value);
 
             if (calculateSmsPrice.ResponseCodeOption.IsSet)
                 writer.WriteString("response_code", calculateSmsPrice.ResponseCode);

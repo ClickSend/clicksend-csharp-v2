@@ -53,7 +53,7 @@ namespace ClickSend.Model
         /// <param name="carrier">The phone carrier of the recipient.</param>
         /// <param name="status">The response code of the operation. Visit [this page](/#application-status-codes) for more information. This reflects the actual status of the individual message.</param>
         [JsonConstructor]
-        public SmsSendSms(Option<string?> direction = default, Option<int?> date = default, Option<string?> to = default, Option<string?> body = default, Option<string?> from = default, Option<int?> schedule = default, Option<string?> messageId = default, Option<int?> messageParts = default, Option<decimal?> messagePrice = default, Option<string?> fromEmail = default, Option<string?> listId = default, Option<string?> customString = default, Option<string?> contactId = default, Option<int?> userId = default, Option<int?> subaccountId = default, Option<bool?> isSharedSystemNumber = default, Option<string?> country = default, Option<string?> carrier = default, Option<string?> status = default)
+        public SmsSendSms(Option<string?> direction = default, Option<int?> date = default, Option<string?> to = default, Option<string?> body = default, Option<string?> from = default, Option<int?> schedule = default, Option<string?> messageId = default, Option<int?> messageParts = default, Option<string?> messagePrice = default, Option<string?> fromEmail = default, Option<string?> listId = default, Option<string?> customString = default, Option<string?> contactId = default, Option<int?> userId = default, Option<int?> subaccountId = default, Option<bool?> isSharedSystemNumber = default, Option<string?> country = default, Option<string?> carrier = default, Option<string?> status = default)
         {
             DirectionOption = direction;
             DateOption = date;
@@ -204,7 +204,7 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> MessagePriceOption { get; private set; }
+        public Option<string?> MessagePriceOption { get; private set; }
 
         /// <summary>
         /// The price of this message. This depends on the total number of parts of the message.
@@ -212,7 +212,7 @@ namespace ClickSend.Model
         /// <value>The price of this message. This depends on the total number of parts of the message.</value>
         /* <example>0.07</example> */
         [JsonPropertyName("message_price")]
-        public decimal? MessagePrice { get { return this.MessagePriceOption.Value; } set { this.MessagePriceOption = new(value); } }
+        public string? MessagePrice { get { return this.MessagePriceOption.Value; } set { this.MessagePriceOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of FromEmail
@@ -436,7 +436,7 @@ namespace ClickSend.Model
             Option<int?> schedule = default;
             Option<string?> messageId = default;
             Option<int?> messageParts = default;
-            Option<decimal?> messagePrice = default;
+            Option<string?> messagePrice = default;
             Option<string?> fromEmail = default;
             Option<string?> listId = default;
             Option<string?> customString = default;
@@ -488,7 +488,7 @@ namespace ClickSend.Model
                             messageParts = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "message_price":
-                            messagePrice = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
+                            messagePrice = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "from_email":
                             fromEmail = new Option<string?>(utf8JsonReader.GetString()!);
@@ -625,6 +625,9 @@ namespace ClickSend.Model
             if (smsSendSms.MessageIdOption.IsSet && smsSendSms.MessageId == null)
                 throw new ArgumentNullException(nameof(smsSendSms.MessageId), "Property is required for class SmsSendSms.");
 
+            if (smsSendSms.MessagePriceOption.IsSet && smsSendSms.MessagePrice == null)
+                throw new ArgumentNullException(nameof(smsSendSms.MessagePrice), "Property is required for class SmsSendSms.");
+
             if (smsSendSms.FromEmailOption.IsSet && smsSendSms.FromEmail == null)
                 throw new ArgumentNullException(nameof(smsSendSms.FromEmail), "Property is required for class SmsSendSms.");
 
@@ -671,7 +674,7 @@ namespace ClickSend.Model
                 writer.WriteNumber("message_parts", smsSendSms.MessagePartsOption.Value!.Value);
 
             if (smsSendSms.MessagePriceOption.IsSet)
-                writer.WriteNumber("message_price", smsSendSms.MessagePriceOption.Value!.Value);
+                writer.WriteString("message_price", smsSendSms.MessagePrice);
 
             if (smsSendSms.FromEmailOption.IsSet)
                 writer.WriteString("from_email", smsSendSms.FromEmail);

@@ -39,7 +39,7 @@ namespace ClickSend.Model
         /// <param name="messages">The list of messages that were sent.</param>
         /// <param name="currency">currency</param>
         [JsonConstructor]
-        public SendFaxData(Option<decimal?> totalPrice = default, Option<string?> totalCount = default, Option<string?> queuedCount = default, Option<List<Fax>?> messages = default, Option<Currency?> currency = default)
+        public SendFaxData(Option<decimal?> totalPrice = default, Option<int?> totalCount = default, Option<int?> queuedCount = default, Option<List<Fax>?> messages = default, Option<Currency?> currency = default)
         {
             TotalPriceOption = totalPrice;
             TotalCountOption = totalCount;
@@ -71,7 +71,7 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> TotalCountOption { get; private set; }
+        public Option<int?> TotalCountOption { get; private set; }
 
         /// <summary>
         /// The total count of the fax.
@@ -79,14 +79,14 @@ namespace ClickSend.Model
         /// <value>The total count of the fax.</value>
         /* <example>1</example> */
         [JsonPropertyName("total_count")]
-        public string? TotalCount { get { return this.TotalCountOption.Value; } set { this.TotalCountOption = new(value); } }
+        public int? TotalCount { get { return this.TotalCountOption.Value; } set { this.TotalCountOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of QueuedCount
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> QueuedCountOption { get; private set; }
+        public Option<int?> QueuedCountOption { get; private set; }
 
         /// <summary>
         /// The count of the queued fax.
@@ -94,7 +94,7 @@ namespace ClickSend.Model
         /// <value>The count of the queued fax.</value>
         /* <example>1</example> */
         [JsonPropertyName("queued_count")]
-        public string? QueuedCount { get { return this.QueuedCountOption.Value; } set { this.QueuedCountOption = new(value); } }
+        public int? QueuedCount { get { return this.QueuedCountOption.Value; } set { this.QueuedCountOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Messages
@@ -174,8 +174,8 @@ namespace ClickSend.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<decimal?> totalPrice = default;
-            Option<string?> totalCount = default;
-            Option<string?> queuedCount = default;
+            Option<int?> totalCount = default;
+            Option<int?> queuedCount = default;
             Option<List<Fax>?> messages = default;
             Option<Currency?> currency = default;
 
@@ -198,10 +198,10 @@ namespace ClickSend.Model
                             totalPrice = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
                             break;
                         case "total_count":
-                            totalCount = new Option<string?>(utf8JsonReader.GetString()!);
+                            totalCount = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "queued_count":
-                            queuedCount = new Option<string?>(utf8JsonReader.GetString()!);
+                            queuedCount = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "messages":
                             messages = new Option<List<Fax>?>(JsonSerializer.Deserialize<List<Fax>>(ref utf8JsonReader, jsonSerializerOptions)!);
@@ -257,12 +257,6 @@ namespace ClickSend.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, SendFaxData sendFaxData, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (sendFaxData.TotalCountOption.IsSet && sendFaxData.TotalCount == null)
-                throw new ArgumentNullException(nameof(sendFaxData.TotalCount), "Property is required for class SendFaxData.");
-
-            if (sendFaxData.QueuedCountOption.IsSet && sendFaxData.QueuedCount == null)
-                throw new ArgumentNullException(nameof(sendFaxData.QueuedCount), "Property is required for class SendFaxData.");
-
             if (sendFaxData.MessagesOption.IsSet && sendFaxData.Messages == null)
                 throw new ArgumentNullException(nameof(sendFaxData.Messages), "Property is required for class SendFaxData.");
 
@@ -273,10 +267,10 @@ namespace ClickSend.Model
                 writer.WriteNumber("total_price", sendFaxData.TotalPriceOption.Value!.Value);
 
             if (sendFaxData.TotalCountOption.IsSet)
-                writer.WriteString("total_count", sendFaxData.TotalCount);
+                writer.WriteNumber("total_count", sendFaxData.TotalCountOption.Value!.Value);
 
             if (sendFaxData.QueuedCountOption.IsSet)
-                writer.WriteString("queued_count", sendFaxData.QueuedCount);
+                writer.WriteNumber("queued_count", sendFaxData.QueuedCountOption.Value!.Value);
 
             if (sendFaxData.MessagesOption.IsSet)
             {

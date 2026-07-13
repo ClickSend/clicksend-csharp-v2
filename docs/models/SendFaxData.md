@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TotalPrice** | **decimal** | The total price of the fax. | [optional] 
-**TotalCount** | **string** | The total count of the fax. | [optional] 
-**QueuedCount** | **string** | The count of the queued fax. | [optional] 
+**TotalCount** | **int** | The total count of the fax. | [optional] 
+**QueuedCount** | **int** | The count of the queued fax. | [optional] 
 **Messages** | [**List&lt;Fax&gt;**](Fax.md) | The list of messages that were sent. | [optional] 
 **Currency** | [**Currency**](Currency.md) |  | [optional] 
 

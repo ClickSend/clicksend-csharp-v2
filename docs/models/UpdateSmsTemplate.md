@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HttpCode** | **string** | The HTTP code of the response. Visit [this page](/#status-codes) for more information. | [optional] 
+**HttpCode** | **int** | The HTTP code of the response. Visit [this page](/#status-codes) for more information. | [optional] 
 **ResponseCode** | **string** | The response code of the operation. Visit [this page](/#status-codes) for more information. | [optional] 
 **ResponseMsg** | **string** | A message describing the outcome of the operation. | [optional] 
 **Data** | [**SmsTemplateUpdate**](SmsTemplateUpdate.md) |  | [optional] 

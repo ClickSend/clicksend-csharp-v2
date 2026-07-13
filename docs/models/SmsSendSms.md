@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Schedule** | **int** | The scheduled date of the message. It is in &lt;a href&#x3D;\&quot;http://help.clicksend.com/what-is-a-unix-timestamp\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Unix format&lt;/a&gt;. | [optional] 
 **MessageId** | **string** | The generated ID of the message. This ID is typically used as a reference for &lt;a href&#x3D;\&quot;https://www.clicksend.com/au/help/\&quot; target&#x3D;\&quot;_blank\&quot;&gt;customer support&lt;/a&gt; in case of any issues. | [optional] 
 **MessageParts** | **int** | The number of parts the message was broken into. To look at how many parts your message is broken down into, use the **&lt;a href&#x3D;\&quot;http://smscharactercount.com/\&quot;&gt;SMS Character Count&lt;/a&gt;**. | [optional] 
-**MessagePrice** | **decimal** | The price of this message. This depends on the total number of parts of the message. | [optional] 
+**MessagePrice** | **string** | The price of this message. This depends on the total number of parts of the message. | [optional] 
 **FromEmail** | **string** | The email address to which replies should be emailed to. If omitted, the reply will be emailed back to the user who sent the outgoing SMS. | [optional] 
 **ListId** | **string** | The _list_id_ of the contact list the message was sent to. This parameter will have a **null** value if you didn’t send to a list in the request. | [optional] 
 **CustomString** | **string** | A note that was sent from the request. | [optional] 

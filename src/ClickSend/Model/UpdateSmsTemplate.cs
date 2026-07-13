@@ -38,7 +38,7 @@ namespace ClickSend.Model
         /// <param name="responseMsg">A message describing the outcome of the operation.</param>
         /// <param name="data">data</param>
         [JsonConstructor]
-        public UpdateSmsTemplate(Option<string?> httpCode = default, Option<string?> responseCode = default, Option<string?> responseMsg = default, Option<SmsTemplateUpdate?> data = default)
+        public UpdateSmsTemplate(Option<int?> httpCode = default, Option<string?> responseCode = default, Option<string?> responseMsg = default, Option<SmsTemplateUpdate?> data = default)
         {
             HttpCodeOption = httpCode;
             ResponseCodeOption = responseCode;
@@ -54,7 +54,7 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> HttpCodeOption { get; private set; }
+        public Option<int?> HttpCodeOption { get; private set; }
 
         /// <summary>
         /// The HTTP code of the response. Visit [this page](/#status-codes) for more information.
@@ -62,7 +62,7 @@ namespace ClickSend.Model
         /// <value>The HTTP code of the response. Visit [this page](/#status-codes) for more information.</value>
         /* <example>200</example> */
         [JsonPropertyName("http_code")]
-        public string? HttpCode { get { return this.HttpCodeOption.Value; } set { this.HttpCodeOption = new(value); } }
+        public int? HttpCode { get { return this.HttpCodeOption.Value; } set { this.HttpCodeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of ResponseCode
@@ -156,7 +156,7 @@ namespace ClickSend.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> httpCode = default;
+            Option<int?> httpCode = default;
             Option<string?> responseCode = default;
             Option<string?> responseMsg = default;
             Option<SmsTemplateUpdate?> data = default;
@@ -177,7 +177,7 @@ namespace ClickSend.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "http_code":
-                            httpCode = new Option<string?>(utf8JsonReader.GetString()!);
+                            httpCode = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "response_code":
                             responseCode = new Option<string?>(utf8JsonReader.GetString()!);
@@ -233,9 +233,6 @@ namespace ClickSend.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, UpdateSmsTemplate updateSmsTemplate, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (updateSmsTemplate.HttpCodeOption.IsSet && updateSmsTemplate.HttpCode == null)
-                throw new ArgumentNullException(nameof(updateSmsTemplate.HttpCode), "Property is required for class UpdateSmsTemplate.");
-
             if (updateSmsTemplate.ResponseCodeOption.IsSet && updateSmsTemplate.ResponseCode == null)
                 throw new ArgumentNullException(nameof(updateSmsTemplate.ResponseCode), "Property is required for class UpdateSmsTemplate.");
 
@@ -246,7 +243,7 @@ namespace ClickSend.Model
                 throw new ArgumentNullException(nameof(updateSmsTemplate.Data), "Property is required for class UpdateSmsTemplate.");
 
             if (updateSmsTemplate.HttpCodeOption.IsSet)
-                writer.WriteString("http_code", updateSmsTemplate.HttpCode);
+                writer.WriteNumber("http_code", updateSmsTemplate.HttpCodeOption.Value!.Value);
 
             if (updateSmsTemplate.ResponseCodeOption.IsSet)
                 writer.WriteString("response_code", updateSmsTemplate.ResponseCode);

@@ -42984,8 +42984,8 @@ components:
         message_price:
           description: The price of this message. This depends on the total number
             of parts of the message.
-          example: 0.07
-          type: number
+          example: "0.07"
+          type: string
         from_email:
           description: "The email address to which replies should be emailed to. If\
             \ omitted, the reply will be emailed back to the user who sent the outgoing\
@@ -43082,7 +43082,7 @@ components:
             schedule: 1721099039
             message_id: 1ABC3200-C38C-6308-BE4B-C7C51D01DCF0
             message_parts: 1
-            message_price: 0.0792
+            message_price: "0.0792"
             from_email: null
             list_id: null
             custom_string: ""
@@ -43270,8 +43270,8 @@ components:
             The HTTP code of the response. Visit [this page](/#status-codes) for more information.
 
             This parameter doesn’t reflect the status of each message. Check the status parameter of the message object to view the status of the individual message.
-          example: "200"
-          type: string
+          example: 200
+          type: integer
         response_code:
           description: "The response code of the operation. Visit [this page](/#status-codes)\
             \ for more information."
@@ -43835,8 +43835,8 @@ components:
         http_code:
           description: "The HTTP code of the response. Visit [this page](/#status-codes)\
             \ for more information."
-          example: "200"
-          type: string
+          example: 200
+          type: integer
         response_code:
           description: "The response code of the operation. Visit [this page](/#status-codes)\
             \ for more information."
@@ -43969,8 +43969,8 @@ components:
       properties:
         http_code:
           description: The HTTP status code of the response.
-          example: "200"
-          type: string
+          example: 200
+          type: integer
         response_code:
           description: The response code indicating the status of the operation.
           example: SUCCESS
@@ -44012,8 +44012,8 @@ components:
         http_code:
           description: "The HTTP code of the response. Visit [this page](/#status-codes)\
             \ for more information."
-          example: "200"
-          type: string
+          example: 200
+          type: integer
         response_code:
           description: "The response code of the operation. Visit [this page](/#status-codes)\
             \ for more information."
@@ -45276,7 +45276,7 @@ components:
         response_code: SUCCESS
         response_msg: Here is your result.
         data:
-          total_count: "1"
+          total_count: 1
           total_price: "0.429"
           data:
             from: "+61411111111"
@@ -45492,9 +45492,9 @@ components:
         from: from
         lang: en-au
         voice: female
-        schedule: "1436874701"
+        schedule: 1436874701
         message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-        message_parts: "1"
+        message_parts: 1
         message_price: "0.07"
         custom_string: this is a test
         user_id: 1
@@ -45535,16 +45535,16 @@ components:
           type: string
         schedule:
           description: The timestamp when the message should be sent.
-          example: "1436874701"
-          type: string
+          example: 1436874701
+          type: integer
         message_id:
           description: The ID of the message.
           example: BF7AD270-0DE2-418B-B606-71D527D9C1AE
           type: string
         message_parts:
           description: The number of parts in the message.
-          example: "1"
-          type: string
+          example: 1
+          type: integer
         message_price:
           description: The price of the message.
           example: "0.07"
@@ -45595,9 +45595,9 @@ components:
             from: from
             lang: en-au
             voice: female
-            schedule: "1436874701"
+            schedule: 1436874701
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: "1"
+            message_parts: 1
             message_price: "0.07"
             custom_string: this is a test
             user_id: 1
@@ -45613,9 +45613,9 @@ components:
             from: from
             lang: en-au
             voice: female
-            schedule: "1436874701"
+            schedule: 1436874701
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: "1"
+            message_parts: 1
             message_price: "0.07"
             custom_string: this is a test
             user_id: 1
@@ -45661,9 +45661,9 @@ components:
             from: from
             lang: en-au
             voice: female
-            schedule: "1436874701"
+            schedule: 1436874701
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: "1"
+            message_parts: 1
             message_price: "0.07"
             custom_string: this is a test
             user_id: 1
@@ -45679,9 +45679,9 @@ components:
             from: from
             lang: en-au
             voice: female
-            schedule: "1436874701"
+            schedule: 1436874701
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: "1"
+            message_parts: 1
             message_price: "0.07"
             custom_string: this is a test
             user_id: 1
@@ -45917,9 +45917,9 @@ components:
             from: from
             lang: en-au
             voice: female
-            schedule: "1436874701"
+            schedule: 1436874701
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: "1"
+            message_parts: 1
             message_price: "0.07"
             custom_string: this is a test
             user_id: 1
@@ -45935,9 +45935,9 @@ components:
             from: from
             lang: en-au
             voice: female
-            schedule: "1436874701"
+            schedule: 1436874701
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: "1"
+            message_parts: 1
             message_price: "0.07"
             custom_string: this is a test
             user_id: 1
@@ -46089,8 +46089,8 @@ components:
         response_msg: Fax queued for delivery.
         data:
           total_price: 13.2
-          total_count: "1"
-          queued_count: "1"
+          total_count: 1
+          queued_count: 1
           messages:
           - user_id: 1
             subaccount_id: 1
@@ -46156,8 +46156,8 @@ components:
         response_msg: Here are some prices.
         data:
           total_price: 13.2
-          total_count: "1"
-          queued_count: "1"
+          total_count: 1
+          queued_count: 1
           messages:
           - user_id: 1
             subaccount_id: 1
@@ -55952,7 +55952,7 @@ components:
           schedule: 1721099039
           message_id: 1ABC3200-C38C-6308-BE4B-C7C51D01DCF0
           message_parts: 1
-          message_price: 0.0792
+          message_price: "0.0792"
           from_email: null
           list_id: null
           custom_string: ""
@@ -55997,7 +55997,7 @@ components:
             schedule: 1721099039
             message_id: 1ABC3200-C38C-6308-BE4B-C7C51D01DCF0
             message_parts: 1
-            message_price: 0.0792
+            message_price: "0.0792"
             from_email: null
             list_id: null
             custom_string: ""
@@ -57174,7 +57174,7 @@ components:
       type: object
     calculate_mms_campaign_price_data:
       example:
-        total_count: "1"
+        total_count: 1
         total_price: "0.429"
         data:
           from: "+61411111111"
@@ -57189,8 +57189,8 @@ components:
       properties:
         total_count:
           description: The total number of records.
-          example: "1"
-          type: string
+          example: 1
+          type: integer
         total_price:
           description: The total price of the MMS campaign.
           example: "0.429"
@@ -57264,9 +57264,9 @@ components:
           from: from
           lang: en-au
           voice: female
-          schedule: "1436874701"
+          schedule: 1436874701
           message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-          message_parts: "1"
+          message_parts: 1
           message_price: "0.07"
           custom_string: this is a test
           user_id: 1
@@ -57282,9 +57282,9 @@ components:
           from: from
           lang: en-au
           voice: female
-          schedule: "1436874701"
+          schedule: 1436874701
           message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-          message_parts: "1"
+          message_parts: 1
           message_price: "0.07"
           custom_string: this is a test
           user_id: 1
@@ -57419,9 +57419,9 @@ components:
           from: from
           lang: en-au
           voice: female
-          schedule: "1436874701"
+          schedule: 1436874701
           message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-          message_parts: "1"
+          message_parts: 1
           message_price: "0.07"
           custom_string: this is a test
           user_id: 1
@@ -57437,9 +57437,9 @@ components:
           from: from
           lang: en-au
           voice: female
-          schedule: "1436874701"
+          schedule: 1436874701
           message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-          message_parts: "1"
+          message_parts: 1
           message_price: "0.07"
           custom_string: this is a test
           user_id: 1
@@ -57451,8 +57451,8 @@ components:
     send_fax_data:
       example:
         total_price: 13.2
-        total_count: "1"
-        queued_count: "1"
+        total_count: 1
+        queued_count: 1
         messages:
         - user_id: 1
           subaccount_id: 1
@@ -57502,12 +57502,12 @@ components:
           type: number
         total_count:
           description: The total count of the fax.
-          example: "1"
-          type: string
+          example: 1
+          type: integer
         queued_count:
           description: The count of the queued fax.
-          example: "1"
-          type: string
+          example: 1
+          type: integer
         messages:
           description: The list of messages that were sent.
           items:
