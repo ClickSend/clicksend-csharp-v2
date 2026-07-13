@@ -43066,7 +43066,7 @@ components:
       type: object
     send-sms:
       example:
-        http_code: "200"
+        http_code: 200
         response_code: SUCCESS
         response_msg: Messages queued for delivery.
         data:
@@ -43105,8 +43105,8 @@ components:
             The HTTP code of the response. Visit [this page](/#status-codes) for more information.
 
             This parameter doesn’t reflect the status of each message. Check the status parameter of the message object to view the status of the individual message.
-          example: "200"
-          type: string
+          example: 200
+          type: integer
         response_code:
           description: "The response code of the operation. Visit [this page](/#status-codes)\
             \ for more information."
