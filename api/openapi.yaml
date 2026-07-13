@@ -42991,21 +42991,25 @@ components:
             \ omitted, the reply will be emailed back to the user who sent the outgoing\
             \ SMS."
           example: john@example.com
+          nullable: true
           type: string
         list_id:
           description: The _list_id_ of the contact list the message was sent to.
             This parameter will have a **null** value if you didn’t send to a list
             in the request.
           example: "1"
+          nullable: true
           type: string
         custom_string:
           description: A note that was sent from the request.
           example: this is a test
+          nullable: true
           type: string
         contact_id:
           description: This is the ID of the contact. This parameter will have a **null**
             value if you didn’t provide a _contact_id_ in the request.
           example: "52649412"
+          nullable: true
           type: string
         user_id:
           description: The unique user ID of the sender.

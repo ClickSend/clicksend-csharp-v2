@@ -491,16 +491,16 @@ namespace ClickSend.Model
                             messagePrice = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "from_email":
-                            fromEmail = new Option<string?>(utf8JsonReader.GetString()!);
+                            fromEmail = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "list_id":
-                            listId = new Option<string?>(utf8JsonReader.GetString()!);
+                            listId = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "custom_string":
-                            customString = new Option<string?>(utf8JsonReader.GetString()!);
+                            customString = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "contact_id":
-                            contactId = new Option<string?>(utf8JsonReader.GetString()!);
+                            contactId = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "user_id":
                             userId = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
@@ -552,18 +552,6 @@ namespace ClickSend.Model
 
             if (messagePrice.IsSet && messagePrice.Value == null)
                 throw new ArgumentNullException(nameof(messagePrice), "Property is not nullable for class SmsSendSms.");
-
-            if (fromEmail.IsSet && fromEmail.Value == null)
-                throw new ArgumentNullException(nameof(fromEmail), "Property is not nullable for class SmsSendSms.");
-
-            if (listId.IsSet && listId.Value == null)
-                throw new ArgumentNullException(nameof(listId), "Property is not nullable for class SmsSendSms.");
-
-            if (customString.IsSet && customString.Value == null)
-                throw new ArgumentNullException(nameof(customString), "Property is not nullable for class SmsSendSms.");
-
-            if (contactId.IsSet && contactId.Value == null)
-                throw new ArgumentNullException(nameof(contactId), "Property is not nullable for class SmsSendSms.");
 
             if (userId.IsSet && userId.Value == null)
                 throw new ArgumentNullException(nameof(userId), "Property is not nullable for class SmsSendSms.");
@@ -628,18 +616,6 @@ namespace ClickSend.Model
             if (smsSendSms.MessagePriceOption.IsSet && smsSendSms.MessagePrice == null)
                 throw new ArgumentNullException(nameof(smsSendSms.MessagePrice), "Property is required for class SmsSendSms.");
 
-            if (smsSendSms.FromEmailOption.IsSet && smsSendSms.FromEmail == null)
-                throw new ArgumentNullException(nameof(smsSendSms.FromEmail), "Property is required for class SmsSendSms.");
-
-            if (smsSendSms.ListIdOption.IsSet && smsSendSms.ListId == null)
-                throw new ArgumentNullException(nameof(smsSendSms.ListId), "Property is required for class SmsSendSms.");
-
-            if (smsSendSms.CustomStringOption.IsSet && smsSendSms.CustomString == null)
-                throw new ArgumentNullException(nameof(smsSendSms.CustomString), "Property is required for class SmsSendSms.");
-
-            if (smsSendSms.ContactIdOption.IsSet && smsSendSms.ContactId == null)
-                throw new ArgumentNullException(nameof(smsSendSms.ContactId), "Property is required for class SmsSendSms.");
-
             if (smsSendSms.CountryOption.IsSet && smsSendSms.Country == null)
                 throw new ArgumentNullException(nameof(smsSendSms.Country), "Property is required for class SmsSendSms.");
 
@@ -677,16 +653,28 @@ namespace ClickSend.Model
                 writer.WriteString("message_price", smsSendSms.MessagePrice);
 
             if (smsSendSms.FromEmailOption.IsSet)
-                writer.WriteString("from_email", smsSendSms.FromEmail);
+                if (smsSendSms.FromEmailOption.Value != null)
+                    writer.WriteString("from_email", smsSendSms.FromEmail);
+                else
+                    writer.WriteNull("from_email");
 
             if (smsSendSms.ListIdOption.IsSet)
-                writer.WriteString("list_id", smsSendSms.ListId);
+                if (smsSendSms.ListIdOption.Value != null)
+                    writer.WriteString("list_id", smsSendSms.ListId);
+                else
+                    writer.WriteNull("list_id");
 
             if (smsSendSms.CustomStringOption.IsSet)
-                writer.WriteString("custom_string", smsSendSms.CustomString);
+                if (smsSendSms.CustomStringOption.Value != null)
+                    writer.WriteString("custom_string", smsSendSms.CustomString);
+                else
+                    writer.WriteNull("custom_string");
 
             if (smsSendSms.ContactIdOption.IsSet)
-                writer.WriteString("contact_id", smsSendSms.ContactId);
+                if (smsSendSms.ContactIdOption.Value != null)
+                    writer.WriteString("contact_id", smsSendSms.ContactId);
+                else
+                    writer.WriteNull("contact_id");
 
             if (smsSendSms.UserIdOption.IsSet)
                 writer.WriteNumber("user_id", smsSendSms.UserIdOption.Value!.Value);
