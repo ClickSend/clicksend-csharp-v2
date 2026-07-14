@@ -37,7 +37,7 @@ namespace ClickSend.Model
         /// <param name="inbound">inbound</param>
         /// <param name="bounced">bounced</param>
         [JsonConstructor]
-        public ViewSmsStatisticsDataTotal(Option<ViewVoiceStatisticsDataTotalOutbound?> outbound = default, Option<CancelAllSmsData?> inbound = default, Option<CancelAllSmsData?> bounced = default)
+        public ViewSmsStatisticsDataTotal(Option<ViewVoiceStatisticsDataTotalOutbound?> outbound = default, Option<ViewVoiceStatisticsDataTotalOutbound?> inbound = default, Option<ViewVoiceStatisticsDataTotalOutbound?> bounced = default)
         {
             OutboundOption = outbound;
             InboundOption = inbound;
@@ -65,26 +65,26 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<CancelAllSmsData?> InboundOption { get; private set; }
+        public Option<ViewVoiceStatisticsDataTotalOutbound?> InboundOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Inbound
         /// </summary>
         [JsonPropertyName("inbound")]
-        public CancelAllSmsData? Inbound { get { return this.InboundOption.Value; } set { this.InboundOption = new(value); } }
+        public ViewVoiceStatisticsDataTotalOutbound? Inbound { get { return this.InboundOption.Value; } set { this.InboundOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Bounced
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<CancelAllSmsData?> BouncedOption { get; private set; }
+        public Option<ViewVoiceStatisticsDataTotalOutbound?> BouncedOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Bounced
         /// </summary>
         [JsonPropertyName("bounced")]
-        public CancelAllSmsData? Bounced { get { return this.BouncedOption.Value; } set { this.BouncedOption = new(value); } }
+        public ViewVoiceStatisticsDataTotalOutbound? Bounced { get { return this.BouncedOption.Value; } set { this.BouncedOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -135,8 +135,8 @@ namespace ClickSend.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<ViewVoiceStatisticsDataTotalOutbound?> outbound = default;
-            Option<CancelAllSmsData?> inbound = default;
-            Option<CancelAllSmsData?> bounced = default;
+            Option<ViewVoiceStatisticsDataTotalOutbound?> inbound = default;
+            Option<ViewVoiceStatisticsDataTotalOutbound?> bounced = default;
 
             while (utf8JsonReader.Read())
             {
@@ -157,10 +157,10 @@ namespace ClickSend.Model
                             outbound = new Option<ViewVoiceStatisticsDataTotalOutbound?>(JsonSerializer.Deserialize<ViewVoiceStatisticsDataTotalOutbound>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "inbound":
-                            inbound = new Option<CancelAllSmsData?>(JsonSerializer.Deserialize<CancelAllSmsData>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            inbound = new Option<ViewVoiceStatisticsDataTotalOutbound?>(JsonSerializer.Deserialize<ViewVoiceStatisticsDataTotalOutbound>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "bounced":
-                            bounced = new Option<CancelAllSmsData?>(JsonSerializer.Deserialize<CancelAllSmsData>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            bounced = new Option<ViewVoiceStatisticsDataTotalOutbound?>(JsonSerializer.Deserialize<ViewVoiceStatisticsDataTotalOutbound>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;

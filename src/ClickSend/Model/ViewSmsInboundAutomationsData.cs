@@ -47,7 +47,7 @@ namespace ClickSend.Model
         /// <param name="links">The list of pagination links.</param>
         /// <param name="data">data</param>
         [JsonConstructor]
-        public ViewSmsInboundAutomationsData(Option<int?> total = default, Option<int?> perPage = default, Option<int?> currentPage = default, Option<int?> lastPage = default, Option<string?> nextPageUrl = default, Option<string?> prevPageUrl = default, Option<int?> from = default, Option<int?> to = default, Option<string?> firstPageUrl = default, Option<string?> lastPageUrl = default, Option<string?> path = default, Option<List<ViewSmsInboundAutomationsDataAllOfLinksInner>?> links = default, Option<List<SmsInboundRule>?> data = default)
+        public ViewSmsInboundAutomationsData(Option<int?> total = default, Option<int?> perPage = default, Option<int?> currentPage = default, Option<int?> lastPage = default, Option<string?> nextPageUrl = default, Option<string?> prevPageUrl = default, Option<int?> from = default, Option<int?> to = default, Option<string?> firstPageUrl = default, Option<string?> lastPageUrl = default, Option<string?> path = default, Option<List<ViewListsDataLinksInner>?> links = default, Option<List<SmsInboundRule>?> data = default)
         {
             TotalOption = total;
             PerPageOption = perPage;
@@ -235,14 +235,14 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<ViewSmsInboundAutomationsDataAllOfLinksInner>?> LinksOption { get; private set; }
+        public Option<List<ViewListsDataLinksInner>?> LinksOption { get; private set; }
 
         /// <summary>
         /// The list of pagination links.
         /// </summary>
         /// <value>The list of pagination links.</value>
         [JsonPropertyName("links")]
-        public List<ViewSmsInboundAutomationsDataAllOfLinksInner>? Links { get { return this.LinksOption.Value; } set { this.LinksOption = new(value); } }
+        public List<ViewListsDataLinksInner>? Links { get { return this.LinksOption.Value; } set { this.LinksOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Data
@@ -327,7 +327,7 @@ namespace ClickSend.Model
             Option<string?> firstPageUrl = default;
             Option<string?> lastPageUrl = default;
             Option<string?> path = default;
-            Option<List<ViewSmsInboundAutomationsDataAllOfLinksInner>?> links = default;
+            Option<List<ViewListsDataLinksInner>?> links = default;
             Option<List<SmsInboundRule>?> data = default;
 
             while (utf8JsonReader.Read())
@@ -379,7 +379,7 @@ namespace ClickSend.Model
                             path = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "links":
-                            links = new Option<List<ViewSmsInboundAutomationsDataAllOfLinksInner>?>(JsonSerializer.Deserialize<List<ViewSmsInboundAutomationsDataAllOfLinksInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            links = new Option<List<ViewListsDataLinksInner>?>(JsonSerializer.Deserialize<List<ViewListsDataLinksInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "data":
                             data = new Option<List<SmsInboundRule>?>(JsonSerializer.Deserialize<List<SmsInboundRule>>(ref utf8JsonReader, jsonSerializerOptions)!);

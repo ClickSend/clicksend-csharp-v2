@@ -34,13 +34,13 @@ namespace ClickSend.Model
         /// Initializes a new instance of the <see cref="ViewSmsStatisticsData" /> class.
         /// </summary>
         /// <param name="total">total</param>
-        /// <param name="stat">stat</param>
+        /// <param name="stats">stats</param>
         /// <param name="currency">currency</param>
         [JsonConstructor]
-        public ViewSmsStatisticsData(Option<ViewSmsStatisticsDataTotal?> total = default, Option<List<ViewSmsStatisticsDataStatInner>?> stat = default, Option<Currency?> currency = default)
+        public ViewSmsStatisticsData(Option<ViewSmsStatisticsDataTotal?> total = default, Option<List<ViewSmsStatisticsDataStatsInner>?> stats = default, Option<Currency?> currency = default)
         {
             TotalOption = total;
-            StatOption = stat;
+            StatsOption = stats;
             CurrencyOption = currency;
             OnCreated();
         }
@@ -61,17 +61,17 @@ namespace ClickSend.Model
         public ViewSmsStatisticsDataTotal? Total { get { return this.TotalOption.Value; } set { this.TotalOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of Stat
+        /// Used to track the state of Stats
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<ViewSmsStatisticsDataStatInner>?> StatOption { get; private set; }
+        public Option<List<ViewSmsStatisticsDataStatsInner>?> StatsOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Stat
+        /// Gets or Sets Stats
         /// </summary>
-        [JsonPropertyName("stat")]
-        public List<ViewSmsStatisticsDataStatInner>? Stat { get { return this.StatOption.Value; } set { this.StatOption = new(value); } }
+        [JsonPropertyName("stats")]
+        public List<ViewSmsStatisticsDataStatsInner>? Stats { get { return this.StatsOption.Value; } set { this.StatsOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Currency
@@ -95,7 +95,7 @@ namespace ClickSend.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class ViewSmsStatisticsData {\n");
             sb.Append("  Total: ").Append(Total).Append("\n");
-            sb.Append("  Stat: ").Append(Stat).Append("\n");
+            sb.Append("  Stats: ").Append(Stats).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -135,7 +135,7 @@ namespace ClickSend.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<ViewSmsStatisticsDataTotal?> total = default;
-            Option<List<ViewSmsStatisticsDataStatInner>?> stat = default;
+            Option<List<ViewSmsStatisticsDataStatsInner>?> stats = default;
             Option<Currency?> currency = default;
 
             while (utf8JsonReader.Read())
@@ -156,8 +156,8 @@ namespace ClickSend.Model
                         case "total":
                             total = new Option<ViewSmsStatisticsDataTotal?>(JsonSerializer.Deserialize<ViewSmsStatisticsDataTotal>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
-                        case "stat":
-                            stat = new Option<List<ViewSmsStatisticsDataStatInner>?>(JsonSerializer.Deserialize<List<ViewSmsStatisticsDataStatInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                        case "stats":
+                            stats = new Option<List<ViewSmsStatisticsDataStatsInner>?>(JsonSerializer.Deserialize<List<ViewSmsStatisticsDataStatsInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "_currency":
                             currency = new Option<Currency?>(JsonSerializer.Deserialize<Currency>(ref utf8JsonReader, jsonSerializerOptions)!);
@@ -171,13 +171,13 @@ namespace ClickSend.Model
             if (total.IsSet && total.Value == null)
                 throw new ArgumentNullException(nameof(total), "Property is not nullable for class ViewSmsStatisticsData.");
 
-            if (stat.IsSet && stat.Value == null)
-                throw new ArgumentNullException(nameof(stat), "Property is not nullable for class ViewSmsStatisticsData.");
+            if (stats.IsSet && stats.Value == null)
+                throw new ArgumentNullException(nameof(stats), "Property is not nullable for class ViewSmsStatisticsData.");
 
             if (currency.IsSet && currency.Value == null)
                 throw new ArgumentNullException(nameof(currency), "Property is not nullable for class ViewSmsStatisticsData.");
 
-            return new ViewSmsStatisticsData(total, stat, currency);
+            return new ViewSmsStatisticsData(total, stats, currency);
         }
 
         /// <summary>
@@ -207,8 +207,8 @@ namespace ClickSend.Model
             if (viewSmsStatisticsData.TotalOption.IsSet && viewSmsStatisticsData.Total == null)
                 throw new ArgumentNullException(nameof(viewSmsStatisticsData.Total), "Property is required for class ViewSmsStatisticsData.");
 
-            if (viewSmsStatisticsData.StatOption.IsSet && viewSmsStatisticsData.Stat == null)
-                throw new ArgumentNullException(nameof(viewSmsStatisticsData.Stat), "Property is required for class ViewSmsStatisticsData.");
+            if (viewSmsStatisticsData.StatsOption.IsSet && viewSmsStatisticsData.Stats == null)
+                throw new ArgumentNullException(nameof(viewSmsStatisticsData.Stats), "Property is required for class ViewSmsStatisticsData.");
 
             if (viewSmsStatisticsData.CurrencyOption.IsSet && viewSmsStatisticsData.Currency == null)
                 throw new ArgumentNullException(nameof(viewSmsStatisticsData.Currency), "Property is required for class ViewSmsStatisticsData.");
@@ -218,10 +218,10 @@ namespace ClickSend.Model
                 writer.WritePropertyName("total");
                 JsonSerializer.Serialize(writer, viewSmsStatisticsData.Total, jsonSerializerOptions);
             }
-            if (viewSmsStatisticsData.StatOption.IsSet)
+            if (viewSmsStatisticsData.StatsOption.IsSet)
             {
-                writer.WritePropertyName("stat");
-                JsonSerializer.Serialize(writer, viewSmsStatisticsData.Stat, jsonSerializerOptions);
+                writer.WritePropertyName("stats");
+                JsonSerializer.Serialize(writer, viewSmsStatisticsData.Stats, jsonSerializerOptions);
             }
             if (viewSmsStatisticsData.CurrencyOption.IsSet)
             {

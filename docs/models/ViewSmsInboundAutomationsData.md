@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **FirstPageUrl** | **string** | The URL of the first page of records. | [optional] 
 **LastPageUrl** | **string** | The URL of the last page of records. | [optional] 
 **Path** | **string** | The base URL path used to build pagination links. | [optional] 
-**Links** | [**List&lt;ViewSmsInboundAutomationsDataAllOfLinksInner&gt;**](ViewSmsInboundAutomationsDataAllOfLinksInner.md) | The list of pagination links. | [optional] 
+**Links** | [**List&lt;ViewListsDataLinksInner&gt;**](ViewListsDataLinksInner.md) | The list of pagination links. | [optional] 
 **Data** | [**List&lt;SmsInboundRule&gt;**](SmsInboundRule.md) |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)

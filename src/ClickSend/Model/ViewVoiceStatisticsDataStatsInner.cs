@@ -37,7 +37,7 @@ namespace ClickSend.Model
         /// <param name="outbound">outbound</param>
         /// <param name="bounced">bounced</param>
         [JsonConstructor]
-        public ViewVoiceStatisticsDataStatsInner(Option<decimal?> date = default, Option<ViewVoiceStatisticsDataTotalOutbound?> outbound = default, Option<CancelAllSmsData?> bounced = default)
+        public ViewVoiceStatisticsDataStatsInner(Option<decimal?> date = default, Option<ViewVoiceStatisticsDataTotalOutbound?> outbound = default, Option<ViewVoiceStatisticsDataTotalOutbound?> bounced = default)
         {
             DateOption = date;
             OutboundOption = outbound;
@@ -80,13 +80,13 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<CancelAllSmsData?> BouncedOption { get; private set; }
+        public Option<ViewVoiceStatisticsDataTotalOutbound?> BouncedOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Bounced
         /// </summary>
         [JsonPropertyName("bounced")]
-        public CancelAllSmsData? Bounced { get { return this.BouncedOption.Value; } set { this.BouncedOption = new(value); } }
+        public ViewVoiceStatisticsDataTotalOutbound? Bounced { get { return this.BouncedOption.Value; } set { this.BouncedOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -138,7 +138,7 @@ namespace ClickSend.Model
 
             Option<decimal?> date = default;
             Option<ViewVoiceStatisticsDataTotalOutbound?> outbound = default;
-            Option<CancelAllSmsData?> bounced = default;
+            Option<ViewVoiceStatisticsDataTotalOutbound?> bounced = default;
 
             while (utf8JsonReader.Read())
             {
@@ -162,7 +162,7 @@ namespace ClickSend.Model
                             outbound = new Option<ViewVoiceStatisticsDataTotalOutbound?>(JsonSerializer.Deserialize<ViewVoiceStatisticsDataTotalOutbound>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "bounced":
-                            bounced = new Option<CancelAllSmsData?>(JsonSerializer.Deserialize<CancelAllSmsData>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            bounced = new Option<ViewVoiceStatisticsDataTotalOutbound?>(JsonSerializer.Deserialize<ViewVoiceStatisticsDataTotalOutbound>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;

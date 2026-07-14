@@ -42,8 +42,9 @@ namespace ClickSend.Model
         /// <param name="actionAddress">The action address to be used in the inbound rule.</param>
         /// <param name="body">The body of the inbound rule.</param>
         /// <param name="enabled">The status of the inbound rule.</param>
+        /// <param name="webhookType">The format used when calling the webhook (e.g. post, json).</param>
         [JsonConstructor]
-        public SmsInboundRule(Option<int?> inboundRuleId = default, Option<string?> dedicatedNumber = default, Option<string?> ruleName = default, Option<int?> messageSearchType = default, Option<string?> messageSearchTerm = default, Option<string?> action = default, Option<string?> actionAddress = default, Option<string?> body = default, Option<int?> enabled = default)
+        public SmsInboundRule(Option<int?> inboundRuleId = default, Option<string?> dedicatedNumber = default, Option<string?> ruleName = default, Option<int?> messageSearchType = default, Option<string?> messageSearchTerm = default, Option<string?> action = default, Option<string?> actionAddress = default, Option<string?> body = default, Option<int?> enabled = default, Option<string?> webhookType = default)
         {
             InboundRuleIdOption = inboundRuleId;
             DedicatedNumberOption = dedicatedNumber;
@@ -54,6 +55,7 @@ namespace ClickSend.Model
             ActionAddressOption = actionAddress;
             BodyOption = body;
             EnabledOption = enabled;
+            WebhookTypeOption = webhookType;
             OnCreated();
         }
 
@@ -195,6 +197,21 @@ namespace ClickSend.Model
         public int? Enabled { get { return this.EnabledOption.Value; } set { this.EnabledOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of WebhookType
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> WebhookTypeOption { get; private set; }
+
+        /// <summary>
+        /// The format used when calling the webhook (e.g. post, json).
+        /// </summary>
+        /// <value>The format used when calling the webhook (e.g. post, json).</value>
+        /* <example>json</example> */
+        [JsonPropertyName("webhook_type")]
+        public string? WebhookType { get { return this.WebhookTypeOption.Value; } set { this.WebhookTypeOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -211,6 +228,7 @@ namespace ClickSend.Model
             sb.Append("  ActionAddress: ").Append(ActionAddress).Append("\n");
             sb.Append("  Body: ").Append(Body).Append("\n");
             sb.Append("  Enabled: ").Append(Enabled).Append("\n");
+            sb.Append("  WebhookType: ").Append(WebhookType).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -257,6 +275,7 @@ namespace ClickSend.Model
             Option<string?> actionAddress = default;
             Option<string?> body = default;
             Option<int?> enabled = default;
+            Option<string?> webhookType = default;
 
             while (utf8JsonReader.Read())
             {
@@ -300,6 +319,9 @@ namespace ClickSend.Model
                         case "enabled":
                             enabled = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
+                        case "webhook_type":
+                            webhookType = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         default:
                             break;
                     }
@@ -330,7 +352,7 @@ namespace ClickSend.Model
             if (enabled.IsSet && enabled.Value == null)
                 throw new ArgumentNullException(nameof(enabled), "Property is not nullable for class SmsInboundRule.");
 
-            return new SmsInboundRule(inboundRuleId, dedicatedNumber, ruleName, messageSearchType, messageSearchTerm, action, actionAddress, body, enabled);
+            return new SmsInboundRule(inboundRuleId, dedicatedNumber, ruleName, messageSearchType, messageSearchTerm, action, actionAddress, body, enabled, webhookType);
         }
 
         /// <summary>
@@ -401,6 +423,12 @@ namespace ClickSend.Model
 
             if (smsInboundRule.EnabledOption.IsSet)
                 writer.WriteNumber("enabled", smsInboundRule.EnabledOption.Value!.Value);
+
+            if (smsInboundRule.WebhookTypeOption.IsSet)
+                if (smsInboundRule.WebhookTypeOption.Value != null)
+                    writer.WriteString("webhook_type", smsInboundRule.WebhookType);
+                else
+                    writer.WriteNull("webhook_type");
         }
     }
 }

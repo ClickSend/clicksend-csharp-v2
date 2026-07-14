@@ -12,6 +12,10 @@ Name | Type | Description | Notes
 **PrevPageUrl** | **string** | The URL of the previous page of contacts. | [optional] 
 **From** | **int** | The number of the first contact on the current page. | [optional] 
 **To** | **int** | The number of the last contact on the current page. | [optional] 
+**FirstPageUrl** | **string** | The URL of the first page of records. | [optional] 
+**LastPageUrl** | **string** | The URL of the last page of records. | [optional] 
+**Path** | **string** | The base URL path used to build pagination links. | [optional] 
+**Links** | [**List&lt;ViewListsDataLinksInner&gt;**](ViewListsDataLinksInner.md) | The list of pagination links. | [optional] 
 **Data** | [**List&lt;ContactList&gt;**](ContactList.md) | The contacts in the list. | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)

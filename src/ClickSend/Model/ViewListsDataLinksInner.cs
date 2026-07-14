@@ -26,19 +26,19 @@ using ClickSend.Client;
 namespace ClickSend.Model
 {
     /// <summary>
-    /// ViewSmsInboundAutomationsDataAllOfLinksInner
+    /// ViewListsDataLinksInner
     /// </summary>
-    public partial class ViewSmsInboundAutomationsDataAllOfLinksInner : IValidatableObject
+    public partial class ViewListsDataLinksInner : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ViewSmsInboundAutomationsDataAllOfLinksInner" /> class.
+        /// Initializes a new instance of the <see cref="ViewListsDataLinksInner" /> class.
         /// </summary>
         /// <param name="url">The URL of this page link.</param>
         /// <param name="label">The display label for this page link.</param>
         /// <param name="page">The page number this link points to.</param>
         /// <param name="active">Whether this link represents the current page.</param>
         [JsonConstructor]
-        public ViewSmsInboundAutomationsDataAllOfLinksInner(Option<string?> url = default, Option<string?> label = default, Option<int?> page = default, Option<bool?> active = default)
+        public ViewListsDataLinksInner(Option<string?> url = default, Option<string?> label = default, Option<int?> page = default, Option<bool?> active = default)
         {
             UrlOption = url;
             LabelOption = label;
@@ -112,7 +112,7 @@ namespace ClickSend.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class ViewSmsInboundAutomationsDataAllOfLinksInner {\n");
+            sb.Append("class ViewListsDataLinksInner {\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
             sb.Append("  Label: ").Append(Label).Append("\n");
             sb.Append("  Page: ").Append(Page).Append("\n");
@@ -133,19 +133,19 @@ namespace ClickSend.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="ViewSmsInboundAutomationsDataAllOfLinksInner" />
+    /// A Json converter for type <see cref="ViewListsDataLinksInner" />
     /// </summary>
-    public class ViewSmsInboundAutomationsDataAllOfLinksInnerJsonConverter : JsonConverter<ViewSmsInboundAutomationsDataAllOfLinksInner>
+    public class ViewListsDataLinksInnerJsonConverter : JsonConverter<ViewListsDataLinksInner>
     {
         /// <summary>
-        /// Deserializes json to <see cref="ViewSmsInboundAutomationsDataAllOfLinksInner" />
+        /// Deserializes json to <see cref="ViewListsDataLinksInner" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override ViewSmsInboundAutomationsDataAllOfLinksInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override ViewListsDataLinksInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -193,58 +193,58 @@ namespace ClickSend.Model
             }
 
             if (label.IsSet && label.Value == null)
-                throw new ArgumentNullException(nameof(label), "Property is not nullable for class ViewSmsInboundAutomationsDataAllOfLinksInner.");
+                throw new ArgumentNullException(nameof(label), "Property is not nullable for class ViewListsDataLinksInner.");
 
             if (active.IsSet && active.Value == null)
-                throw new ArgumentNullException(nameof(active), "Property is not nullable for class ViewSmsInboundAutomationsDataAllOfLinksInner.");
+                throw new ArgumentNullException(nameof(active), "Property is not nullable for class ViewListsDataLinksInner.");
 
-            return new ViewSmsInboundAutomationsDataAllOfLinksInner(url, label, page, active);
+            return new ViewListsDataLinksInner(url, label, page, active);
         }
 
         /// <summary>
-        /// Serializes a <see cref="ViewSmsInboundAutomationsDataAllOfLinksInner" />
+        /// Serializes a <see cref="ViewListsDataLinksInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="viewSmsInboundAutomationsDataAllOfLinksInner"></param>
+        /// <param name="viewListsDataLinksInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, ViewSmsInboundAutomationsDataAllOfLinksInner viewSmsInboundAutomationsDataAllOfLinksInner, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, ViewListsDataLinksInner viewListsDataLinksInner, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, viewSmsInboundAutomationsDataAllOfLinksInner, jsonSerializerOptions);
+            WriteProperties(writer, viewListsDataLinksInner, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="ViewSmsInboundAutomationsDataAllOfLinksInner" />
+        /// Serializes the properties of <see cref="ViewListsDataLinksInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="viewSmsInboundAutomationsDataAllOfLinksInner"></param>
+        /// <param name="viewListsDataLinksInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, ViewSmsInboundAutomationsDataAllOfLinksInner viewSmsInboundAutomationsDataAllOfLinksInner, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, ViewListsDataLinksInner viewListsDataLinksInner, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (viewSmsInboundAutomationsDataAllOfLinksInner.LabelOption.IsSet && viewSmsInboundAutomationsDataAllOfLinksInner.Label == null)
-                throw new ArgumentNullException(nameof(viewSmsInboundAutomationsDataAllOfLinksInner.Label), "Property is required for class ViewSmsInboundAutomationsDataAllOfLinksInner.");
+            if (viewListsDataLinksInner.LabelOption.IsSet && viewListsDataLinksInner.Label == null)
+                throw new ArgumentNullException(nameof(viewListsDataLinksInner.Label), "Property is required for class ViewListsDataLinksInner.");
 
-            if (viewSmsInboundAutomationsDataAllOfLinksInner.UrlOption.IsSet)
-                if (viewSmsInboundAutomationsDataAllOfLinksInner.UrlOption.Value != null)
-                    writer.WriteString("url", viewSmsInboundAutomationsDataAllOfLinksInner.Url);
+            if (viewListsDataLinksInner.UrlOption.IsSet)
+                if (viewListsDataLinksInner.UrlOption.Value != null)
+                    writer.WriteString("url", viewListsDataLinksInner.Url);
                 else
                     writer.WriteNull("url");
 
-            if (viewSmsInboundAutomationsDataAllOfLinksInner.LabelOption.IsSet)
-                writer.WriteString("label", viewSmsInboundAutomationsDataAllOfLinksInner.Label);
+            if (viewListsDataLinksInner.LabelOption.IsSet)
+                writer.WriteString("label", viewListsDataLinksInner.Label);
 
-            if (viewSmsInboundAutomationsDataAllOfLinksInner.PageOption.IsSet)
-                if (viewSmsInboundAutomationsDataAllOfLinksInner.PageOption.Value != null)
-                    writer.WriteNumber("page", viewSmsInboundAutomationsDataAllOfLinksInner.PageOption.Value!.Value);
+            if (viewListsDataLinksInner.PageOption.IsSet)
+                if (viewListsDataLinksInner.PageOption.Value != null)
+                    writer.WriteNumber("page", viewListsDataLinksInner.PageOption.Value!.Value);
                 else
                     writer.WriteNull("page");
 
-            if (viewSmsInboundAutomationsDataAllOfLinksInner.ActiveOption.IsSet)
-                writer.WriteBoolean("active", viewSmsInboundAutomationsDataAllOfLinksInner.ActiveOption.Value!.Value);
+            if (viewListsDataLinksInner.ActiveOption.IsSet)
+                writer.WriteBoolean("active", viewListsDataLinksInner.ActiveOption.Value!.Value);
         }
     }
 }

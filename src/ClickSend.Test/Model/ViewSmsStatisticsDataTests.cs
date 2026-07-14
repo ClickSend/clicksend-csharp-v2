@@ -63,12 +63,12 @@ namespace ClickSend.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Stat'
+        /// Test the property 'Stats'
         /// </summary>
         [Fact]
-        public void StatTest()
+        public void StatsTest()
         {
-            // TODO unit test for the property 'Stat'
+            // TODO unit test for the property 'Stats'
         }
 
         /// <summary>

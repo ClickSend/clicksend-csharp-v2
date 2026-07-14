@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **ActionAddress** | **string** | The action address to be used in the inbound rule. | [optional] 
 **Body** | **string** | The body of the inbound rule. | [optional] 
 **Enabled** | **int** | The status of the inbound rule. | [optional] 
+**WebhookType** | **string** | The format used when calling the webhook (e.g. post, json). | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

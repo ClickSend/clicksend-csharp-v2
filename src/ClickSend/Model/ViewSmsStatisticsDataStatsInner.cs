@@ -26,19 +26,19 @@ using ClickSend.Client;
 namespace ClickSend.Model
 {
     /// <summary>
-    /// ViewSmsStatisticsDataStatInner
+    /// ViewSmsStatisticsDataStatsInner
     /// </summary>
-    public partial class ViewSmsStatisticsDataStatInner : IValidatableObject
+    public partial class ViewSmsStatisticsDataStatsInner : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ViewSmsStatisticsDataStatInner" /> class.
+        /// Initializes a new instance of the <see cref="ViewSmsStatisticsDataStatsInner" /> class.
         /// </summary>
         /// <param name="date">The date.</param>
         /// <param name="outbound">outbound</param>
         /// <param name="inbound">inbound</param>
         /// <param name="bounced">bounced</param>
         [JsonConstructor]
-        public ViewSmsStatisticsDataStatInner(Option<decimal?> date = default, Option<ViewVoiceStatisticsDataTotalOutbound?> outbound = default, Option<CancelAllSmsData?> inbound = default, Option<CancelAllSmsData?> bounced = default)
+        public ViewSmsStatisticsDataStatsInner(Option<decimal?> date = default, Option<ViewVoiceStatisticsDataTotalOutbound?> outbound = default, Option<ViewVoiceStatisticsDataTotalOutbound?> inbound = default, Option<ViewVoiceStatisticsDataTotalOutbound?> bounced = default)
         {
             DateOption = date;
             OutboundOption = outbound;
@@ -82,26 +82,26 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<CancelAllSmsData?> InboundOption { get; private set; }
+        public Option<ViewVoiceStatisticsDataTotalOutbound?> InboundOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Inbound
         /// </summary>
         [JsonPropertyName("inbound")]
-        public CancelAllSmsData? Inbound { get { return this.InboundOption.Value; } set { this.InboundOption = new(value); } }
+        public ViewVoiceStatisticsDataTotalOutbound? Inbound { get { return this.InboundOption.Value; } set { this.InboundOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Bounced
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<CancelAllSmsData?> BouncedOption { get; private set; }
+        public Option<ViewVoiceStatisticsDataTotalOutbound?> BouncedOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Bounced
         /// </summary>
         [JsonPropertyName("bounced")]
-        public CancelAllSmsData? Bounced { get { return this.BouncedOption.Value; } set { this.BouncedOption = new(value); } }
+        public ViewVoiceStatisticsDataTotalOutbound? Bounced { get { return this.BouncedOption.Value; } set { this.BouncedOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -110,7 +110,7 @@ namespace ClickSend.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class ViewSmsStatisticsDataStatInner {\n");
+            sb.Append("class ViewSmsStatisticsDataStatsInner {\n");
             sb.Append("  Date: ").Append(Date).Append("\n");
             sb.Append("  Outbound: ").Append(Outbound).Append("\n");
             sb.Append("  Inbound: ").Append(Inbound).Append("\n");
@@ -131,19 +131,19 @@ namespace ClickSend.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="ViewSmsStatisticsDataStatInner" />
+    /// A Json converter for type <see cref="ViewSmsStatisticsDataStatsInner" />
     /// </summary>
-    public class ViewSmsStatisticsDataStatInnerJsonConverter : JsonConverter<ViewSmsStatisticsDataStatInner>
+    public class ViewSmsStatisticsDataStatsInnerJsonConverter : JsonConverter<ViewSmsStatisticsDataStatsInner>
     {
         /// <summary>
-        /// Deserializes json to <see cref="ViewSmsStatisticsDataStatInner" />
+        /// Deserializes json to <see cref="ViewSmsStatisticsDataStatsInner" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override ViewSmsStatisticsDataStatInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override ViewSmsStatisticsDataStatsInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -154,8 +154,8 @@ namespace ClickSend.Model
 
             Option<decimal?> date = default;
             Option<ViewVoiceStatisticsDataTotalOutbound?> outbound = default;
-            Option<CancelAllSmsData?> inbound = default;
-            Option<CancelAllSmsData?> bounced = default;
+            Option<ViewVoiceStatisticsDataTotalOutbound?> inbound = default;
+            Option<ViewVoiceStatisticsDataTotalOutbound?> bounced = default;
 
             while (utf8JsonReader.Read())
             {
@@ -179,10 +179,10 @@ namespace ClickSend.Model
                             outbound = new Option<ViewVoiceStatisticsDataTotalOutbound?>(JsonSerializer.Deserialize<ViewVoiceStatisticsDataTotalOutbound>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "inbound":
-                            inbound = new Option<CancelAllSmsData?>(JsonSerializer.Deserialize<CancelAllSmsData>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            inbound = new Option<ViewVoiceStatisticsDataTotalOutbound?>(JsonSerializer.Deserialize<ViewVoiceStatisticsDataTotalOutbound>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "bounced":
-                            bounced = new Option<CancelAllSmsData?>(JsonSerializer.Deserialize<CancelAllSmsData>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            bounced = new Option<ViewVoiceStatisticsDataTotalOutbound?>(JsonSerializer.Deserialize<ViewVoiceStatisticsDataTotalOutbound>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;
@@ -191,70 +191,70 @@ namespace ClickSend.Model
             }
 
             if (date.IsSet && date.Value == null)
-                throw new ArgumentNullException(nameof(date), "Property is not nullable for class ViewSmsStatisticsDataStatInner.");
+                throw new ArgumentNullException(nameof(date), "Property is not nullable for class ViewSmsStatisticsDataStatsInner.");
 
             if (outbound.IsSet && outbound.Value == null)
-                throw new ArgumentNullException(nameof(outbound), "Property is not nullable for class ViewSmsStatisticsDataStatInner.");
+                throw new ArgumentNullException(nameof(outbound), "Property is not nullable for class ViewSmsStatisticsDataStatsInner.");
 
             if (inbound.IsSet && inbound.Value == null)
-                throw new ArgumentNullException(nameof(inbound), "Property is not nullable for class ViewSmsStatisticsDataStatInner.");
+                throw new ArgumentNullException(nameof(inbound), "Property is not nullable for class ViewSmsStatisticsDataStatsInner.");
 
             if (bounced.IsSet && bounced.Value == null)
-                throw new ArgumentNullException(nameof(bounced), "Property is not nullable for class ViewSmsStatisticsDataStatInner.");
+                throw new ArgumentNullException(nameof(bounced), "Property is not nullable for class ViewSmsStatisticsDataStatsInner.");
 
-            return new ViewSmsStatisticsDataStatInner(date, outbound, inbound, bounced);
+            return new ViewSmsStatisticsDataStatsInner(date, outbound, inbound, bounced);
         }
 
         /// <summary>
-        /// Serializes a <see cref="ViewSmsStatisticsDataStatInner" />
+        /// Serializes a <see cref="ViewSmsStatisticsDataStatsInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="viewSmsStatisticsDataStatInner"></param>
+        /// <param name="viewSmsStatisticsDataStatsInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, ViewSmsStatisticsDataStatInner viewSmsStatisticsDataStatInner, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, ViewSmsStatisticsDataStatsInner viewSmsStatisticsDataStatsInner, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, viewSmsStatisticsDataStatInner, jsonSerializerOptions);
+            WriteProperties(writer, viewSmsStatisticsDataStatsInner, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="ViewSmsStatisticsDataStatInner" />
+        /// Serializes the properties of <see cref="ViewSmsStatisticsDataStatsInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="viewSmsStatisticsDataStatInner"></param>
+        /// <param name="viewSmsStatisticsDataStatsInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, ViewSmsStatisticsDataStatInner viewSmsStatisticsDataStatInner, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, ViewSmsStatisticsDataStatsInner viewSmsStatisticsDataStatsInner, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (viewSmsStatisticsDataStatInner.OutboundOption.IsSet && viewSmsStatisticsDataStatInner.Outbound == null)
-                throw new ArgumentNullException(nameof(viewSmsStatisticsDataStatInner.Outbound), "Property is required for class ViewSmsStatisticsDataStatInner.");
+            if (viewSmsStatisticsDataStatsInner.OutboundOption.IsSet && viewSmsStatisticsDataStatsInner.Outbound == null)
+                throw new ArgumentNullException(nameof(viewSmsStatisticsDataStatsInner.Outbound), "Property is required for class ViewSmsStatisticsDataStatsInner.");
 
-            if (viewSmsStatisticsDataStatInner.InboundOption.IsSet && viewSmsStatisticsDataStatInner.Inbound == null)
-                throw new ArgumentNullException(nameof(viewSmsStatisticsDataStatInner.Inbound), "Property is required for class ViewSmsStatisticsDataStatInner.");
+            if (viewSmsStatisticsDataStatsInner.InboundOption.IsSet && viewSmsStatisticsDataStatsInner.Inbound == null)
+                throw new ArgumentNullException(nameof(viewSmsStatisticsDataStatsInner.Inbound), "Property is required for class ViewSmsStatisticsDataStatsInner.");
 
-            if (viewSmsStatisticsDataStatInner.BouncedOption.IsSet && viewSmsStatisticsDataStatInner.Bounced == null)
-                throw new ArgumentNullException(nameof(viewSmsStatisticsDataStatInner.Bounced), "Property is required for class ViewSmsStatisticsDataStatInner.");
+            if (viewSmsStatisticsDataStatsInner.BouncedOption.IsSet && viewSmsStatisticsDataStatsInner.Bounced == null)
+                throw new ArgumentNullException(nameof(viewSmsStatisticsDataStatsInner.Bounced), "Property is required for class ViewSmsStatisticsDataStatsInner.");
 
-            if (viewSmsStatisticsDataStatInner.DateOption.IsSet)
-                writer.WriteNumber("date", viewSmsStatisticsDataStatInner.DateOption.Value!.Value);
+            if (viewSmsStatisticsDataStatsInner.DateOption.IsSet)
+                writer.WriteNumber("date", viewSmsStatisticsDataStatsInner.DateOption.Value!.Value);
 
-            if (viewSmsStatisticsDataStatInner.OutboundOption.IsSet)
+            if (viewSmsStatisticsDataStatsInner.OutboundOption.IsSet)
             {
                 writer.WritePropertyName("outbound");
-                JsonSerializer.Serialize(writer, viewSmsStatisticsDataStatInner.Outbound, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, viewSmsStatisticsDataStatsInner.Outbound, jsonSerializerOptions);
             }
-            if (viewSmsStatisticsDataStatInner.InboundOption.IsSet)
+            if (viewSmsStatisticsDataStatsInner.InboundOption.IsSet)
             {
                 writer.WritePropertyName("inbound");
-                JsonSerializer.Serialize(writer, viewSmsStatisticsDataStatInner.Inbound, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, viewSmsStatisticsDataStatsInner.Inbound, jsonSerializerOptions);
             }
-            if (viewSmsStatisticsDataStatInner.BouncedOption.IsSet)
+            if (viewSmsStatisticsDataStatsInner.BouncedOption.IsSet)
             {
                 writer.WritePropertyName("bounced");
-                JsonSerializer.Serialize(writer, viewSmsStatisticsDataStatInner.Bounced, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, viewSmsStatisticsDataStatsInner.Bounced, jsonSerializerOptions);
             }
         }
     }

@@ -1,4 +1,4 @@
-# ClickSend.Model.ViewSmsInboundAutomationsDataAllOfLinksInner
+# ClickSend.Model.ViewListsDataLinksInner
 
 ## Properties
 
