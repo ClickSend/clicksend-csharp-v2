@@ -37,15 +37,13 @@ namespace ClickSend.Model
         /// <param name="responseCode">The response code indicating the status of the operation.</param>
         /// <param name="responseMsg">A message describing the outcome of the operation.</param>
         /// <param name="data">data</param>
-        /// <param name="currency">currency</param>
         [JsonConstructor]
-        public ViewAvailableNumbers(Option<int?> httpCode = default, Option<string?> responseCode = default, Option<string?> responseMsg = default, Option<ViewAvailableNumbersData?> data = default, Option<Currency?> currency = default)
+        public ViewAvailableNumbers(Option<int?> httpCode = default, Option<string?> responseCode = default, Option<string?> responseMsg = default, Option<ViewAvailableNumbersData?> data = default)
         {
             HttpCodeOption = httpCode;
             ResponseCodeOption = responseCode;
             ResponseMsgOption = responseMsg;
             DataOption = data;
-            CurrencyOption = currency;
             OnCreated();
         }
 
@@ -110,19 +108,6 @@ namespace ClickSend.Model
         public ViewAvailableNumbersData? Data { get { return this.DataOption.Value; } set { this.DataOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of Currency
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<Currency?> CurrencyOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets Currency
-        /// </summary>
-        [JsonPropertyName("_currency")]
-        public Currency? Currency { get { return this.CurrencyOption.Value; } set { this.CurrencyOption = new(value); } }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -134,7 +119,6 @@ namespace ClickSend.Model
             sb.Append("  ResponseCode: ").Append(ResponseCode).Append("\n");
             sb.Append("  ResponseMsg: ").Append(ResponseMsg).Append("\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
-            sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -176,7 +160,6 @@ namespace ClickSend.Model
             Option<string?> responseCode = default;
             Option<string?> responseMsg = default;
             Option<ViewAvailableNumbersData?> data = default;
-            Option<Currency?> currency = default;
 
             while (utf8JsonReader.Read())
             {
@@ -205,9 +188,6 @@ namespace ClickSend.Model
                         case "data":
                             data = new Option<ViewAvailableNumbersData?>(JsonSerializer.Deserialize<ViewAvailableNumbersData>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
-                        case "_currency":
-                            currency = new Option<Currency?>(JsonSerializer.Deserialize<Currency>(ref utf8JsonReader, jsonSerializerOptions)!);
-                            break;
                         default:
                             break;
                     }
@@ -226,10 +206,7 @@ namespace ClickSend.Model
             if (data.IsSet && data.Value == null)
                 throw new ArgumentNullException(nameof(data), "Property is not nullable for class ViewAvailableNumbers.");
 
-            if (currency.IsSet && currency.Value == null)
-                throw new ArgumentNullException(nameof(currency), "Property is not nullable for class ViewAvailableNumbers.");
-
-            return new ViewAvailableNumbers(httpCode, responseCode, responseMsg, data, currency);
+            return new ViewAvailableNumbers(httpCode, responseCode, responseMsg, data);
         }
 
         /// <summary>
@@ -265,9 +242,6 @@ namespace ClickSend.Model
             if (viewAvailableNumbers.DataOption.IsSet && viewAvailableNumbers.Data == null)
                 throw new ArgumentNullException(nameof(viewAvailableNumbers.Data), "Property is required for class ViewAvailableNumbers.");
 
-            if (viewAvailableNumbers.CurrencyOption.IsSet && viewAvailableNumbers.Currency == null)
-                throw new ArgumentNullException(nameof(viewAvailableNumbers.Currency), "Property is required for class ViewAvailableNumbers.");
-
             if (viewAvailableNumbers.HttpCodeOption.IsSet)
                 writer.WriteNumber("http_code", viewAvailableNumbers.HttpCodeOption.Value!.Value);
 
@@ -281,11 +255,6 @@ namespace ClickSend.Model
             {
                 writer.WritePropertyName("data");
                 JsonSerializer.Serialize(writer, viewAvailableNumbers.Data, jsonSerializerOptions);
-            }
-            if (viewAvailableNumbers.CurrencyOption.IsSet)
-            {
-                writer.WritePropertyName("_currency");
-                JsonSerializer.Serialize(writer, viewAvailableNumbers.Currency, jsonSerializerOptions);
             }
         }
     }

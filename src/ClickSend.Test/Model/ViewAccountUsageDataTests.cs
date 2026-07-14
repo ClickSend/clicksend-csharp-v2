@@ -63,6 +63,15 @@ namespace ClickSend.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Mms'
+        /// </summary>
+        [Fact]
+        public void MmsTest()
+        {
+            // TODO unit test for the property 'Mms'
+        }
+
+        /// <summary>
         /// Test the property 'Voice'
         /// </summary>
         [Fact]
@@ -96,6 +105,24 @@ namespace ClickSend.Test.Model
         public void EmailTest()
         {
             // TODO unit test for the property 'Email'
+        }
+
+        /// <summary>
+        /// Test the property 'EmailTransactional'
+        /// </summary>
+        [Fact]
+        public void EmailTransactionalTest()
+        {
+            // TODO unit test for the property 'EmailTransactional'
+        }
+
+        /// <summary>
+        /// Test the property 'Postcards'
+        /// </summary>
+        [Fact]
+        public void PostcardsTest()
+        {
+            // TODO unit test for the property 'Postcards'
         }
 
         /// <summary>
@@ -141,6 +168,42 @@ namespace ClickSend.Test.Model
         public void EmailTotalTest()
         {
             // TODO unit test for the property 'EmailTotal'
+        }
+
+        /// <summary>
+        /// Test the property 'MmsTotal'
+        /// </summary>
+        [Fact]
+        public void MmsTotalTest()
+        {
+            // TODO unit test for the property 'MmsTotal'
+        }
+
+        /// <summary>
+        /// Test the property 'EmailTransactionalTotal'
+        /// </summary>
+        [Fact]
+        public void EmailTransactionalTotalTest()
+        {
+            // TODO unit test for the property 'EmailTransactionalTotal'
+        }
+
+        /// <summary>
+        /// Test the property 'PostcardsTotal'
+        /// </summary>
+        [Fact]
+        public void PostcardsTotalTest()
+        {
+            // TODO unit test for the property 'PostcardsTotal'
+        }
+
+        /// <summary>
+        /// Test the property 'Currency'
+        /// </summary>
+        [Fact]
+        public void CurrencyTest()
+        {
+            // TODO unit test for the property 'Currency'
         }
     }
 }

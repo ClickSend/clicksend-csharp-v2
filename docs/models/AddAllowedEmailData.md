@@ -1,4 +1,4 @@
-# ClickSend.Model.ViewAllowedEmailsDataInner
+# ClickSend.Model.AddAllowedEmailData
 
 ## Properties
 

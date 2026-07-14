@@ -37,9 +37,13 @@ namespace ClickSend.Model
         /// <param name="date">The date of the message.</param>
         /// <param name="to">The recipient of the message.</param>
         /// <param name="body">The body of the message.</param>
+        /// <param name="subject">The subject of the message.</param>
+        /// <param name="priority">The priority of the message.</param>
+        /// <param name="mediaFileUrl">A temporary, signed URL to download the message&#39;s media attachment.</param>
         /// <param name="status">The status of the message.</param>
         /// <param name="from">The sender of the message.</param>
         /// <param name="schedule">The schedule time of the message.</param>
+        /// <param name="dateAdded">The Unix timestamp when the message was added.</param>
         /// <param name="statusCode">The status code (if applicable).</param>
         /// <param name="statusText">The status text (if applicable).</param>
         /// <param name="errorCode">The error code (if applicable).</param>
@@ -59,15 +63,19 @@ namespace ClickSend.Model
         /// <param name="lastName">The last name of the sender.</param>
         /// <param name="apiUsername">The API username associated with the message.</param>
         [JsonConstructor]
-        public ViewMmsHistoryDataAllOfDataInner(Option<string?> direction = default, Option<string?> date = default, Option<string?> to = default, Option<string?> body = default, Option<string?> status = default, Option<string?> from = default, Option<string?> schedule = default, Option<string?> statusCode = default, Option<string?> statusText = default, Option<string?> errorCode = default, Option<string?> errorText = default, Option<string?> messageId = default, Option<string?> messageParts = default, Option<string?> messagePrice = default, Option<string?> fromEmail = default, Option<string?> listId = default, Option<string?> customString = default, Option<int?> contactId = default, Option<int?> userId = default, Option<int?> subaccountId = default, Option<string?> country = default, Option<string?> carrier = default, Option<string?> firstName = default, Option<string?> lastName = default, Option<string?> apiUsername = default)
+        public ViewMmsHistoryDataAllOfDataInner(Option<string?> direction = default, Option<string?> date = default, Option<string?> to = default, Option<string?> body = default, Option<string?> subject = default, Option<int?> priority = default, Option<string?> mediaFileUrl = default, Option<string?> status = default, Option<string?> from = default, Option<string?> schedule = default, Option<int?> dateAdded = default, Option<string?> statusCode = default, Option<string?> statusText = default, Option<string?> errorCode = default, Option<string?> errorText = default, Option<string?> messageId = default, Option<string?> messageParts = default, Option<string?> messagePrice = default, Option<string?> fromEmail = default, Option<string?> listId = default, Option<string?> customString = default, Option<int?> contactId = default, Option<int?> userId = default, Option<int?> subaccountId = default, Option<string?> country = default, Option<string?> carrier = default, Option<string?> firstName = default, Option<string?> lastName = default, Option<string?> apiUsername = default)
         {
             DirectionOption = direction;
             DateOption = date;
             ToOption = to;
             BodyOption = body;
+            SubjectOption = subject;
+            PriorityOption = priority;
+            MediaFileUrlOption = mediaFileUrl;
             StatusOption = status;
             FromOption = from;
             ScheduleOption = schedule;
+            DateAddedOption = dateAdded;
             StatusCodeOption = statusCode;
             StatusTextOption = statusText;
             ErrorCodeOption = errorCode;
@@ -152,6 +160,51 @@ namespace ClickSend.Model
         public string? Body { get { return this.BodyOption.Value; } set { this.BodyOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Subject
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> SubjectOption { get; private set; }
+
+        /// <summary>
+        /// The subject of the message.
+        /// </summary>
+        /// <value>The subject of the message.</value>
+        /* <example>This is a subject</example> */
+        [JsonPropertyName("subject")]
+        public string? Subject { get { return this.SubjectOption.Value; } set { this.SubjectOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Priority
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> PriorityOption { get; private set; }
+
+        /// <summary>
+        /// The priority of the message.
+        /// </summary>
+        /// <value>The priority of the message.</value>
+        /* <example>2</example> */
+        [JsonPropertyName("priority")]
+        public int? Priority { get { return this.PriorityOption.Value; } set { this.PriorityOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of MediaFileUrl
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> MediaFileUrlOption { get; private set; }
+
+        /// <summary>
+        /// A temporary, signed URL to download the message&#39;s media attachment.
+        /// </summary>
+        /// <value>A temporary, signed URL to download the message&#39;s media attachment.</value>
+        /* <example>https://clicksend-api-downloads.s3.ap-southeast-2.amazonaws.com/_private/example.jpg</example> */
+        [JsonPropertyName("_media_file_url")]
+        public string? MediaFileUrl { get { return this.MediaFileUrlOption.Value; } set { this.MediaFileUrlOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of Status
         /// </summary>
         [JsonIgnore]
@@ -195,6 +248,21 @@ namespace ClickSend.Model
         /* <example>1436879372</example> */
         [JsonPropertyName("schedule")]
         public string? Schedule { get { return this.ScheduleOption.Value; } set { this.ScheduleOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of DateAdded
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> DateAddedOption { get; private set; }
+
+        /// <summary>
+        /// The Unix timestamp when the message was added.
+        /// </summary>
+        /// <value>The Unix timestamp when the message was added.</value>
+        /* <example>1436879372</example> */
+        [JsonPropertyName("date_added")]
+        public int? DateAdded { get { return this.DateAddedOption.Value; } set { this.DateAddedOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of StatusCode
@@ -471,9 +539,13 @@ namespace ClickSend.Model
             sb.Append("  Date: ").Append(Date).Append("\n");
             sb.Append("  To: ").Append(To).Append("\n");
             sb.Append("  Body: ").Append(Body).Append("\n");
+            sb.Append("  Subject: ").Append(Subject).Append("\n");
+            sb.Append("  Priority: ").Append(Priority).Append("\n");
+            sb.Append("  MediaFileUrl: ").Append(MediaFileUrl).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  From: ").Append(From).Append("\n");
             sb.Append("  Schedule: ").Append(Schedule).Append("\n");
+            sb.Append("  DateAdded: ").Append(DateAdded).Append("\n");
             sb.Append("  StatusCode: ").Append(StatusCode).Append("\n");
             sb.Append("  StatusText: ").Append(StatusText).Append("\n");
             sb.Append("  ErrorCode: ").Append(ErrorCode).Append("\n");
@@ -533,9 +605,13 @@ namespace ClickSend.Model
             Option<string?> date = default;
             Option<string?> to = default;
             Option<string?> body = default;
+            Option<string?> subject = default;
+            Option<int?> priority = default;
+            Option<string?> mediaFileUrl = default;
             Option<string?> status = default;
             Option<string?> from = default;
             Option<string?> schedule = default;
+            Option<int?> dateAdded = default;
             Option<string?> statusCode = default;
             Option<string?> statusText = default;
             Option<string?> errorCode = default;
@@ -582,6 +658,15 @@ namespace ClickSend.Model
                         case "body":
                             body = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "subject":
+                            subject = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "priority":
+                            priority = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "_media_file_url":
+                            mediaFileUrl = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "status":
                             status = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
@@ -590,6 +675,9 @@ namespace ClickSend.Model
                             break;
                         case "schedule":
                             schedule = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "date_added":
+                            dateAdded = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "status_code":
                             statusCode = new Option<string?>(utf8JsonReader.GetString());
@@ -663,6 +751,9 @@ namespace ClickSend.Model
             if (body.IsSet && body.Value == null)
                 throw new ArgumentNullException(nameof(body), "Property is not nullable for class ViewMmsHistoryDataAllOfDataInner.");
 
+            if (priority.IsSet && priority.Value == null)
+                throw new ArgumentNullException(nameof(priority), "Property is not nullable for class ViewMmsHistoryDataAllOfDataInner.");
+
             if (status.IsSet && status.Value == null)
                 throw new ArgumentNullException(nameof(status), "Property is not nullable for class ViewMmsHistoryDataAllOfDataInner.");
 
@@ -671,6 +762,9 @@ namespace ClickSend.Model
 
             if (schedule.IsSet && schedule.Value == null)
                 throw new ArgumentNullException(nameof(schedule), "Property is not nullable for class ViewMmsHistoryDataAllOfDataInner.");
+
+            if (dateAdded.IsSet && dateAdded.Value == null)
+                throw new ArgumentNullException(nameof(dateAdded), "Property is not nullable for class ViewMmsHistoryDataAllOfDataInner.");
 
             if (errorText.IsSet && errorText.Value == null)
                 throw new ArgumentNullException(nameof(errorText), "Property is not nullable for class ViewMmsHistoryDataAllOfDataInner.");
@@ -711,7 +805,7 @@ namespace ClickSend.Model
             if (apiUsername.IsSet && apiUsername.Value == null)
                 throw new ArgumentNullException(nameof(apiUsername), "Property is not nullable for class ViewMmsHistoryDataAllOfDataInner.");
 
-            return new ViewMmsHistoryDataAllOfDataInner(direction, date, to, body, status, from, schedule, statusCode, statusText, errorCode, errorText, messageId, messageParts, messagePrice, fromEmail, listId, customString, contactId, userId, subaccountId, country, carrier, firstName, lastName, apiUsername);
+            return new ViewMmsHistoryDataAllOfDataInner(direction, date, to, body, subject, priority, mediaFileUrl, status, from, schedule, dateAdded, statusCode, statusText, errorCode, errorText, messageId, messageParts, messagePrice, fromEmail, listId, customString, contactId, userId, subaccountId, country, carrier, firstName, lastName, apiUsername);
         }
 
         /// <summary>
@@ -801,6 +895,21 @@ namespace ClickSend.Model
             if (viewMmsHistoryDataAllOfDataInner.BodyOption.IsSet)
                 writer.WriteString("body", viewMmsHistoryDataAllOfDataInner.Body);
 
+            if (viewMmsHistoryDataAllOfDataInner.SubjectOption.IsSet)
+                if (viewMmsHistoryDataAllOfDataInner.SubjectOption.Value != null)
+                    writer.WriteString("subject", viewMmsHistoryDataAllOfDataInner.Subject);
+                else
+                    writer.WriteNull("subject");
+
+            if (viewMmsHistoryDataAllOfDataInner.PriorityOption.IsSet)
+                writer.WriteNumber("priority", viewMmsHistoryDataAllOfDataInner.PriorityOption.Value!.Value);
+
+            if (viewMmsHistoryDataAllOfDataInner.MediaFileUrlOption.IsSet)
+                if (viewMmsHistoryDataAllOfDataInner.MediaFileUrlOption.Value != null)
+                    writer.WriteString("_media_file_url", viewMmsHistoryDataAllOfDataInner.MediaFileUrl);
+                else
+                    writer.WriteNull("_media_file_url");
+
             if (viewMmsHistoryDataAllOfDataInner.StatusOption.IsSet)
                 writer.WriteString("status", viewMmsHistoryDataAllOfDataInner.Status);
 
@@ -809,6 +918,9 @@ namespace ClickSend.Model
 
             if (viewMmsHistoryDataAllOfDataInner.ScheduleOption.IsSet)
                 writer.WriteString("schedule", viewMmsHistoryDataAllOfDataInner.Schedule);
+
+            if (viewMmsHistoryDataAllOfDataInner.DateAddedOption.IsSet)
+                writer.WriteNumber("date_added", viewMmsHistoryDataAllOfDataInner.DateAddedOption.Value!.Value);
 
             if (viewMmsHistoryDataAllOfDataInner.StatusCodeOption.IsSet)
                 if (viewMmsHistoryDataAllOfDataInner.StatusCodeOption.Value != null)

@@ -34,28 +34,42 @@ namespace ClickSend.Model
         /// Initializes a new instance of the <see cref="ViewAccountUsageData" /> class.
         /// </summary>
         /// <param name="sms">sms</param>
+        /// <param name="mms">mms</param>
         /// <param name="voice">voice</param>
         /// <param name="fax">fax</param>
         /// <param name="post">post</param>
         /// <param name="email">email</param>
+        /// <param name="emailTransactional">emailTransactional</param>
+        /// <param name="postcards">postcards</param>
         /// <param name="smsTotal">smsTotal</param>
         /// <param name="voiceTotal">voiceTotal</param>
         /// <param name="faxTotal">faxTotal</param>
         /// <param name="postTotal">postTotal</param>
         /// <param name="emailTotal">emailTotal</param>
+        /// <param name="mmsTotal">mmsTotal</param>
+        /// <param name="emailTransactionalTotal">emailTransactionalTotal</param>
+        /// <param name="postcardsTotal">postcardsTotal</param>
+        /// <param name="currency">currency</param>
         [JsonConstructor]
-        public ViewAccountUsageData(Option<List<ViewAccountUsageDataSmsInner>?> sms = default, Option<List<ViewAccountUsageDataVoiceInner>?> voice = default, Option<List<ViewAccountUsageDataVoiceInner>?> fax = default, Option<List<ViewAccountUsageDataVoiceInner>?> post = default, Option<List<ViewAccountUsageDataEmailInner>?> email = default, Option<ViewAccountUsageDataSmsTotal?> smsTotal = default, Option<ViewAccountUsageDataSmsTotal?> voiceTotal = default, Option<ViewAccountUsageDataSmsTotal?> faxTotal = default, Option<ViewAccountUsageDataSmsTotal?> postTotal = default, Option<ViewAccountUsageDataEmailTotal?> emailTotal = default)
+        public ViewAccountUsageData(Option<List<ViewAccountUsageDataSmsInner>?> sms = default, Option<List<ViewAccountUsageDataMmsInner>?> mms = default, Option<List<ViewAccountUsageDataMmsInner>?> voice = default, Option<List<ViewAccountUsageDataMmsInner>?> fax = default, Option<List<ViewAccountUsageDataMmsInner>?> post = default, Option<List<ViewAccountUsageDataEmailInner>?> email = default, Option<List<ViewAccountUsageDataEmailInner>?> emailTransactional = default, Option<List<ViewAccountUsageDataMmsInner>?> postcards = default, Option<ViewAccountUsageDataSmsTotal?> smsTotal = default, Option<ViewAccountUsageDataSmsTotal?> voiceTotal = default, Option<ViewAccountUsageDataSmsTotal?> faxTotal = default, Option<ViewAccountUsageDataSmsTotal?> postTotal = default, Option<ViewAccountUsageDataEmailTotal?> emailTotal = default, Option<ViewVoiceStatisticsDataTotalOutbound?> mmsTotal = default, Option<ViewVoiceStatisticsDataTotalOutbound?> emailTransactionalTotal = default, Option<ViewVoiceStatisticsDataTotalOutbound?> postcardsTotal = default, Option<Currency?> currency = default)
         {
             SmsOption = sms;
+            MmsOption = mms;
             VoiceOption = voice;
             FaxOption = fax;
             PostOption = post;
             EmailOption = email;
+            EmailTransactionalOption = emailTransactional;
+            PostcardsOption = postcards;
             SmsTotalOption = smsTotal;
             VoiceTotalOption = voiceTotal;
             FaxTotalOption = faxTotal;
             PostTotalOption = postTotal;
             EmailTotalOption = emailTotal;
+            MmsTotalOption = mmsTotal;
+            EmailTransactionalTotalOption = emailTransactionalTotal;
+            PostcardsTotalOption = postcardsTotal;
+            CurrencyOption = currency;
             OnCreated();
         }
 
@@ -76,46 +90,60 @@ namespace ClickSend.Model
         public List<ViewAccountUsageDataSmsInner>? Sms { get { return this.SmsOption.Value; } set { this.SmsOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Mms
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<ViewAccountUsageDataMmsInner>?> MmsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Mms
+        /// </summary>
+        /* <example>[]</example> */
+        [JsonPropertyName("mms")]
+        public List<ViewAccountUsageDataMmsInner>? Mms { get { return this.MmsOption.Value; } set { this.MmsOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of Voice
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<ViewAccountUsageDataVoiceInner>?> VoiceOption { get; private set; }
+        public Option<List<ViewAccountUsageDataMmsInner>?> VoiceOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Voice
         /// </summary>
         /* <example>[{&quot;subaccount_id&quot;:1039,&quot;username&quot;:&quot;user1&quot;,&quot;total_count&quot;:&quot;6.00&quot;,&quot;total_price&quot;:&quot;0.1980&quot;},{&quot;subaccount_id&quot;:1047,&quot;username&quot;:&quot;user5&quot;,&quot;total_count&quot;:&quot;1.00&quot;,&quot;total_price&quot;:&quot;0.0330&quot;}]</example> */
         [JsonPropertyName("voice")]
-        public List<ViewAccountUsageDataVoiceInner>? Voice { get { return this.VoiceOption.Value; } set { this.VoiceOption = new(value); } }
+        public List<ViewAccountUsageDataMmsInner>? Voice { get { return this.VoiceOption.Value; } set { this.VoiceOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Fax
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<ViewAccountUsageDataVoiceInner>?> FaxOption { get; private set; }
+        public Option<List<ViewAccountUsageDataMmsInner>?> FaxOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Fax
         /// </summary>
         /* <example>[{&quot;subaccount_id&quot;:1039,&quot;username&quot;:&quot;user1&quot;,&quot;total_count&quot;:&quot;3.00&quot;,&quot;total_price&quot;:&quot;0.6943&quot;},{&quot;subaccount_id&quot;:1047,&quot;username&quot;:&quot;user5&quot;,&quot;total_count&quot;:&quot;1.00&quot;,&quot;total_price&quot;:&quot;0.2314&quot;}]</example> */
         [JsonPropertyName("fax")]
-        public List<ViewAccountUsageDataVoiceInner>? Fax { get { return this.FaxOption.Value; } set { this.FaxOption = new(value); } }
+        public List<ViewAccountUsageDataMmsInner>? Fax { get { return this.FaxOption.Value; } set { this.FaxOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Post
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<ViewAccountUsageDataVoiceInner>?> PostOption { get; private set; }
+        public Option<List<ViewAccountUsageDataMmsInner>?> PostOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Post
         /// </summary>
         /* <example>[{&quot;subaccount_id&quot;:1039,&quot;username&quot;:&quot;user1&quot;,&quot;total_count&quot;:&quot;10&quot;,&quot;total_price&quot;:&quot;8.5624&quot;},{&quot;subaccount_id&quot;:1047,&quot;username&quot;:&quot;user5&quot;,&quot;total_count&quot;:&quot;3&quot;,&quot;total_price&quot;:&quot;2.5586&quot;}]</example> */
         [JsonPropertyName("post")]
-        public List<ViewAccountUsageDataVoiceInner>? Post { get { return this.PostOption.Value; } set { this.PostOption = new(value); } }
+        public List<ViewAccountUsageDataMmsInner>? Post { get { return this.PostOption.Value; } set { this.PostOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Email
@@ -130,6 +158,34 @@ namespace ClickSend.Model
         /* <example>[{&quot;subaccount_id&quot;:1039,&quot;username&quot;:&quot;user1&quot;,&quot;total_count&quot;:3992,&quot;total_price&quot;:&quot;9.0020&quot;},{&quot;subaccount_id&quot;:1047,&quot;username&quot;:&quot;user5&quot;,&quot;total_count&quot;:998,&quot;total_price&quot;:&quot;0.0000&quot;}]</example> */
         [JsonPropertyName("email")]
         public List<ViewAccountUsageDataEmailInner>? Email { get { return this.EmailOption.Value; } set { this.EmailOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of EmailTransactional
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<ViewAccountUsageDataEmailInner>?> EmailTransactionalOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets EmailTransactional
+        /// </summary>
+        /* <example>[]</example> */
+        [JsonPropertyName("email_transactional")]
+        public List<ViewAccountUsageDataEmailInner>? EmailTransactional { get { return this.EmailTransactionalOption.Value; } set { this.EmailTransactionalOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Postcards
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<ViewAccountUsageDataMmsInner>?> PostcardsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Postcards
+        /// </summary>
+        /* <example>[]</example> */
+        [JsonPropertyName("postcards")]
+        public List<ViewAccountUsageDataMmsInner>? Postcards { get { return this.PostcardsOption.Value; } set { this.PostcardsOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of SmsTotal
@@ -197,6 +253,58 @@ namespace ClickSend.Model
         public ViewAccountUsageDataEmailTotal? EmailTotal { get { return this.EmailTotalOption.Value; } set { this.EmailTotalOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of MmsTotal
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<ViewVoiceStatisticsDataTotalOutbound?> MmsTotalOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets MmsTotal
+        /// </summary>
+        [JsonPropertyName("mms_total")]
+        public ViewVoiceStatisticsDataTotalOutbound? MmsTotal { get { return this.MmsTotalOption.Value; } set { this.MmsTotalOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of EmailTransactionalTotal
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<ViewVoiceStatisticsDataTotalOutbound?> EmailTransactionalTotalOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets EmailTransactionalTotal
+        /// </summary>
+        [JsonPropertyName("email_transactional_total")]
+        public ViewVoiceStatisticsDataTotalOutbound? EmailTransactionalTotal { get { return this.EmailTransactionalTotalOption.Value; } set { this.EmailTransactionalTotalOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PostcardsTotal
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<ViewVoiceStatisticsDataTotalOutbound?> PostcardsTotalOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PostcardsTotal
+        /// </summary>
+        [JsonPropertyName("postcards_total")]
+        public ViewVoiceStatisticsDataTotalOutbound? PostcardsTotal { get { return this.PostcardsTotalOption.Value; } set { this.PostcardsTotalOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Currency
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<Currency?> CurrencyOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Currency
+        /// </summary>
+        [JsonPropertyName("_currency")]
+        public Currency? Currency { get { return this.CurrencyOption.Value; } set { this.CurrencyOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -205,15 +313,22 @@ namespace ClickSend.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class ViewAccountUsageData {\n");
             sb.Append("  Sms: ").Append(Sms).Append("\n");
+            sb.Append("  Mms: ").Append(Mms).Append("\n");
             sb.Append("  Voice: ").Append(Voice).Append("\n");
             sb.Append("  Fax: ").Append(Fax).Append("\n");
             sb.Append("  Post: ").Append(Post).Append("\n");
             sb.Append("  Email: ").Append(Email).Append("\n");
+            sb.Append("  EmailTransactional: ").Append(EmailTransactional).Append("\n");
+            sb.Append("  Postcards: ").Append(Postcards).Append("\n");
             sb.Append("  SmsTotal: ").Append(SmsTotal).Append("\n");
             sb.Append("  VoiceTotal: ").Append(VoiceTotal).Append("\n");
             sb.Append("  FaxTotal: ").Append(FaxTotal).Append("\n");
             sb.Append("  PostTotal: ").Append(PostTotal).Append("\n");
             sb.Append("  EmailTotal: ").Append(EmailTotal).Append("\n");
+            sb.Append("  MmsTotal: ").Append(MmsTotal).Append("\n");
+            sb.Append("  EmailTransactionalTotal: ").Append(EmailTransactionalTotal).Append("\n");
+            sb.Append("  PostcardsTotal: ").Append(PostcardsTotal).Append("\n");
+            sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -252,15 +367,22 @@ namespace ClickSend.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<List<ViewAccountUsageDataSmsInner>?> sms = default;
-            Option<List<ViewAccountUsageDataVoiceInner>?> voice = default;
-            Option<List<ViewAccountUsageDataVoiceInner>?> fax = default;
-            Option<List<ViewAccountUsageDataVoiceInner>?> post = default;
+            Option<List<ViewAccountUsageDataMmsInner>?> mms = default;
+            Option<List<ViewAccountUsageDataMmsInner>?> voice = default;
+            Option<List<ViewAccountUsageDataMmsInner>?> fax = default;
+            Option<List<ViewAccountUsageDataMmsInner>?> post = default;
             Option<List<ViewAccountUsageDataEmailInner>?> email = default;
+            Option<List<ViewAccountUsageDataEmailInner>?> emailTransactional = default;
+            Option<List<ViewAccountUsageDataMmsInner>?> postcards = default;
             Option<ViewAccountUsageDataSmsTotal?> smsTotal = default;
             Option<ViewAccountUsageDataSmsTotal?> voiceTotal = default;
             Option<ViewAccountUsageDataSmsTotal?> faxTotal = default;
             Option<ViewAccountUsageDataSmsTotal?> postTotal = default;
             Option<ViewAccountUsageDataEmailTotal?> emailTotal = default;
+            Option<ViewVoiceStatisticsDataTotalOutbound?> mmsTotal = default;
+            Option<ViewVoiceStatisticsDataTotalOutbound?> emailTransactionalTotal = default;
+            Option<ViewVoiceStatisticsDataTotalOutbound?> postcardsTotal = default;
+            Option<Currency?> currency = default;
 
             while (utf8JsonReader.Read())
             {
@@ -280,17 +402,26 @@ namespace ClickSend.Model
                         case "sms":
                             sms = new Option<List<ViewAccountUsageDataSmsInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataSmsInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
+                        case "mms":
+                            mms = new Option<List<ViewAccountUsageDataMmsInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataMmsInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
                         case "voice":
-                            voice = new Option<List<ViewAccountUsageDataVoiceInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataVoiceInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            voice = new Option<List<ViewAccountUsageDataMmsInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataMmsInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "fax":
-                            fax = new Option<List<ViewAccountUsageDataVoiceInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataVoiceInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            fax = new Option<List<ViewAccountUsageDataMmsInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataMmsInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "post":
-                            post = new Option<List<ViewAccountUsageDataVoiceInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataVoiceInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            post = new Option<List<ViewAccountUsageDataMmsInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataMmsInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "email":
                             email = new Option<List<ViewAccountUsageDataEmailInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataEmailInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "email_transactional":
+                            emailTransactional = new Option<List<ViewAccountUsageDataEmailInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataEmailInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "postcards":
+                            postcards = new Option<List<ViewAccountUsageDataMmsInner>?>(JsonSerializer.Deserialize<List<ViewAccountUsageDataMmsInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "sms_total":
                             smsTotal = new Option<ViewAccountUsageDataSmsTotal?>(JsonSerializer.Deserialize<ViewAccountUsageDataSmsTotal>(ref utf8JsonReader, jsonSerializerOptions)!);
@@ -307,6 +438,18 @@ namespace ClickSend.Model
                         case "email_total":
                             emailTotal = new Option<ViewAccountUsageDataEmailTotal?>(JsonSerializer.Deserialize<ViewAccountUsageDataEmailTotal>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
+                        case "mms_total":
+                            mmsTotal = new Option<ViewVoiceStatisticsDataTotalOutbound?>(JsonSerializer.Deserialize<ViewVoiceStatisticsDataTotalOutbound>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "email_transactional_total":
+                            emailTransactionalTotal = new Option<ViewVoiceStatisticsDataTotalOutbound?>(JsonSerializer.Deserialize<ViewVoiceStatisticsDataTotalOutbound>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "postcards_total":
+                            postcardsTotal = new Option<ViewVoiceStatisticsDataTotalOutbound?>(JsonSerializer.Deserialize<ViewVoiceStatisticsDataTotalOutbound>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "_currency":
+                            currency = new Option<Currency?>(JsonSerializer.Deserialize<Currency>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
                         default:
                             break;
                     }
@@ -315,6 +458,9 @@ namespace ClickSend.Model
 
             if (sms.IsSet && sms.Value == null)
                 throw new ArgumentNullException(nameof(sms), "Property is not nullable for class ViewAccountUsageData.");
+
+            if (mms.IsSet && mms.Value == null)
+                throw new ArgumentNullException(nameof(mms), "Property is not nullable for class ViewAccountUsageData.");
 
             if (voice.IsSet && voice.Value == null)
                 throw new ArgumentNullException(nameof(voice), "Property is not nullable for class ViewAccountUsageData.");
@@ -327,6 +473,12 @@ namespace ClickSend.Model
 
             if (email.IsSet && email.Value == null)
                 throw new ArgumentNullException(nameof(email), "Property is not nullable for class ViewAccountUsageData.");
+
+            if (emailTransactional.IsSet && emailTransactional.Value == null)
+                throw new ArgumentNullException(nameof(emailTransactional), "Property is not nullable for class ViewAccountUsageData.");
+
+            if (postcards.IsSet && postcards.Value == null)
+                throw new ArgumentNullException(nameof(postcards), "Property is not nullable for class ViewAccountUsageData.");
 
             if (smsTotal.IsSet && smsTotal.Value == null)
                 throw new ArgumentNullException(nameof(smsTotal), "Property is not nullable for class ViewAccountUsageData.");
@@ -343,7 +495,19 @@ namespace ClickSend.Model
             if (emailTotal.IsSet && emailTotal.Value == null)
                 throw new ArgumentNullException(nameof(emailTotal), "Property is not nullable for class ViewAccountUsageData.");
 
-            return new ViewAccountUsageData(sms, voice, fax, post, email, smsTotal, voiceTotal, faxTotal, postTotal, emailTotal);
+            if (mmsTotal.IsSet && mmsTotal.Value == null)
+                throw new ArgumentNullException(nameof(mmsTotal), "Property is not nullable for class ViewAccountUsageData.");
+
+            if (emailTransactionalTotal.IsSet && emailTransactionalTotal.Value == null)
+                throw new ArgumentNullException(nameof(emailTransactionalTotal), "Property is not nullable for class ViewAccountUsageData.");
+
+            if (postcardsTotal.IsSet && postcardsTotal.Value == null)
+                throw new ArgumentNullException(nameof(postcardsTotal), "Property is not nullable for class ViewAccountUsageData.");
+
+            if (currency.IsSet && currency.Value == null)
+                throw new ArgumentNullException(nameof(currency), "Property is not nullable for class ViewAccountUsageData.");
+
+            return new ViewAccountUsageData(sms, mms, voice, fax, post, email, emailTransactional, postcards, smsTotal, voiceTotal, faxTotal, postTotal, emailTotal, mmsTotal, emailTransactionalTotal, postcardsTotal, currency);
         }
 
         /// <summary>
@@ -373,6 +537,9 @@ namespace ClickSend.Model
             if (viewAccountUsageData.SmsOption.IsSet && viewAccountUsageData.Sms == null)
                 throw new ArgumentNullException(nameof(viewAccountUsageData.Sms), "Property is required for class ViewAccountUsageData.");
 
+            if (viewAccountUsageData.MmsOption.IsSet && viewAccountUsageData.Mms == null)
+                throw new ArgumentNullException(nameof(viewAccountUsageData.Mms), "Property is required for class ViewAccountUsageData.");
+
             if (viewAccountUsageData.VoiceOption.IsSet && viewAccountUsageData.Voice == null)
                 throw new ArgumentNullException(nameof(viewAccountUsageData.Voice), "Property is required for class ViewAccountUsageData.");
 
@@ -384,6 +551,12 @@ namespace ClickSend.Model
 
             if (viewAccountUsageData.EmailOption.IsSet && viewAccountUsageData.Email == null)
                 throw new ArgumentNullException(nameof(viewAccountUsageData.Email), "Property is required for class ViewAccountUsageData.");
+
+            if (viewAccountUsageData.EmailTransactionalOption.IsSet && viewAccountUsageData.EmailTransactional == null)
+                throw new ArgumentNullException(nameof(viewAccountUsageData.EmailTransactional), "Property is required for class ViewAccountUsageData.");
+
+            if (viewAccountUsageData.PostcardsOption.IsSet && viewAccountUsageData.Postcards == null)
+                throw new ArgumentNullException(nameof(viewAccountUsageData.Postcards), "Property is required for class ViewAccountUsageData.");
 
             if (viewAccountUsageData.SmsTotalOption.IsSet && viewAccountUsageData.SmsTotal == null)
                 throw new ArgumentNullException(nameof(viewAccountUsageData.SmsTotal), "Property is required for class ViewAccountUsageData.");
@@ -400,10 +573,27 @@ namespace ClickSend.Model
             if (viewAccountUsageData.EmailTotalOption.IsSet && viewAccountUsageData.EmailTotal == null)
                 throw new ArgumentNullException(nameof(viewAccountUsageData.EmailTotal), "Property is required for class ViewAccountUsageData.");
 
+            if (viewAccountUsageData.MmsTotalOption.IsSet && viewAccountUsageData.MmsTotal == null)
+                throw new ArgumentNullException(nameof(viewAccountUsageData.MmsTotal), "Property is required for class ViewAccountUsageData.");
+
+            if (viewAccountUsageData.EmailTransactionalTotalOption.IsSet && viewAccountUsageData.EmailTransactionalTotal == null)
+                throw new ArgumentNullException(nameof(viewAccountUsageData.EmailTransactionalTotal), "Property is required for class ViewAccountUsageData.");
+
+            if (viewAccountUsageData.PostcardsTotalOption.IsSet && viewAccountUsageData.PostcardsTotal == null)
+                throw new ArgumentNullException(nameof(viewAccountUsageData.PostcardsTotal), "Property is required for class ViewAccountUsageData.");
+
+            if (viewAccountUsageData.CurrencyOption.IsSet && viewAccountUsageData.Currency == null)
+                throw new ArgumentNullException(nameof(viewAccountUsageData.Currency), "Property is required for class ViewAccountUsageData.");
+
             if (viewAccountUsageData.SmsOption.IsSet)
             {
                 writer.WritePropertyName("sms");
                 JsonSerializer.Serialize(writer, viewAccountUsageData.Sms, jsonSerializerOptions);
+            }
+            if (viewAccountUsageData.MmsOption.IsSet)
+            {
+                writer.WritePropertyName("mms");
+                JsonSerializer.Serialize(writer, viewAccountUsageData.Mms, jsonSerializerOptions);
             }
             if (viewAccountUsageData.VoiceOption.IsSet)
             {
@@ -424,6 +614,16 @@ namespace ClickSend.Model
             {
                 writer.WritePropertyName("email");
                 JsonSerializer.Serialize(writer, viewAccountUsageData.Email, jsonSerializerOptions);
+            }
+            if (viewAccountUsageData.EmailTransactionalOption.IsSet)
+            {
+                writer.WritePropertyName("email_transactional");
+                JsonSerializer.Serialize(writer, viewAccountUsageData.EmailTransactional, jsonSerializerOptions);
+            }
+            if (viewAccountUsageData.PostcardsOption.IsSet)
+            {
+                writer.WritePropertyName("postcards");
+                JsonSerializer.Serialize(writer, viewAccountUsageData.Postcards, jsonSerializerOptions);
             }
             if (viewAccountUsageData.SmsTotalOption.IsSet)
             {
@@ -449,6 +649,26 @@ namespace ClickSend.Model
             {
                 writer.WritePropertyName("email_total");
                 JsonSerializer.Serialize(writer, viewAccountUsageData.EmailTotal, jsonSerializerOptions);
+            }
+            if (viewAccountUsageData.MmsTotalOption.IsSet)
+            {
+                writer.WritePropertyName("mms_total");
+                JsonSerializer.Serialize(writer, viewAccountUsageData.MmsTotal, jsonSerializerOptions);
+            }
+            if (viewAccountUsageData.EmailTransactionalTotalOption.IsSet)
+            {
+                writer.WritePropertyName("email_transactional_total");
+                JsonSerializer.Serialize(writer, viewAccountUsageData.EmailTransactionalTotal, jsonSerializerOptions);
+            }
+            if (viewAccountUsageData.PostcardsTotalOption.IsSet)
+            {
+                writer.WritePropertyName("postcards_total");
+                JsonSerializer.Serialize(writer, viewAccountUsageData.PostcardsTotal, jsonSerializerOptions);
+            }
+            if (viewAccountUsageData.CurrencyOption.IsSet)
+            {
+                writer.WritePropertyName("_currency");
+                JsonSerializer.Serialize(writer, viewAccountUsageData.Currency, jsonSerializerOptions);
             }
         }
     }

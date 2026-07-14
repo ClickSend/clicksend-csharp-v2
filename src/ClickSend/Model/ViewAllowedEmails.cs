@@ -38,7 +38,7 @@ namespace ClickSend.Model
         /// <param name="responseMsg">A message describing the outcome of the operation.</param>
         /// <param name="data">data</param>
         [JsonConstructor]
-        public ViewAllowedEmails(Option<int?> httpCode = default, Option<string?> responseCode = default, Option<string?> responseMsg = default, Option<List<ViewAllowedEmailsDataInner>?> data = default)
+        public ViewAllowedEmails(Option<int?> httpCode = default, Option<string?> responseCode = default, Option<string?> responseMsg = default, Option<ViewAllowedEmailsData?> data = default)
         {
             HttpCodeOption = httpCode;
             ResponseCodeOption = responseCode;
@@ -99,14 +99,13 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<ViewAllowedEmailsDataInner>?> DataOption { get; private set; }
+        public Option<ViewAllowedEmailsData?> DataOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Data
         /// </summary>
-        /* <example>[{&quot;email_address_id&quot;:84,&quot;email_address&quot;:&quot;my@email.com&quot;,&quot;from&quot;:&quot;+13523944199&quot;},{&quot;email_address_id&quot;:85,&quot;email_address&quot;:&quot;my@email.com&quot;,&quot;from&quot;:&quot;+13523944199&quot;}]</example> */
         [JsonPropertyName("data")]
-        public List<ViewAllowedEmailsDataInner>? Data { get { return this.DataOption.Value; } set { this.DataOption = new(value); } }
+        public ViewAllowedEmailsData? Data { get { return this.DataOption.Value; } set { this.DataOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -160,7 +159,7 @@ namespace ClickSend.Model
             Option<int?> httpCode = default;
             Option<string?> responseCode = default;
             Option<string?> responseMsg = default;
-            Option<List<ViewAllowedEmailsDataInner>?> data = default;
+            Option<ViewAllowedEmailsData?> data = default;
 
             while (utf8JsonReader.Read())
             {
@@ -187,7 +186,7 @@ namespace ClickSend.Model
                             responseMsg = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "data":
-                            data = new Option<List<ViewAllowedEmailsDataInner>?>(JsonSerializer.Deserialize<List<ViewAllowedEmailsDataInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            data = new Option<ViewAllowedEmailsData?>(JsonSerializer.Deserialize<ViewAllowedEmailsData>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;

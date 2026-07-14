@@ -135,6 +135,15 @@ namespace ClickSend.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'NotifiedTimestamp'
+        /// </summary>
+        [Fact]
+        public void NotifiedTimestampTest()
+        {
+            // TODO unit test for the property 'NotifiedTimestamp'
+        }
+
+        /// <summary>
         /// Test the property 'IsNearingExpiration'
         /// </summary>
         [Fact]

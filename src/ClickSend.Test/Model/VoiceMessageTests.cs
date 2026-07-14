@@ -63,6 +63,24 @@ namespace ClickSend.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'DateAdded'
+        /// </summary>
+        [Fact]
+        public void DateAddedTest()
+        {
+            // TODO unit test for the property 'DateAdded'
+        }
+
+        /// <summary>
+        /// Test the property 'ListId'
+        /// </summary>
+        [Fact]
+        public void ListIdTest()
+        {
+            // TODO unit test for the property 'ListId'
+        }
+
+        /// <summary>
         /// Test the property 'To'
         /// </summary>
         [Fact]
@@ -207,12 +225,66 @@ namespace ClickSend.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'MachineDetected'
+        /// </summary>
+        [Fact]
+        public void MachineDetectedTest()
+        {
+            // TODO unit test for the property 'MachineDetected'
+        }
+
+        /// <summary>
+        /// Test the property 'Digits'
+        /// </summary>
+        [Fact]
+        public void DigitsTest()
+        {
+            // TODO unit test for the property 'Digits'
+        }
+
+        /// <summary>
+        /// Test the property 'Carrier'
+        /// </summary>
+        [Fact]
+        public void CarrierTest()
+        {
+            // TODO unit test for the property 'Carrier'
+        }
+
+        /// <summary>
+        /// Test the property 'StatusCode'
+        /// </summary>
+        [Fact]
+        public void StatusCodeTest()
+        {
+            // TODO unit test for the property 'StatusCode'
+        }
+
+        /// <summary>
+        /// Test the property 'StatusText'
+        /// </summary>
+        [Fact]
+        public void StatusTextTest()
+        {
+            // TODO unit test for the property 'StatusText'
+        }
+
+        /// <summary>
         /// Test the property 'Status'
         /// </summary>
         [Fact]
         public void StatusTest()
         {
             // TODO unit test for the property 'Status'
+        }
+
+        /// <summary>
+        /// Test the property 'ApiUsername'
+        /// </summary>
+        [Fact]
+        public void ApiUsernameTest()
+        {
+            // TODO unit test for the property 'ApiUsername'
         }
     }
 }

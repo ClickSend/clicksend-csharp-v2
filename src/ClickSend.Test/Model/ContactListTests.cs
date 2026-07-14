@@ -88,5 +88,23 @@ namespace ClickSend.Test.Model
         {
             // TODO unit test for the property 'ContactsCount'
         }
+
+        /// <summary>
+        /// Test the property 'ImportInProgress'
+        /// </summary>
+        [Fact]
+        public void ImportInProgressTest()
+        {
+            // TODO unit test for the property 'ImportInProgress'
+        }
+
+        /// <summary>
+        /// Test the property 'OptoutInProgress'
+        /// </summary>
+        [Fact]
+        public void OptoutInProgressTest()
+        {
+            // TODO unit test for the property 'OptoutInProgress'
+        }
     }
 }

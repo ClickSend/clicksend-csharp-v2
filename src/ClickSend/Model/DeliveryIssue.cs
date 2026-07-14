@@ -222,7 +222,7 @@ namespace ClickSend.Model
         /// </summary>
         /// <value>The user&#39;s email address.</value>
         /* <example>johndoe1@awesome.com</example> */
-        [JsonPropertyName("email-address")]
+        [JsonPropertyName("email_address")]
         public string? EmailAddress { get { return this.EmailAddressOption.Value; } set { this.EmailAddressOption = new(value); } }
 
         /// <summary>
@@ -338,7 +338,7 @@ namespace ClickSend.Model
                         case "resolved":
                             resolved = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
                             break;
-                        case "email-address":
+                        case "email_address":
                             emailAddress = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         default:
@@ -453,7 +453,7 @@ namespace ClickSend.Model
                 writer.WriteNumber("resolved", deliveryIssue.ResolvedOption.Value!.Value);
 
             if (deliveryIssue.EmailAddressOption.IsSet)
-                writer.WriteString("email-address", deliveryIssue.EmailAddress);
+                writer.WriteString("email_address", deliveryIssue.EmailAddress);
         }
     }
 }

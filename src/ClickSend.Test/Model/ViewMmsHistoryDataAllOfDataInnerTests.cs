@@ -90,6 +90,33 @@ namespace ClickSend.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Subject'
+        /// </summary>
+        [Fact]
+        public void SubjectTest()
+        {
+            // TODO unit test for the property 'Subject'
+        }
+
+        /// <summary>
+        /// Test the property 'Priority'
+        /// </summary>
+        [Fact]
+        public void PriorityTest()
+        {
+            // TODO unit test for the property 'Priority'
+        }
+
+        /// <summary>
+        /// Test the property 'MediaFileUrl'
+        /// </summary>
+        [Fact]
+        public void MediaFileUrlTest()
+        {
+            // TODO unit test for the property 'MediaFileUrl'
+        }
+
+        /// <summary>
         /// Test the property 'Status'
         /// </summary>
         [Fact]
@@ -114,6 +141,15 @@ namespace ClickSend.Test.Model
         public void ScheduleTest()
         {
             // TODO unit test for the property 'Schedule'
+        }
+
+        /// <summary>
+        /// Test the property 'DateAdded'
+        /// </summary>
+        [Fact]
+        public void DateAddedTest()
+        {
+            // TODO unit test for the property 'DateAdded'
         }
 
         /// <summary>

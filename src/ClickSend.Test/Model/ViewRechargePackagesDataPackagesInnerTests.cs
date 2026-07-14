@@ -99,6 +99,15 @@ namespace ClickSend.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'PriceSmsCarrierFee'
+        /// </summary>
+        [Fact]
+        public void PriceSmsCarrierFeeTest()
+        {
+            // TODO unit test for the property 'PriceSmsCarrierFee'
+        }
+
+        /// <summary>
         /// Test the property 'VoiceMobilePrice'
         /// </summary>
         [Fact]
@@ -132,6 +141,33 @@ namespace ClickSend.Test.Model
         public void VoiceLandlineQuantityTest()
         {
             // TODO unit test for the property 'VoiceLandlineQuantity'
+        }
+
+        /// <summary>
+        /// Test the property 'MmsPrice'
+        /// </summary>
+        [Fact]
+        public void MmsPriceTest()
+        {
+            // TODO unit test for the property 'MmsPrice'
+        }
+
+        /// <summary>
+        /// Test the property 'MmsQuantity'
+        /// </summary>
+        [Fact]
+        public void MmsQuantityTest()
+        {
+            // TODO unit test for the property 'MmsQuantity'
+        }
+
+        /// <summary>
+        /// Test the property 'PriceMmsCarrierFee'
+        /// </summary>
+        [Fact]
+        public void PriceMmsCarrierFeeTest()
+        {
+            // TODO unit test for the property 'PriceMmsCarrierFee'
         }
 
         /// <summary>

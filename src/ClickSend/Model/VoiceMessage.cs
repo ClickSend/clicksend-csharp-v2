@@ -33,14 +33,16 @@ namespace ClickSend.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="VoiceMessage" /> class.
         /// </summary>
-        /// <param name="date">The date.</param>
+        /// <param name="date">The date, if applicable. May be null; see also &#x60;date_added&#x60;.</param>
+        /// <param name="dateAdded">The Unix timestamp when the message was added.</param>
+        /// <param name="listId">The ID of the list associated with the message, if applicable.</param>
         /// <param name="to">The recipient&#39;s phone number.</param>
         /// <param name="toType">The type of recipient.</param>
         /// <param name="body">The body of the message.</param>
         /// <param name="from">The sender&#39;s phone number.</param>
         /// <param name="lang">The language of the message.</param>
         /// <param name="voice">The voice of the message.</param>
-        /// <param name="schedule">The timestamp when the message should be sent.</param>
+        /// <param name="schedule">The timestamp when the message should be sent. Returned as a string since it may be an empty string when no schedule was set.</param>
         /// <param name="messageId">The ID of the message.</param>
         /// <param name="messageParts">The number of parts in the message.</param>
         /// <param name="messagePrice">The price of the message.</param>
@@ -50,11 +52,19 @@ namespace ClickSend.Model
         /// <param name="country">The country code of the message.</param>
         /// <param name="requireInput">The require input of the message.</param>
         /// <param name="machineDetection">The machine detection of the message.</param>
+        /// <param name="machineDetected">Flag indicating if an answering machine was detected.</param>
+        /// <param name="digits">The digits entered by the recipient, if any input was collected.</param>
+        /// <param name="carrier">The carrier of the recipient&#39;s phone number.</param>
+        /// <param name="statusCode">The status code of the message.</param>
+        /// <param name="statusText">A human-readable description of the status.</param>
         /// <param name="status">The status of the message.</param>
+        /// <param name="apiUsername">The API username associated with the message.</param>
         [JsonConstructor]
-        public VoiceMessage(Option<decimal?> date = default, Option<string?> to = default, Option<string?> toType = default, Option<string?> body = default, Option<string?> from = default, Option<string?> lang = default, Option<string?> voice = default, Option<int?> schedule = default, Option<string?> messageId = default, Option<int?> messageParts = default, Option<string?> messagePrice = default, Option<string?> customString = default, Option<decimal?> userId = default, Option<decimal?> subaccountId = default, Option<string?> country = default, Option<decimal?> requireInput = default, Option<decimal?> machineDetection = default, Option<string?> status = default)
+        public VoiceMessage(Option<string?> date = default, Option<int?> dateAdded = default, Option<string?> listId = default, Option<string?> to = default, Option<string?> toType = default, Option<string?> body = default, Option<string?> from = default, Option<string?> lang = default, Option<string?> voice = default, Option<string?> schedule = default, Option<string?> messageId = default, Option<string?> messageParts = default, Option<string?> messagePrice = default, Option<string?> customString = default, Option<decimal?> userId = default, Option<decimal?> subaccountId = default, Option<string?> country = default, Option<decimal?> requireInput = default, Option<decimal?> machineDetection = default, Option<decimal?> machineDetected = default, Option<string?> digits = default, Option<string?> carrier = default, Option<string?> statusCode = default, Option<string?> statusText = default, Option<string?> status = default, Option<string?> apiUsername = default)
         {
             DateOption = date;
+            DateAddedOption = dateAdded;
+            ListIdOption = listId;
             ToOption = to;
             ToTypeOption = toType;
             BodyOption = body;
@@ -71,7 +81,13 @@ namespace ClickSend.Model
             CountryOption = country;
             RequireInputOption = requireInput;
             MachineDetectionOption = machineDetection;
+            MachineDetectedOption = machineDetected;
+            DigitsOption = digits;
+            CarrierOption = carrier;
+            StatusCodeOption = statusCode;
+            StatusTextOption = statusText;
             StatusOption = status;
+            ApiUsernameOption = apiUsername;
             OnCreated();
         }
 
@@ -82,15 +98,44 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> DateOption { get; private set; }
+        public Option<string?> DateOption { get; private set; }
 
         /// <summary>
-        /// The date.
+        /// The date, if applicable. May be null; see also &#x60;date_added&#x60;.
         /// </summary>
-        /// <value>The date.</value>
+        /// <value>The date, if applicable. May be null; see also &#x60;date_added&#x60;.</value>
         /* <example>1436871253</example> */
         [JsonPropertyName("date")]
-        public decimal? Date { get { return this.DateOption.Value; } set { this.DateOption = new(value); } }
+        public string? Date { get { return this.DateOption.Value; } set { this.DateOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of DateAdded
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> DateAddedOption { get; private set; }
+
+        /// <summary>
+        /// The Unix timestamp when the message was added.
+        /// </summary>
+        /// <value>The Unix timestamp when the message was added.</value>
+        /* <example>1436871253</example> */
+        [JsonPropertyName("date_added")]
+        public int? DateAdded { get { return this.DateAddedOption.Value; } set { this.DateAddedOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ListId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ListIdOption { get; private set; }
+
+        /// <summary>
+        /// The ID of the list associated with the message, if applicable.
+        /// </summary>
+        /// <value>The ID of the list associated with the message, if applicable.</value>
+        [JsonPropertyName("list_id")]
+        public string? ListId { get { return this.ListIdOption.Value; } set { this.ListIdOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of To
@@ -186,15 +231,15 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<int?> ScheduleOption { get; private set; }
+        public Option<string?> ScheduleOption { get; private set; }
 
         /// <summary>
-        /// The timestamp when the message should be sent.
+        /// The timestamp when the message should be sent. Returned as a string since it may be an empty string when no schedule was set.
         /// </summary>
-        /// <value>The timestamp when the message should be sent.</value>
+        /// <value>The timestamp when the message should be sent. Returned as a string since it may be an empty string when no schedule was set.</value>
         /* <example>1436874701</example> */
         [JsonPropertyName("schedule")]
-        public int? Schedule { get { return this.ScheduleOption.Value; } set { this.ScheduleOption = new(value); } }
+        public string? Schedule { get { return this.ScheduleOption.Value; } set { this.ScheduleOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of MessageId
@@ -216,15 +261,15 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<int?> MessagePartsOption { get; private set; }
+        public Option<string?> MessagePartsOption { get; private set; }
 
         /// <summary>
         /// The number of parts in the message.
         /// </summary>
         /// <value>The number of parts in the message.</value>
-        /* <example>1</example> */
+        /* <example>1.00</example> */
         [JsonPropertyName("message_parts")]
-        public int? MessageParts { get { return this.MessagePartsOption.Value; } set { this.MessagePartsOption = new(value); } }
+        public string? MessageParts { get { return this.MessagePartsOption.Value; } set { this.MessagePartsOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of MessagePrice
@@ -332,6 +377,80 @@ namespace ClickSend.Model
         public decimal? MachineDetection { get { return this.MachineDetectionOption.Value; } set { this.MachineDetectionOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of MachineDetected
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> MachineDetectedOption { get; private set; }
+
+        /// <summary>
+        /// Flag indicating if an answering machine was detected.
+        /// </summary>
+        /// <value>Flag indicating if an answering machine was detected.</value>
+        /* <example>0</example> */
+        [JsonPropertyName("machine_detected")]
+        public decimal? MachineDetected { get { return this.MachineDetectedOption.Value; } set { this.MachineDetectedOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Digits
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> DigitsOption { get; private set; }
+
+        /// <summary>
+        /// The digits entered by the recipient, if any input was collected.
+        /// </summary>
+        /// <value>The digits entered by the recipient, if any input was collected.</value>
+        [JsonPropertyName("digits")]
+        public string? Digits { get { return this.DigitsOption.Value; } set { this.DigitsOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Carrier
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> CarrierOption { get; private set; }
+
+        /// <summary>
+        /// The carrier of the recipient&#39;s phone number.
+        /// </summary>
+        /// <value>The carrier of the recipient&#39;s phone number.</value>
+        /* <example>Telstra</example> */
+        [JsonPropertyName("carrier")]
+        public string? Carrier { get { return this.CarrierOption.Value; } set { this.CarrierOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of StatusCode
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> StatusCodeOption { get; private set; }
+
+        /// <summary>
+        /// The status code of the message.
+        /// </summary>
+        /// <value>The status code of the message.</value>
+        /* <example>201</example> */
+        [JsonPropertyName("status_code")]
+        public string? StatusCode { get { return this.StatusCodeOption.Value; } set { this.StatusCodeOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of StatusText
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> StatusTextOption { get; private set; }
+
+        /// <summary>
+        /// A human-readable description of the status.
+        /// </summary>
+        /// <value>A human-readable description of the status.</value>
+        /* <example>Delivered</example> */
+        [JsonPropertyName("status_text")]
+        public string? StatusText { get { return this.StatusTextOption.Value; } set { this.StatusTextOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of Status
         /// </summary>
         [JsonIgnore]
@@ -347,6 +466,21 @@ namespace ClickSend.Model
         public string? Status { get { return this.StatusOption.Value; } set { this.StatusOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of ApiUsername
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ApiUsernameOption { get; private set; }
+
+        /// <summary>
+        /// The API username associated with the message.
+        /// </summary>
+        /// <value>The API username associated with the message.</value>
+        /* <example>johndoe1</example> */
+        [JsonPropertyName("_api_username")]
+        public string? ApiUsername { get { return this.ApiUsernameOption.Value; } set { this.ApiUsernameOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -355,6 +489,8 @@ namespace ClickSend.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class VoiceMessage {\n");
             sb.Append("  Date: ").Append(Date).Append("\n");
+            sb.Append("  DateAdded: ").Append(DateAdded).Append("\n");
+            sb.Append("  ListId: ").Append(ListId).Append("\n");
             sb.Append("  To: ").Append(To).Append("\n");
             sb.Append("  ToType: ").Append(ToType).Append("\n");
             sb.Append("  Body: ").Append(Body).Append("\n");
@@ -371,7 +507,13 @@ namespace ClickSend.Model
             sb.Append("  Country: ").Append(Country).Append("\n");
             sb.Append("  RequireInput: ").Append(RequireInput).Append("\n");
             sb.Append("  MachineDetection: ").Append(MachineDetection).Append("\n");
+            sb.Append("  MachineDetected: ").Append(MachineDetected).Append("\n");
+            sb.Append("  Digits: ").Append(Digits).Append("\n");
+            sb.Append("  Carrier: ").Append(Carrier).Append("\n");
+            sb.Append("  StatusCode: ").Append(StatusCode).Append("\n");
+            sb.Append("  StatusText: ").Append(StatusText).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
+            sb.Append("  ApiUsername: ").Append(ApiUsername).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -409,16 +551,18 @@ namespace ClickSend.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<decimal?> date = default;
+            Option<string?> date = default;
+            Option<int?> dateAdded = default;
+            Option<string?> listId = default;
             Option<string?> to = default;
             Option<string?> toType = default;
             Option<string?> body = default;
             Option<string?> from = default;
             Option<string?> lang = default;
             Option<string?> voice = default;
-            Option<int?> schedule = default;
+            Option<string?> schedule = default;
             Option<string?> messageId = default;
-            Option<int?> messageParts = default;
+            Option<string?> messageParts = default;
             Option<string?> messagePrice = default;
             Option<string?> customString = default;
             Option<decimal?> userId = default;
@@ -426,7 +570,13 @@ namespace ClickSend.Model
             Option<string?> country = default;
             Option<decimal?> requireInput = default;
             Option<decimal?> machineDetection = default;
+            Option<decimal?> machineDetected = default;
+            Option<string?> digits = default;
+            Option<string?> carrier = default;
+            Option<string?> statusCode = default;
+            Option<string?> statusText = default;
             Option<string?> status = default;
+            Option<string?> apiUsername = default;
 
             while (utf8JsonReader.Read())
             {
@@ -444,7 +594,13 @@ namespace ClickSend.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "date":
-                            date = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
+                            date = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "date_added":
+                            dateAdded = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "list_id":
+                            listId = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "to":
                             to = new Option<string?>(utf8JsonReader.GetString()!);
@@ -465,13 +621,13 @@ namespace ClickSend.Model
                             voice = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "schedule":
-                            schedule = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            schedule = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "message_id":
                             messageId = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "message_parts":
-                            messageParts = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            messageParts = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "message_price":
                             messagePrice = new Option<string?>(utf8JsonReader.GetString()!);
@@ -494,8 +650,26 @@ namespace ClickSend.Model
                         case "machine_detection":
                             machineDetection = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
                             break;
+                        case "machine_detected":
+                            machineDetected = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
+                            break;
+                        case "digits":
+                            digits = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "carrier":
+                            carrier = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "status_code":
+                            statusCode = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "status_text":
+                            statusText = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "status":
                             status = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "_api_username":
+                            apiUsername = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         default:
                             break;
@@ -503,8 +677,8 @@ namespace ClickSend.Model
                 }
             }
 
-            if (date.IsSet && date.Value == null)
-                throw new ArgumentNullException(nameof(date), "Property is not nullable for class VoiceMessage.");
+            if (dateAdded.IsSet && dateAdded.Value == null)
+                throw new ArgumentNullException(nameof(dateAdded), "Property is not nullable for class VoiceMessage.");
 
             if (to.IsSet && to.Value == null)
                 throw new ArgumentNullException(nameof(to), "Property is not nullable for class VoiceMessage.");
@@ -554,7 +728,10 @@ namespace ClickSend.Model
             if (status.IsSet && status.Value == null)
                 throw new ArgumentNullException(nameof(status), "Property is not nullable for class VoiceMessage.");
 
-            return new VoiceMessage(date, to, toType, body, from, lang, voice, schedule, messageId, messageParts, messagePrice, customString, userId, subaccountId, country, requireInput, machineDetection, status);
+            if (apiUsername.IsSet && apiUsername.Value == null)
+                throw new ArgumentNullException(nameof(apiUsername), "Property is not nullable for class VoiceMessage.");
+
+            return new VoiceMessage(date, dateAdded, listId, to, toType, body, from, lang, voice, schedule, messageId, messageParts, messagePrice, customString, userId, subaccountId, country, requireInput, machineDetection, machineDetected, digits, carrier, statusCode, statusText, status, apiUsername);
         }
 
         /// <summary>
@@ -596,8 +773,14 @@ namespace ClickSend.Model
             if (voiceMessage.VoiceOption.IsSet && voiceMessage.Voice == null)
                 throw new ArgumentNullException(nameof(voiceMessage.Voice), "Property is required for class VoiceMessage.");
 
+            if (voiceMessage.ScheduleOption.IsSet && voiceMessage.Schedule == null)
+                throw new ArgumentNullException(nameof(voiceMessage.Schedule), "Property is required for class VoiceMessage.");
+
             if (voiceMessage.MessageIdOption.IsSet && voiceMessage.MessageId == null)
                 throw new ArgumentNullException(nameof(voiceMessage.MessageId), "Property is required for class VoiceMessage.");
+
+            if (voiceMessage.MessagePartsOption.IsSet && voiceMessage.MessageParts == null)
+                throw new ArgumentNullException(nameof(voiceMessage.MessageParts), "Property is required for class VoiceMessage.");
 
             if (voiceMessage.MessagePriceOption.IsSet && voiceMessage.MessagePrice == null)
                 throw new ArgumentNullException(nameof(voiceMessage.MessagePrice), "Property is required for class VoiceMessage.");
@@ -611,8 +794,23 @@ namespace ClickSend.Model
             if (voiceMessage.StatusOption.IsSet && voiceMessage.Status == null)
                 throw new ArgumentNullException(nameof(voiceMessage.Status), "Property is required for class VoiceMessage.");
 
+            if (voiceMessage.ApiUsernameOption.IsSet && voiceMessage.ApiUsername == null)
+                throw new ArgumentNullException(nameof(voiceMessage.ApiUsername), "Property is required for class VoiceMessage.");
+
             if (voiceMessage.DateOption.IsSet)
-                writer.WriteNumber("date", voiceMessage.DateOption.Value!.Value);
+                if (voiceMessage.DateOption.Value != null)
+                    writer.WriteString("date", voiceMessage.Date);
+                else
+                    writer.WriteNull("date");
+
+            if (voiceMessage.DateAddedOption.IsSet)
+                writer.WriteNumber("date_added", voiceMessage.DateAddedOption.Value!.Value);
+
+            if (voiceMessage.ListIdOption.IsSet)
+                if (voiceMessage.ListIdOption.Value != null)
+                    writer.WriteString("list_id", voiceMessage.ListId);
+                else
+                    writer.WriteNull("list_id");
 
             if (voiceMessage.ToOption.IsSet)
                 writer.WriteString("to", voiceMessage.To);
@@ -636,13 +834,13 @@ namespace ClickSend.Model
                 writer.WriteString("voice", voiceMessage.Voice);
 
             if (voiceMessage.ScheduleOption.IsSet)
-                writer.WriteNumber("schedule", voiceMessage.ScheduleOption.Value!.Value);
+                writer.WriteString("schedule", voiceMessage.Schedule);
 
             if (voiceMessage.MessageIdOption.IsSet)
                 writer.WriteString("message_id", voiceMessage.MessageId);
 
             if (voiceMessage.MessagePartsOption.IsSet)
-                writer.WriteNumber("message_parts", voiceMessage.MessagePartsOption.Value!.Value);
+                writer.WriteString("message_parts", voiceMessage.MessageParts);
 
             if (voiceMessage.MessagePriceOption.IsSet)
                 writer.WriteString("message_price", voiceMessage.MessagePrice);
@@ -665,8 +863,41 @@ namespace ClickSend.Model
             if (voiceMessage.MachineDetectionOption.IsSet)
                 writer.WriteNumber("machine_detection", voiceMessage.MachineDetectionOption.Value!.Value);
 
+            if (voiceMessage.MachineDetectedOption.IsSet)
+                if (voiceMessage.MachineDetectedOption.Value != null)
+                    writer.WriteNumber("machine_detected", voiceMessage.MachineDetectedOption.Value!.Value);
+                else
+                    writer.WriteNull("machine_detected");
+
+            if (voiceMessage.DigitsOption.IsSet)
+                if (voiceMessage.DigitsOption.Value != null)
+                    writer.WriteString("digits", voiceMessage.Digits);
+                else
+                    writer.WriteNull("digits");
+
+            if (voiceMessage.CarrierOption.IsSet)
+                if (voiceMessage.CarrierOption.Value != null)
+                    writer.WriteString("carrier", voiceMessage.Carrier);
+                else
+                    writer.WriteNull("carrier");
+
+            if (voiceMessage.StatusCodeOption.IsSet)
+                if (voiceMessage.StatusCodeOption.Value != null)
+                    writer.WriteString("status_code", voiceMessage.StatusCode);
+                else
+                    writer.WriteNull("status_code");
+
+            if (voiceMessage.StatusTextOption.IsSet)
+                if (voiceMessage.StatusTextOption.Value != null)
+                    writer.WriteString("status_text", voiceMessage.StatusText);
+                else
+                    writer.WriteNull("status_text");
+
             if (voiceMessage.StatusOption.IsSet)
                 writer.WriteString("status", voiceMessage.Status);
+
+            if (voiceMessage.ApiUsernameOption.IsSet)
+                writer.WriteString("_api_username", voiceMessage.ApiUsername);
         }
     }
 }

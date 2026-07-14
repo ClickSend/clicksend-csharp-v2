@@ -41,9 +41,13 @@ namespace ClickSend.Model
         /// <param name="prevPageUrl">A URL of the previous page. It will return **null** if there’s no previous page.</param>
         /// <param name="from">The number of the first result in the current page.</param>
         /// <param name="to">The number of the last result in the current page.</param>
+        /// <param name="firstPageUrl">The URL of the first page of records.</param>
+        /// <param name="lastPageUrl">The URL of the last page of records.</param>
+        /// <param name="path">The base URL path used to build pagination links.</param>
+        /// <param name="links">The list of pagination links.</param>
         /// <param name="data">data</param>
         [JsonConstructor]
-        public ViewSmsInboundAutomationsData(Option<int?> total = default, Option<int?> perPage = default, Option<int?> currentPage = default, Option<int?> lastPage = default, Option<string?> nextPageUrl = default, Option<string?> prevPageUrl = default, Option<int?> from = default, Option<int?> to = default, Option<List<SmsInboundRule>?> data = default)
+        public ViewSmsInboundAutomationsData(Option<int?> total = default, Option<int?> perPage = default, Option<int?> currentPage = default, Option<int?> lastPage = default, Option<string?> nextPageUrl = default, Option<string?> prevPageUrl = default, Option<int?> from = default, Option<int?> to = default, Option<string?> firstPageUrl = default, Option<string?> lastPageUrl = default, Option<string?> path = default, Option<List<ViewSmsInboundAutomationsDataAllOfLinksInner>?> links = default, Option<List<SmsInboundRule>?> data = default)
         {
             TotalOption = total;
             PerPageOption = perPage;
@@ -53,6 +57,10 @@ namespace ClickSend.Model
             PrevPageUrlOption = prevPageUrl;
             FromOption = from;
             ToOption = to;
+            FirstPageUrlOption = firstPageUrl;
+            LastPageUrlOption = lastPageUrl;
+            PathOption = path;
+            LinksOption = links;
             DataOption = data;
             OnCreated();
         }
@@ -178,6 +186,65 @@ namespace ClickSend.Model
         public int? To { get { return this.ToOption.Value; } set { this.ToOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of FirstPageUrl
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> FirstPageUrlOption { get; private set; }
+
+        /// <summary>
+        /// The URL of the first page of records.
+        /// </summary>
+        /// <value>The URL of the first page of records.</value>
+        /* <example>https://rest.clicksend.com/v3/automations/sms/inbound?page&#x3D;1</example> */
+        [JsonPropertyName("first_page_url")]
+        public string? FirstPageUrl { get { return this.FirstPageUrlOption.Value; } set { this.FirstPageUrlOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of LastPageUrl
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> LastPageUrlOption { get; private set; }
+
+        /// <summary>
+        /// The URL of the last page of records.
+        /// </summary>
+        /// <value>The URL of the last page of records.</value>
+        /* <example>https://rest.clicksend.com/v3/automations/sms/inbound?page&#x3D;2</example> */
+        [JsonPropertyName("last_page_url")]
+        public string? LastPageUrl { get { return this.LastPageUrlOption.Value; } set { this.LastPageUrlOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Path
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PathOption { get; private set; }
+
+        /// <summary>
+        /// The base URL path used to build pagination links.
+        /// </summary>
+        /// <value>The base URL path used to build pagination links.</value>
+        /* <example>https://rest.clicksend.com/v3/automations/sms/inbound</example> */
+        [JsonPropertyName("path")]
+        public string? Path { get { return this.PathOption.Value; } set { this.PathOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Links
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<ViewSmsInboundAutomationsDataAllOfLinksInner>?> LinksOption { get; private set; }
+
+        /// <summary>
+        /// The list of pagination links.
+        /// </summary>
+        /// <value>The list of pagination links.</value>
+        [JsonPropertyName("links")]
+        public List<ViewSmsInboundAutomationsDataAllOfLinksInner>? Links { get { return this.LinksOption.Value; } set { this.LinksOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of Data
         /// </summary>
         [JsonIgnore]
@@ -207,6 +274,10 @@ namespace ClickSend.Model
             sb.Append("  PrevPageUrl: ").Append(PrevPageUrl).Append("\n");
             sb.Append("  From: ").Append(From).Append("\n");
             sb.Append("  To: ").Append(To).Append("\n");
+            sb.Append("  FirstPageUrl: ").Append(FirstPageUrl).Append("\n");
+            sb.Append("  LastPageUrl: ").Append(LastPageUrl).Append("\n");
+            sb.Append("  Path: ").Append(Path).Append("\n");
+            sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -253,6 +324,10 @@ namespace ClickSend.Model
             Option<string?> prevPageUrl = default;
             Option<int?> from = default;
             Option<int?> to = default;
+            Option<string?> firstPageUrl = default;
+            Option<string?> lastPageUrl = default;
+            Option<string?> path = default;
+            Option<List<ViewSmsInboundAutomationsDataAllOfLinksInner>?> links = default;
             Option<List<SmsInboundRule>?> data = default;
 
             while (utf8JsonReader.Read())
@@ -294,6 +369,18 @@ namespace ClickSend.Model
                         case "to":
                             to = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
+                        case "first_page_url":
+                            firstPageUrl = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "last_page_url":
+                            lastPageUrl = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "path":
+                            path = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "links":
+                            links = new Option<List<ViewSmsInboundAutomationsDataAllOfLinksInner>?>(JsonSerializer.Deserialize<List<ViewSmsInboundAutomationsDataAllOfLinksInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
                         case "data":
                             data = new Option<List<SmsInboundRule>?>(JsonSerializer.Deserialize<List<SmsInboundRule>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
@@ -321,10 +408,16 @@ namespace ClickSend.Model
             if (to.IsSet && to.Value == null)
                 throw new ArgumentNullException(nameof(to), "Property is not nullable for class ViewSmsInboundAutomationsData.");
 
+            if (path.IsSet && path.Value == null)
+                throw new ArgumentNullException(nameof(path), "Property is not nullable for class ViewSmsInboundAutomationsData.");
+
+            if (links.IsSet && links.Value == null)
+                throw new ArgumentNullException(nameof(links), "Property is not nullable for class ViewSmsInboundAutomationsData.");
+
             if (data.IsSet && data.Value == null)
                 throw new ArgumentNullException(nameof(data), "Property is not nullable for class ViewSmsInboundAutomationsData.");
 
-            return new ViewSmsInboundAutomationsData(total, perPage, currentPage, lastPage, nextPageUrl, prevPageUrl, from, to, data);
+            return new ViewSmsInboundAutomationsData(total, perPage, currentPage, lastPage, nextPageUrl, prevPageUrl, from, to, firstPageUrl, lastPageUrl, path, links, data);
         }
 
         /// <summary>
@@ -351,6 +444,12 @@ namespace ClickSend.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, ViewSmsInboundAutomationsData viewSmsInboundAutomationsData, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (viewSmsInboundAutomationsData.PathOption.IsSet && viewSmsInboundAutomationsData.Path == null)
+                throw new ArgumentNullException(nameof(viewSmsInboundAutomationsData.Path), "Property is required for class ViewSmsInboundAutomationsData.");
+
+            if (viewSmsInboundAutomationsData.LinksOption.IsSet && viewSmsInboundAutomationsData.Links == null)
+                throw new ArgumentNullException(nameof(viewSmsInboundAutomationsData.Links), "Property is required for class ViewSmsInboundAutomationsData.");
+
             if (viewSmsInboundAutomationsData.DataOption.IsSet && viewSmsInboundAutomationsData.Data == null)
                 throw new ArgumentNullException(nameof(viewSmsInboundAutomationsData.Data), "Property is required for class ViewSmsInboundAutomationsData.");
 
@@ -384,6 +483,26 @@ namespace ClickSend.Model
             if (viewSmsInboundAutomationsData.ToOption.IsSet)
                 writer.WriteNumber("to", viewSmsInboundAutomationsData.ToOption.Value!.Value);
 
+            if (viewSmsInboundAutomationsData.FirstPageUrlOption.IsSet)
+                if (viewSmsInboundAutomationsData.FirstPageUrlOption.Value != null)
+                    writer.WriteString("first_page_url", viewSmsInboundAutomationsData.FirstPageUrl);
+                else
+                    writer.WriteNull("first_page_url");
+
+            if (viewSmsInboundAutomationsData.LastPageUrlOption.IsSet)
+                if (viewSmsInboundAutomationsData.LastPageUrlOption.Value != null)
+                    writer.WriteString("last_page_url", viewSmsInboundAutomationsData.LastPageUrl);
+                else
+                    writer.WriteNull("last_page_url");
+
+            if (viewSmsInboundAutomationsData.PathOption.IsSet)
+                writer.WriteString("path", viewSmsInboundAutomationsData.Path);
+
+            if (viewSmsInboundAutomationsData.LinksOption.IsSet)
+            {
+                writer.WritePropertyName("links");
+                JsonSerializer.Serialize(writer, viewSmsInboundAutomationsData.Links, jsonSerializerOptions);
+            }
             if (viewSmsInboundAutomationsData.DataOption.IsSet)
             {
                 writer.WritePropertyName("data");

@@ -26,24 +26,26 @@ using ClickSend.Client;
 namespace ClickSend.Model
 {
     /// <summary>
-    /// ViewAccountUsageDataVoiceInner
+    /// ViewAccountUsageDataMmsInner
     /// </summary>
-    public partial class ViewAccountUsageDataVoiceInner : IValidatableObject
+    public partial class ViewAccountUsageDataMmsInner : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ViewAccountUsageDataVoiceInner" /> class.
+        /// Initializes a new instance of the <see cref="ViewAccountUsageDataMmsInner" /> class.
         /// </summary>
         /// <param name="subaccountId">The subaccount identifier.</param>
         /// <param name="username">The username associated with the subaccount.</param>
-        /// <param name="totalCount">The total count of voice calls.</param>
-        /// <param name="totalPrice">The total price of voice calls.</param>
+        /// <param name="totalCount">The total count of MMS.</param>
+        /// <param name="totalPrice">The total price of MMS.</param>
+        /// <param name="notes">Optional notes.</param>
         [JsonConstructor]
-        public ViewAccountUsageDataVoiceInner(Option<int?> subaccountId = default, Option<string?> username = default, Option<string?> totalCount = default, Option<string?> totalPrice = default)
+        public ViewAccountUsageDataMmsInner(Option<int?> subaccountId = default, Option<string?> username = default, Option<string?> totalCount = default, Option<string?> totalPrice = default, Option<string?> notes = default)
         {
             SubaccountIdOption = subaccountId;
             UsernameOption = username;
             TotalCountOption = totalCount;
             TotalPriceOption = totalPrice;
+            NotesOption = notes;
             OnCreated();
         }
 
@@ -85,9 +87,9 @@ namespace ClickSend.Model
         public Option<string?> TotalCountOption { get; private set; }
 
         /// <summary>
-        /// The total count of voice calls.
+        /// The total count of MMS.
         /// </summary>
-        /// <value>The total count of voice calls.</value>
+        /// <value>The total count of MMS.</value>
         [JsonPropertyName("total_count")]
         public string? TotalCount { get { return this.TotalCountOption.Value; } set { this.TotalCountOption = new(value); } }
 
@@ -99,11 +101,25 @@ namespace ClickSend.Model
         public Option<string?> TotalPriceOption { get; private set; }
 
         /// <summary>
-        /// The total price of voice calls.
+        /// The total price of MMS.
         /// </summary>
-        /// <value>The total price of voice calls.</value>
+        /// <value>The total price of MMS.</value>
         [JsonPropertyName("total_price")]
         public string? TotalPrice { get { return this.TotalPriceOption.Value; } set { this.TotalPriceOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Notes
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> NotesOption { get; private set; }
+
+        /// <summary>
+        /// Optional notes.
+        /// </summary>
+        /// <value>Optional notes.</value>
+        [JsonPropertyName("notes")]
+        public string? Notes { get { return this.NotesOption.Value; } set { this.NotesOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -112,11 +128,12 @@ namespace ClickSend.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class ViewAccountUsageDataVoiceInner {\n");
+            sb.Append("class ViewAccountUsageDataMmsInner {\n");
             sb.Append("  SubaccountId: ").Append(SubaccountId).Append("\n");
             sb.Append("  Username: ").Append(Username).Append("\n");
             sb.Append("  TotalCount: ").Append(TotalCount).Append("\n");
             sb.Append("  TotalPrice: ").Append(TotalPrice).Append("\n");
+            sb.Append("  Notes: ").Append(Notes).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -133,19 +150,19 @@ namespace ClickSend.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="ViewAccountUsageDataVoiceInner" />
+    /// A Json converter for type <see cref="ViewAccountUsageDataMmsInner" />
     /// </summary>
-    public class ViewAccountUsageDataVoiceInnerJsonConverter : JsonConverter<ViewAccountUsageDataVoiceInner>
+    public class ViewAccountUsageDataMmsInnerJsonConverter : JsonConverter<ViewAccountUsageDataMmsInner>
     {
         /// <summary>
-        /// Deserializes json to <see cref="ViewAccountUsageDataVoiceInner" />
+        /// Deserializes json to <see cref="ViewAccountUsageDataMmsInner" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override ViewAccountUsageDataVoiceInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override ViewAccountUsageDataMmsInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -158,6 +175,7 @@ namespace ClickSend.Model
             Option<string?> username = default;
             Option<string?> totalCount = default;
             Option<string?> totalPrice = default;
+            Option<string?> notes = default;
 
             while (utf8JsonReader.Read())
             {
@@ -186,6 +204,9 @@ namespace ClickSend.Model
                         case "total_price":
                             totalPrice = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "notes":
+                            notes = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         default:
                             break;
                     }
@@ -193,64 +214,70 @@ namespace ClickSend.Model
             }
 
             if (subaccountId.IsSet && subaccountId.Value == null)
-                throw new ArgumentNullException(nameof(subaccountId), "Property is not nullable for class ViewAccountUsageDataVoiceInner.");
+                throw new ArgumentNullException(nameof(subaccountId), "Property is not nullable for class ViewAccountUsageDataMmsInner.");
 
             if (username.IsSet && username.Value == null)
-                throw new ArgumentNullException(nameof(username), "Property is not nullable for class ViewAccountUsageDataVoiceInner.");
+                throw new ArgumentNullException(nameof(username), "Property is not nullable for class ViewAccountUsageDataMmsInner.");
 
             if (totalCount.IsSet && totalCount.Value == null)
-                throw new ArgumentNullException(nameof(totalCount), "Property is not nullable for class ViewAccountUsageDataVoiceInner.");
+                throw new ArgumentNullException(nameof(totalCount), "Property is not nullable for class ViewAccountUsageDataMmsInner.");
 
             if (totalPrice.IsSet && totalPrice.Value == null)
-                throw new ArgumentNullException(nameof(totalPrice), "Property is not nullable for class ViewAccountUsageDataVoiceInner.");
+                throw new ArgumentNullException(nameof(totalPrice), "Property is not nullable for class ViewAccountUsageDataMmsInner.");
 
-            return new ViewAccountUsageDataVoiceInner(subaccountId, username, totalCount, totalPrice);
+            return new ViewAccountUsageDataMmsInner(subaccountId, username, totalCount, totalPrice, notes);
         }
 
         /// <summary>
-        /// Serializes a <see cref="ViewAccountUsageDataVoiceInner" />
+        /// Serializes a <see cref="ViewAccountUsageDataMmsInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="viewAccountUsageDataVoiceInner"></param>
+        /// <param name="viewAccountUsageDataMmsInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, ViewAccountUsageDataVoiceInner viewAccountUsageDataVoiceInner, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, ViewAccountUsageDataMmsInner viewAccountUsageDataMmsInner, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, viewAccountUsageDataVoiceInner, jsonSerializerOptions);
+            WriteProperties(writer, viewAccountUsageDataMmsInner, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="ViewAccountUsageDataVoiceInner" />
+        /// Serializes the properties of <see cref="ViewAccountUsageDataMmsInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="viewAccountUsageDataVoiceInner"></param>
+        /// <param name="viewAccountUsageDataMmsInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, ViewAccountUsageDataVoiceInner viewAccountUsageDataVoiceInner, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, ViewAccountUsageDataMmsInner viewAccountUsageDataMmsInner, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (viewAccountUsageDataVoiceInner.UsernameOption.IsSet && viewAccountUsageDataVoiceInner.Username == null)
-                throw new ArgumentNullException(nameof(viewAccountUsageDataVoiceInner.Username), "Property is required for class ViewAccountUsageDataVoiceInner.");
+            if (viewAccountUsageDataMmsInner.UsernameOption.IsSet && viewAccountUsageDataMmsInner.Username == null)
+                throw new ArgumentNullException(nameof(viewAccountUsageDataMmsInner.Username), "Property is required for class ViewAccountUsageDataMmsInner.");
 
-            if (viewAccountUsageDataVoiceInner.TotalCountOption.IsSet && viewAccountUsageDataVoiceInner.TotalCount == null)
-                throw new ArgumentNullException(nameof(viewAccountUsageDataVoiceInner.TotalCount), "Property is required for class ViewAccountUsageDataVoiceInner.");
+            if (viewAccountUsageDataMmsInner.TotalCountOption.IsSet && viewAccountUsageDataMmsInner.TotalCount == null)
+                throw new ArgumentNullException(nameof(viewAccountUsageDataMmsInner.TotalCount), "Property is required for class ViewAccountUsageDataMmsInner.");
 
-            if (viewAccountUsageDataVoiceInner.TotalPriceOption.IsSet && viewAccountUsageDataVoiceInner.TotalPrice == null)
-                throw new ArgumentNullException(nameof(viewAccountUsageDataVoiceInner.TotalPrice), "Property is required for class ViewAccountUsageDataVoiceInner.");
+            if (viewAccountUsageDataMmsInner.TotalPriceOption.IsSet && viewAccountUsageDataMmsInner.TotalPrice == null)
+                throw new ArgumentNullException(nameof(viewAccountUsageDataMmsInner.TotalPrice), "Property is required for class ViewAccountUsageDataMmsInner.");
 
-            if (viewAccountUsageDataVoiceInner.SubaccountIdOption.IsSet)
-                writer.WriteNumber("subaccount_id", viewAccountUsageDataVoiceInner.SubaccountIdOption.Value!.Value);
+            if (viewAccountUsageDataMmsInner.SubaccountIdOption.IsSet)
+                writer.WriteNumber("subaccount_id", viewAccountUsageDataMmsInner.SubaccountIdOption.Value!.Value);
 
-            if (viewAccountUsageDataVoiceInner.UsernameOption.IsSet)
-                writer.WriteString("username", viewAccountUsageDataVoiceInner.Username);
+            if (viewAccountUsageDataMmsInner.UsernameOption.IsSet)
+                writer.WriteString("username", viewAccountUsageDataMmsInner.Username);
 
-            if (viewAccountUsageDataVoiceInner.TotalCountOption.IsSet)
-                writer.WriteString("total_count", viewAccountUsageDataVoiceInner.TotalCount);
+            if (viewAccountUsageDataMmsInner.TotalCountOption.IsSet)
+                writer.WriteString("total_count", viewAccountUsageDataMmsInner.TotalCount);
 
-            if (viewAccountUsageDataVoiceInner.TotalPriceOption.IsSet)
-                writer.WriteString("total_price", viewAccountUsageDataVoiceInner.TotalPrice);
+            if (viewAccountUsageDataMmsInner.TotalPriceOption.IsSet)
+                writer.WriteString("total_price", viewAccountUsageDataMmsInner.TotalPrice);
+
+            if (viewAccountUsageDataMmsInner.NotesOption.IsSet)
+                if (viewAccountUsageDataMmsInner.NotesOption.Value != null)
+                    writer.WriteString("notes", viewAccountUsageDataMmsInner.Notes);
+                else
+                    writer.WriteNull("notes");
         }
     }
 }

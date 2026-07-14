@@ -37,13 +37,15 @@ namespace ClickSend.Model
         /// <param name="username">The username associated with the subaccount.</param>
         /// <param name="totalCount">The total count of emails.</param>
         /// <param name="totalPrice">totalPrice</param>
+        /// <param name="notes">Optional notes.</param>
         [JsonConstructor]
-        public ViewAccountUsageDataEmailInner(Option<int?> subaccountId = default, Option<string?> username = default, Option<int?> totalCount = default, Option<string?> totalPrice = default)
+        public ViewAccountUsageDataEmailInner(Option<int?> subaccountId = default, Option<string?> username = default, Option<int?> totalCount = default, Option<string?> totalPrice = default, Option<string?> notes = default)
         {
             SubaccountIdOption = subaccountId;
             UsernameOption = username;
             TotalCountOption = totalCount;
             TotalPriceOption = totalPrice;
+            NotesOption = notes;
             OnCreated();
         }
 
@@ -105,6 +107,20 @@ namespace ClickSend.Model
         public string? TotalPrice { get { return this.TotalPriceOption.Value; } set { this.TotalPriceOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Notes
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> NotesOption { get; private set; }
+
+        /// <summary>
+        /// Optional notes.
+        /// </summary>
+        /// <value>Optional notes.</value>
+        [JsonPropertyName("notes")]
+        public string? Notes { get { return this.NotesOption.Value; } set { this.NotesOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -116,6 +132,7 @@ namespace ClickSend.Model
             sb.Append("  Username: ").Append(Username).Append("\n");
             sb.Append("  TotalCount: ").Append(TotalCount).Append("\n");
             sb.Append("  TotalPrice: ").Append(TotalPrice).Append("\n");
+            sb.Append("  Notes: ").Append(Notes).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -157,6 +174,7 @@ namespace ClickSend.Model
             Option<string?> username = default;
             Option<int?> totalCount = default;
             Option<string?> totalPrice = default;
+            Option<string?> notes = default;
 
             while (utf8JsonReader.Read())
             {
@@ -185,6 +203,9 @@ namespace ClickSend.Model
                         case "total_price":
                             totalPrice = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "notes":
+                            notes = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         default:
                             break;
                     }
@@ -203,7 +224,7 @@ namespace ClickSend.Model
             if (totalPrice.IsSet && totalPrice.Value == null)
                 throw new ArgumentNullException(nameof(totalPrice), "Property is not nullable for class ViewAccountUsageDataEmailInner.");
 
-            return new ViewAccountUsageDataEmailInner(subaccountId, username, totalCount, totalPrice);
+            return new ViewAccountUsageDataEmailInner(subaccountId, username, totalCount, totalPrice, notes);
         }
 
         /// <summary>
@@ -247,6 +268,12 @@ namespace ClickSend.Model
 
             if (viewAccountUsageDataEmailInner.TotalPriceOption.IsSet)
                 writer.WriteString("total_price", viewAccountUsageDataEmailInner.TotalPrice);
+
+            if (viewAccountUsageDataEmailInner.NotesOption.IsSet)
+                if (viewAccountUsageDataEmailInner.NotesOption.Value != null)
+                    writer.WriteString("notes", viewAccountUsageDataEmailInner.Notes);
+                else
+                    writer.WriteNull("notes");
         }
     }
 }

@@ -38,10 +38,14 @@ namespace ClickSend.Model
         /// <param name="priceRate">The pricing tier used to determine the cost per message.</param>
         /// <param name="smsPrice">The price of the SMS.</param>
         /// <param name="smsQuantity">The quantity of the SMS.</param>
+        /// <param name="priceSmsCarrierFee">The carrier fee applied to SMS in this package.</param>
         /// <param name="voiceMobilePrice">The price of the voice mobile.</param>
         /// <param name="voiceMobileQuantity">The quantity of the voice mobile.</param>
         /// <param name="voiceLandlinePrice">The price of the voice landline.</param>
         /// <param name="voiceLandlineQuantity">The quantity of the voice landline.</param>
+        /// <param name="mmsPrice">The price of the MMS.</param>
+        /// <param name="mmsQuantity">The quantity of the MMS.</param>
+        /// <param name="priceMmsCarrierFee">The carrier fee applied to MMS in this package.</param>
         /// <param name="faxPrice">The price of the fax.</param>
         /// <param name="faxQuantity">The quantity of the fax.</param>
         /// <param name="emailPrice">The price of the email.</param>
@@ -59,17 +63,21 @@ namespace ClickSend.Model
         /// <param name="postcardQuantity">The quantity of the postcard.</param>
         /// <param name="automationPrice">The price of the automation.</param>
         [JsonConstructor]
-        public ViewRechargePackagesDataPackagesInner(Option<decimal?> packageId = default, Option<string?> packagePrice = default, Option<int?> priceRate = default, Option<decimal?> smsPrice = default, Option<decimal?> smsQuantity = default, Option<decimal?> voiceMobilePrice = default, Option<decimal?> voiceMobileQuantity = default, Option<decimal?> voiceLandlinePrice = default, Option<decimal?> voiceLandlineQuantity = default, Option<decimal?> faxPrice = default, Option<decimal?> faxQuantity = default, Option<decimal?> emailPrice = default, Option<decimal?> emailQuantity = default, Option<decimal?> postLetterBlackPrice = default, Option<decimal?> postLetterColourPrice = default, Option<decimal?> postPageBlackPrice = default, Option<decimal?> postPageColourPrice = default, Option<decimal?> postLetterBlackQuantity = default, Option<decimal?> postLetterColourQuantity = default, Option<decimal?> postDirectMailDlPrice = default, Option<decimal?> postDirectMailA5Price = default, Option<decimal?> postDirectMailMinQuantity = default, Option<decimal?> postcardPrice = default, Option<decimal?> postcardQuantity = default, Option<decimal?> automationPrice = default)
+        public ViewRechargePackagesDataPackagesInner(Option<decimal?> packageId = default, Option<string?> packagePrice = default, Option<int?> priceRate = default, Option<decimal?> smsPrice = default, Option<decimal?> smsQuantity = default, Option<string?> priceSmsCarrierFee = default, Option<decimal?> voiceMobilePrice = default, Option<decimal?> voiceMobileQuantity = default, Option<decimal?> voiceLandlinePrice = default, Option<decimal?> voiceLandlineQuantity = default, Option<decimal?> mmsPrice = default, Option<decimal?> mmsQuantity = default, Option<string?> priceMmsCarrierFee = default, Option<decimal?> faxPrice = default, Option<decimal?> faxQuantity = default, Option<decimal?> emailPrice = default, Option<decimal?> emailQuantity = default, Option<decimal?> postLetterBlackPrice = default, Option<decimal?> postLetterColourPrice = default, Option<decimal?> postPageBlackPrice = default, Option<decimal?> postPageColourPrice = default, Option<decimal?> postLetterBlackQuantity = default, Option<decimal?> postLetterColourQuantity = default, Option<decimal?> postDirectMailDlPrice = default, Option<decimal?> postDirectMailA5Price = default, Option<decimal?> postDirectMailMinQuantity = default, Option<decimal?> postcardPrice = default, Option<decimal?> postcardQuantity = default, Option<decimal?> automationPrice = default)
         {
             PackageIdOption = packageId;
             PackagePriceOption = packagePrice;
             PriceRateOption = priceRate;
             SmsPriceOption = smsPrice;
             SmsQuantityOption = smsQuantity;
+            PriceSmsCarrierFeeOption = priceSmsCarrierFee;
             VoiceMobilePriceOption = voiceMobilePrice;
             VoiceMobileQuantityOption = voiceMobileQuantity;
             VoiceLandlinePriceOption = voiceLandlinePrice;
             VoiceLandlineQuantityOption = voiceLandlineQuantity;
+            MmsPriceOption = mmsPrice;
+            MmsQuantityOption = mmsQuantity;
+            PriceMmsCarrierFeeOption = priceMmsCarrierFee;
             FaxPriceOption = faxPrice;
             FaxQuantityOption = faxQuantity;
             EmailPriceOption = emailPrice;
@@ -167,6 +175,21 @@ namespace ClickSend.Model
         public decimal? SmsQuantity { get { return this.SmsQuantityOption.Value; } set { this.SmsQuantityOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of PriceSmsCarrierFee
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PriceSmsCarrierFeeOption { get; private set; }
+
+        /// <summary>
+        /// The carrier fee applied to SMS in this package.
+        /// </summary>
+        /// <value>The carrier fee applied to SMS in this package.</value>
+        /* <example>0.0000</example> */
+        [JsonPropertyName("price_sms_carrier_fee")]
+        public string? PriceSmsCarrierFee { get { return this.PriceSmsCarrierFeeOption.Value; } set { this.PriceSmsCarrierFeeOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of VoiceMobilePrice
         /// </summary>
         [JsonIgnore]
@@ -225,6 +248,50 @@ namespace ClickSend.Model
         /* <example>343</example> */
         [JsonPropertyName("voice_landline_quantity")]
         public decimal? VoiceLandlineQuantity { get { return this.VoiceLandlineQuantityOption.Value; } set { this.VoiceLandlineQuantityOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of MmsPrice
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> MmsPriceOption { get; private set; }
+
+        /// <summary>
+        /// The price of the MMS.
+        /// </summary>
+        /// <value>The price of the MMS.</value>
+        /* <example>0.275</example> */
+        [JsonPropertyName("mms_price")]
+        public decimal? MmsPrice { get { return this.MmsPriceOption.Value; } set { this.MmsPriceOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of MmsQuantity
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> MmsQuantityOption { get; private set; }
+
+        /// <summary>
+        /// The quantity of the MMS.
+        /// </summary>
+        /// <value>The quantity of the MMS.</value>
+        /* <example>72</example> */
+        [JsonPropertyName("mms_quantity")]
+        public decimal? MmsQuantity { get { return this.MmsQuantityOption.Value; } set { this.MmsQuantityOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PriceMmsCarrierFee
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PriceMmsCarrierFeeOption { get; private set; }
+
+        /// <summary>
+        /// The carrier fee applied to MMS in this package.
+        /// </summary>
+        /// <value>The carrier fee applied to MMS in this package.</value>
+        [JsonPropertyName("price_mms_carrier_fee")]
+        public string? PriceMmsCarrierFee { get { return this.PriceMmsCarrierFeeOption.Value; } set { this.PriceMmsCarrierFeeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of FaxPrice
@@ -479,10 +546,14 @@ namespace ClickSend.Model
             sb.Append("  PriceRate: ").Append(PriceRate).Append("\n");
             sb.Append("  SmsPrice: ").Append(SmsPrice).Append("\n");
             sb.Append("  SmsQuantity: ").Append(SmsQuantity).Append("\n");
+            sb.Append("  PriceSmsCarrierFee: ").Append(PriceSmsCarrierFee).Append("\n");
             sb.Append("  VoiceMobilePrice: ").Append(VoiceMobilePrice).Append("\n");
             sb.Append("  VoiceMobileQuantity: ").Append(VoiceMobileQuantity).Append("\n");
             sb.Append("  VoiceLandlinePrice: ").Append(VoiceLandlinePrice).Append("\n");
             sb.Append("  VoiceLandlineQuantity: ").Append(VoiceLandlineQuantity).Append("\n");
+            sb.Append("  MmsPrice: ").Append(MmsPrice).Append("\n");
+            sb.Append("  MmsQuantity: ").Append(MmsQuantity).Append("\n");
+            sb.Append("  PriceMmsCarrierFee: ").Append(PriceMmsCarrierFee).Append("\n");
             sb.Append("  FaxPrice: ").Append(FaxPrice).Append("\n");
             sb.Append("  FaxQuantity: ").Append(FaxQuantity).Append("\n");
             sb.Append("  EmailPrice: ").Append(EmailPrice).Append("\n");
@@ -541,10 +612,14 @@ namespace ClickSend.Model
             Option<int?> priceRate = default;
             Option<decimal?> smsPrice = default;
             Option<decimal?> smsQuantity = default;
+            Option<string?> priceSmsCarrierFee = default;
             Option<decimal?> voiceMobilePrice = default;
             Option<decimal?> voiceMobileQuantity = default;
             Option<decimal?> voiceLandlinePrice = default;
             Option<decimal?> voiceLandlineQuantity = default;
+            Option<decimal?> mmsPrice = default;
+            Option<decimal?> mmsQuantity = default;
+            Option<string?> priceMmsCarrierFee = default;
             Option<decimal?> faxPrice = default;
             Option<decimal?> faxQuantity = default;
             Option<decimal?> emailPrice = default;
@@ -592,6 +667,9 @@ namespace ClickSend.Model
                         case "sms_quantity":
                             smsQuantity = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
                             break;
+                        case "price_sms_carrier_fee":
+                            priceSmsCarrierFee = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "voice_mobile_price":
                             voiceMobilePrice = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
                             break;
@@ -603,6 +681,15 @@ namespace ClickSend.Model
                             break;
                         case "voice_landline_quantity":
                             voiceLandlineQuantity = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
+                            break;
+                        case "mms_price":
+                            mmsPrice = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
+                            break;
+                        case "mms_quantity":
+                            mmsQuantity = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
+                            break;
+                        case "price_mms_carrier_fee":
+                            priceMmsCarrierFee = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "fax_price":
                             faxPrice = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
@@ -685,6 +772,12 @@ namespace ClickSend.Model
             if (voiceLandlineQuantity.IsSet && voiceLandlineQuantity.Value == null)
                 throw new ArgumentNullException(nameof(voiceLandlineQuantity), "Property is not nullable for class ViewRechargePackagesDataPackagesInner.");
 
+            if (mmsPrice.IsSet && mmsPrice.Value == null)
+                throw new ArgumentNullException(nameof(mmsPrice), "Property is not nullable for class ViewRechargePackagesDataPackagesInner.");
+
+            if (mmsQuantity.IsSet && mmsQuantity.Value == null)
+                throw new ArgumentNullException(nameof(mmsQuantity), "Property is not nullable for class ViewRechargePackagesDataPackagesInner.");
+
             if (faxPrice.IsSet && faxPrice.Value == null)
                 throw new ArgumentNullException(nameof(faxPrice), "Property is not nullable for class ViewRechargePackagesDataPackagesInner.");
 
@@ -733,7 +826,7 @@ namespace ClickSend.Model
             if (automationPrice.IsSet && automationPrice.Value == null)
                 throw new ArgumentNullException(nameof(automationPrice), "Property is not nullable for class ViewRechargePackagesDataPackagesInner.");
 
-            return new ViewRechargePackagesDataPackagesInner(packageId, packagePrice, priceRate, smsPrice, smsQuantity, voiceMobilePrice, voiceMobileQuantity, voiceLandlinePrice, voiceLandlineQuantity, faxPrice, faxQuantity, emailPrice, emailQuantity, postLetterBlackPrice, postLetterColourPrice, postPageBlackPrice, postPageColourPrice, postLetterBlackQuantity, postLetterColourQuantity, postDirectMailDlPrice, postDirectMailA5Price, postDirectMailMinQuantity, postcardPrice, postcardQuantity, automationPrice);
+            return new ViewRechargePackagesDataPackagesInner(packageId, packagePrice, priceRate, smsPrice, smsQuantity, priceSmsCarrierFee, voiceMobilePrice, voiceMobileQuantity, voiceLandlinePrice, voiceLandlineQuantity, mmsPrice, mmsQuantity, priceMmsCarrierFee, faxPrice, faxQuantity, emailPrice, emailQuantity, postLetterBlackPrice, postLetterColourPrice, postPageBlackPrice, postPageColourPrice, postLetterBlackQuantity, postLetterColourQuantity, postDirectMailDlPrice, postDirectMailA5Price, postDirectMailMinQuantity, postcardPrice, postcardQuantity, automationPrice);
         }
 
         /// <summary>
@@ -778,6 +871,12 @@ namespace ClickSend.Model
             if (viewRechargePackagesDataPackagesInner.SmsQuantityOption.IsSet)
                 writer.WriteNumber("sms_quantity", viewRechargePackagesDataPackagesInner.SmsQuantityOption.Value!.Value);
 
+            if (viewRechargePackagesDataPackagesInner.PriceSmsCarrierFeeOption.IsSet)
+                if (viewRechargePackagesDataPackagesInner.PriceSmsCarrierFeeOption.Value != null)
+                    writer.WriteString("price_sms_carrier_fee", viewRechargePackagesDataPackagesInner.PriceSmsCarrierFee);
+                else
+                    writer.WriteNull("price_sms_carrier_fee");
+
             if (viewRechargePackagesDataPackagesInner.VoiceMobilePriceOption.IsSet)
                 writer.WriteNumber("voice_mobile_price", viewRechargePackagesDataPackagesInner.VoiceMobilePriceOption.Value!.Value);
 
@@ -789,6 +888,18 @@ namespace ClickSend.Model
 
             if (viewRechargePackagesDataPackagesInner.VoiceLandlineQuantityOption.IsSet)
                 writer.WriteNumber("voice_landline_quantity", viewRechargePackagesDataPackagesInner.VoiceLandlineQuantityOption.Value!.Value);
+
+            if (viewRechargePackagesDataPackagesInner.MmsPriceOption.IsSet)
+                writer.WriteNumber("mms_price", viewRechargePackagesDataPackagesInner.MmsPriceOption.Value!.Value);
+
+            if (viewRechargePackagesDataPackagesInner.MmsQuantityOption.IsSet)
+                writer.WriteNumber("mms_quantity", viewRechargePackagesDataPackagesInner.MmsQuantityOption.Value!.Value);
+
+            if (viewRechargePackagesDataPackagesInner.PriceMmsCarrierFeeOption.IsSet)
+                if (viewRechargePackagesDataPackagesInner.PriceMmsCarrierFeeOption.Value != null)
+                    writer.WriteString("price_mms_carrier_fee", viewRechargePackagesDataPackagesInner.PriceMmsCarrierFee);
+                else
+                    writer.WriteNull("price_mms_carrier_fee");
 
             if (viewRechargePackagesDataPackagesInner.FaxPriceOption.IsSet)
                 writer.WriteNumber("fax_price", viewRechargePackagesDataPackagesInner.FaxPriceOption.Value!.Value);

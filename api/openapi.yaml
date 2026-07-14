@@ -43048,6 +43048,8 @@ components:
         currency_prefix_d: $
         currency_prefix_c: c
         currency_name_long: Australian Dollars
+        min_recharge_amount: "20.00"
+        max_recharge_amount: "10000.00"
       properties:
         currency_name_short:
           description: "The currency used for the sender in three-letter format (e.g.\
@@ -43066,6 +43068,16 @@ components:
         currency_name_long:
           description: The full name of the currency.
           example: Australian Dollars
+          type: string
+        min_recharge_amount:
+          description: "The minimum amount that can be used to recharge the account,\
+            \ in this currency."
+          example: "20.00"
+          type: string
+        max_recharge_amount:
+          description: "The maximum amount that can be used to recharge the account,\
+            \ in this currency."
+          example: "10000.00"
           type: string
       type: object
     send-sms:
@@ -43102,6 +43114,8 @@ components:
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
           blocked_count: 0
       properties:
         http_code:
@@ -43126,10 +43140,12 @@ components:
     sms:
       properties:
         date:
-          description: The date you sent the message. It is in <a href="http://help.clicksend.com/what-is-a-unix-timestamp"
-            target="_blank">Unix format</a>.
-          example: 1436871253
-          type: integer
+          description: |-
+            The date you sent the message. It is in <a href="http://help.clicksend.com/what-is-a-unix-timestamp" target="_blank">Unix format</a>.
+            Returned as a string since it may be an empty string in price-calculation responses where
+            no message has actually been sent yet.
+          example: "1436871253"
+          type: string
         to:
           description: The phone number of the recipient. It should be in <a href="https://en.wikipedia.org/wiki/E.164"
             target="_blank">E.164 format</a>.
@@ -44327,6 +44343,8 @@ components:
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -44683,12 +44701,31 @@ components:
         response_code: SUCCESS
         response_msg: Here are some data.
         data:
-        - email_address_id: 84
-          email_address: my@email.com
-          from: "+13523944199"
-        - email_address_id: 85
-          email_address: my@email.com
-          from: "+13523944199"
+          total: 2
+          per_page: 15
+          current_page: 1
+          last_page: 1
+          next_page_url: next_page_url
+          prev_page_url: prev_page_url
+          from: 1
+          to: 2
+          data:
+          - email_address_id: 84
+            email_address: my@email.com
+            from: "+13523944199"
+            subaccount_id: 345789
+            from_fax: ""
+            voice: male
+            lang: en-us
+            _subaccount_name: my@email.com
+          - email_address_id: 85
+            email_address: my@email.com
+            from: "+13523944199"
+            subaccount_id: 345789
+            from_fax: ""
+            voice: male
+            lang: en-us
+            _subaccount_name: my@email.com
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -44703,16 +44740,7 @@ components:
           example: Here are some data.
           type: string
         data:
-          example:
-          - email_address_id: 84
-            email_address: my@email.com
-            from: "+13523944199"
-          - email_address_id: 85
-            email_address: my@email.com
-            from: "+13523944199"
-          items:
-            $ref: "#/components/schemas/view_allowed_emails_data_inner"
-          type: array
+          $ref: "#/components/schemas/view_allowed_emails_data"
       type: object
     add-allowed-email:
       example:
@@ -44720,9 +44748,9 @@ components:
         response_code: SUCCESS
         response_msg: New data has been saved.
         data:
-          email_address_id: 1
-          email_address: my@email.com
-          from: "+13523944199"
+          email_address_id: 107
+          email_address: Cv3p0@gmail.com
+          from: "+17128845887"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -44737,7 +44765,7 @@ components:
           example: New data has been saved.
           type: string
         data:
-          $ref: "#/components/schemas/view_allowed_emails_data_inner"
+          $ref: "#/components/schemas/add_allowed_email_data"
       type: object
     view-stripped-string-rules:
       example:
@@ -44751,6 +44779,8 @@ components:
           last_page: 1
           next_page_url: next_page_url
           prev_page_url: prev_page_url
+          from: 1
+          to: 2
           data:
           - rule_id: 18
             strip_string: This is a test1.
@@ -44794,7 +44824,7 @@ components:
           example: Strip string has been created.
           type: string
         data:
-          $ref: "#/components/schemas/view_stripped_string_rules_data_data_inner"
+          $ref: "#/components/schemas/view_stripped_string_rules_data_allOf_data_inner"
       type: object
     view-stripped-string-rule:
       example:
@@ -45069,9 +45099,13 @@ components:
             date: "1436932432"
             to: "+16783270696"
             body: Chocolate bar icing icing oat cake carrot cake jelly cotton 1iQByXxdLN.
+            subject: This is a subject
+            priority: 2
+            _media_file_url: https://clicksend-api-downloads.s3.ap-southeast-2.amazonaws.com/_private/example.jpg
             status: Completed
             from: sendlist
             schedule: "1436879372"
+            date_added: 1436879372
             status_code: status_code
             status_text: status_text
             error_code: error_code
@@ -45094,9 +45128,13 @@ components:
             date: "1436932432"
             to: "+16783270696"
             body: Chocolate bar icing icing oat cake carrot cake jelly cotton 1iQByXxdLN.
+            subject: This is a subject
+            priority: 2
+            _media_file_url: https://clicksend-api-downloads.s3.ap-southeast-2.amazonaws.com/_private/example.jpg
             status: Completed
             from: sendlist
             schedule: "1436879372"
+            date_added: 1436879372
             status_code: status_code
             status_text: status_text
             error_code: error_code
@@ -45292,6 +45330,8 @@ components:
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -45423,82 +45463,70 @@ components:
           $ref: "#/components/schemas/mms_campaign"
       type: object
     view-all-mms-campaigns:
-      example:
-        http_code: 200
-        response_code: SUCCESS
-        response_msg: Countries have been selected.
-        data:
-          total: 2
-          per_page: 15
-          current_page: 1
-          last_page: 1
-          next_page_url: next_page_url
-          prev_page_url: prev_page_url
-          from: 1
-          to: 2
+      allOf:
+      - $ref: "#/components/schemas/pagination"
+      - properties:
           data:
-          - mms_campaign_id: 96
-            name: Koala Campaign
-            user_id: 20807
-            subaccount_id: 15
-            list_id: 85262
-            from: "0451919865"
-            subject: New MMS campaign test
-            file_name: 8EA5FA8C-3216-4A5D-86EA-6BE78050E439.jpg
-            body: "Hey (First Name), I want to ask if this is your lastname: (Last\
-              \ Name)? Also, do you like koalas? Visit http://smsu.io/xxxxx for more\
-              \ details."
-            schedule: 1531800743
-            status: Queued
-            date_added: 1531800745
-            _total_count: 1
-            _list_name: test
-            _media_file_url: http://rest.clicksend.clicksend/files/8EA5FA8C-3216-4A5D-86EA-6BE78050E439.jpg
-          - mms_campaign_id: 96
-            name: Koala Campaign
-            user_id: 20807
-            subaccount_id: 15
-            list_id: 85262
-            from: "0451919865"
-            subject: New MMS campaign test
-            file_name: 8EA5FA8C-3216-4A5D-86EA-6BE78050E439.jpg
-            body: "Hey (First Name), I want to ask if this is your lastname: (Last\
-              \ Name)? Also, do you like koalas? Visit http://smsu.io/xxxxx for more\
-              \ details."
-            schedule: 1531800743
-            status: Queued
-            date_added: 1531800745
-            _total_count: 1
-            _list_name: test
-            _media_file_url: http://rest.clicksend.clicksend/files/8EA5FA8C-3216-4A5D-86EA-6BE78050E439.jpg
-      properties:
-        http_code:
-          description: The HTTP status code of the response.
-          example: 200
-          type: integer
-        response_code:
-          description: The response code indicating the status of the operation.
-          example: SUCCESS
-          type: string
-        response_msg:
-          description: A message describing the outcome of the operation.
-          example: Countries have been selected.
-          type: string
+            items:
+              $ref: "#/components/schemas/mms_campaign"
+            type: array
+        type: object
+      example:
+        total: 2
+        per_page: 15
+        current_page: 1
+        last_page: 1
+        next_page_url: next_page_url
+        prev_page_url: prev_page_url
+        from: 1
+        to: 2
         data:
-          $ref: "#/components/schemas/view_all_mms_campaigns_data"
-      type: object
+        - mms_campaign_id: 96
+          name: Koala Campaign
+          user_id: 20807
+          subaccount_id: 15
+          list_id: 85262
+          from: "0451919865"
+          subject: New MMS campaign test
+          file_name: 8EA5FA8C-3216-4A5D-86EA-6BE78050E439.jpg
+          body: "Hey (First Name), I want to ask if this is your lastname: (Last Name)?\
+            \ Also, do you like koalas? Visit http://smsu.io/xxxxx for more details."
+          schedule: 1531800743
+          status: Queued
+          date_added: 1531800745
+          _total_count: 1
+          _list_name: test
+          _media_file_url: http://rest.clicksend.clicksend/files/8EA5FA8C-3216-4A5D-86EA-6BE78050E439.jpg
+        - mms_campaign_id: 96
+          name: Koala Campaign
+          user_id: 20807
+          subaccount_id: 15
+          list_id: 85262
+          from: "0451919865"
+          subject: New MMS campaign test
+          file_name: 8EA5FA8C-3216-4A5D-86EA-6BE78050E439.jpg
+          body: "Hey (First Name), I want to ask if this is your lastname: (Last Name)?\
+            \ Also, do you like koalas? Visit http://smsu.io/xxxxx for more details."
+          schedule: 1531800743
+          status: Queued
+          date_added: 1531800745
+          _total_count: 1
+          _list_name: test
+          _media_file_url: http://rest.clicksend.clicksend/files/8EA5FA8C-3216-4A5D-86EA-6BE78050E439.jpg
     voice_message:
       example:
-        date: 1436871253
+        date: "1436871253"
+        date_added: 1436871253
+        list_id: list_id
         to: "+61411111111"
         to_type: mobile
         body: Jelly liquorice marshmallow candy carrot cake 4Eyffjs1vL.
         from: from
         lang: en-au
         voice: female
-        schedule: 1436874701
+        schedule: "1436874701"
         message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-        message_parts: 1
+        message_parts: "1.00"
         message_price: "0.07"
         custom_string: this is a test
         user_id: 1
@@ -45506,12 +45534,28 @@ components:
         country: AU
         require_input: 0
         machine_detection: 0
+        machine_detected: 0
+        digits: digits
+        carrier: Telstra
+        status_code: "201"
+        status_text: Delivered
         status: SUCCESS
+        _api_username: johndoe1
       properties:
         date:
-          description: The date.
+          description: "The date, if applicable. May be null; see also `date_added`."
+          example: "1436871253"
+          nullable: true
+          type: string
+        date_added:
+          description: The Unix timestamp when the message was added.
           example: 1436871253
-          type: number
+          type: integer
+        list_id:
+          description: "The ID of the list associated with the message, if applicable."
+          nullable: true
+          type: string
+          example: null
         to:
           description: The recipient's phone number.
           example: "+61411111111"
@@ -45538,17 +45582,19 @@ components:
           example: female
           type: string
         schedule:
-          description: The timestamp when the message should be sent.
-          example: 1436874701
-          type: integer
+          description: |-
+            The timestamp when the message should be sent. Returned as a string since it may be
+            an empty string when no schedule was set.
+          example: "1436874701"
+          type: string
         message_id:
           description: The ID of the message.
           example: BF7AD270-0DE2-418B-B606-71D527D9C1AE
           type: string
         message_parts:
           description: The number of parts in the message.
-          example: 1
-          type: integer
+          example: "1.00"
+          type: string
         message_price:
           description: The price of the message.
           example: "0.07"
@@ -45577,9 +45623,38 @@ components:
           description: The machine detection of the message.
           example: 0
           type: number
+        machine_detected:
+          description: Flag indicating if an answering machine was detected.
+          example: 0
+          nullable: true
+          type: number
+        digits:
+          description: "The digits entered by the recipient, if any input was collected."
+          nullable: true
+          type: string
+          example: null
+        carrier:
+          description: The carrier of the recipient's phone number.
+          example: Telstra
+          nullable: true
+          type: string
+        status_code:
+          description: The status code of the message.
+          example: "201"
+          nullable: true
+          type: string
+        status_text:
+          description: A human-readable description of the status.
+          example: Delivered
+          nullable: true
+          type: string
         status:
           description: The status of the message.
           example: SUCCESS
+          type: string
+        _api_username:
+          description: The API username associated with the message.
+          example: johndoe1
           type: string
       type: object
     send-voice-message:
@@ -45592,16 +45667,18 @@ components:
           total_count: 1
           queued_count: 1
           messages:
-          - date: 1436871253
+          - date: "1436871253"
+            date_added: 1436871253
+            list_id: list_id
             to: "+61411111111"
             to_type: mobile
             body: Jelly liquorice marshmallow candy carrot cake 4Eyffjs1vL.
             from: from
             lang: en-au
             voice: female
-            schedule: 1436874701
+            schedule: "1436874701"
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: 1
+            message_parts: "1.00"
             message_price: "0.07"
             custom_string: this is a test
             user_id: 1
@@ -45609,17 +45686,25 @@ components:
             country: AU
             require_input: 0
             machine_detection: 0
+            machine_detected: 0
+            digits: digits
+            carrier: Telstra
+            status_code: "201"
+            status_text: Delivered
             status: SUCCESS
-          - date: 1436871253
+            _api_username: johndoe1
+          - date: "1436871253"
+            date_added: 1436871253
+            list_id: list_id
             to: "+61411111111"
             to_type: mobile
             body: Jelly liquorice marshmallow candy carrot cake 4Eyffjs1vL.
             from: from
             lang: en-au
             voice: female
-            schedule: 1436874701
+            schedule: "1436874701"
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: 1
+            message_parts: "1.00"
             message_price: "0.07"
             custom_string: this is a test
             user_id: 1
@@ -45627,12 +45712,20 @@ components:
             country: AU
             require_input: 0
             machine_detection: 0
+            machine_detected: 0
+            digits: digits
+            carrier: Telstra
+            status_code: "201"
+            status_text: Delivered
             status: SUCCESS
+            _api_username: johndoe1
           _currency:
             currency_name_short: AUD
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -45658,16 +45751,18 @@ components:
           total_count: 1
           queued_count: 1
           messages:
-          - date: 1436871253
+          - date: "1436871253"
+            date_added: 1436871253
+            list_id: list_id
             to: "+61411111111"
             to_type: mobile
             body: Jelly liquorice marshmallow candy carrot cake 4Eyffjs1vL.
             from: from
             lang: en-au
             voice: female
-            schedule: 1436874701
+            schedule: "1436874701"
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: 1
+            message_parts: "1.00"
             message_price: "0.07"
             custom_string: this is a test
             user_id: 1
@@ -45675,17 +45770,25 @@ components:
             country: AU
             require_input: 0
             machine_detection: 0
+            machine_detected: 0
+            digits: digits
+            carrier: Telstra
+            status_code: "201"
+            status_text: Delivered
             status: SUCCESS
-          - date: 1436871253
+            _api_username: johndoe1
+          - date: "1436871253"
+            date_added: 1436871253
+            list_id: list_id
             to: "+61411111111"
             to_type: mobile
             body: Jelly liquorice marshmallow candy carrot cake 4Eyffjs1vL.
             from: from
             lang: en-au
             voice: female
-            schedule: 1436874701
+            schedule: "1436874701"
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: 1
+            message_parts: "1.00"
             message_price: "0.07"
             custom_string: this is a test
             user_id: 1
@@ -45693,12 +45796,20 @@ components:
             country: AU
             require_input: 0
             machine_detection: 0
+            machine_detected: 0
+            digits: digits
+            carrier: Telstra
+            status_code: "201"
+            status_text: Delivered
             status: SUCCESS
+            _api_username: johndoe1
           _currency:
             currency_name_short: AUD
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -45725,7 +45836,9 @@ components:
           gender: male
         - code: en-au
           country: "English, Australia"
-          gender: female
+          gender:
+          - female
+          - male
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -45746,7 +45859,9 @@ components:
             gender: male
           - code: en-au
             country: "English, Australia"
-            gender: female
+            gender:
+            - female
+            - male
           items:
             $ref: "#/components/schemas/view_voice_languages_data_inner"
           type: array
@@ -45914,16 +46029,18 @@ components:
           from: 1
           to: 2
           data:
-          - date: 1436871253
+          - date: "1436871253"
+            date_added: 1436871253
+            list_id: list_id
             to: "+61411111111"
             to_type: mobile
             body: Jelly liquorice marshmallow candy carrot cake 4Eyffjs1vL.
             from: from
             lang: en-au
             voice: female
-            schedule: 1436874701
+            schedule: "1436874701"
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: 1
+            message_parts: "1.00"
             message_price: "0.07"
             custom_string: this is a test
             user_id: 1
@@ -45931,17 +46048,25 @@ components:
             country: AU
             require_input: 0
             machine_detection: 0
+            machine_detected: 0
+            digits: digits
+            carrier: Telstra
+            status_code: "201"
+            status_text: Delivered
             status: SUCCESS
-          - date: 1436871253
+            _api_username: johndoe1
+          - date: "1436871253"
+            date_added: 1436871253
+            list_id: list_id
             to: "+61411111111"
             to_type: mobile
             body: Jelly liquorice marshmallow candy carrot cake 4Eyffjs1vL.
             from: from
             lang: en-au
             voice: female
-            schedule: 1436874701
+            schedule: "1436874701"
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: 1
+            message_parts: "1.00"
             message_price: "0.07"
             custom_string: this is a test
             user_id: 1
@@ -45949,7 +46074,13 @@ components:
             country: AU
             require_input: 0
             machine_detection: 0
+            machine_detected: 0
+            digits: digits
+            carrier: Telstra
+            status_code: "201"
+            status_text: Delivered
             status: SUCCESS
+            _api_username: johndoe1
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -46137,6 +46268,8 @@ components:
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -46204,6 +46337,8 @@ components:
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -46489,6 +46624,8 @@ components:
           currency_prefix_d: $
           currency_prefix_c: c
           currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
       properties:
         user_id:
           description: The ID of the user.
@@ -46631,6 +46768,8 @@ components:
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -47071,6 +47210,8 @@ components:
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -47108,6 +47249,8 @@ components:
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -47921,6 +48064,8 @@ components:
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -47973,6 +48118,8 @@ components:
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -48032,7 +48179,7 @@ components:
           description: Flag indicating if the delivery issue is resolved.
           example: 0
           type: number
-        email-address:
+        email_address:
           description: The user's email address.
           example: johndoe1@awesome.com
           type: string
@@ -48043,54 +48190,15 @@ components:
         response_code: SUCCESS
         response_msg: Here is your result.
         data:
-        - issue_id: 1
-          user_id: 3820
-          message_id: B388828B-AD46-4366-8AD3-0305FF5E3FE5
-          type: sms
-          description: this is a test.
-          client_comments: null
-          support_comments: null
-          status: null
-          date_added: 1481610495
-          resolved: 0
-          email_address: test@user.com
-        - issue_id: 2
-          user_id: 3820
-          message_id: 90396A38-146B-46C4-A455-675F620C2E05
-          type: sms
-          description: this is a test.
-          client_comments: null
-          support_comments: null
-          status: null
-          date_added: 1481610495
-          resolved: 0
-          email_address: test@user.com
-        - issue_id: 3
-          user_id: 3820
-          message_id: 4ECFB6CB-0300-45EC-96E1-5AB189432AF5
-          type: sms
-          description: this is a test.
-          client_comments: null
-          support_comments: null
-          status: null
-          date_added: 1481611389
-          resolved: 0
-          email_address: test@user.com
-      properties:
-        http_code:
-          description: The HTTP status code of the response.
-          example: 200
-          type: integer
-        response_code:
-          description: The response code indicating the status of the operation.
-          example: SUCCESS
-          type: string
-        response_msg:
-          description: A message describing the outcome of the operation.
-          example: Here is your result.
-          type: string
-        data:
-          example:
+          total: 2
+          per_page: 15
+          current_page: 1
+          last_page: 1
+          next_page_url: next_page_url
+          prev_page_url: prev_page_url
+          from: 1
+          to: 2
+          data:
           - issue_id: 1
             user_id: 3820
             message_id: B388828B-AD46-4366-8AD3-0305FF5E3FE5
@@ -48124,9 +48232,21 @@ components:
             date_added: 1481611389
             resolved: 0
             email_address: test@user.com
-          items:
-            $ref: "#/components/schemas/delivery_issue"
-          type: array
+      properties:
+        http_code:
+          description: The HTTP status code of the response.
+          example: 200
+          type: integer
+        response_code:
+          description: The response code indicating the status of the operation.
+          example: SUCCESS
+          type: string
+        response_msg:
+          description: A message describing the outcome of the operation.
+          example: Here is your result.
+          type: string
+        data:
+          $ref: "#/components/schemas/get_all_delivery_issues_data"
       type: object
     create-delivery-issue:
       example:
@@ -48203,6 +48323,13 @@ components:
               description: Your number is unregistered. You will not be able to send
                 messages to certain countries.
               name: Unregistered
+          _currency:
+            currency_name_short: AUD
+            currency_prefix_d: $
+            currency_prefix_c: c
+            currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -48311,11 +48438,13 @@ components:
             price_monthly: "20.7100"
             price_total: "20.7100"
             address_requirement: local
-        _currency:
-          currency_name_short: AUD
-          currency_prefix_d: $
-          currency_prefix_c: c
-          currency_name_long: Australian Dollars
+          _currency:
+            currency_name_short: AUD
+            currency_prefix_d: $
+            currency_prefix_c: c
+            currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -48331,8 +48460,6 @@ components:
           type: string
         data:
           $ref: "#/components/schemas/view_available_numbers_data"
-        _currency:
-          $ref: "#/components/schemas/currency"
       type: object
     register_numbers:
       example:
@@ -48405,6 +48532,7 @@ components:
         label: My phone number
         status: APPROVED
         verified_timestamp: 2023-08-31T12:00:00Z
+        notified_timestamp: notified_timestamp
         is_nearing_expiration: true
         created_timestamp: 2023-08-25T08:00:00Z
         updated_timestamp: 2023-08-25T08:30:00Z
@@ -48450,6 +48578,12 @@ components:
           example: 2023-08-31T12:00:00Z
           format: date-time
           type: string
+        notified_timestamp:
+          description: "The timestamp when the user was last notified about this number,\
+            \ if applicable."
+          nullable: true
+          type: string
+          example: null
         is_nearing_expiration:
           description: |-
             Indicates whether the phone number verification is nearing its expiration date:
@@ -48480,6 +48614,7 @@ components:
           label: My phone number
           status: APPROVED
           verified_timestamp: 2023-08-31T12:00:00Z
+          notified_timestamp: notified_timestamp
           is_nearing_expiration: true
           created_timestamp: 2023-08-25T08:00:00Z
           updated_timestamp: 2023-08-25T08:30:00Z
@@ -48492,6 +48627,7 @@ components:
           label: My phone number
           status: APPROVED
           verified_timestamp: 2023-08-31T12:00:00Z
+          notified_timestamp: notified_timestamp
           is_nearing_expiration: true
           created_timestamp: 2023-08-25T08:00:00Z
           updated_timestamp: 2023-08-25T08:30:00Z
@@ -48639,14 +48775,18 @@ components:
           nullable: true
           type: array
         created_timestamp:
-          description: The timestamp when the record was created.
+          description: |-
+            The timestamp when the record was created. Usually ISO 8601 (e.g. "2021-05-11T01:00:00.123Z"),
+            but returned as a plain string rather than a strict date-time since some older records
+            don't include a UTC offset (e.g. "2024-01-10T10:55:26.818097").
           example: 2021-05-11T01:00:00.123Z
-          format: date-time
           type: string
         updated_timestamp:
-          description: The timestamp when the record was last updated.
+          description: |-
+            The timestamp when the record was last updated. Usually ISO 8601 (e.g. "2021-05-11T01:05:00.123Z"),
+            but returned as a plain string rather than a strict date-time since some older records
+            don't include a UTC offset.
           example: 2021-05-11T01:05:00.123Z
-          format: date-time
           type: string
       type: object
     list-alpha-tags:
@@ -49038,6 +49178,7 @@ components:
         first_name: John
         last_name: Doe
         api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+        access_smpp: 0
         access_users: 1
         access_billing: 1
         access_reporting: 1
@@ -49049,9 +49190,13 @@ components:
         access_fax: 1
         access_post: 1
         access_reseller: 1
+        access_global_sending: 1
         access_mms: 1
+        hide_pricing: 0
         share_campaigns: 0
         notes: notes
+        is_main: 0
+        sign_up_type: sign_up_type
       properties:
         subaccount_id:
           description: The unique identifier for the subaccount.
@@ -49082,6 +49227,10 @@ components:
           description: The API key of the subaccount.
           example: F3702045-EB2C-0091-C211-7728048DCAE2
           type: string
+        access_smpp:
+          description: Flag indicating if the subaccount has access to SMPP.
+          example: 0
+          type: integer
         access_users:
           description: Flag indicating if the subaccount has access to users.
           example: 1
@@ -49126,9 +49275,17 @@ components:
           description: Flag indicating if the subaccount has access to reseller services.
           example: 1
           type: integer
+        access_global_sending:
+          description: Flag indicating if the subaccount has access to global sending.
+          example: 1
+          type: integer
         access_mms:
           description: Flag indicating if the subaccount has access to MMS services.
           example: 1
+          type: integer
+        hide_pricing:
+          description: Flag indicating if pricing is hidden for the subaccount.
+          example: 0
           type: integer
         share_campaigns:
           description: Flag indicating if the subaccount can share campaigns.
@@ -49136,6 +49293,15 @@ components:
           type: integer
         notes:
           description: Additional notes for the subaccount.
+          nullable: true
+          type: string
+          example: null
+        is_main:
+          description: Flag indicating if this is the main account rather than a subaccount.
+          example: 0
+          type: integer
+        sign_up_type:
+          description: "The sign-up type used to create the subaccount, if applicable."
           nullable: true
           type: string
           example: null
@@ -49147,6 +49313,7 @@ components:
         user_email: johndoe1@awesome.com
         active: 0
         banned: 0
+        date_sign_up: 1436871253
         balance: "4.998000"
         user_phone: "+15184811001"
         reply_to: originalemail
@@ -49157,7 +49324,9 @@ components:
         account_name: The Awesome Company
         account_billing_email: johndoe1@awesome.com
         account_billing_mobile: "+15184811001"
+        priority: 2
         country: US
+        country_ip: US
         default_country_sms: US
         auto_recharge: 0
         auto_recharge_amount: "20.00"
@@ -49170,11 +49339,20 @@ components:
         balance_commission: "0.299954"
         timezone: Australia/Melbourne
         price_rate: 0
+        private_uploads: 0
+        fax_quality: 0
+        setting_sms_hide_your_number: 0
+        setting_sms_hide_business_name: 0
+        pricing_variant: 0
+        on_trial: 0
+        trial_expiry: trial_expiry
         _currency:
           currency_name_short: AUD
           currency_prefix_d: $
           currency_prefix_c: c
           currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
         _subaccount:
           subaccount_id: 126
           api_username: johndoe1
@@ -49183,6 +49361,7 @@ components:
           first_name: John
           last_name: Doe
           api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+          access_smpp: 0
           access_users: 1
           access_billing: 1
           access_reporting: 1
@@ -49194,9 +49373,16 @@ components:
           access_fax: 1
           access_post: 1
           access_reseller: 1
+          access_global_sending: 1
           access_mms: 1
+          hide_pricing: 0
           share_campaigns: 0
           notes: notes
+          is_main: 0
+          sign_up_type: sign_up_type
+        _referrer_chosen:
+          id: 8
+          name: Other
       properties:
         user_id:
           description: The unique identifier for the user.
@@ -49218,6 +49404,10 @@ components:
         banned:
           description: Flag indicating if the user account is banned.
           example: 0
+          type: integer
+        date_sign_up:
+          description: The Unix timestamp of when the account was created.
+          example: 1436871253
           type: integer
         balance:
           description: The balance of the user's account.
@@ -49261,8 +49451,17 @@ components:
           description: The billing mobile number of the account.
           example: "+15184811001"
           type: string
+        priority:
+          description: The account's priority tier.
+          example: 2
+          type: integer
         country:
           description: The country of the user.
+          example: US
+          type: string
+        country_ip:
+          description: "The country the user is currently connecting from, based on\
+            \ IP address."
           example: US
           type: string
         default_country_sms:
@@ -49313,10 +49512,42 @@ components:
           description: The pricing tier used to determine the cost per message.
           example: 0
           type: integer
+        private_uploads:
+          description: Flag indicating if uploaded media is kept private.
+          example: 0
+          type: integer
+        fax_quality:
+          description: The quality setting used for outgoing faxes.
+          example: 0
+          type: integer
+        setting_sms_hide_your_number:
+          description: Flag indicating if your number is hidden on outgoing SMS.
+          example: 0
+          type: integer
+        setting_sms_hide_business_name:
+          description: Flag indicating if the business name is hidden on outgoing
+            SMS.
+          example: 0
+          type: integer
+        pricing_variant:
+          description: The pricing variant applied to the account.
+          example: 0
+          type: integer
+        on_trial:
+          description: Flag indicating if the account is currently on a trial.
+          example: 0
+          type: integer
+        trial_expiry:
+          description: "The date the trial expires, if the account is on a trial."
+          nullable: true
+          type: string
+          example: null
         _currency:
           $ref: "#/components/schemas/currency"
         _subaccount:
           $ref: "#/components/schemas/subaccount"
+        _referrer_chosen:
+          $ref: "#/components/schemas/account__referrer_chosen"
       type: object
     view-account-details:
       example:
@@ -49329,6 +49560,7 @@ components:
           user_email: johndoe1@awesome.com
           active: 0
           banned: 0
+          date_sign_up: 1436871253
           balance: "4.998000"
           user_phone: "+15184811001"
           reply_to: originalemail
@@ -49339,7 +49571,9 @@ components:
           account_name: The Awesome Company
           account_billing_email: johndoe1@awesome.com
           account_billing_mobile: "+15184811001"
+          priority: 2
           country: US
+          country_ip: US
           default_country_sms: US
           auto_recharge: 0
           auto_recharge_amount: "20.00"
@@ -49352,11 +49586,20 @@ components:
           balance_commission: "0.299954"
           timezone: Australia/Melbourne
           price_rate: 0
+          private_uploads: 0
+          fax_quality: 0
+          setting_sms_hide_your_number: 0
+          setting_sms_hide_business_name: 0
+          pricing_variant: 0
+          on_trial: 0
+          trial_expiry: trial_expiry
           _currency:
             currency_name_short: AUD
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
           _subaccount:
             subaccount_id: 126
             api_username: johndoe1
@@ -49365,6 +49608,7 @@ components:
             first_name: John
             last_name: Doe
             api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+            access_smpp: 0
             access_users: 1
             access_billing: 1
             access_reporting: 1
@@ -49376,9 +49620,16 @@ components:
             access_fax: 1
             access_post: 1
             access_reseller: 1
+            access_global_sending: 1
             access_mms: 1
+            hide_pricing: 0
             share_campaigns: 0
             notes: notes
+            is_main: 0
+            sign_up_type: sign_up_type
+          _referrer_chosen:
+            id: 8
+            name: Other
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -49410,6 +49661,7 @@ components:
             username: user5
             total_count: "4.00"
             total_price: "0.3080"
+          mms: []
           voice:
           - subaccount_id: 1039
             username: user1
@@ -49446,6 +49698,8 @@ components:
             username: user5
             total_count: 998
             total_price: "0.0000"
+          email_transactional: []
+          postcards: []
           sms_total:
             count: 33
             price: "2.4417"
@@ -49461,6 +49715,22 @@ components:
           email_total:
             count: 4990
             price: "9.0020"
+          mms_total:
+            count: 1
+            price: 0
+          email_transactional_total:
+            count: 1
+            price: 0
+          postcards_total:
+            count: 1
+            price: 0
+          _currency:
+            currency_name_short: AUD
+            currency_prefix_d: $
+            currency_prefix_c: c
+            currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -49536,16 +49806,18 @@ components:
         code: AU
         region: Oceania
         agreed_at: agreed_at
-        registration_entity: registration_entity
+        registration_entity:
+          id: 8
+          name: Other
         registration_status:
           id: 1
           name: NOT_INITIATED
         jotform_id: "12345"
         sms_registration_type: 0
-        block_registration: 0
-        block_leads: 0
+        block_registration: false
+        block_leads: false
         trial_from_address: ""
-        restricted_sending: 0
+        restricted_sending: false
         trial_sending: 0
         trial_sending_description: ""
         has_regulation_requirements: 0
@@ -49577,10 +49849,7 @@ components:
           type: string
           example: null
         registration_entity:
-          description: The entity responsible for the registration.
-          nullable: true
-          type: string
-          example: null
+          $ref: "#/components/schemas/account__referrer_chosen"
         registration_status:
           $ref: "#/components/schemas/global_sending_registration_status"
         jotform_id:
@@ -49593,20 +49862,20 @@ components:
           type: integer
         block_registration:
           description: Indicates if registration is blocked.
-          example: 0
-          type: integer
+          example: false
+          type: boolean
         block_leads:
           description: Indicates if leads are blocked.
-          example: 0
-          type: integer
+          example: false
+          type: boolean
         trial_from_address:
           description: The trial from address.
           example: ""
           type: string
         restricted_sending:
           description: Indicates if sending is restricted.
-          example: 0
-          type: integer
+          example: false
+          type: boolean
         trial_sending:
           description: Indicates if trial sending is allowed.
           example: 0
@@ -49641,16 +49910,18 @@ components:
           code: AU
           region: Oceania
           agreed_at: agreed_at
-          registration_entity: registration_entity
+          registration_entity:
+            id: 8
+            name: Other
           registration_status:
             id: 1
             name: NOT_INITIATED
           jotform_id: "12345"
           sms_registration_type: 0
-          block_registration: 0
-          block_leads: 0
+          block_registration: false
+          block_leads: false
           trial_from_address: ""
-          restricted_sending: 0
+          restricted_sending: false
           trial_sending: 0
           trial_sending_description: ""
           has_regulation_requirements: 0
@@ -49664,16 +49935,18 @@ components:
           code: AU
           region: Oceania
           agreed_at: agreed_at
-          registration_entity: registration_entity
+          registration_entity:
+            id: 8
+            name: Other
           registration_status:
             id: 1
             name: NOT_INITIATED
           jotform_id: "12345"
           sms_registration_type: 0
-          block_registration: 0
-          block_leads: 0
+          block_registration: false
+          block_leads: false
           trial_from_address: ""
-          restricted_sending: 0
+          restricted_sending: false
           trial_sending: 0
           trial_sending_description: ""
           has_regulation_requirements: 0
@@ -49711,16 +49984,18 @@ components:
           code: AU
           region: Oceania
           agreed_at: agreed_at
-          registration_entity: registration_entity
+          registration_entity:
+            id: 8
+            name: Other
           registration_status:
             id: 1
             name: NOT_INITIATED
           jotform_id: "12345"
           sms_registration_type: 0
-          block_registration: 0
-          block_leads: 0
+          block_registration: false
+          block_leads: false
           trial_from_address: ""
-          restricted_sending: 0
+          restricted_sending: false
           trial_sending: 0
           trial_sending_description: ""
           has_regulation_requirements: 0
@@ -49734,16 +50009,18 @@ components:
           code: AU
           region: Oceania
           agreed_at: agreed_at
-          registration_entity: registration_entity
+          registration_entity:
+            id: 8
+            name: Other
           registration_status:
             id: 1
             name: NOT_INITIATED
           jotform_id: "12345"
           sms_registration_type: 0
-          block_registration: 0
-          block_leads: 0
+          block_registration: false
+          block_leads: false
           trial_from_address: ""
-          restricted_sending: 0
+          restricted_sending: false
           trial_sending: 0
           trial_sending_description: ""
           has_regulation_requirements: 0
@@ -49781,16 +50058,18 @@ components:
           code: AU
           region: Oceania
           agreed_at: agreed_at
-          registration_entity: registration_entity
+          registration_entity:
+            id: 8
+            name: Other
           registration_status:
             id: 1
             name: NOT_INITIATED
           jotform_id: "12345"
           sms_registration_type: 0
-          block_registration: 0
-          block_leads: 0
+          block_registration: false
+          block_leads: false
           trial_from_address: ""
-          restricted_sending: 0
+          restricted_sending: false
           trial_sending: 0
           trial_sending_description: ""
           has_regulation_requirements: 0
@@ -49804,16 +50083,18 @@ components:
           code: AU
           region: Oceania
           agreed_at: agreed_at
-          registration_entity: registration_entity
+          registration_entity:
+            id: 8
+            name: Other
           registration_status:
             id: 1
             name: NOT_INITIATED
           jotform_id: "12345"
           sms_registration_type: 0
-          block_registration: 0
-          block_leads: 0
+          block_registration: false
+          block_leads: false
           trial_from_address: ""
-          restricted_sending: 0
+          restricted_sending: false
           trial_sending: 0
           trial_sending_description: ""
           has_regulation_requirements: 0
@@ -50048,10 +50329,14 @@ components:
             price_rate: 0
             sms_price: 0.099
             sms_quantity: 202
+            price_sms_carrier_fee: "0.0000"
             voice_mobile_price: 0.99
             voice_mobile_quantity: 202
             voice_landline_price: 0.0583
             voice_landline_quantity: 343
+            mms_price: 0.275
+            mms_quantity: 72
+            price_mms_carrier_fee: price_mms_carrier_fee
             fax_price: 0.198
             fax_quantity: 101
             email_price: 0.033
@@ -50073,10 +50358,14 @@ components:
             price_rate: 0
             sms_price: 0.099
             sms_quantity: 202
+            price_sms_carrier_fee: "0.0000"
             voice_mobile_price: 0.99
             voice_mobile_quantity: 202
             voice_landline_price: 0.0583
             voice_landline_quantity: 343
+            mms_price: 0.275
+            mms_quantity: 72
+            price_mms_carrier_fee: price_mms_carrier_fee
             fax_price: 0.198
             fax_quantity: 101
             email_price: 0.033
@@ -50093,11 +50382,13 @@ components:
             postcard_price: 11
             postcard_quantity: 1
             automation_price: 0.0017
-          _currency:
+          currency:
             currency_name_short: AUD
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -50228,6 +50519,7 @@ components:
             first_name: John
             last_name: Doe
             api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+            access_smpp: 0
             access_users: 1
             access_billing: 1
             access_reporting: 1
@@ -50239,9 +50531,13 @@ components:
             access_fax: 1
             access_post: 1
             access_reseller: 1
+            access_global_sending: 1
             access_mms: 1
+            hide_pricing: 0
             share_campaigns: 0
             notes: notes
+            is_main: 0
+            sign_up_type: sign_up_type
           - subaccount_id: 126
             api_username: johndoe1
             email: johndoe1@awesome.com
@@ -50249,6 +50545,7 @@ components:
             first_name: John
             last_name: Doe
             api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+            access_smpp: 0
             access_users: 1
             access_billing: 1
             access_reporting: 1
@@ -50260,9 +50557,13 @@ components:
             access_fax: 1
             access_post: 1
             access_reseller: 1
+            access_global_sending: 1
             access_mms: 1
+            hide_pricing: 0
             share_campaigns: 0
             notes: notes
+            is_main: 0
+            sign_up_type: sign_up_type
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -50292,6 +50593,7 @@ components:
           first_name: John
           last_name: Doe
           api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+          access_smpp: 0
           access_users: 1
           access_billing: 1
           access_reporting: 1
@@ -50303,9 +50605,13 @@ components:
           access_fax: 1
           access_post: 1
           access_reseller: 1
+          access_global_sending: 1
           access_mms: 1
+          hide_pricing: 0
           share_campaigns: 0
           notes: notes
+          is_main: 0
+          sign_up_type: sign_up_type
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -50335,6 +50641,7 @@ components:
           first_name: John
           last_name: Doe
           api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+          access_smpp: 0
           access_users: 1
           access_billing: 1
           access_reporting: 1
@@ -50346,9 +50653,13 @@ components:
           access_fax: 1
           access_post: 1
           access_reseller: 1
+          access_global_sending: 1
           access_mms: 1
+          hide_pricing: 0
           share_campaigns: 0
           notes: notes
+          is_main: 0
+          sign_up_type: sign_up_type
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -50705,6 +51016,8 @@ components:
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
           _subaccount:
             subaccount_id: 126
             api_username: johndoe1
@@ -50713,6 +51026,7 @@ components:
             first_name: John
             last_name: Doe
             api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+            access_smpp: 0
             access_users: 1
             access_billing: 1
             access_reporting: 1
@@ -50724,9 +51038,13 @@ components:
             access_fax: 1
             access_post: 1
             access_reseller: 1
+            access_global_sending: 1
             access_mms: 1
+            hide_pricing: 0
             share_campaigns: 0
             notes: notes
+            is_main: 0
+            sign_up_type: sign_up_type
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -50781,6 +51099,8 @@ components:
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
           _subaccount:
             subaccount_id: 126
             api_username: johndoe1
@@ -50789,6 +51109,7 @@ components:
             first_name: John
             last_name: Doe
             api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+            access_smpp: 0
             access_users: 1
             access_billing: 1
             access_reporting: 1
@@ -50800,9 +51121,13 @@ components:
             access_fax: 1
             access_post: 1
             access_reseller: 1
+            access_global_sending: 1
             access_mms: 1
+            hide_pricing: 0
             share_campaigns: 0
             notes: notes
+            is_main: 0
+            sign_up_type: sign_up_type
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -50857,6 +51182,8 @@ components:
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
           _subaccount:
             subaccount_id: 126
             api_username: johndoe1
@@ -50865,6 +51192,7 @@ components:
             first_name: John
             last_name: Doe
             api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+            access_smpp: 0
             access_users: 1
             access_billing: 1
             access_reporting: 1
@@ -50876,9 +51204,13 @@ components:
             access_fax: 1
             access_post: 1
             access_reseller: 1
+            access_global_sending: 1
             access_mms: 1
+            hide_pricing: 0
             share_campaigns: 0
             notes: notes
+            is_main: 0
+            sign_up_type: sign_up_type
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -50988,6 +51320,8 @@ components:
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
           _subaccount:
             subaccount_id: 126
             api_username: johndoe1
@@ -50996,6 +51330,7 @@ components:
             first_name: John
             last_name: Doe
             api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+            access_smpp: 0
             access_users: 1
             access_billing: 1
             access_reporting: 1
@@ -51007,9 +51342,13 @@ components:
             access_fax: 1
             access_post: 1
             access_reseller: 1
+            access_global_sending: 1
             access_mms: 1
+            hide_pricing: 0
             share_campaigns: 0
             notes: notes
+            is_main: 0
+            sign_up_type: sign_up_type
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -51087,14 +51426,18 @@ components:
           example: Custom 4
           type: string
         date_added:
-          description: The date when the contact was added.
+          description: |-
+            The date when the contact was added. Returned as a plain string rather than a strict
+            date-time since the API sometimes returns a raw Unix timestamp (e.g. "1783997542")
+            instead of ISO 8601.
           example: 2015-07-05T14:51:26Z
-          format: date-time
           type: string
         date_updated:
-          description: The date when the contact was last updated.
+          description: |-
+            The date when the contact was last updated. Returned as a plain string rather than a
+            strict date-time since the API sometimes returns a raw Unix timestamp (e.g. "1783997542")
+            instead of ISO 8601.
           example: 2015-07-05T14:51:26Z
-          format: date-time
           type: string
         fax_number:
           description: The fax number of the contact.
@@ -51377,6 +51720,8 @@ components:
         list_name: ListCT3QrVL4od
         list_email_id: KB0LHD6WXFVHZWTR
         _contacts_count: 0
+        _import_in_progress: 0
+        _optout_in_progress: 0
       properties:
         list_id:
           description: The unique identifier for the list.
@@ -51392,6 +51737,16 @@ components:
           type: string
         _contacts_count:
           description: The number of contacts in the list.
+          example: 0
+          type: integer
+        _import_in_progress:
+          description: Flag indicating if a contact import is currently in progress
+            for this list.
+          example: 0
+          type: integer
+        _optout_in_progress:
+          description: Flag indicating if an opt-out removal is currently in progress
+            for this list.
           example: 0
           type: integer
       type: object
@@ -51444,6 +51799,8 @@ components:
           list_name: ListCT3QrVL4od
           list_email_id: KB0LHD6WXFVHZWTR
           _contacts_count: 0
+          _import_in_progress: 0
+          _optout_in_progress: 0
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -51470,6 +51827,8 @@ components:
           list_name: ListCT3QrVL4od
           list_email_id: KB0LHD6WXFVHZWTR
           _contacts_count: 0
+          _import_in_progress: 0
+          _optout_in_progress: 0
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -51496,6 +51855,8 @@ components:
           list_name: ListCT3QrVL4od
           list_email_id: KB0LHD6WXFVHZWTR
           _contacts_count: 0
+          _import_in_progress: 0
+          _optout_in_progress: 0
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -52114,6 +52475,8 @@ components:
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -52207,6 +52570,8 @@ components:
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -52571,6 +52936,8 @@ components:
             currency_prefix_d: $
             currency_prefix_c: c
             currency_name_long: Australian Dollars
+            min_recharge_amount: "20.00"
+            max_recharge_amount: "10000.00"
       properties:
         http_code:
           description: The HTTP status code of the response.
@@ -52816,6 +53183,18 @@ components:
           prev_page_url: prev_page_url
           from: 1
           to: 2
+          first_page_url: https://rest.clicksend.com/v3/automations/sms/inbound?page=1
+          last_page_url: https://rest.clicksend.com/v3/automations/sms/inbound?page=2
+          path: https://rest.clicksend.com/v3/automations/sms/inbound
+          links:
+          - url: url
+            label: label
+            page: 0
+            active: true
+          - url: url
+            label: label
+            page: 0
+            active: true
           data:
           - sms_inbound_rule_id: 1
             dedicated_number: "+61298441484"
@@ -55972,6 +56351,8 @@ components:
           currency_prefix_d: $
           currency_prefix_c: c
           currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
         blocked_count: 0
       properties:
         total_price:
@@ -56191,7 +56572,7 @@ components:
           items:
             $ref: "#/components/schemas/sms"
           type: array
-        currency:
+        _currency:
           $ref: "#/components/schemas/currency"
         _summary:
           $ref: "#/components/schemas/calculate_sms_price_data__summary"
@@ -56589,6 +56970,8 @@ components:
           currency_prefix_d: $
           currency_prefix_c: c
           currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
       properties:
         total_count:
           description: The total number of records.
@@ -56807,11 +57190,7 @@ components:
         contact:
           $ref: "#/components/schemas/get_tracking_data_inner_contact"
       type: object
-    view_allowed_emails_data_inner:
-      example:
-        email_address_id: 1
-        email_address: my@email.com
-        from: "+13523944199"
+    view_allowed_emails_data_allOf_data_inner:
       properties:
         email_address_id:
           description: The ID of the email address.
@@ -56825,8 +57204,101 @@ components:
           description: The sender.
           example: "+13523944199"
           type: string
+        subaccount_id:
+          description: The ID of the subaccount that owns this email address.
+          example: 345789
+          type: integer
+        from_fax:
+          description: "The fax number used as the sender, if applicable."
+          example: ""
+          nullable: true
+          type: string
+        voice:
+          description: The voice used when this email address triggers a voice message.
+          example: male
+          type: string
+        lang:
+          description: The language used when this email address triggers a voice
+            message.
+          example: en-us
+          type: string
+        _subaccount_name:
+          description: The name of the subaccount that owns this email address.
+          example: my@email.com
+          type: string
       type: object
-    view_stripped_string_rules_data_data_inner:
+    view_allowed_emails_data:
+      allOf:
+      - $ref: "#/components/schemas/pagination"
+      - properties:
+          data:
+            example:
+            - email_address_id: 84
+              email_address: my@email.com
+              from: "+13523944199"
+              subaccount_id: 345789
+              from_fax: ""
+              voice: male
+              lang: en-us
+              _subaccount_name: my@email.com
+            - email_address_id: 85
+              email_address: my@email.com
+              from: "+13523944199"
+              subaccount_id: 345789
+              from_fax: ""
+              voice: male
+              lang: en-us
+              _subaccount_name: my@email.com
+            items:
+              $ref: "#/components/schemas/view_allowed_emails_data_allOf_data_inner"
+            type: array
+        type: object
+      example:
+        total: 2
+        per_page: 15
+        current_page: 1
+        last_page: 1
+        next_page_url: next_page_url
+        prev_page_url: prev_page_url
+        from: 1
+        to: 2
+        data:
+        - email_address_id: 84
+          email_address: my@email.com
+          from: "+13523944199"
+          subaccount_id: 345789
+          from_fax: ""
+          voice: male
+          lang: en-us
+          _subaccount_name: my@email.com
+        - email_address_id: 85
+          email_address: my@email.com
+          from: "+13523944199"
+          subaccount_id: 345789
+          from_fax: ""
+          voice: male
+          lang: en-us
+          _subaccount_name: my@email.com
+    add_allowed_email_data:
+      example:
+        email_address_id: 107
+        email_address: Cv3p0@gmail.com
+        from: "+17128845887"
+      properties:
+        email_address_id:
+          description: The ID of the email address.
+          example: 107
+          type: number
+        email_address:
+          description: The email address.
+          example: Cv3p0@gmail.com
+          type: string
+        from:
+          description: The sender.
+          example: "+17128845887"
+          type: string
+      type: object
+    view_stripped_string_rules_data_allOf_data_inner:
       example:
         rule_id: 0
         strip_string: strip_string
@@ -56839,6 +57311,19 @@ components:
           type: string
       type: object
     view_stripped_string_rules_data:
+      allOf:
+      - $ref: "#/components/schemas/pagination"
+      - properties:
+          data:
+            example:
+            - rule_id: 18
+              strip_string: This is a test1.
+            - rule_id: 19
+              strip_string: This is a test2.
+            items:
+              $ref: "#/components/schemas/view_stripped_string_rules_data_allOf_data_inner"
+            type: array
+        type: object
       example:
         total: 2
         per_page: 15
@@ -56846,48 +57331,13 @@ components:
         last_page: 1
         next_page_url: next_page_url
         prev_page_url: prev_page_url
+        from: 1
+        to: 2
         data:
         - rule_id: 18
           strip_string: This is a test1.
         - rule_id: 19
           strip_string: This is a test2.
-      properties:
-        total:
-          description: The total number of records in the response.
-          example: 2
-          type: integer
-        per_page:
-          description: The number of records per page.
-          example: 15
-          type: integer
-        current_page:
-          description: The current page number.
-          example: 1
-          type: integer
-        last_page:
-          description: The last page number.
-          example: 1
-          type: integer
-        next_page_url:
-          description: The URL of the next page of records.
-          nullable: true
-          type: string
-          example: null
-        prev_page_url:
-          description: The URL of the previous page of records.
-          nullable: true
-          type: string
-          example: null
-        data:
-          example:
-          - rule_id: 18
-            strip_string: This is a test1.
-          - rule_id: 19
-            strip_string: This is a test2.
-          items:
-            $ref: "#/components/schemas/view_stripped_string_rules_data_data_inner"
-          type: array
-      type: object
     view_stripped_string_rule_data:
       example:
         rule_id: 18
@@ -56960,9 +57410,13 @@ components:
         date: "1436932432"
         to: "+16783270696"
         body: Chocolate bar icing icing oat cake carrot cake jelly cotton 1iQByXxdLN.
+        subject: This is a subject
+        priority: 2
+        _media_file_url: https://clicksend-api-downloads.s3.ap-southeast-2.amazonaws.com/_private/example.jpg
         status: Completed
         from: sendlist
         schedule: "1436879372"
+        date_added: 1436879372
         status_code: status_code
         status_text: status_text
         error_code: error_code
@@ -56998,6 +57452,20 @@ components:
           description: The body of the message.
           example: Chocolate bar icing icing oat cake carrot cake jelly cotton 1iQByXxdLN.
           type: string
+        subject:
+          description: The subject of the message.
+          example: This is a subject
+          nullable: true
+          type: string
+        priority:
+          description: The priority of the message.
+          example: 2
+          type: integer
+        _media_file_url:
+          description: "A temporary, signed URL to download the message's media attachment."
+          example: https://clicksend-api-downloads.s3.ap-southeast-2.amazonaws.com/_private/example.jpg
+          nullable: true
+          type: string
         status:
           description: The status of the message.
           example: Completed
@@ -57010,6 +57478,10 @@ components:
           description: The schedule time of the message.
           example: "1436879372"
           type: string
+        date_added:
+          description: The Unix timestamp when the message was added.
+          example: 1436879372
+          type: integer
         status_code:
           description: The status code (if applicable).
           nullable: true
@@ -57109,9 +57581,13 @@ components:
           date: "1436932432"
           to: "+16783270696"
           body: Chocolate bar icing icing oat cake carrot cake jelly cotton 1iQByXxdLN.
+          subject: This is a subject
+          priority: 2
+          _media_file_url: https://clicksend-api-downloads.s3.ap-southeast-2.amazonaws.com/_private/example.jpg
           status: Completed
           from: sendlist
           schedule: "1436879372"
+          date_added: 1436879372
           status_code: status_code
           status_text: status_text
           error_code: error_code
@@ -57134,9 +57610,13 @@ components:
           date: "1436932432"
           to: "+16783270696"
           body: Chocolate bar icing icing oat cake carrot cake jelly cotton 1iQByXxdLN.
+          subject: This is a subject
+          priority: 2
+          _media_file_url: https://clicksend-api-downloads.s3.ap-southeast-2.amazonaws.com/_private/example.jpg
           status: Completed
           from: sendlist
           schedule: "1436879372"
+          date_added: 1436879372
           status_code: status_code
           status_text: status_text
           error_code: error_code
@@ -57190,6 +57670,8 @@ components:
           currency_prefix_d: $
           currency_prefix_c: c
           currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
       properties:
         total_count:
           description: The total number of records.
@@ -57204,73 +57686,24 @@ components:
         _currency:
           $ref: "#/components/schemas/currency"
       type: object
-    view_all_mms_campaigns_data:
-      allOf:
-      - $ref: "#/components/schemas/pagination"
-      - properties:
-          data:
-            items:
-              $ref: "#/components/schemas/mms_campaign"
-            type: array
-        type: object
-      example:
-        total: 2
-        per_page: 15
-        current_page: 1
-        last_page: 1
-        next_page_url: next_page_url
-        prev_page_url: prev_page_url
-        from: 1
-        to: 2
-        data:
-        - mms_campaign_id: 96
-          name: Koala Campaign
-          user_id: 20807
-          subaccount_id: 15
-          list_id: 85262
-          from: "0451919865"
-          subject: New MMS campaign test
-          file_name: 8EA5FA8C-3216-4A5D-86EA-6BE78050E439.jpg
-          body: "Hey (First Name), I want to ask if this is your lastname: (Last Name)?\
-            \ Also, do you like koalas? Visit http://smsu.io/xxxxx for more details."
-          schedule: 1531800743
-          status: Queued
-          date_added: 1531800745
-          _total_count: 1
-          _list_name: test
-          _media_file_url: http://rest.clicksend.clicksend/files/8EA5FA8C-3216-4A5D-86EA-6BE78050E439.jpg
-        - mms_campaign_id: 96
-          name: Koala Campaign
-          user_id: 20807
-          subaccount_id: 15
-          list_id: 85262
-          from: "0451919865"
-          subject: New MMS campaign test
-          file_name: 8EA5FA8C-3216-4A5D-86EA-6BE78050E439.jpg
-          body: "Hey (First Name), I want to ask if this is your lastname: (Last Name)?\
-            \ Also, do you like koalas? Visit http://smsu.io/xxxxx for more details."
-          schedule: 1531800743
-          status: Queued
-          date_added: 1531800745
-          _total_count: 1
-          _list_name: test
-          _media_file_url: http://rest.clicksend.clicksend/files/8EA5FA8C-3216-4A5D-86EA-6BE78050E439.jpg
     send_voice_message_data:
       example:
         total_price: 0.07
         total_count: 1
         queued_count: 1
         messages:
-        - date: 1436871253
+        - date: "1436871253"
+          date_added: 1436871253
+          list_id: list_id
           to: "+61411111111"
           to_type: mobile
           body: Jelly liquorice marshmallow candy carrot cake 4Eyffjs1vL.
           from: from
           lang: en-au
           voice: female
-          schedule: 1436874701
+          schedule: "1436874701"
           message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-          message_parts: 1
+          message_parts: "1.00"
           message_price: "0.07"
           custom_string: this is a test
           user_id: 1
@@ -57278,17 +57711,25 @@ components:
           country: AU
           require_input: 0
           machine_detection: 0
+          machine_detected: 0
+          digits: digits
+          carrier: Telstra
+          status_code: "201"
+          status_text: Delivered
           status: SUCCESS
-        - date: 1436871253
+          _api_username: johndoe1
+        - date: "1436871253"
+          date_added: 1436871253
+          list_id: list_id
           to: "+61411111111"
           to_type: mobile
           body: Jelly liquorice marshmallow candy carrot cake 4Eyffjs1vL.
           from: from
           lang: en-au
           voice: female
-          schedule: 1436874701
+          schedule: "1436874701"
           message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-          message_parts: 1
+          message_parts: "1.00"
           message_price: "0.07"
           custom_string: this is a test
           user_id: 1
@@ -57296,12 +57737,20 @@ components:
           country: AU
           require_input: 0
           machine_detection: 0
+          machine_detected: 0
+          digits: digits
+          carrier: Telstra
+          status_code: "201"
+          status_text: Delivered
           status: SUCCESS
+          _api_username: johndoe1
         _currency:
           currency_name_short: AUD
           currency_prefix_d: $
           currency_prefix_c: c
           currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
       properties:
         total_price:
           description: The total price of the message.
@@ -57322,6 +57771,16 @@ components:
         _currency:
           $ref: "#/components/schemas/currency"
       type: object
+    view_voice_languages_data_inner_gender:
+      description: |-
+        The gender(s) available for this language. Returned as a single string when only one
+        gender is available, or an array of strings when more than one is available.
+      example: male
+      oneOf:
+      - type: string
+      - items:
+          type: string
+        type: array
     view_voice_languages_data_inner:
       properties:
         code:
@@ -57333,9 +57792,7 @@ components:
           example: "English, US"
           type: string
         gender:
-          description: The gender of the language.
-          example: male
-          type: string
+          $ref: "#/components/schemas/view_voice_languages_data_inner_gender"
       type: object
     view_voice_receipts_data:
       allOf:
@@ -57416,16 +57873,18 @@ components:
         from: 1
         to: 2
         data:
-        - date: 1436871253
+        - date: "1436871253"
+          date_added: 1436871253
+          list_id: list_id
           to: "+61411111111"
           to_type: mobile
           body: Jelly liquorice marshmallow candy carrot cake 4Eyffjs1vL.
           from: from
           lang: en-au
           voice: female
-          schedule: 1436874701
+          schedule: "1436874701"
           message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-          message_parts: 1
+          message_parts: "1.00"
           message_price: "0.07"
           custom_string: this is a test
           user_id: 1
@@ -57433,17 +57892,25 @@ components:
           country: AU
           require_input: 0
           machine_detection: 0
+          machine_detected: 0
+          digits: digits
+          carrier: Telstra
+          status_code: "201"
+          status_text: Delivered
           status: SUCCESS
-        - date: 1436871253
+          _api_username: johndoe1
+        - date: "1436871253"
+          date_added: 1436871253
+          list_id: list_id
           to: "+61411111111"
           to_type: mobile
           body: Jelly liquorice marshmallow candy carrot cake 4Eyffjs1vL.
           from: from
           lang: en-au
           voice: female
-          schedule: 1436874701
+          schedule: "1436874701"
           message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-          message_parts: 1
+          message_parts: "1.00"
           message_price: "0.07"
           custom_string: this is a test
           user_id: 1
@@ -57451,7 +57918,13 @@ components:
           country: AU
           require_input: 0
           machine_detection: 0
+          machine_detected: 0
+          digits: digits
+          carrier: Telstra
+          status_code: "201"
+          status_text: Delivered
           status: SUCCESS
+          _api_username: johndoe1
     send_fax_data:
       example:
         total_price: 13.2
@@ -57499,6 +57972,8 @@ components:
           currency_prefix_d: $
           currency_prefix_c: c
           currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
       properties:
         total_price:
           description: The total price of the fax.
@@ -57698,6 +58173,8 @@ components:
           currency_prefix_d: $
           currency_prefix_c: c
           currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
       properties:
         totlal_count:
           description: The total count of the email campaigns.
@@ -57767,6 +58244,8 @@ components:
           currency_prefix_d: $
           currency_prefix_c: c
           currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
       properties:
         total_count:
           description: The total count of the email campaigns.
@@ -58167,6 +58646,8 @@ components:
           currency_prefix_d: $
           currency_prefix_c: c
           currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
       properties:
         total:
           $ref: "#/components/schemas/view_voice_statistics_data_total"
@@ -58248,6 +58729,8 @@ components:
           currency_prefix_d: $
           currency_prefix_c: c
           currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
       properties:
         total:
           $ref: "#/components/schemas/view_sms_statistics_data_total"
@@ -58258,6 +58741,92 @@ components:
         _currency:
           $ref: "#/components/schemas/currency"
       type: object
+    get_all_delivery_issues_data:
+      allOf:
+      - $ref: "#/components/schemas/pagination"
+      - properties:
+          data:
+            example:
+            - issue_id: 1
+              user_id: 3820
+              message_id: B388828B-AD46-4366-8AD3-0305FF5E3FE5
+              type: sms
+              description: this is a test.
+              client_comments: null
+              support_comments: null
+              status: null
+              date_added: 1481610495
+              resolved: 0
+              email_address: test@user.com
+            - issue_id: 2
+              user_id: 3820
+              message_id: 90396A38-146B-46C4-A455-675F620C2E05
+              type: sms
+              description: this is a test.
+              client_comments: null
+              support_comments: null
+              status: null
+              date_added: 1481610495
+              resolved: 0
+              email_address: test@user.com
+            - issue_id: 3
+              user_id: 3820
+              message_id: 4ECFB6CB-0300-45EC-96E1-5AB189432AF5
+              type: sms
+              description: this is a test.
+              client_comments: null
+              support_comments: null
+              status: null
+              date_added: 1481611389
+              resolved: 0
+              email_address: test@user.com
+            items:
+              $ref: "#/components/schemas/delivery_issue"
+            type: array
+        type: object
+      example:
+        total: 2
+        per_page: 15
+        current_page: 1
+        last_page: 1
+        next_page_url: next_page_url
+        prev_page_url: prev_page_url
+        from: 1
+        to: 2
+        data:
+        - issue_id: 1
+          user_id: 3820
+          message_id: B388828B-AD46-4366-8AD3-0305FF5E3FE5
+          type: sms
+          description: this is a test.
+          client_comments: null
+          support_comments: null
+          status: null
+          date_added: 1481610495
+          resolved: 0
+          email_address: test@user.com
+        - issue_id: 2
+          user_id: 3820
+          message_id: 90396A38-146B-46C4-A455-675F620C2E05
+          type: sms
+          description: this is a test.
+          client_comments: null
+          support_comments: null
+          status: null
+          date_added: 1481610495
+          resolved: 0
+          email_address: test@user.com
+        - issue_id: 3
+          user_id: 3820
+          message_id: 4ECFB6CB-0300-45EC-96E1-5AB189432AF5
+          type: sms
+          description: this is a test.
+          client_comments: null
+          support_comments: null
+          status: null
+          date_added: 1481611389
+          resolved: 0
+          email_address: test@user.com
     create_delivery_issue_data:
       example:
         issue_id: 1
@@ -58435,6 +59004,8 @@ components:
             items:
               $ref: "#/components/schemas/view_your_numbers_data_allOf_data_inner"
             type: array
+          _currency:
+            $ref: "#/components/schemas/currency"
         type: object
       example:
         total: 2
@@ -58477,6 +59048,13 @@ components:
             description: Your number is unregistered. You will not be able to send
               messages to certain countries.
             name: Unregistered
+        _currency:
+          currency_name_short: AUD
+          currency_prefix_d: $
+          currency_prefix_c: c
+          currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
     buy_number_request_registration_data:
       description: Optional registration data for number compliance
       properties:
@@ -58621,6 +59199,8 @@ components:
             items:
               $ref: "#/components/schemas/view_available_numbers_data_allOf_data_inner"
             type: array
+          _currency:
+            $ref: "#/components/schemas/currency"
         type: object
       example:
         total: 2
@@ -58646,6 +59226,13 @@ components:
           price_monthly: "20.7100"
           price_total: "20.7100"
           address_requirement: local
+        _currency:
+          currency_name_short: AUD
+          currency_prefix_d: $
+          currency_prefix_c: c
+          currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
     list_own_numbers__metadata_pagination:
       example:
         self: https://rest.clicksend.com/v3/own-numbers?offset=f99872cc-11a6-48ba-a9f2-bcfb6dd1e3d4#8fa5ebc2-777b-45db-a448-ec76a40d4384&page_size=10
@@ -58806,6 +59393,22 @@ components:
           example: Invalid sender ID format
           type: string
       type: object
+    account__referrer_chosen:
+      description: "The referral source chosen at sign-up, if any."
+      example:
+        id: 8
+        name: Other
+      nullable: true
+      properties:
+        id:
+          description: The ID of the referral source.
+          example: 8
+          type: integer
+        name:
+          description: The name of the referral source.
+          example: Other
+          type: string
+      type: object
     view_account_usage_data_sms_inner:
       properties:
         subaccount_id:
@@ -58820,8 +59423,12 @@ components:
         total_price:
           description: The total price of SMS.
           type: number
+        notes:
+          description: Optional notes.
+          nullable: true
+          type: string
       type: object
-    view_account_usage_data_voice_inner:
+    view_account_usage_data_mms_inner:
       properties:
         subaccount_id:
           description: The subaccount identifier.
@@ -58830,10 +59437,14 @@ components:
           description: The username associated with the subaccount.
           type: string
         total_count:
-          description: The total count of voice calls.
+          description: The total count of MMS.
           type: string
         total_price:
-          description: The total price of voice calls.
+          description: The total price of MMS.
+          type: string
+        notes:
+          description: Optional notes.
+          nullable: true
           type: string
       type: object
     view_account_usage_data_email_inner:
@@ -58848,6 +59459,10 @@ components:
           description: The total count of emails.
           type: integer
         total_price:
+          type: string
+        notes:
+          description: Optional notes.
+          nullable: true
           type: string
       type: object
     view_account_usage_data_sms_total:
@@ -58885,6 +59500,7 @@ components:
           username: user5
           total_count: "4.00"
           total_price: "0.3080"
+        mms: []
         voice:
         - subaccount_id: 1039
           username: user1
@@ -58921,6 +59537,8 @@ components:
           username: user5
           total_count: 998
           total_price: "0.0000"
+        email_transactional: []
+        postcards: []
         sms_total:
           count: 33
           price: "2.4417"
@@ -58936,6 +59554,22 @@ components:
         email_total:
           count: 4990
           price: "9.0020"
+        mms_total:
+          count: 1
+          price: 0
+        email_transactional_total:
+          count: 1
+          price: 0
+        postcards_total:
+          count: 1
+          price: 0
+        _currency:
+          currency_name_short: AUD
+          currency_prefix_d: $
+          currency_prefix_c: c
+          currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
       properties:
         sms:
           example:
@@ -58950,6 +59584,11 @@ components:
           items:
             $ref: "#/components/schemas/view_account_usage_data_sms_inner"
           type: array
+        mms:
+          example: []
+          items:
+            $ref: "#/components/schemas/view_account_usage_data_mms_inner"
+          type: array
         voice:
           example:
           - subaccount_id: 1039
@@ -58961,7 +59600,7 @@ components:
             total_count: "1.00"
             total_price: "0.0330"
           items:
-            $ref: "#/components/schemas/view_account_usage_data_voice_inner"
+            $ref: "#/components/schemas/view_account_usage_data_mms_inner"
           type: array
         fax:
           example:
@@ -58974,7 +59613,7 @@ components:
             total_count: "1.00"
             total_price: "0.2314"
           items:
-            $ref: "#/components/schemas/view_account_usage_data_voice_inner"
+            $ref: "#/components/schemas/view_account_usage_data_mms_inner"
           type: array
         post:
           example:
@@ -58987,7 +59626,7 @@ components:
             total_count: "3"
             total_price: "2.5586"
           items:
-            $ref: "#/components/schemas/view_account_usage_data_voice_inner"
+            $ref: "#/components/schemas/view_account_usage_data_mms_inner"
           type: array
         email:
           example:
@@ -59002,6 +59641,16 @@ components:
           items:
             $ref: "#/components/schemas/view_account_usage_data_email_inner"
           type: array
+        email_transactional:
+          example: []
+          items:
+            $ref: "#/components/schemas/view_account_usage_data_email_inner"
+          type: array
+        postcards:
+          example: []
+          items:
+            $ref: "#/components/schemas/view_account_usage_data_mms_inner"
+          type: array
         sms_total:
           $ref: "#/components/schemas/view_account_usage_data_sms_total"
         voice_total:
@@ -59012,6 +59661,14 @@ components:
           $ref: "#/components/schemas/view_account_usage_data_sms_total"
         email_total:
           $ref: "#/components/schemas/view_account_usage_data_email_total"
+        mms_total:
+          $ref: "#/components/schemas/view_voice_statistics_data_total_outbound"
+        email_transactional_total:
+          $ref: "#/components/schemas/view_voice_statistics_data_total_outbound"
+        postcards_total:
+          $ref: "#/components/schemas/view_voice_statistics_data_total_outbound"
+        _currency:
+          $ref: "#/components/schemas/currency"
       type: object
     global_sending_registration_status:
       example:
@@ -59092,10 +59749,14 @@ components:
         price_rate: 0
         sms_price: 0.099
         sms_quantity: 202
+        price_sms_carrier_fee: "0.0000"
         voice_mobile_price: 0.99
         voice_mobile_quantity: 202
         voice_landline_price: 0.0583
         voice_landline_quantity: 343
+        mms_price: 0.275
+        mms_quantity: 72
+        price_mms_carrier_fee: price_mms_carrier_fee
         fax_price: 0.198
         fax_quantity: 101
         email_price: 0.033
@@ -59133,6 +59794,11 @@ components:
           description: The quantity of the SMS.
           example: 202
           type: number
+        price_sms_carrier_fee:
+          description: The carrier fee applied to SMS in this package.
+          example: "0.0000"
+          nullable: true
+          type: string
         voice_mobile_price:
           description: The price of the voice mobile.
           example: 0.99
@@ -59149,6 +59815,19 @@ components:
           description: The quantity of the voice landline.
           example: 343
           type: number
+        mms_price:
+          description: The price of the MMS.
+          example: 0.275
+          type: number
+        mms_quantity:
+          description: The quantity of the MMS.
+          example: 72
+          type: number
+        price_mms_carrier_fee:
+          description: The carrier fee applied to MMS in this package.
+          nullable: true
+          type: string
+          example: null
         fax_price:
           description: The price of the fax.
           example: 0.198
@@ -59222,10 +59901,14 @@ components:
           price_rate: 0
           sms_price: 0.099
           sms_quantity: 202
+          price_sms_carrier_fee: "0.0000"
           voice_mobile_price: 0.99
           voice_mobile_quantity: 202
           voice_landline_price: 0.0583
           voice_landline_quantity: 343
+          mms_price: 0.275
+          mms_quantity: 72
+          price_mms_carrier_fee: price_mms_carrier_fee
           fax_price: 0.198
           fax_quantity: 101
           email_price: 0.033
@@ -59247,10 +59930,14 @@ components:
           price_rate: 0
           sms_price: 0.099
           sms_quantity: 202
+          price_sms_carrier_fee: "0.0000"
           voice_mobile_price: 0.99
           voice_mobile_quantity: 202
           voice_landline_price: 0.0583
           voice_landline_quantity: 343
+          mms_price: 0.275
+          mms_quantity: 72
+          price_mms_carrier_fee: price_mms_carrier_fee
           fax_price: 0.198
           fax_quantity: 101
           email_price: 0.033
@@ -59267,17 +59954,19 @@ components:
           postcard_price: 11
           postcard_quantity: 1
           automation_price: 0.0017
-        _currency:
+        currency:
           currency_name_short: AUD
           currency_prefix_d: $
           currency_prefix_c: c
           currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
       properties:
         packages:
           items:
             $ref: "#/components/schemas/view_recharge_packages_data_packages_inner"
           type: array
-        _currency:
+        currency:
           $ref: "#/components/schemas/currency"
       type: object
     purchase_recharge_package_data:
@@ -59394,6 +60083,7 @@ components:
           first_name: John
           last_name: Doe
           api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+          access_smpp: 0
           access_users: 1
           access_billing: 1
           access_reporting: 1
@@ -59405,9 +60095,13 @@ components:
           access_fax: 1
           access_post: 1
           access_reseller: 1
+          access_global_sending: 1
           access_mms: 1
+          hide_pricing: 0
           share_campaigns: 0
           notes: notes
+          is_main: 0
+          sign_up_type: sign_up_type
         - subaccount_id: 126
           api_username: johndoe1
           email: johndoe1@awesome.com
@@ -59415,6 +60109,7 @@ components:
           first_name: John
           last_name: Doe
           api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+          access_smpp: 0
           access_users: 1
           access_billing: 1
           access_reporting: 1
@@ -59426,9 +60121,13 @@ components:
           access_fax: 1
           access_post: 1
           access_reseller: 1
+          access_global_sending: 1
           access_mms: 1
+          hide_pricing: 0
           share_campaigns: 0
           notes: notes
+          is_main: 0
+          sign_up_type: sign_up_type
     generate_new_api_key_data:
       example:
         api_key: E72D09F6-AC80-0A5C-F7F0-1A244A377A5C
@@ -59573,6 +60272,8 @@ components:
           currency_prefix_d: $
           currency_prefix_c: c
           currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
         _subaccount:
           subaccount_id: 126
           api_username: johndoe1
@@ -59581,6 +60282,7 @@ components:
           first_name: John
           last_name: Doe
           api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+          access_smpp: 0
           access_users: 1
           access_billing: 1
           access_reporting: 1
@@ -59592,9 +60294,13 @@ components:
           access_fax: 1
           access_post: 1
           access_reseller: 1
+          access_global_sending: 1
           access_mms: 1
+          hide_pricing: 0
           share_campaigns: 0
           notes: notes
+          is_main: 0
+          sign_up_type: sign_up_type
     create_reseller_account_data:
       allOf:
       - $ref: "#/components/schemas/reseller_account"
@@ -59637,6 +60343,8 @@ components:
           currency_prefix_d: $
           currency_prefix_c: c
           currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
         _subaccount:
           subaccount_id: 126
           api_username: johndoe1
@@ -59645,6 +60353,7 @@ components:
           first_name: John
           last_name: Doe
           api_key: F3702045-EB2C-0091-C211-7728048DCAE2
+          access_smpp: 0
           access_users: 1
           access_billing: 1
           access_reporting: 1
@@ -59656,9 +60365,13 @@ components:
           access_fax: 1
           access_post: 1
           access_reseller: 1
+          access_global_sending: 1
           access_mms: 1
+          hide_pricing: 0
           share_campaigns: 0
           notes: notes
+          is_main: 0
+          sign_up_type: sign_up_type
     view_list_contacts_data:
       allOf:
       - $ref: "#/components/schemas/pagination"
@@ -59970,6 +60683,8 @@ components:
           currency_prefix_d: $
           currency_prefix_c: c
           currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
       properties:
         total_price:
           description: The total price of the postcard.
@@ -60145,6 +60860,8 @@ components:
           currency_prefix_d: $
           currency_prefix_c: c
           currency_name_long: Australian Dollars
+          min_recharge_amount: "20.00"
+          max_recharge_amount: "10000.00"
       properties:
         recipients:
           items:
@@ -60300,10 +61017,51 @@ components:
           priority_post: 0
           date_added: 1449662203
           status: SUCCESS
+    view_sms_inbound_automations_data_allOf_links_inner:
+      example:
+        url: url
+        label: label
+        page: 0
+        active: true
+      properties:
+        url:
+          description: The URL of this page link.
+          nullable: true
+          type: string
+        label:
+          description: The display label for this page link.
+          type: string
+        page:
+          description: The page number this link points to.
+          nullable: true
+          type: integer
+        active:
+          description: Whether this link represents the current page.
+          type: boolean
+      type: object
     view_sms_inbound_automations_data:
       allOf:
       - $ref: "#/components/schemas/pagination"
       - properties:
+          first_page_url:
+            description: The URL of the first page of records.
+            example: https://rest.clicksend.com/v3/automations/sms/inbound?page=1
+            nullable: true
+            type: string
+          last_page_url:
+            description: The URL of the last page of records.
+            example: https://rest.clicksend.com/v3/automations/sms/inbound?page=2
+            nullable: true
+            type: string
+          path:
+            description: The base URL path used to build pagination links.
+            example: https://rest.clicksend.com/v3/automations/sms/inbound
+            type: string
+          links:
+            description: The list of pagination links.
+            items:
+              $ref: "#/components/schemas/view_sms_inbound_automations_data_allOf_links_inner"
+            type: array
           data:
             example:
             - sms_inbound_rule_id: 1
@@ -60337,6 +61095,18 @@ components:
         prev_page_url: prev_page_url
         from: 1
         to: 2
+        first_page_url: https://rest.clicksend.com/v3/automations/sms/inbound?page=1
+        last_page_url: https://rest.clicksend.com/v3/automations/sms/inbound?page=2
+        path: https://rest.clicksend.com/v3/automations/sms/inbound
+        links:
+        - url: url
+          label: label
+          page: 0
+          active: true
+        - url: url
+          label: label
+          page: 0
+          active: true
         data:
         - sms_inbound_rule_id: 1
           dedicated_number: "+61298441484"

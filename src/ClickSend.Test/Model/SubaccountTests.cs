@@ -117,6 +117,15 @@ namespace ClickSend.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'AccessSmpp'
+        /// </summary>
+        [Fact]
+        public void AccessSmppTest()
+        {
+            // TODO unit test for the property 'AccessSmpp'
+        }
+
+        /// <summary>
         /// Test the property 'AccessUsers'
         /// </summary>
         [Fact]
@@ -216,12 +225,30 @@ namespace ClickSend.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'AccessGlobalSending'
+        /// </summary>
+        [Fact]
+        public void AccessGlobalSendingTest()
+        {
+            // TODO unit test for the property 'AccessGlobalSending'
+        }
+
+        /// <summary>
         /// Test the property 'AccessMms'
         /// </summary>
         [Fact]
         public void AccessMmsTest()
         {
             // TODO unit test for the property 'AccessMms'
+        }
+
+        /// <summary>
+        /// Test the property 'HidePricing'
+        /// </summary>
+        [Fact]
+        public void HidePricingTest()
+        {
+            // TODO unit test for the property 'HidePricing'
         }
 
         /// <summary>
@@ -240,6 +267,24 @@ namespace ClickSend.Test.Model
         public void NotesTest()
         {
             // TODO unit test for the property 'Notes'
+        }
+
+        /// <summary>
+        /// Test the property 'IsMain'
+        /// </summary>
+        [Fact]
+        public void IsMainTest()
+        {
+            // TODO unit test for the property 'IsMain'
+        }
+
+        /// <summary>
+        /// Test the property 'SignUpType'
+        /// </summary>
+        [Fact]
+        public void SignUpTypeTest()
+        {
+            // TODO unit test for the property 'SignUpType'
         }
     }
 }

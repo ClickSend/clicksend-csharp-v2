@@ -99,6 +99,15 @@ namespace ClickSend.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'DateSignUp'
+        /// </summary>
+        [Fact]
+        public void DateSignUpTest()
+        {
+            // TODO unit test for the property 'DateSignUp'
+        }
+
+        /// <summary>
         /// Test the property 'Balance'
         /// </summary>
         [Fact]
@@ -189,12 +198,30 @@ namespace ClickSend.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Priority'
+        /// </summary>
+        [Fact]
+        public void PriorityTest()
+        {
+            // TODO unit test for the property 'Priority'
+        }
+
+        /// <summary>
         /// Test the property 'Country'
         /// </summary>
         [Fact]
         public void CountryTest()
         {
             // TODO unit test for the property 'Country'
+        }
+
+        /// <summary>
+        /// Test the property 'CountryIp'
+        /// </summary>
+        [Fact]
+        public void CountryIpTest()
+        {
+            // TODO unit test for the property 'CountryIp'
         }
 
         /// <summary>
@@ -306,6 +333,69 @@ namespace ClickSend.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'PrivateUploads'
+        /// </summary>
+        [Fact]
+        public void PrivateUploadsTest()
+        {
+            // TODO unit test for the property 'PrivateUploads'
+        }
+
+        /// <summary>
+        /// Test the property 'FaxQuality'
+        /// </summary>
+        [Fact]
+        public void FaxQualityTest()
+        {
+            // TODO unit test for the property 'FaxQuality'
+        }
+
+        /// <summary>
+        /// Test the property 'SettingSmsHideYourNumber'
+        /// </summary>
+        [Fact]
+        public void SettingSmsHideYourNumberTest()
+        {
+            // TODO unit test for the property 'SettingSmsHideYourNumber'
+        }
+
+        /// <summary>
+        /// Test the property 'SettingSmsHideBusinessName'
+        /// </summary>
+        [Fact]
+        public void SettingSmsHideBusinessNameTest()
+        {
+            // TODO unit test for the property 'SettingSmsHideBusinessName'
+        }
+
+        /// <summary>
+        /// Test the property 'PricingVariant'
+        /// </summary>
+        [Fact]
+        public void PricingVariantTest()
+        {
+            // TODO unit test for the property 'PricingVariant'
+        }
+
+        /// <summary>
+        /// Test the property 'OnTrial'
+        /// </summary>
+        [Fact]
+        public void OnTrialTest()
+        {
+            // TODO unit test for the property 'OnTrial'
+        }
+
+        /// <summary>
+        /// Test the property 'TrialExpiry'
+        /// </summary>
+        [Fact]
+        public void TrialExpiryTest()
+        {
+            // TODO unit test for the property 'TrialExpiry'
+        }
+
+        /// <summary>
         /// Test the property 'Currency'
         /// </summary>
         [Fact]
@@ -321,6 +411,15 @@ namespace ClickSend.Test.Model
         public void SubaccountTest()
         {
             // TODO unit test for the property 'Subaccount'
+        }
+
+        /// <summary>
+        /// Test the property 'ReferrerChosen'
+        /// </summary>
+        [Fact]
+        public void ReferrerChosenTest()
+        {
+            // TODO unit test for the property 'ReferrerChosen'
         }
     }
 }

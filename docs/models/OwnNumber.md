@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Label** | **string** | A label for the phone number. | [optional] 
 **Status** | **string** | The status of the phone number. | [optional] 
 **VerifiedTimestamp** | **DateTime** | The timestamp when the phone number was verified. | [optional] 
+**NotifiedTimestamp** | **string** | The timestamp when the user was last notified about this number, if applicable. | [optional] 
 **IsNearingExpiration** | **bool** | Indicates whether the phone number verification is nearing its expiration date: - **true:** The verification was completed more than 11 months ago and will expire soon. You should re-verify your phone number to maintain uninterrupted service. - **false:** The verification is still valid and not approaching expiration. | [optional] 
 **CreatedTimestamp** | **DateTime** | The timestamp when the record was created. | [optional] 
 **UpdatedTimestamp** | **DateTime** | The timestamp when the record was last updated. | [optional] 

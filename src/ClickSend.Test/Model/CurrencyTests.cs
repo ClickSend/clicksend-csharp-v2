@@ -88,5 +88,23 @@ namespace ClickSend.Test.Model
         {
             // TODO unit test for the property 'CurrencyNameLong'
         }
+
+        /// <summary>
+        /// Test the property 'MinRechargeAmount'
+        /// </summary>
+        [Fact]
+        public void MinRechargeAmountTest()
+        {
+            // TODO unit test for the property 'MinRechargeAmount'
+        }
+
+        /// <summary>
+        /// Test the property 'MaxRechargeAmount'
+        /// </summary>
+        [Fact]
+        public void MaxRechargeAmountTest()
+        {
+            // TODO unit test for the property 'MaxRechargeAmount'
+        }
     }
 }

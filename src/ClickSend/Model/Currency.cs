@@ -37,13 +37,17 @@ namespace ClickSend.Model
         /// <param name="currencyPrefixD">The symbol used to indicate the currency of the sender (e.g. $ , €, etc).</param>
         /// <param name="currencyPrefixC">The currency basic unit (e.g. cents).</param>
         /// <param name="currencyNameLong">The full name of the currency.</param>
+        /// <param name="minRechargeAmount">The minimum amount that can be used to recharge the account, in this currency.</param>
+        /// <param name="maxRechargeAmount">The maximum amount that can be used to recharge the account, in this currency.</param>
         [JsonConstructor]
-        public Currency(Option<string?> currencyNameShort = default, Option<string?> currencyPrefixD = default, Option<string?> currencyPrefixC = default, Option<string?> currencyNameLong = default)
+        public Currency(Option<string?> currencyNameShort = default, Option<string?> currencyPrefixD = default, Option<string?> currencyPrefixC = default, Option<string?> currencyNameLong = default, Option<string?> minRechargeAmount = default, Option<string?> maxRechargeAmount = default)
         {
             CurrencyNameShortOption = currencyNameShort;
             CurrencyPrefixDOption = currencyPrefixD;
             CurrencyPrefixCOption = currencyPrefixC;
             CurrencyNameLongOption = currencyNameLong;
+            MinRechargeAmountOption = minRechargeAmount;
+            MaxRechargeAmountOption = maxRechargeAmount;
             OnCreated();
         }
 
@@ -110,6 +114,36 @@ namespace ClickSend.Model
         public string? CurrencyNameLong { get { return this.CurrencyNameLongOption.Value; } set { this.CurrencyNameLongOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of MinRechargeAmount
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> MinRechargeAmountOption { get; private set; }
+
+        /// <summary>
+        /// The minimum amount that can be used to recharge the account, in this currency.
+        /// </summary>
+        /// <value>The minimum amount that can be used to recharge the account, in this currency.</value>
+        /* <example>20.00</example> */
+        [JsonPropertyName("min_recharge_amount")]
+        public string? MinRechargeAmount { get { return this.MinRechargeAmountOption.Value; } set { this.MinRechargeAmountOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of MaxRechargeAmount
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> MaxRechargeAmountOption { get; private set; }
+
+        /// <summary>
+        /// The maximum amount that can be used to recharge the account, in this currency.
+        /// </summary>
+        /// <value>The maximum amount that can be used to recharge the account, in this currency.</value>
+        /* <example>10000.00</example> */
+        [JsonPropertyName("max_recharge_amount")]
+        public string? MaxRechargeAmount { get { return this.MaxRechargeAmountOption.Value; } set { this.MaxRechargeAmountOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -121,6 +155,8 @@ namespace ClickSend.Model
             sb.Append("  CurrencyPrefixD: ").Append(CurrencyPrefixD).Append("\n");
             sb.Append("  CurrencyPrefixC: ").Append(CurrencyPrefixC).Append("\n");
             sb.Append("  CurrencyNameLong: ").Append(CurrencyNameLong).Append("\n");
+            sb.Append("  MinRechargeAmount: ").Append(MinRechargeAmount).Append("\n");
+            sb.Append("  MaxRechargeAmount: ").Append(MaxRechargeAmount).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -162,6 +198,8 @@ namespace ClickSend.Model
             Option<string?> currencyPrefixD = default;
             Option<string?> currencyPrefixC = default;
             Option<string?> currencyNameLong = default;
+            Option<string?> minRechargeAmount = default;
+            Option<string?> maxRechargeAmount = default;
 
             while (utf8JsonReader.Read())
             {
@@ -190,6 +228,12 @@ namespace ClickSend.Model
                         case "currency_name_long":
                             currencyNameLong = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "min_recharge_amount":
+                            minRechargeAmount = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "max_recharge_amount":
+                            maxRechargeAmount = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
                         default:
                             break;
                     }
@@ -208,7 +252,13 @@ namespace ClickSend.Model
             if (currencyNameLong.IsSet && currencyNameLong.Value == null)
                 throw new ArgumentNullException(nameof(currencyNameLong), "Property is not nullable for class Currency.");
 
-            return new Currency(currencyNameShort, currencyPrefixD, currencyPrefixC, currencyNameLong);
+            if (minRechargeAmount.IsSet && minRechargeAmount.Value == null)
+                throw new ArgumentNullException(nameof(minRechargeAmount), "Property is not nullable for class Currency.");
+
+            if (maxRechargeAmount.IsSet && maxRechargeAmount.Value == null)
+                throw new ArgumentNullException(nameof(maxRechargeAmount), "Property is not nullable for class Currency.");
+
+            return new Currency(currencyNameShort, currencyPrefixD, currencyPrefixC, currencyNameLong, minRechargeAmount, maxRechargeAmount);
         }
 
         /// <summary>
@@ -247,6 +297,12 @@ namespace ClickSend.Model
             if (currency.CurrencyNameLongOption.IsSet && currency.CurrencyNameLong == null)
                 throw new ArgumentNullException(nameof(currency.CurrencyNameLong), "Property is required for class Currency.");
 
+            if (currency.MinRechargeAmountOption.IsSet && currency.MinRechargeAmount == null)
+                throw new ArgumentNullException(nameof(currency.MinRechargeAmount), "Property is required for class Currency.");
+
+            if (currency.MaxRechargeAmountOption.IsSet && currency.MaxRechargeAmount == null)
+                throw new ArgumentNullException(nameof(currency.MaxRechargeAmount), "Property is required for class Currency.");
+
             if (currency.CurrencyNameShortOption.IsSet)
                 writer.WriteString("currency_name_short", currency.CurrencyNameShort);
 
@@ -258,6 +314,12 @@ namespace ClickSend.Model
 
             if (currency.CurrencyNameLongOption.IsSet)
                 writer.WriteString("currency_name_long", currency.CurrencyNameLong);
+
+            if (currency.MinRechargeAmountOption.IsSet)
+                writer.WriteString("min_recharge_amount", currency.MinRechargeAmount);
+
+            if (currency.MaxRechargeAmountOption.IsSet)
+                writer.WriteString("max_recharge_amount", currency.MaxRechargeAmount);
         }
     }
 }

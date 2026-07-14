@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **CurrencyPrefixD** | **string** | The symbol used to indicate the currency of the sender (e.g. $ , €, etc). | [optional] 
 **CurrencyPrefixC** | **string** | The currency basic unit (e.g. cents). | [optional] 
 **CurrencyNameLong** | **string** | The full name of the currency. | [optional] 
+**MinRechargeAmount** | **string** | The minimum amount that can be used to recharge the account, in this currency. | [optional] 
+**MaxRechargeAmount** | **string** | The maximum amount that can be used to recharge the account, in this currency. | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

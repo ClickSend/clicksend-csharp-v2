@@ -33,7 +33,7 @@ namespace ClickSend.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Sms" /> class.
         /// </summary>
-        /// <param name="date">The date you sent the message. It is in &lt;a href&#x3D;\&quot;http://help.clicksend.com/what-is-a-unix-timestamp\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Unix format&lt;/a&gt;.</param>
+        /// <param name="date">The date you sent the message. It is in &lt;a href&#x3D;\&quot;http://help.clicksend.com/what-is-a-unix-timestamp\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Unix format&lt;/a&gt;. Returned as a string since it may be an empty string in price-calculation responses where no message has actually been sent yet.</param>
         /// <param name="to">The phone number of the recipient. It should be in &lt;a href&#x3D;\&quot;https://en.wikipedia.org/wiki/E.164\&quot; target&#x3D;\&quot;_blank\&quot;&gt;E.164 format&lt;/a&gt;.</param>
         /// <param name="body">The message sent. The price of sending a message depends on the number of characters and the type of message. There are two types:  - Standard message - Contains only characters in the &lt;a href&#x3D;\&quot;https://en.wikipedia.org/wiki/GSM_03.38\&quot; target&#x3D;\&quot;_blank\&quot;&gt;GSM&lt;/a&gt; set, with a maximum of 160 characters.      - Unicode message - Contains characters outside the &lt;a href&#x3D;\&quot;https://en.wikipedia.org/wiki/GSM_03.38\&quot; target&#x3D;\&quot;_blank\&quot;&gt;GSM&lt;/a&gt; set, with a maximum of 70 characters.       Longer messages will be sent as multiple messages (parts), but the recipient will receive them as a single long message. Visit &lt;a href&#x3D;\&quot;https://help.clicksend.com/article/h474eseq3a-how-many-characters-can-i-send-in-an-sms\&quot; target&#x3D;\&quot;_blank\&quot;&gt;this page&lt;/a&gt; to learn more about the number of characters per message, and &lt;a href&#x3D;\&quot;http://smscharactercount.com/\&quot; target&#x3D;\&quot;_blank\&quot;&gt;this page&lt;/a&gt; to count the number of characters.</param>
         /// <param name="from">The sender of the message. This is also referred to as the **Sender ID**. If your **Sender ID** has a different country code to the recipient’s, it&#39;ll be replaced by a local number, except in &lt;a href&#x3D;\&quot;https://help.clicksend.com/category/mfdctha7f0-country-specific-features-and-restrictions\&quot; target&#x3D;\&quot;_blank\&quot;&gt;certain countries&lt;/a&gt;. If the sender number is blocked, a different number will replace it.</param>
@@ -47,7 +47,7 @@ namespace ClickSend.Model
         /// <param name="country">The country of the recipient in two-letter format (e.g. US, UK, AU, NZ, etc).</param>
         /// <param name="status">The response code of the operation. Visit [this page](/#application-status-codes) for more information. This reflects the actual status of the individual message.</param>
         [JsonConstructor]
-        public Sms(Option<int?> date = default, Option<string?> to = default, Option<string?> body = default, Option<string?> from = default, Option<string?> schedule = default, Option<string?> messageId = default, Option<int?> messageParts = default, Option<string?> messagePrice = default, Option<string?> customString = default, Option<string?> contactId = default, Option<bool?> isSharedSystemNumber = default, Option<string?> country = default, Option<string?> status = default)
+        public Sms(Option<string?> date = default, Option<string?> to = default, Option<string?> body = default, Option<string?> from = default, Option<string?> schedule = default, Option<string?> messageId = default, Option<int?> messageParts = default, Option<string?> messagePrice = default, Option<string?> customString = default, Option<string?> contactId = default, Option<bool?> isSharedSystemNumber = default, Option<string?> country = default, Option<string?> status = default)
         {
             DateOption = date;
             ToOption = to;
@@ -72,15 +72,15 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<int?> DateOption { get; private set; }
+        public Option<string?> DateOption { get; private set; }
 
         /// <summary>
-        /// The date you sent the message. It is in &lt;a href&#x3D;\&quot;http://help.clicksend.com/what-is-a-unix-timestamp\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Unix format&lt;/a&gt;.
+        /// The date you sent the message. It is in &lt;a href&#x3D;\&quot;http://help.clicksend.com/what-is-a-unix-timestamp\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Unix format&lt;/a&gt;. Returned as a string since it may be an empty string in price-calculation responses where no message has actually been sent yet.
         /// </summary>
-        /// <value>The date you sent the message. It is in &lt;a href&#x3D;\&quot;http://help.clicksend.com/what-is-a-unix-timestamp\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Unix format&lt;/a&gt;.</value>
+        /// <value>The date you sent the message. It is in &lt;a href&#x3D;\&quot;http://help.clicksend.com/what-is-a-unix-timestamp\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Unix format&lt;/a&gt;. Returned as a string since it may be an empty string in price-calculation responses where no message has actually been sent yet.</value>
         /* <example>1436871253</example> */
         [JsonPropertyName("date")]
-        public int? Date { get { return this.DateOption.Value; } set { this.DateOption = new(value); } }
+        public string? Date { get { return this.DateOption.Value; } set { this.DateOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of To
@@ -320,7 +320,7 @@ namespace ClickSend.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<int?> date = default;
+            Option<string?> date = default;
             Option<string?> to = default;
             Option<string?> body = default;
             Option<string?> from = default;
@@ -350,7 +350,7 @@ namespace ClickSend.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "date":
-                            date = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            date = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "to":
                             to = new Option<string?>(utf8JsonReader.GetString()!);
@@ -460,6 +460,9 @@ namespace ClickSend.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, Sms sms, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (sms.DateOption.IsSet && sms.Date == null)
+                throw new ArgumentNullException(nameof(sms.Date), "Property is required for class Sms.");
+
             if (sms.ToOption.IsSet && sms.To == null)
                 throw new ArgumentNullException(nameof(sms.To), "Property is required for class Sms.");
 
@@ -491,7 +494,7 @@ namespace ClickSend.Model
                 throw new ArgumentNullException(nameof(sms.Status), "Property is required for class Sms.");
 
             if (sms.DateOption.IsSet)
-                writer.WriteNumber("date", sms.DateOption.Value!.Value);
+                writer.WriteString("date", sms.Date);
 
             if (sms.ToOption.IsSet)
                 writer.WriteString("to", sms.To);

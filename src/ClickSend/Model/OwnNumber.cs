@@ -42,11 +42,12 @@ namespace ClickSend.Model
         /// <param name="label">A label for the phone number.</param>
         /// <param name="status">The status of the phone number.</param>
         /// <param name="verifiedTimestamp">The timestamp when the phone number was verified.</param>
+        /// <param name="notifiedTimestamp">The timestamp when the user was last notified about this number, if applicable.</param>
         /// <param name="isNearingExpiration">Indicates whether the phone number verification is nearing its expiration date: - **true:** The verification was completed more than 11 months ago and will expire soon. You should re-verify your phone number to maintain uninterrupted service. - **false:** The verification is still valid and not approaching expiration.</param>
         /// <param name="createdTimestamp">The timestamp when the record was created.</param>
         /// <param name="updatedTimestamp">The timestamp when the record was last updated.</param>
         [JsonConstructor]
-        public OwnNumber(Option<Guid?> id = default, Option<Guid?> accountId = default, Option<Guid?> workspaceId = default, Option<Guid?> userId = default, Option<string?> phoneNumber = default, Option<string?> country = default, Option<string?> label = default, Option<string?> status = default, Option<DateTime?> verifiedTimestamp = default, Option<bool?> isNearingExpiration = default, Option<DateTime?> createdTimestamp = default, Option<DateTime?> updatedTimestamp = default)
+        public OwnNumber(Option<Guid?> id = default, Option<Guid?> accountId = default, Option<Guid?> workspaceId = default, Option<Guid?> userId = default, Option<string?> phoneNumber = default, Option<string?> country = default, Option<string?> label = default, Option<string?> status = default, Option<DateTime?> verifiedTimestamp = default, Option<string?> notifiedTimestamp = default, Option<bool?> isNearingExpiration = default, Option<DateTime?> createdTimestamp = default, Option<DateTime?> updatedTimestamp = default)
         {
             IdOption = id;
             AccountIdOption = accountId;
@@ -57,6 +58,7 @@ namespace ClickSend.Model
             LabelOption = label;
             StatusOption = status;
             VerifiedTimestampOption = verifiedTimestamp;
+            NotifiedTimestampOption = notifiedTimestamp;
             IsNearingExpirationOption = isNearingExpiration;
             CreatedTimestampOption = createdTimestamp;
             UpdatedTimestampOption = updatedTimestamp;
@@ -201,6 +203,20 @@ namespace ClickSend.Model
         public DateTime? VerifiedTimestamp { get { return this.VerifiedTimestampOption.Value; } set { this.VerifiedTimestampOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of NotifiedTimestamp
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> NotifiedTimestampOption { get; private set; }
+
+        /// <summary>
+        /// The timestamp when the user was last notified about this number, if applicable.
+        /// </summary>
+        /// <value>The timestamp when the user was last notified about this number, if applicable.</value>
+        [JsonPropertyName("notified_timestamp")]
+        public string? NotifiedTimestamp { get { return this.NotifiedTimestampOption.Value; } set { this.NotifiedTimestampOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of IsNearingExpiration
         /// </summary>
         [JsonIgnore]
@@ -262,6 +278,7 @@ namespace ClickSend.Model
             sb.Append("  Label: ").Append(Label).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  VerifiedTimestamp: ").Append(VerifiedTimestamp).Append("\n");
+            sb.Append("  NotifiedTimestamp: ").Append(NotifiedTimestamp).Append("\n");
             sb.Append("  IsNearingExpiration: ").Append(IsNearingExpiration).Append("\n");
             sb.Append("  CreatedTimestamp: ").Append(CreatedTimestamp).Append("\n");
             sb.Append("  UpdatedTimestamp: ").Append(UpdatedTimestamp).Append("\n");
@@ -326,6 +343,7 @@ namespace ClickSend.Model
             Option<string?> label = default;
             Option<string?> status = default;
             Option<DateTime?> verifiedTimestamp = default;
+            Option<string?> notifiedTimestamp = default;
             Option<bool?> isNearingExpiration = default;
             Option<DateTime?> createdTimestamp = default;
             Option<DateTime?> updatedTimestamp = default;
@@ -371,6 +389,9 @@ namespace ClickSend.Model
                             break;
                         case "verified_timestamp":
                             verifiedTimestamp = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "notified_timestamp":
+                            notifiedTimestamp = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "is_nearing_expiration":
                             isNearingExpiration = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
@@ -423,7 +444,7 @@ namespace ClickSend.Model
             if (updatedTimestamp.IsSet && updatedTimestamp.Value == null)
                 throw new ArgumentNullException(nameof(updatedTimestamp), "Property is not nullable for class OwnNumber.");
 
-            return new OwnNumber(id, accountId, workspaceId, userId, phoneNumber, country, label, status, verifiedTimestamp, isNearingExpiration, createdTimestamp, updatedTimestamp);
+            return new OwnNumber(id, accountId, workspaceId, userId, phoneNumber, country, label, status, verifiedTimestamp, notifiedTimestamp, isNearingExpiration, createdTimestamp, updatedTimestamp);
         }
 
         /// <summary>
@@ -488,6 +509,12 @@ namespace ClickSend.Model
 
             if (ownNumber.VerifiedTimestampOption.IsSet)
                 writer.WriteString("verified_timestamp", ownNumber.VerifiedTimestampOption.Value!.Value.ToString(VerifiedTimestampFormat));
+
+            if (ownNumber.NotifiedTimestampOption.IsSet)
+                if (ownNumber.NotifiedTimestampOption.Value != null)
+                    writer.WriteString("notified_timestamp", ownNumber.NotifiedTimestamp);
+                else
+                    writer.WriteNull("notified_timestamp");
 
             if (ownNumber.IsNearingExpirationOption.IsSet)
                 writer.WriteBoolean("is_nearing_expiration", ownNumber.IsNearingExpirationOption.Value!.Value);

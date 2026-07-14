@@ -38,7 +38,7 @@ namespace ClickSend.Model
         /// <param name="code">The country code.</param>
         /// <param name="region">The region of the country.</param>
         /// <param name="agreedAt">The date when the country was agreed upon.</param>
-        /// <param name="registrationEntity">The entity responsible for the registration.</param>
+        /// <param name="registrationEntity">registrationEntity</param>
         /// <param name="registrationStatus">registrationStatus</param>
         /// <param name="jotformId">The ID of the country in JotForm.</param>
         /// <param name="smsRegistrationType">The type of SMS registration.</param>
@@ -52,7 +52,7 @@ namespace ClickSend.Model
         /// <param name="registrationStepsUrl">URL for registration steps.</param>
         /// <param name="regulationRequirementsDescription">Description of regulation requirements.</param>
         [JsonConstructor]
-        public GlobalSending(Option<int?> id = default, Option<string?> name = default, Option<string?> code = default, Option<string?> region = default, Option<string?> agreedAt = default, Option<string?> registrationEntity = default, Option<GlobalSendingRegistrationStatus?> registrationStatus = default, Option<string?> jotformId = default, Option<int?> smsRegistrationType = default, Option<int?> blockRegistration = default, Option<int?> blockLeads = default, Option<string?> trialFromAddress = default, Option<int?> restrictedSending = default, Option<int?> trialSending = default, Option<string?> trialSendingDescription = default, Option<int?> hasRegulationRequirements = default, Option<string?> registrationStepsUrl = default, Option<string?> regulationRequirementsDescription = default)
+        public GlobalSending(Option<int?> id = default, Option<string?> name = default, Option<string?> code = default, Option<string?> region = default, Option<string?> agreedAt = default, Option<AccountReferrerChosen?> registrationEntity = default, Option<GlobalSendingRegistrationStatus?> registrationStatus = default, Option<string?> jotformId = default, Option<int?> smsRegistrationType = default, Option<bool?> blockRegistration = default, Option<bool?> blockLeads = default, Option<string?> trialFromAddress = default, Option<bool?> restrictedSending = default, Option<int?> trialSending = default, Option<string?> trialSendingDescription = default, Option<int?> hasRegulationRequirements = default, Option<string?> registrationStepsUrl = default, Option<string?> regulationRequirementsDescription = default)
         {
             IdOption = id;
             NameOption = name;
@@ -156,14 +156,13 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> RegistrationEntityOption { get; private set; }
+        public Option<AccountReferrerChosen?> RegistrationEntityOption { get; private set; }
 
         /// <summary>
-        /// The entity responsible for the registration.
+        /// Gets or Sets RegistrationEntity
         /// </summary>
-        /// <value>The entity responsible for the registration.</value>
         [JsonPropertyName("registration_entity")]
-        public string? RegistrationEntity { get { return this.RegistrationEntityOption.Value; } set { this.RegistrationEntityOption = new(value); } }
+        public AccountReferrerChosen? RegistrationEntity { get { return this.RegistrationEntityOption.Value; } set { this.RegistrationEntityOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of RegistrationStatus
@@ -213,30 +212,30 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<int?> BlockRegistrationOption { get; private set; }
+        public Option<bool?> BlockRegistrationOption { get; private set; }
 
         /// <summary>
         /// Indicates if registration is blocked.
         /// </summary>
         /// <value>Indicates if registration is blocked.</value>
-        /* <example>0</example> */
+        /* <example>false</example> */
         [JsonPropertyName("block_registration")]
-        public int? BlockRegistration { get { return this.BlockRegistrationOption.Value; } set { this.BlockRegistrationOption = new(value); } }
+        public bool? BlockRegistration { get { return this.BlockRegistrationOption.Value; } set { this.BlockRegistrationOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of BlockLeads
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<int?> BlockLeadsOption { get; private set; }
+        public Option<bool?> BlockLeadsOption { get; private set; }
 
         /// <summary>
         /// Indicates if leads are blocked.
         /// </summary>
         /// <value>Indicates if leads are blocked.</value>
-        /* <example>0</example> */
+        /* <example>false</example> */
         [JsonPropertyName("block_leads")]
-        public int? BlockLeads { get { return this.BlockLeadsOption.Value; } set { this.BlockLeadsOption = new(value); } }
+        public bool? BlockLeads { get { return this.BlockLeadsOption.Value; } set { this.BlockLeadsOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of TrialFromAddress
@@ -257,15 +256,15 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<int?> RestrictedSendingOption { get; private set; }
+        public Option<bool?> RestrictedSendingOption { get; private set; }
 
         /// <summary>
         /// Indicates if sending is restricted.
         /// </summary>
         /// <value>Indicates if sending is restricted.</value>
-        /* <example>0</example> */
+        /* <example>false</example> */
         [JsonPropertyName("restricted_sending")]
-        public int? RestrictedSending { get { return this.RestrictedSendingOption.Value; } set { this.RestrictedSendingOption = new(value); } }
+        public bool? RestrictedSending { get { return this.RestrictedSendingOption.Value; } set { this.RestrictedSendingOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of TrialSending
@@ -409,14 +408,14 @@ namespace ClickSend.Model
             Option<string?> code = default;
             Option<string?> region = default;
             Option<string?> agreedAt = default;
-            Option<string?> registrationEntity = default;
+            Option<AccountReferrerChosen?> registrationEntity = default;
             Option<GlobalSendingRegistrationStatus?> registrationStatus = default;
             Option<string?> jotformId = default;
             Option<int?> smsRegistrationType = default;
-            Option<int?> blockRegistration = default;
-            Option<int?> blockLeads = default;
+            Option<bool?> blockRegistration = default;
+            Option<bool?> blockLeads = default;
             Option<string?> trialFromAddress = default;
-            Option<int?> restrictedSending = default;
+            Option<bool?> restrictedSending = default;
             Option<int?> trialSending = default;
             Option<string?> trialSendingDescription = default;
             Option<int?> hasRegulationRequirements = default;
@@ -454,7 +453,7 @@ namespace ClickSend.Model
                             agreedAt = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "registration_entity":
-                            registrationEntity = new Option<string?>(utf8JsonReader.GetString());
+                            registrationEntity = new Option<AccountReferrerChosen?>(JsonSerializer.Deserialize<AccountReferrerChosen>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "registration_status":
                             registrationStatus = new Option<GlobalSendingRegistrationStatus?>(JsonSerializer.Deserialize<GlobalSendingRegistrationStatus>(ref utf8JsonReader, jsonSerializerOptions)!);
@@ -466,16 +465,16 @@ namespace ClickSend.Model
                             smsRegistrationType = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "block_registration":
-                            blockRegistration = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            blockRegistration = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
                         case "block_leads":
-                            blockLeads = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            blockLeads = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
                         case "trial_from_address":
                             trialFromAddress = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "restricted_sending":
-                            restrictedSending = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            restrictedSending = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
                         case "trial_sending":
                             trialSending = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
@@ -620,10 +619,12 @@ namespace ClickSend.Model
 
             if (globalSending.RegistrationEntityOption.IsSet)
                 if (globalSending.RegistrationEntityOption.Value != null)
-                    writer.WriteString("registration_entity", globalSending.RegistrationEntity);
+                {
+                    writer.WritePropertyName("registration_entity");
+                    JsonSerializer.Serialize(writer, globalSending.RegistrationEntity, jsonSerializerOptions);
+                }
                 else
                     writer.WriteNull("registration_entity");
-
             if (globalSending.RegistrationStatusOption.IsSet)
             {
                 writer.WritePropertyName("registration_status");
@@ -636,16 +637,16 @@ namespace ClickSend.Model
                 writer.WriteNumber("sms_registration_type", globalSending.SmsRegistrationTypeOption.Value!.Value);
 
             if (globalSending.BlockRegistrationOption.IsSet)
-                writer.WriteNumber("block_registration", globalSending.BlockRegistrationOption.Value!.Value);
+                writer.WriteBoolean("block_registration", globalSending.BlockRegistrationOption.Value!.Value);
 
             if (globalSending.BlockLeadsOption.IsSet)
-                writer.WriteNumber("block_leads", globalSending.BlockLeadsOption.Value!.Value);
+                writer.WriteBoolean("block_leads", globalSending.BlockLeadsOption.Value!.Value);
 
             if (globalSending.TrialFromAddressOption.IsSet)
                 writer.WriteString("trial_from_address", globalSending.TrialFromAddress);
 
             if (globalSending.RestrictedSendingOption.IsSet)
-                writer.WriteNumber("restricted_sending", globalSending.RestrictedSendingOption.Value!.Value);
+                writer.WriteBoolean("restricted_sending", globalSending.RestrictedSendingOption.Value!.Value);
 
             if (globalSending.TrialSendingOption.IsSet)
                 writer.WriteNumber("trial_sending", globalSending.TrialSendingOption.Value!.Value);

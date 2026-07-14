@@ -38,7 +38,7 @@ namespace ClickSend.Model
         /// <param name="responseMsg">A message describing the outcome of the operation.</param>
         /// <param name="data">data</param>
         [JsonConstructor]
-        public GetAllDeliveryIssues(Option<int?> httpCode = default, Option<string?> responseCode = default, Option<string?> responseMsg = default, Option<List<DeliveryIssue>?> data = default)
+        public GetAllDeliveryIssues(Option<int?> httpCode = default, Option<string?> responseCode = default, Option<string?> responseMsg = default, Option<GetAllDeliveryIssuesData?> data = default)
         {
             HttpCodeOption = httpCode;
             ResponseCodeOption = responseCode;
@@ -99,14 +99,13 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<DeliveryIssue>?> DataOption { get; private set; }
+        public Option<GetAllDeliveryIssuesData?> DataOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Data
         /// </summary>
-        /* <example>[{&quot;issue_id&quot;:1,&quot;user_id&quot;:3820,&quot;message_id&quot;:&quot;B388828B-AD46-4366-8AD3-0305FF5E3FE5&quot;,&quot;type&quot;:&quot;sms&quot;,&quot;description&quot;:&quot;this is a test.&quot;,&quot;client_comments&quot;:null,&quot;support_comments&quot;:null,&quot;status&quot;:null,&quot;date_added&quot;:1481610495,&quot;resolved&quot;:0,&quot;email_address&quot;:&quot;test@user.com&quot;},{&quot;issue_id&quot;:2,&quot;user_id&quot;:3820,&quot;message_id&quot;:&quot;90396A38-146B-46C4-A455-675F620C2E05&quot;,&quot;type&quot;:&quot;sms&quot;,&quot;description&quot;:&quot;this is a test.&quot;,&quot;client_comments&quot;:null,&quot;support_comments&quot;:null,&quot;status&quot;:null,&quot;date_added&quot;:1481610495,&quot;resolved&quot;:0,&quot;email_address&quot;:&quot;test@user.com&quot;},{&quot;issue_id&quot;:3,&quot;user_id&quot;:3820,&quot;message_id&quot;:&quot;4ECFB6CB-0300-45EC-96E1-5AB189432AF5&quot;,&quot;type&quot;:&quot;sms&quot;,&quot;description&quot;:&quot;this is a test.&quot;,&quot;client_comments&quot;:null,&quot;support_comments&quot;:null,&quot;status&quot;:null,&quot;date_added&quot;:1481611389,&quot;resolved&quot;:0,&quot;email_address&quot;:&quot;test@user.com&quot;}]</example> */
         [JsonPropertyName("data")]
-        public List<DeliveryIssue>? Data { get { return this.DataOption.Value; } set { this.DataOption = new(value); } }
+        public GetAllDeliveryIssuesData? Data { get { return this.DataOption.Value; } set { this.DataOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -160,7 +159,7 @@ namespace ClickSend.Model
             Option<int?> httpCode = default;
             Option<string?> responseCode = default;
             Option<string?> responseMsg = default;
-            Option<List<DeliveryIssue>?> data = default;
+            Option<GetAllDeliveryIssuesData?> data = default;
 
             while (utf8JsonReader.Read())
             {
@@ -187,7 +186,7 @@ namespace ClickSend.Model
                             responseMsg = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "data":
-                            data = new Option<List<DeliveryIssue>?>(JsonSerializer.Deserialize<List<DeliveryIssue>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            data = new Option<GetAllDeliveryIssuesData?>(JsonSerializer.Deserialize<GetAllDeliveryIssuesData>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;

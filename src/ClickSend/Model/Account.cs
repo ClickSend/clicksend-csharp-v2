@@ -38,6 +38,7 @@ namespace ClickSend.Model
         /// <param name="userEmail">The email address of the user.</param>
         /// <param name="active">Flag indicating if the user account is active.</param>
         /// <param name="banned">Flag indicating if the user account is banned.</param>
+        /// <param name="dateSignUp">The Unix timestamp of when the account was created.</param>
         /// <param name="balance">The balance of the user&#39;s account.</param>
         /// <param name="userPhone">The phone number of the user.</param>
         /// <param name="replyTo">The email address to reply to.</param>
@@ -48,7 +49,9 @@ namespace ClickSend.Model
         /// <param name="accountName">The name of the account.</param>
         /// <param name="accountBillingEmail">The billing email address of the account.</param>
         /// <param name="accountBillingMobile">The billing mobile number of the account.</param>
+        /// <param name="priority">The account&#39;s priority tier.</param>
         /// <param name="country">The country of the user.</param>
+        /// <param name="countryIp">The country the user is currently connecting from, based on IP address.</param>
         /// <param name="defaultCountrySms">The default country for SMS.</param>
         /// <param name="autoRecharge">Flag indicating if auto-recharge is enabled.</param>
         /// <param name="autoRechargeAmount">The auto-recharge amount.</param>
@@ -61,16 +64,25 @@ namespace ClickSend.Model
         /// <param name="balanceCommission">The balance commission.</param>
         /// <param name="timezone">The timezone of the user.</param>
         /// <param name="priceRate">The pricing tier used to determine the cost per message.</param>
+        /// <param name="privateUploads">Flag indicating if uploaded media is kept private.</param>
+        /// <param name="faxQuality">The quality setting used for outgoing faxes.</param>
+        /// <param name="settingSmsHideYourNumber">Flag indicating if your number is hidden on outgoing SMS.</param>
+        /// <param name="settingSmsHideBusinessName">Flag indicating if the business name is hidden on outgoing SMS.</param>
+        /// <param name="pricingVariant">The pricing variant applied to the account.</param>
+        /// <param name="onTrial">Flag indicating if the account is currently on a trial.</param>
+        /// <param name="trialExpiry">The date the trial expires, if the account is on a trial.</param>
         /// <param name="currency">currency</param>
         /// <param name="subaccount">subaccount</param>
+        /// <param name="referrerChosen">referrerChosen</param>
         [JsonConstructor]
-        public Account(Option<int?> userId = default, Option<string?> username = default, Option<string?> userEmail = default, Option<int?> active = default, Option<int?> banned = default, Option<string?> balance = default, Option<string?> userPhone = default, Option<string?> replyTo = default, Option<string?> deliveryTo = default, Option<string?> userFirstName = default, Option<string?> userLastName = default, Option<int?> varAccount = default, Option<string?> accountName = default, Option<string?> accountBillingEmail = default, Option<string?> accountBillingMobile = default, Option<string?> country = default, Option<string?> defaultCountrySms = default, Option<int?> autoRecharge = default, Option<string?> autoRechargeAmount = default, Option<string?> lowCreditAmount = default, Option<int?> settingUnicodeSms = default, Option<int?> settingEmailSmsSubject = default, Option<int?> settingFixSenderId = default, Option<int?> settingSmsMessageCharLimit = default, Option<int?> oldDashboard = default, Option<string?> balanceCommission = default, Option<string?> timezone = default, Option<int?> priceRate = default, Option<Currency?> currency = default, Option<Subaccount?> subaccount = default)
+        public Account(Option<int?> userId = default, Option<string?> username = default, Option<string?> userEmail = default, Option<int?> active = default, Option<int?> banned = default, Option<int?> dateSignUp = default, Option<string?> balance = default, Option<string?> userPhone = default, Option<string?> replyTo = default, Option<string?> deliveryTo = default, Option<string?> userFirstName = default, Option<string?> userLastName = default, Option<int?> varAccount = default, Option<string?> accountName = default, Option<string?> accountBillingEmail = default, Option<string?> accountBillingMobile = default, Option<int?> priority = default, Option<string?> country = default, Option<string?> countryIp = default, Option<string?> defaultCountrySms = default, Option<int?> autoRecharge = default, Option<string?> autoRechargeAmount = default, Option<string?> lowCreditAmount = default, Option<int?> settingUnicodeSms = default, Option<int?> settingEmailSmsSubject = default, Option<int?> settingFixSenderId = default, Option<int?> settingSmsMessageCharLimit = default, Option<int?> oldDashboard = default, Option<string?> balanceCommission = default, Option<string?> timezone = default, Option<int?> priceRate = default, Option<int?> privateUploads = default, Option<int?> faxQuality = default, Option<int?> settingSmsHideYourNumber = default, Option<int?> settingSmsHideBusinessName = default, Option<int?> pricingVariant = default, Option<int?> onTrial = default, Option<string?> trialExpiry = default, Option<Currency?> currency = default, Option<Subaccount?> subaccount = default, Option<AccountReferrerChosen?> referrerChosen = default)
         {
             UserIdOption = userId;
             UsernameOption = username;
             UserEmailOption = userEmail;
             ActiveOption = active;
             BannedOption = banned;
+            DateSignUpOption = dateSignUp;
             BalanceOption = balance;
             UserPhoneOption = userPhone;
             ReplyToOption = replyTo;
@@ -81,7 +93,9 @@ namespace ClickSend.Model
             AccountNameOption = accountName;
             AccountBillingEmailOption = accountBillingEmail;
             AccountBillingMobileOption = accountBillingMobile;
+            PriorityOption = priority;
             CountryOption = country;
+            CountryIpOption = countryIp;
             DefaultCountrySmsOption = defaultCountrySms;
             AutoRechargeOption = autoRecharge;
             AutoRechargeAmountOption = autoRechargeAmount;
@@ -94,8 +108,16 @@ namespace ClickSend.Model
             BalanceCommissionOption = balanceCommission;
             TimezoneOption = timezone;
             PriceRateOption = priceRate;
+            PrivateUploadsOption = privateUploads;
+            FaxQualityOption = faxQuality;
+            SettingSmsHideYourNumberOption = settingSmsHideYourNumber;
+            SettingSmsHideBusinessNameOption = settingSmsHideBusinessName;
+            PricingVariantOption = pricingVariant;
+            OnTrialOption = onTrial;
+            TrialExpiryOption = trialExpiry;
             CurrencyOption = currency;
             SubaccountOption = subaccount;
+            ReferrerChosenOption = referrerChosen;
             OnCreated();
         }
 
@@ -175,6 +197,21 @@ namespace ClickSend.Model
         /* <example>0</example> */
         [JsonPropertyName("banned")]
         public int? Banned { get { return this.BannedOption.Value; } set { this.BannedOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of DateSignUp
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> DateSignUpOption { get; private set; }
+
+        /// <summary>
+        /// The Unix timestamp of when the account was created.
+        /// </summary>
+        /// <value>The Unix timestamp of when the account was created.</value>
+        /* <example>1436871253</example> */
+        [JsonPropertyName("date_sign_up")]
+        public int? DateSignUp { get { return this.DateSignUpOption.Value; } set { this.DateSignUpOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Balance
@@ -326,6 +363,21 @@ namespace ClickSend.Model
         public string? AccountBillingMobile { get { return this.AccountBillingMobileOption.Value; } set { this.AccountBillingMobileOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Priority
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> PriorityOption { get; private set; }
+
+        /// <summary>
+        /// The account&#39;s priority tier.
+        /// </summary>
+        /// <value>The account&#39;s priority tier.</value>
+        /* <example>2</example> */
+        [JsonPropertyName("priority")]
+        public int? Priority { get { return this.PriorityOption.Value; } set { this.PriorityOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of Country
         /// </summary>
         [JsonIgnore]
@@ -339,6 +391,21 @@ namespace ClickSend.Model
         /* <example>US</example> */
         [JsonPropertyName("country")]
         public string? Country { get { return this.CountryOption.Value; } set { this.CountryOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of CountryIp
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> CountryIpOption { get; private set; }
+
+        /// <summary>
+        /// The country the user is currently connecting from, based on IP address.
+        /// </summary>
+        /// <value>The country the user is currently connecting from, based on IP address.</value>
+        /* <example>US</example> */
+        [JsonPropertyName("country_ip")]
+        public string? CountryIp { get { return this.CountryIpOption.Value; } set { this.CountryIpOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of DefaultCountrySms
@@ -521,6 +588,110 @@ namespace ClickSend.Model
         public int? PriceRate { get { return this.PriceRateOption.Value; } set { this.PriceRateOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of PrivateUploads
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> PrivateUploadsOption { get; private set; }
+
+        /// <summary>
+        /// Flag indicating if uploaded media is kept private.
+        /// </summary>
+        /// <value>Flag indicating if uploaded media is kept private.</value>
+        /* <example>0</example> */
+        [JsonPropertyName("private_uploads")]
+        public int? PrivateUploads { get { return this.PrivateUploadsOption.Value; } set { this.PrivateUploadsOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of FaxQuality
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> FaxQualityOption { get; private set; }
+
+        /// <summary>
+        /// The quality setting used for outgoing faxes.
+        /// </summary>
+        /// <value>The quality setting used for outgoing faxes.</value>
+        /* <example>0</example> */
+        [JsonPropertyName("fax_quality")]
+        public int? FaxQuality { get { return this.FaxQualityOption.Value; } set { this.FaxQualityOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of SettingSmsHideYourNumber
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> SettingSmsHideYourNumberOption { get; private set; }
+
+        /// <summary>
+        /// Flag indicating if your number is hidden on outgoing SMS.
+        /// </summary>
+        /// <value>Flag indicating if your number is hidden on outgoing SMS.</value>
+        /* <example>0</example> */
+        [JsonPropertyName("setting_sms_hide_your_number")]
+        public int? SettingSmsHideYourNumber { get { return this.SettingSmsHideYourNumberOption.Value; } set { this.SettingSmsHideYourNumberOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of SettingSmsHideBusinessName
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> SettingSmsHideBusinessNameOption { get; private set; }
+
+        /// <summary>
+        /// Flag indicating if the business name is hidden on outgoing SMS.
+        /// </summary>
+        /// <value>Flag indicating if the business name is hidden on outgoing SMS.</value>
+        /* <example>0</example> */
+        [JsonPropertyName("setting_sms_hide_business_name")]
+        public int? SettingSmsHideBusinessName { get { return this.SettingSmsHideBusinessNameOption.Value; } set { this.SettingSmsHideBusinessNameOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PricingVariant
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> PricingVariantOption { get; private set; }
+
+        /// <summary>
+        /// The pricing variant applied to the account.
+        /// </summary>
+        /// <value>The pricing variant applied to the account.</value>
+        /* <example>0</example> */
+        [JsonPropertyName("pricing_variant")]
+        public int? PricingVariant { get { return this.PricingVariantOption.Value; } set { this.PricingVariantOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of OnTrial
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> OnTrialOption { get; private set; }
+
+        /// <summary>
+        /// Flag indicating if the account is currently on a trial.
+        /// </summary>
+        /// <value>Flag indicating if the account is currently on a trial.</value>
+        /* <example>0</example> */
+        [JsonPropertyName("on_trial")]
+        public int? OnTrial { get { return this.OnTrialOption.Value; } set { this.OnTrialOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of TrialExpiry
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> TrialExpiryOption { get; private set; }
+
+        /// <summary>
+        /// The date the trial expires, if the account is on a trial.
+        /// </summary>
+        /// <value>The date the trial expires, if the account is on a trial.</value>
+        [JsonPropertyName("trial_expiry")]
+        public string? TrialExpiry { get { return this.TrialExpiryOption.Value; } set { this.TrialExpiryOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of Currency
         /// </summary>
         [JsonIgnore]
@@ -547,6 +718,19 @@ namespace ClickSend.Model
         public Subaccount? Subaccount { get { return this.SubaccountOption.Value; } set { this.SubaccountOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of ReferrerChosen
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<AccountReferrerChosen?> ReferrerChosenOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ReferrerChosen
+        /// </summary>
+        [JsonPropertyName("_referrer_chosen")]
+        public AccountReferrerChosen? ReferrerChosen { get { return this.ReferrerChosenOption.Value; } set { this.ReferrerChosenOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -559,6 +743,7 @@ namespace ClickSend.Model
             sb.Append("  UserEmail: ").Append(UserEmail).Append("\n");
             sb.Append("  Active: ").Append(Active).Append("\n");
             sb.Append("  Banned: ").Append(Banned).Append("\n");
+            sb.Append("  DateSignUp: ").Append(DateSignUp).Append("\n");
             sb.Append("  Balance: ").Append(Balance).Append("\n");
             sb.Append("  UserPhone: ").Append(UserPhone).Append("\n");
             sb.Append("  ReplyTo: ").Append(ReplyTo).Append("\n");
@@ -569,7 +754,9 @@ namespace ClickSend.Model
             sb.Append("  AccountName: ").Append(AccountName).Append("\n");
             sb.Append("  AccountBillingEmail: ").Append(AccountBillingEmail).Append("\n");
             sb.Append("  AccountBillingMobile: ").Append(AccountBillingMobile).Append("\n");
+            sb.Append("  Priority: ").Append(Priority).Append("\n");
             sb.Append("  Country: ").Append(Country).Append("\n");
+            sb.Append("  CountryIp: ").Append(CountryIp).Append("\n");
             sb.Append("  DefaultCountrySms: ").Append(DefaultCountrySms).Append("\n");
             sb.Append("  AutoRecharge: ").Append(AutoRecharge).Append("\n");
             sb.Append("  AutoRechargeAmount: ").Append(AutoRechargeAmount).Append("\n");
@@ -582,8 +769,16 @@ namespace ClickSend.Model
             sb.Append("  BalanceCommission: ").Append(BalanceCommission).Append("\n");
             sb.Append("  Timezone: ").Append(Timezone).Append("\n");
             sb.Append("  PriceRate: ").Append(PriceRate).Append("\n");
+            sb.Append("  PrivateUploads: ").Append(PrivateUploads).Append("\n");
+            sb.Append("  FaxQuality: ").Append(FaxQuality).Append("\n");
+            sb.Append("  SettingSmsHideYourNumber: ").Append(SettingSmsHideYourNumber).Append("\n");
+            sb.Append("  SettingSmsHideBusinessName: ").Append(SettingSmsHideBusinessName).Append("\n");
+            sb.Append("  PricingVariant: ").Append(PricingVariant).Append("\n");
+            sb.Append("  OnTrial: ").Append(OnTrial).Append("\n");
+            sb.Append("  TrialExpiry: ").Append(TrialExpiry).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  Subaccount: ").Append(Subaccount).Append("\n");
+            sb.Append("  ReferrerChosen: ").Append(ReferrerChosen).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -626,6 +821,7 @@ namespace ClickSend.Model
             Option<string?> userEmail = default;
             Option<int?> active = default;
             Option<int?> banned = default;
+            Option<int?> dateSignUp = default;
             Option<string?> balance = default;
             Option<string?> userPhone = default;
             Option<string?> replyTo = default;
@@ -636,7 +832,9 @@ namespace ClickSend.Model
             Option<string?> accountName = default;
             Option<string?> accountBillingEmail = default;
             Option<string?> accountBillingMobile = default;
+            Option<int?> priority = default;
             Option<string?> country = default;
+            Option<string?> countryIp = default;
             Option<string?> defaultCountrySms = default;
             Option<int?> autoRecharge = default;
             Option<string?> autoRechargeAmount = default;
@@ -649,8 +847,16 @@ namespace ClickSend.Model
             Option<string?> balanceCommission = default;
             Option<string?> timezone = default;
             Option<int?> priceRate = default;
+            Option<int?> privateUploads = default;
+            Option<int?> faxQuality = default;
+            Option<int?> settingSmsHideYourNumber = default;
+            Option<int?> settingSmsHideBusinessName = default;
+            Option<int?> pricingVariant = default;
+            Option<int?> onTrial = default;
+            Option<string?> trialExpiry = default;
             Option<Currency?> currency = default;
             Option<Subaccount?> subaccount = default;
+            Option<AccountReferrerChosen?> referrerChosen = default;
 
             while (utf8JsonReader.Read())
             {
@@ -682,6 +888,9 @@ namespace ClickSend.Model
                         case "banned":
                             banned = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
+                        case "date_sign_up":
+                            dateSignUp = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
                         case "balance":
                             balance = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
@@ -712,8 +921,14 @@ namespace ClickSend.Model
                         case "account_billing_mobile":
                             accountBillingMobile = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "priority":
+                            priority = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
                         case "country":
                             country = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "country_ip":
+                            countryIp = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "default_country_sms":
                             defaultCountrySms = new Option<string?>(utf8JsonReader.GetString()!);
@@ -751,11 +966,35 @@ namespace ClickSend.Model
                         case "price_rate":
                             priceRate = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
+                        case "private_uploads":
+                            privateUploads = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "fax_quality":
+                            faxQuality = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "setting_sms_hide_your_number":
+                            settingSmsHideYourNumber = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "setting_sms_hide_business_name":
+                            settingSmsHideBusinessName = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "pricing_variant":
+                            pricingVariant = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "on_trial":
+                            onTrial = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "trial_expiry":
+                            trialExpiry = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "_currency":
                             currency = new Option<Currency?>(JsonSerializer.Deserialize<Currency>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "_subaccount":
                             subaccount = new Option<Subaccount?>(JsonSerializer.Deserialize<Subaccount>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "_referrer_chosen":
+                            referrerChosen = new Option<AccountReferrerChosen?>(JsonSerializer.Deserialize<AccountReferrerChosen>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -777,6 +1016,9 @@ namespace ClickSend.Model
 
             if (banned.IsSet && banned.Value == null)
                 throw new ArgumentNullException(nameof(banned), "Property is not nullable for class Account.");
+
+            if (dateSignUp.IsSet && dateSignUp.Value == null)
+                throw new ArgumentNullException(nameof(dateSignUp), "Property is not nullable for class Account.");
 
             if (balance.IsSet && balance.Value == null)
                 throw new ArgumentNullException(nameof(balance), "Property is not nullable for class Account.");
@@ -805,8 +1047,14 @@ namespace ClickSend.Model
             if (accountBillingMobile.IsSet && accountBillingMobile.Value == null)
                 throw new ArgumentNullException(nameof(accountBillingMobile), "Property is not nullable for class Account.");
 
+            if (priority.IsSet && priority.Value == null)
+                throw new ArgumentNullException(nameof(priority), "Property is not nullable for class Account.");
+
             if (country.IsSet && country.Value == null)
                 throw new ArgumentNullException(nameof(country), "Property is not nullable for class Account.");
+
+            if (countryIp.IsSet && countryIp.Value == null)
+                throw new ArgumentNullException(nameof(countryIp), "Property is not nullable for class Account.");
 
             if (defaultCountrySms.IsSet && defaultCountrySms.Value == null)
                 throw new ArgumentNullException(nameof(defaultCountrySms), "Property is not nullable for class Account.");
@@ -844,13 +1092,31 @@ namespace ClickSend.Model
             if (priceRate.IsSet && priceRate.Value == null)
                 throw new ArgumentNullException(nameof(priceRate), "Property is not nullable for class Account.");
 
+            if (privateUploads.IsSet && privateUploads.Value == null)
+                throw new ArgumentNullException(nameof(privateUploads), "Property is not nullable for class Account.");
+
+            if (faxQuality.IsSet && faxQuality.Value == null)
+                throw new ArgumentNullException(nameof(faxQuality), "Property is not nullable for class Account.");
+
+            if (settingSmsHideYourNumber.IsSet && settingSmsHideYourNumber.Value == null)
+                throw new ArgumentNullException(nameof(settingSmsHideYourNumber), "Property is not nullable for class Account.");
+
+            if (settingSmsHideBusinessName.IsSet && settingSmsHideBusinessName.Value == null)
+                throw new ArgumentNullException(nameof(settingSmsHideBusinessName), "Property is not nullable for class Account.");
+
+            if (pricingVariant.IsSet && pricingVariant.Value == null)
+                throw new ArgumentNullException(nameof(pricingVariant), "Property is not nullable for class Account.");
+
+            if (onTrial.IsSet && onTrial.Value == null)
+                throw new ArgumentNullException(nameof(onTrial), "Property is not nullable for class Account.");
+
             if (currency.IsSet && currency.Value == null)
                 throw new ArgumentNullException(nameof(currency), "Property is not nullable for class Account.");
 
             if (subaccount.IsSet && subaccount.Value == null)
                 throw new ArgumentNullException(nameof(subaccount), "Property is not nullable for class Account.");
 
-            return new Account(userId, username, userEmail, active, banned, balance, userPhone, replyTo, deliveryTo, userFirstName, userLastName, varAccount, accountName, accountBillingEmail, accountBillingMobile, country, defaultCountrySms, autoRecharge, autoRechargeAmount, lowCreditAmount, settingUnicodeSms, settingEmailSmsSubject, settingFixSenderId, settingSmsMessageCharLimit, oldDashboard, balanceCommission, timezone, priceRate, currency, subaccount);
+            return new Account(userId, username, userEmail, active, banned, dateSignUp, balance, userPhone, replyTo, deliveryTo, userFirstName, userLastName, varAccount, accountName, accountBillingEmail, accountBillingMobile, priority, country, countryIp, defaultCountrySms, autoRecharge, autoRechargeAmount, lowCreditAmount, settingUnicodeSms, settingEmailSmsSubject, settingFixSenderId, settingSmsMessageCharLimit, oldDashboard, balanceCommission, timezone, priceRate, privateUploads, faxQuality, settingSmsHideYourNumber, settingSmsHideBusinessName, pricingVariant, onTrial, trialExpiry, currency, subaccount, referrerChosen);
         }
 
         /// <summary>
@@ -910,6 +1176,9 @@ namespace ClickSend.Model
             if (account.CountryOption.IsSet && account.Country == null)
                 throw new ArgumentNullException(nameof(account.Country), "Property is required for class Account.");
 
+            if (account.CountryIpOption.IsSet && account.CountryIp == null)
+                throw new ArgumentNullException(nameof(account.CountryIp), "Property is required for class Account.");
+
             if (account.DefaultCountrySmsOption.IsSet && account.DefaultCountrySms == null)
                 throw new ArgumentNullException(nameof(account.DefaultCountrySms), "Property is required for class Account.");
 
@@ -946,6 +1215,9 @@ namespace ClickSend.Model
             if (account.BannedOption.IsSet)
                 writer.WriteNumber("banned", account.BannedOption.Value!.Value);
 
+            if (account.DateSignUpOption.IsSet)
+                writer.WriteNumber("date_sign_up", account.DateSignUpOption.Value!.Value);
+
             if (account.BalanceOption.IsSet)
                 writer.WriteString("balance", account.Balance);
 
@@ -979,8 +1251,14 @@ namespace ClickSend.Model
             if (account.AccountBillingMobileOption.IsSet)
                 writer.WriteString("account_billing_mobile", account.AccountBillingMobile);
 
+            if (account.PriorityOption.IsSet)
+                writer.WriteNumber("priority", account.PriorityOption.Value!.Value);
+
             if (account.CountryOption.IsSet)
                 writer.WriteString("country", account.Country);
+
+            if (account.CountryIpOption.IsSet)
+                writer.WriteString("country_ip", account.CountryIp);
 
             if (account.DefaultCountrySmsOption.IsSet)
                 writer.WriteString("default_country_sms", account.DefaultCountrySms);
@@ -1018,6 +1296,30 @@ namespace ClickSend.Model
             if (account.PriceRateOption.IsSet)
                 writer.WriteNumber("price_rate", account.PriceRateOption.Value!.Value);
 
+            if (account.PrivateUploadsOption.IsSet)
+                writer.WriteNumber("private_uploads", account.PrivateUploadsOption.Value!.Value);
+
+            if (account.FaxQualityOption.IsSet)
+                writer.WriteNumber("fax_quality", account.FaxQualityOption.Value!.Value);
+
+            if (account.SettingSmsHideYourNumberOption.IsSet)
+                writer.WriteNumber("setting_sms_hide_your_number", account.SettingSmsHideYourNumberOption.Value!.Value);
+
+            if (account.SettingSmsHideBusinessNameOption.IsSet)
+                writer.WriteNumber("setting_sms_hide_business_name", account.SettingSmsHideBusinessNameOption.Value!.Value);
+
+            if (account.PricingVariantOption.IsSet)
+                writer.WriteNumber("pricing_variant", account.PricingVariantOption.Value!.Value);
+
+            if (account.OnTrialOption.IsSet)
+                writer.WriteNumber("on_trial", account.OnTrialOption.Value!.Value);
+
+            if (account.TrialExpiryOption.IsSet)
+                if (account.TrialExpiryOption.Value != null)
+                    writer.WriteString("trial_expiry", account.TrialExpiry);
+                else
+                    writer.WriteNull("trial_expiry");
+
             if (account.CurrencyOption.IsSet)
             {
                 writer.WritePropertyName("_currency");
@@ -1028,6 +1330,14 @@ namespace ClickSend.Model
                 writer.WritePropertyName("_subaccount");
                 JsonSerializer.Serialize(writer, account.Subaccount, jsonSerializerOptions);
             }
+            if (account.ReferrerChosenOption.IsSet)
+                if (account.ReferrerChosenOption.Value != null)
+                {
+                    writer.WritePropertyName("_referrer_chosen");
+                    JsonSerializer.Serialize(writer, account.ReferrerChosen, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("_referrer_chosen");
         }
     }
 }

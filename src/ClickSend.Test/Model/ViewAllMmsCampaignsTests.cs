@@ -54,30 +54,75 @@ namespace ClickSend.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'HttpCode'
+        /// Test the property 'Total'
         /// </summary>
         [Fact]
-        public void HttpCodeTest()
+        public void TotalTest()
         {
-            // TODO unit test for the property 'HttpCode'
+            // TODO unit test for the property 'Total'
         }
 
         /// <summary>
-        /// Test the property 'ResponseCode'
+        /// Test the property 'PerPage'
         /// </summary>
         [Fact]
-        public void ResponseCodeTest()
+        public void PerPageTest()
         {
-            // TODO unit test for the property 'ResponseCode'
+            // TODO unit test for the property 'PerPage'
         }
 
         /// <summary>
-        /// Test the property 'ResponseMsg'
+        /// Test the property 'CurrentPage'
         /// </summary>
         [Fact]
-        public void ResponseMsgTest()
+        public void CurrentPageTest()
         {
-            // TODO unit test for the property 'ResponseMsg'
+            // TODO unit test for the property 'CurrentPage'
+        }
+
+        /// <summary>
+        /// Test the property 'LastPage'
+        /// </summary>
+        [Fact]
+        public void LastPageTest()
+        {
+            // TODO unit test for the property 'LastPage'
+        }
+
+        /// <summary>
+        /// Test the property 'NextPageUrl'
+        /// </summary>
+        [Fact]
+        public void NextPageUrlTest()
+        {
+            // TODO unit test for the property 'NextPageUrl'
+        }
+
+        /// <summary>
+        /// Test the property 'PrevPageUrl'
+        /// </summary>
+        [Fact]
+        public void PrevPageUrlTest()
+        {
+            // TODO unit test for the property 'PrevPageUrl'
+        }
+
+        /// <summary>
+        /// Test the property 'From'
+        /// </summary>
+        [Fact]
+        public void FromTest()
+        {
+            // TODO unit test for the property 'From'
+        }
+
+        /// <summary>
+        /// Test the property 'To'
+        /// </summary>
+        [Fact]
+        public void ToTest()
+        {
+            // TODO unit test for the property 'To'
         }
 
         /// <summary>

@@ -108,6 +108,24 @@ namespace ClickSend.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'From'
+        /// </summary>
+        [Fact]
+        public void FromTest()
+        {
+            // TODO unit test for the property 'From'
+        }
+
+        /// <summary>
+        /// Test the property 'To'
+        /// </summary>
+        [Fact]
+        public void ToTest()
+        {
+            // TODO unit test for the property 'To'
+        }
+
+        /// <summary>
         /// Test the property 'Data'
         /// </summary>
         [Fact]

@@ -33,16 +33,26 @@ namespace ClickSend.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewAllMmsCampaigns" /> class.
         /// </summary>
-        /// <param name="httpCode">The HTTP status code of the response.</param>
-        /// <param name="responseCode">The response code indicating the status of the operation.</param>
-        /// <param name="responseMsg">A message describing the outcome of the operation.</param>
+        /// <param name="total">The total number of items available for viewing.</param>
+        /// <param name="perPage">The number of items returned per page. This is specified in the limit parameter. You can have 100 items at maximum, and 15 at minimum.</param>
+        /// <param name="currentPage">The current page number.</param>
+        /// <param name="lastPage">The last page number.</param>
+        /// <param name="nextPageUrl">A URL of the next page. It will return **null** if there’s no next page.</param>
+        /// <param name="prevPageUrl">A URL of the previous page. It will return **null** if there’s no previous page.</param>
+        /// <param name="from">The number of the first result in the current page.</param>
+        /// <param name="to">The number of the last result in the current page.</param>
         /// <param name="data">data</param>
         [JsonConstructor]
-        public ViewAllMmsCampaigns(Option<int?> httpCode = default, Option<string?> responseCode = default, Option<string?> responseMsg = default, Option<ViewAllMmsCampaignsData?> data = default)
+        public ViewAllMmsCampaigns(Option<int?> total = default, Option<int?> perPage = default, Option<int?> currentPage = default, Option<int?> lastPage = default, Option<string?> nextPageUrl = default, Option<string?> prevPageUrl = default, Option<int?> from = default, Option<int?> to = default, Option<List<MmsCampaign>?> data = default)
         {
-            HttpCodeOption = httpCode;
-            ResponseCodeOption = responseCode;
-            ResponseMsgOption = responseMsg;
+            TotalOption = total;
+            PerPageOption = perPage;
+            CurrentPageOption = currentPage;
+            LastPageOption = lastPage;
+            NextPageUrlOption = nextPageUrl;
+            PrevPageUrlOption = prevPageUrl;
+            FromOption = from;
+            ToOption = to;
             DataOption = data;
             OnCreated();
         }
@@ -50,62 +60,135 @@ namespace ClickSend.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Used to track the state of HttpCode
+        /// Used to track the state of Total
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<int?> HttpCodeOption { get; private set; }
+        public Option<int?> TotalOption { get; private set; }
 
         /// <summary>
-        /// The HTTP status code of the response.
+        /// The total number of items available for viewing.
         /// </summary>
-        /// <value>The HTTP status code of the response.</value>
-        /* <example>200</example> */
-        [JsonPropertyName("http_code")]
-        public int? HttpCode { get { return this.HttpCodeOption.Value; } set { this.HttpCodeOption = new(value); } }
+        /// <value>The total number of items available for viewing.</value>
+        /* <example>2</example> */
+        [JsonPropertyName("total")]
+        public int? Total { get { return this.TotalOption.Value; } set { this.TotalOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of ResponseCode
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> ResponseCodeOption { get; private set; }
-
-        /// <summary>
-        /// The response code indicating the status of the operation.
-        /// </summary>
-        /// <value>The response code indicating the status of the operation.</value>
-        /* <example>SUCCESS</example> */
-        [JsonPropertyName("response_code")]
-        public string? ResponseCode { get { return this.ResponseCodeOption.Value; } set { this.ResponseCodeOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of ResponseMsg
+        /// Used to track the state of PerPage
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> ResponseMsgOption { get; private set; }
+        public Option<int?> PerPageOption { get; private set; }
 
         /// <summary>
-        /// A message describing the outcome of the operation.
+        /// The number of items returned per page. This is specified in the limit parameter. You can have 100 items at maximum, and 15 at minimum.
         /// </summary>
-        /// <value>A message describing the outcome of the operation.</value>
-        /* <example>Countries have been selected.</example> */
-        [JsonPropertyName("response_msg")]
-        public string? ResponseMsg { get { return this.ResponseMsgOption.Value; } set { this.ResponseMsgOption = new(value); } }
+        /// <value>The number of items returned per page. This is specified in the limit parameter. You can have 100 items at maximum, and 15 at minimum.</value>
+        /* <example>15</example> */
+        [JsonPropertyName("per_page")]
+        public int? PerPage { get { return this.PerPageOption.Value; } set { this.PerPageOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of CurrentPage
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> CurrentPageOption { get; private set; }
+
+        /// <summary>
+        /// The current page number.
+        /// </summary>
+        /// <value>The current page number.</value>
+        /* <example>1</example> */
+        [JsonPropertyName("current_page")]
+        public int? CurrentPage { get { return this.CurrentPageOption.Value; } set { this.CurrentPageOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of LastPage
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> LastPageOption { get; private set; }
+
+        /// <summary>
+        /// The last page number.
+        /// </summary>
+        /// <value>The last page number.</value>
+        /* <example>1</example> */
+        [JsonPropertyName("last_page")]
+        public int? LastPage { get { return this.LastPageOption.Value; } set { this.LastPageOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of NextPageUrl
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> NextPageUrlOption { get; private set; }
+
+        /// <summary>
+        /// A URL of the next page. It will return **null** if there’s no next page.
+        /// </summary>
+        /// <value>A URL of the next page. It will return **null** if there’s no next page.</value>
+        [JsonPropertyName("next_page_url")]
+        public string? NextPageUrl { get { return this.NextPageUrlOption.Value; } set { this.NextPageUrlOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PrevPageUrl
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PrevPageUrlOption { get; private set; }
+
+        /// <summary>
+        /// A URL of the previous page. It will return **null** if there’s no previous page.
+        /// </summary>
+        /// <value>A URL of the previous page. It will return **null** if there’s no previous page.</value>
+        [JsonPropertyName("prev_page_url")]
+        public string? PrevPageUrl { get { return this.PrevPageUrlOption.Value; } set { this.PrevPageUrlOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of From
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> FromOption { get; private set; }
+
+        /// <summary>
+        /// The number of the first result in the current page.
+        /// </summary>
+        /// <value>The number of the first result in the current page.</value>
+        /* <example>1</example> */
+        [JsonPropertyName("from")]
+        public int? From { get { return this.FromOption.Value; } set { this.FromOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of To
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> ToOption { get; private set; }
+
+        /// <summary>
+        /// The number of the last result in the current page.
+        /// </summary>
+        /// <value>The number of the last result in the current page.</value>
+        /* <example>2</example> */
+        [JsonPropertyName("to")]
+        public int? To { get { return this.ToOption.Value; } set { this.ToOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Data
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<ViewAllMmsCampaignsData?> DataOption { get; private set; }
+        public Option<List<MmsCampaign>?> DataOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Data
         /// </summary>
         [JsonPropertyName("data")]
-        public ViewAllMmsCampaignsData? Data { get { return this.DataOption.Value; } set { this.DataOption = new(value); } }
+        public List<MmsCampaign>? Data { get { return this.DataOption.Value; } set { this.DataOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -115,9 +198,14 @@ namespace ClickSend.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class ViewAllMmsCampaigns {\n");
-            sb.Append("  HttpCode: ").Append(HttpCode).Append("\n");
-            sb.Append("  ResponseCode: ").Append(ResponseCode).Append("\n");
-            sb.Append("  ResponseMsg: ").Append(ResponseMsg).Append("\n");
+            sb.Append("  Total: ").Append(Total).Append("\n");
+            sb.Append("  PerPage: ").Append(PerPage).Append("\n");
+            sb.Append("  CurrentPage: ").Append(CurrentPage).Append("\n");
+            sb.Append("  LastPage: ").Append(LastPage).Append("\n");
+            sb.Append("  NextPageUrl: ").Append(NextPageUrl).Append("\n");
+            sb.Append("  PrevPageUrl: ").Append(PrevPageUrl).Append("\n");
+            sb.Append("  From: ").Append(From).Append("\n");
+            sb.Append("  To: ").Append(To).Append("\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -156,10 +244,15 @@ namespace ClickSend.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<int?> httpCode = default;
-            Option<string?> responseCode = default;
-            Option<string?> responseMsg = default;
-            Option<ViewAllMmsCampaignsData?> data = default;
+            Option<int?> total = default;
+            Option<int?> perPage = default;
+            Option<int?> currentPage = default;
+            Option<int?> lastPage = default;
+            Option<string?> nextPageUrl = default;
+            Option<string?> prevPageUrl = default;
+            Option<int?> from = default;
+            Option<int?> to = default;
+            Option<List<MmsCampaign>?> data = default;
 
             while (utf8JsonReader.Read())
             {
@@ -176,17 +269,32 @@ namespace ClickSend.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "http_code":
-                            httpCode = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                        case "total":
+                            total = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
-                        case "response_code":
-                            responseCode = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "per_page":
+                            perPage = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
-                        case "response_msg":
-                            responseMsg = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "current_page":
+                            currentPage = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "last_page":
+                            lastPage = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "next_page_url":
+                            nextPageUrl = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "prev_page_url":
+                            prevPageUrl = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "from":
+                            from = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "to":
+                            to = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "data":
-                            data = new Option<ViewAllMmsCampaignsData?>(JsonSerializer.Deserialize<ViewAllMmsCampaignsData>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            data = new Option<List<MmsCampaign>?>(JsonSerializer.Deserialize<List<MmsCampaign>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;
@@ -194,19 +302,28 @@ namespace ClickSend.Model
                 }
             }
 
-            if (httpCode.IsSet && httpCode.Value == null)
-                throw new ArgumentNullException(nameof(httpCode), "Property is not nullable for class ViewAllMmsCampaigns.");
+            if (total.IsSet && total.Value == null)
+                throw new ArgumentNullException(nameof(total), "Property is not nullable for class ViewAllMmsCampaigns.");
 
-            if (responseCode.IsSet && responseCode.Value == null)
-                throw new ArgumentNullException(nameof(responseCode), "Property is not nullable for class ViewAllMmsCampaigns.");
+            if (perPage.IsSet && perPage.Value == null)
+                throw new ArgumentNullException(nameof(perPage), "Property is not nullable for class ViewAllMmsCampaigns.");
 
-            if (responseMsg.IsSet && responseMsg.Value == null)
-                throw new ArgumentNullException(nameof(responseMsg), "Property is not nullable for class ViewAllMmsCampaigns.");
+            if (currentPage.IsSet && currentPage.Value == null)
+                throw new ArgumentNullException(nameof(currentPage), "Property is not nullable for class ViewAllMmsCampaigns.");
+
+            if (lastPage.IsSet && lastPage.Value == null)
+                throw new ArgumentNullException(nameof(lastPage), "Property is not nullable for class ViewAllMmsCampaigns.");
+
+            if (from.IsSet && from.Value == null)
+                throw new ArgumentNullException(nameof(from), "Property is not nullable for class ViewAllMmsCampaigns.");
+
+            if (to.IsSet && to.Value == null)
+                throw new ArgumentNullException(nameof(to), "Property is not nullable for class ViewAllMmsCampaigns.");
 
             if (data.IsSet && data.Value == null)
                 throw new ArgumentNullException(nameof(data), "Property is not nullable for class ViewAllMmsCampaigns.");
 
-            return new ViewAllMmsCampaigns(httpCode, responseCode, responseMsg, data);
+            return new ViewAllMmsCampaigns(total, perPage, currentPage, lastPage, nextPageUrl, prevPageUrl, from, to, data);
         }
 
         /// <summary>
@@ -233,23 +350,38 @@ namespace ClickSend.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, ViewAllMmsCampaigns viewAllMmsCampaigns, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (viewAllMmsCampaigns.ResponseCodeOption.IsSet && viewAllMmsCampaigns.ResponseCode == null)
-                throw new ArgumentNullException(nameof(viewAllMmsCampaigns.ResponseCode), "Property is required for class ViewAllMmsCampaigns.");
-
-            if (viewAllMmsCampaigns.ResponseMsgOption.IsSet && viewAllMmsCampaigns.ResponseMsg == null)
-                throw new ArgumentNullException(nameof(viewAllMmsCampaigns.ResponseMsg), "Property is required for class ViewAllMmsCampaigns.");
-
             if (viewAllMmsCampaigns.DataOption.IsSet && viewAllMmsCampaigns.Data == null)
                 throw new ArgumentNullException(nameof(viewAllMmsCampaigns.Data), "Property is required for class ViewAllMmsCampaigns.");
 
-            if (viewAllMmsCampaigns.HttpCodeOption.IsSet)
-                writer.WriteNumber("http_code", viewAllMmsCampaigns.HttpCodeOption.Value!.Value);
+            if (viewAllMmsCampaigns.TotalOption.IsSet)
+                writer.WriteNumber("total", viewAllMmsCampaigns.TotalOption.Value!.Value);
 
-            if (viewAllMmsCampaigns.ResponseCodeOption.IsSet)
-                writer.WriteString("response_code", viewAllMmsCampaigns.ResponseCode);
+            if (viewAllMmsCampaigns.PerPageOption.IsSet)
+                writer.WriteNumber("per_page", viewAllMmsCampaigns.PerPageOption.Value!.Value);
 
-            if (viewAllMmsCampaigns.ResponseMsgOption.IsSet)
-                writer.WriteString("response_msg", viewAllMmsCampaigns.ResponseMsg);
+            if (viewAllMmsCampaigns.CurrentPageOption.IsSet)
+                writer.WriteNumber("current_page", viewAllMmsCampaigns.CurrentPageOption.Value!.Value);
+
+            if (viewAllMmsCampaigns.LastPageOption.IsSet)
+                writer.WriteNumber("last_page", viewAllMmsCampaigns.LastPageOption.Value!.Value);
+
+            if (viewAllMmsCampaigns.NextPageUrlOption.IsSet)
+                if (viewAllMmsCampaigns.NextPageUrlOption.Value != null)
+                    writer.WriteString("next_page_url", viewAllMmsCampaigns.NextPageUrl);
+                else
+                    writer.WriteNull("next_page_url");
+
+            if (viewAllMmsCampaigns.PrevPageUrlOption.IsSet)
+                if (viewAllMmsCampaigns.PrevPageUrlOption.Value != null)
+                    writer.WriteString("prev_page_url", viewAllMmsCampaigns.PrevPageUrl);
+                else
+                    writer.WriteNull("prev_page_url");
+
+            if (viewAllMmsCampaigns.FromOption.IsSet)
+                writer.WriteNumber("from", viewAllMmsCampaigns.FromOption.Value!.Value);
+
+            if (viewAllMmsCampaigns.ToOption.IsSet)
+                writer.WriteNumber("to", viewAllMmsCampaigns.ToOption.Value!.Value);
 
             if (viewAllMmsCampaigns.DataOption.IsSet)
             {

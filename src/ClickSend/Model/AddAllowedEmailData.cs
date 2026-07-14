@@ -26,18 +26,18 @@ using ClickSend.Client;
 namespace ClickSend.Model
 {
     /// <summary>
-    /// ViewAllowedEmailsDataInner
+    /// AddAllowedEmailData
     /// </summary>
-    public partial class ViewAllowedEmailsDataInner : IValidatableObject
+    public partial class AddAllowedEmailData : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ViewAllowedEmailsDataInner" /> class.
+        /// Initializes a new instance of the <see cref="AddAllowedEmailData" /> class.
         /// </summary>
         /// <param name="emailAddressId">The ID of the email address.</param>
         /// <param name="emailAddress">The email address.</param>
         /// <param name="from">The sender.</param>
         [JsonConstructor]
-        public ViewAllowedEmailsDataInner(Option<decimal?> emailAddressId = default, Option<string?> emailAddress = default, Option<string?> from = default)
+        public AddAllowedEmailData(Option<decimal?> emailAddressId = default, Option<string?> emailAddress = default, Option<string?> from = default)
         {
             EmailAddressIdOption = emailAddressId;
             EmailAddressOption = emailAddress;
@@ -58,7 +58,7 @@ namespace ClickSend.Model
         /// The ID of the email address.
         /// </summary>
         /// <value>The ID of the email address.</value>
-        /* <example>1</example> */
+        /* <example>107</example> */
         [JsonPropertyName("email_address_id")]
         public decimal? EmailAddressId { get { return this.EmailAddressIdOption.Value; } set { this.EmailAddressIdOption = new(value); } }
 
@@ -73,7 +73,7 @@ namespace ClickSend.Model
         /// The email address.
         /// </summary>
         /// <value>The email address.</value>
-        /* <example>my@email.com</example> */
+        /* <example>Cv3p0@gmail.com</example> */
         [JsonPropertyName("email_address")]
         public string? EmailAddress { get { return this.EmailAddressOption.Value; } set { this.EmailAddressOption = new(value); } }
 
@@ -88,7 +88,7 @@ namespace ClickSend.Model
         /// The sender.
         /// </summary>
         /// <value>The sender.</value>
-        /* <example>+13523944199</example> */
+        /* <example>+17128845887</example> */
         [JsonPropertyName("from")]
         public string? From { get { return this.FromOption.Value; } set { this.FromOption = new(value); } }
 
@@ -99,7 +99,7 @@ namespace ClickSend.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class ViewAllowedEmailsDataInner {\n");
+            sb.Append("class AddAllowedEmailData {\n");
             sb.Append("  EmailAddressId: ").Append(EmailAddressId).Append("\n");
             sb.Append("  EmailAddress: ").Append(EmailAddress).Append("\n");
             sb.Append("  From: ").Append(From).Append("\n");
@@ -119,19 +119,19 @@ namespace ClickSend.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="ViewAllowedEmailsDataInner" />
+    /// A Json converter for type <see cref="AddAllowedEmailData" />
     /// </summary>
-    public class ViewAllowedEmailsDataInnerJsonConverter : JsonConverter<ViewAllowedEmailsDataInner>
+    public class AddAllowedEmailDataJsonConverter : JsonConverter<AddAllowedEmailData>
     {
         /// <summary>
-        /// Deserializes json to <see cref="ViewAllowedEmailsDataInner" />
+        /// Deserializes json to <see cref="AddAllowedEmailData" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override ViewAllowedEmailsDataInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override AddAllowedEmailData Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -175,55 +175,55 @@ namespace ClickSend.Model
             }
 
             if (emailAddressId.IsSet && emailAddressId.Value == null)
-                throw new ArgumentNullException(nameof(emailAddressId), "Property is not nullable for class ViewAllowedEmailsDataInner.");
+                throw new ArgumentNullException(nameof(emailAddressId), "Property is not nullable for class AddAllowedEmailData.");
 
             if (emailAddress.IsSet && emailAddress.Value == null)
-                throw new ArgumentNullException(nameof(emailAddress), "Property is not nullable for class ViewAllowedEmailsDataInner.");
+                throw new ArgumentNullException(nameof(emailAddress), "Property is not nullable for class AddAllowedEmailData.");
 
             if (from.IsSet && from.Value == null)
-                throw new ArgumentNullException(nameof(from), "Property is not nullable for class ViewAllowedEmailsDataInner.");
+                throw new ArgumentNullException(nameof(from), "Property is not nullable for class AddAllowedEmailData.");
 
-            return new ViewAllowedEmailsDataInner(emailAddressId, emailAddress, from);
+            return new AddAllowedEmailData(emailAddressId, emailAddress, from);
         }
 
         /// <summary>
-        /// Serializes a <see cref="ViewAllowedEmailsDataInner" />
+        /// Serializes a <see cref="AddAllowedEmailData" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="viewAllowedEmailsDataInner"></param>
+        /// <param name="addAllowedEmailData"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, ViewAllowedEmailsDataInner viewAllowedEmailsDataInner, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, AddAllowedEmailData addAllowedEmailData, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, viewAllowedEmailsDataInner, jsonSerializerOptions);
+            WriteProperties(writer, addAllowedEmailData, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="ViewAllowedEmailsDataInner" />
+        /// Serializes the properties of <see cref="AddAllowedEmailData" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="viewAllowedEmailsDataInner"></param>
+        /// <param name="addAllowedEmailData"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, ViewAllowedEmailsDataInner viewAllowedEmailsDataInner, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, AddAllowedEmailData addAllowedEmailData, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (viewAllowedEmailsDataInner.EmailAddressOption.IsSet && viewAllowedEmailsDataInner.EmailAddress == null)
-                throw new ArgumentNullException(nameof(viewAllowedEmailsDataInner.EmailAddress), "Property is required for class ViewAllowedEmailsDataInner.");
+            if (addAllowedEmailData.EmailAddressOption.IsSet && addAllowedEmailData.EmailAddress == null)
+                throw new ArgumentNullException(nameof(addAllowedEmailData.EmailAddress), "Property is required for class AddAllowedEmailData.");
 
-            if (viewAllowedEmailsDataInner.FromOption.IsSet && viewAllowedEmailsDataInner.From == null)
-                throw new ArgumentNullException(nameof(viewAllowedEmailsDataInner.From), "Property is required for class ViewAllowedEmailsDataInner.");
+            if (addAllowedEmailData.FromOption.IsSet && addAllowedEmailData.From == null)
+                throw new ArgumentNullException(nameof(addAllowedEmailData.From), "Property is required for class AddAllowedEmailData.");
 
-            if (viewAllowedEmailsDataInner.EmailAddressIdOption.IsSet)
-                writer.WriteNumber("email_address_id", viewAllowedEmailsDataInner.EmailAddressIdOption.Value!.Value);
+            if (addAllowedEmailData.EmailAddressIdOption.IsSet)
+                writer.WriteNumber("email_address_id", addAllowedEmailData.EmailAddressIdOption.Value!.Value);
 
-            if (viewAllowedEmailsDataInner.EmailAddressOption.IsSet)
-                writer.WriteString("email_address", viewAllowedEmailsDataInner.EmailAddress);
+            if (addAllowedEmailData.EmailAddressOption.IsSet)
+                writer.WriteString("email_address", addAllowedEmailData.EmailAddress);
 
-            if (viewAllowedEmailsDataInner.FromOption.IsSet)
-                writer.WriteString("from", viewAllowedEmailsDataInner.From);
+            if (addAllowedEmailData.FromOption.IsSet)
+                writer.WriteString("from", addAllowedEmailData.From);
         }
     }
 }

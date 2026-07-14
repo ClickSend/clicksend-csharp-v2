@@ -41,10 +41,10 @@ namespace ClickSend.Model
         /// <param name="status">The status of the record.</param>
         /// <param name="reason">The reason for the status.</param>
         /// <param name="countries">List of country codes where the alpha tag is requested. If not provided, it means a global alpha tag.</param>
-        /// <param name="createdTimestamp">The timestamp when the record was created.</param>
-        /// <param name="updatedTimestamp">The timestamp when the record was last updated.</param>
+        /// <param name="createdTimestamp">The timestamp when the record was created. Usually ISO 8601 (e.g. \&quot;2021-05-11T01:00:00.123Z\&quot;), but returned as a plain string rather than a strict date-time since some older records don&#39;t include a UTC offset (e.g. \&quot;2024-01-10T10:55:26.818097\&quot;).</param>
+        /// <param name="updatedTimestamp">The timestamp when the record was last updated. Usually ISO 8601 (e.g. \&quot;2021-05-11T01:05:00.123Z\&quot;), but returned as a plain string rather than a strict date-time since some older records don&#39;t include a UTC offset.</param>
         [JsonConstructor]
-        public AlphaTag(Option<string?> id = default, Option<string?> accountId = default, Option<string?> workspaceId = default, Option<string?> userId = default, Option<string?> varAlphaTag = default, Option<string?> status = default, Option<string?> reason = default, Option<List<string>?> countries = default, Option<DateTime?> createdTimestamp = default, Option<DateTime?> updatedTimestamp = default)
+        public AlphaTag(Option<string?> id = default, Option<string?> accountId = default, Option<string?> workspaceId = default, Option<string?> userId = default, Option<string?> varAlphaTag = default, Option<string?> status = default, Option<string?> reason = default, Option<List<string>?> countries = default, Option<string?> createdTimestamp = default, Option<string?> updatedTimestamp = default)
         {
             IdOption = id;
             AccountIdOption = accountId;
@@ -186,30 +186,30 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<DateTime?> CreatedTimestampOption { get; private set; }
+        public Option<string?> CreatedTimestampOption { get; private set; }
 
         /// <summary>
-        /// The timestamp when the record was created.
+        /// The timestamp when the record was created. Usually ISO 8601 (e.g. \&quot;2021-05-11T01:00:00.123Z\&quot;), but returned as a plain string rather than a strict date-time since some older records don&#39;t include a UTC offset (e.g. \&quot;2024-01-10T10:55:26.818097\&quot;).
         /// </summary>
-        /// <value>The timestamp when the record was created.</value>
+        /// <value>The timestamp when the record was created. Usually ISO 8601 (e.g. \&quot;2021-05-11T01:00:00.123Z\&quot;), but returned as a plain string rather than a strict date-time since some older records don&#39;t include a UTC offset (e.g. \&quot;2024-01-10T10:55:26.818097\&quot;).</value>
         /* <example>2021-05-11T01:00:00.123Z</example> */
         [JsonPropertyName("created_timestamp")]
-        public DateTime? CreatedTimestamp { get { return this.CreatedTimestampOption.Value; } set { this.CreatedTimestampOption = new(value); } }
+        public string? CreatedTimestamp { get { return this.CreatedTimestampOption.Value; } set { this.CreatedTimestampOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of UpdatedTimestamp
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<DateTime?> UpdatedTimestampOption { get; private set; }
+        public Option<string?> UpdatedTimestampOption { get; private set; }
 
         /// <summary>
-        /// The timestamp when the record was last updated.
+        /// The timestamp when the record was last updated. Usually ISO 8601 (e.g. \&quot;2021-05-11T01:05:00.123Z\&quot;), but returned as a plain string rather than a strict date-time since some older records don&#39;t include a UTC offset.
         /// </summary>
-        /// <value>The timestamp when the record was last updated.</value>
+        /// <value>The timestamp when the record was last updated. Usually ISO 8601 (e.g. \&quot;2021-05-11T01:05:00.123Z\&quot;), but returned as a plain string rather than a strict date-time since some older records don&#39;t include a UTC offset.</value>
         /* <example>2021-05-11T01:05:00.123Z</example> */
         [JsonPropertyName("updated_timestamp")]
-        public DateTime? UpdatedTimestamp { get { return this.UpdatedTimestampOption.Value; } set { this.UpdatedTimestampOption = new(value); } }
+        public string? UpdatedTimestamp { get { return this.UpdatedTimestampOption.Value; } set { this.UpdatedTimestampOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -250,16 +250,6 @@ namespace ClickSend.Model
     public class AlphaTagJsonConverter : JsonConverter<AlphaTag>
     {
         /// <summary>
-        /// The format to use to serialize CreatedTimestamp
-        /// </summary>
-        public static string CreatedTimestampFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
-
-        /// <summary>
-        /// The format to use to serialize UpdatedTimestamp
-        /// </summary>
-        public static string UpdatedTimestampFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
-
-        /// <summary>
         /// Deserializes json to <see cref="AlphaTag" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -284,8 +274,8 @@ namespace ClickSend.Model
             Option<string?> status = default;
             Option<string?> reason = default;
             Option<List<string>?> countries = default;
-            Option<DateTime?> createdTimestamp = default;
-            Option<DateTime?> updatedTimestamp = default;
+            Option<string?> createdTimestamp = default;
+            Option<string?> updatedTimestamp = default;
 
             while (utf8JsonReader.Read())
             {
@@ -327,10 +317,10 @@ namespace ClickSend.Model
                             countries = new Option<List<string>?>(JsonSerializer.Deserialize<List<string>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "created_timestamp":
-                            createdTimestamp = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            createdTimestamp = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "updated_timestamp":
-                            updatedTimestamp = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            updatedTimestamp = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         default:
                             break;
@@ -413,6 +403,12 @@ namespace ClickSend.Model
             if (alphaTag.ReasonOption.IsSet && alphaTag.Reason == null)
                 throw new ArgumentNullException(nameof(alphaTag.Reason), "Property is required for class AlphaTag.");
 
+            if (alphaTag.CreatedTimestampOption.IsSet && alphaTag.CreatedTimestamp == null)
+                throw new ArgumentNullException(nameof(alphaTag.CreatedTimestamp), "Property is required for class AlphaTag.");
+
+            if (alphaTag.UpdatedTimestampOption.IsSet && alphaTag.UpdatedTimestamp == null)
+                throw new ArgumentNullException(nameof(alphaTag.UpdatedTimestamp), "Property is required for class AlphaTag.");
+
             if (alphaTag.IdOption.IsSet)
                 writer.WriteString("id", alphaTag.Id);
 
@@ -443,10 +439,10 @@ namespace ClickSend.Model
                 else
                     writer.WriteNull("countries");
             if (alphaTag.CreatedTimestampOption.IsSet)
-                writer.WriteString("created_timestamp", alphaTag.CreatedTimestampOption.Value!.Value.ToString(CreatedTimestampFormat));
+                writer.WriteString("created_timestamp", alphaTag.CreatedTimestamp);
 
             if (alphaTag.UpdatedTimestampOption.IsSet)
-                writer.WriteString("updated_timestamp", alphaTag.UpdatedTimestampOption.Value!.Value.ToString(UpdatedTimestampFormat));
+                writer.WriteString("updated_timestamp", alphaTag.UpdatedTimestamp);
         }
     }
 }

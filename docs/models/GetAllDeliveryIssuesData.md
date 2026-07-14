@@ -1,4 +1,4 @@
-# ClickSend.Model.ViewAllMmsCampaignsData
+# ClickSend.Model.GetAllDeliveryIssuesData
 
 ## Properties
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **PrevPageUrl** | **string** | A URL of the previous page. It will return **null** if there’s no previous page. | [optional] 
 **From** | **int** | The number of the first result in the current page. | [optional] 
 **To** | **int** | The number of the last result in the current page. | [optional] 
-**Data** | [**List&lt;MmsCampaign&gt;**](MmsCampaign.md) |  | [optional] 
+**Data** | [**List&lt;DeliveryIssue&gt;**](DeliveryIssue.md) |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

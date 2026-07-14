@@ -104,7 +104,7 @@ namespace ClickSend.Model
         /// <summary>
         /// Gets or Sets Data
         /// </summary>
-        /* <example>[{&quot;code&quot;:&quot;en-us&quot;,&quot;country&quot;:&quot;English, US&quot;,&quot;gender&quot;:&quot;male&quot;},{&quot;code&quot;:&quot;en-au&quot;,&quot;country&quot;:&quot;English, Australia&quot;,&quot;gender&quot;:&quot;female&quot;}]</example> */
+        /* <example>[{&quot;code&quot;:&quot;en-us&quot;,&quot;country&quot;:&quot;English, US&quot;,&quot;gender&quot;:&quot;male&quot;},{&quot;code&quot;:&quot;en-au&quot;,&quot;country&quot;:&quot;English, Australia&quot;,&quot;gender&quot;:[&quot;female&quot;,&quot;male&quot;]}]</example> */
         [JsonPropertyName("data")]
         public List<ViewVoiceLanguagesDataInner>? Data { get { return this.DataOption.Value; } set { this.DataOption = new(value); } }
 

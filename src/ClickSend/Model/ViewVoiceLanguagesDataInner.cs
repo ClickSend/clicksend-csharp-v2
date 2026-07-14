@@ -35,9 +35,9 @@ namespace ClickSend.Model
         /// </summary>
         /// <param name="code">The code of the language.</param>
         /// <param name="country">The country of the language.</param>
-        /// <param name="gender">The gender of the language.</param>
+        /// <param name="gender">gender</param>
         [JsonConstructor]
-        public ViewVoiceLanguagesDataInner(Option<string?> code = default, Option<string?> country = default, Option<string?> gender = default)
+        public ViewVoiceLanguagesDataInner(Option<string?> code = default, Option<string?> country = default, Option<ViewVoiceLanguagesDataInnerGender?> gender = default)
         {
             CodeOption = code;
             CountryOption = country;
@@ -82,15 +82,13 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> GenderOption { get; private set; }
+        public Option<ViewVoiceLanguagesDataInnerGender?> GenderOption { get; private set; }
 
         /// <summary>
-        /// The gender of the language.
+        /// Gets or Sets Gender
         /// </summary>
-        /// <value>The gender of the language.</value>
-        /* <example>male</example> */
         [JsonPropertyName("gender")]
-        public string? Gender { get { return this.GenderOption.Value; } set { this.GenderOption = new(value); } }
+        public ViewVoiceLanguagesDataInnerGender? Gender { get { return this.GenderOption.Value; } set { this.GenderOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -142,7 +140,7 @@ namespace ClickSend.Model
 
             Option<string?> code = default;
             Option<string?> country = default;
-            Option<string?> gender = default;
+            Option<ViewVoiceLanguagesDataInnerGender?> gender = default;
 
             while (utf8JsonReader.Read())
             {
@@ -166,7 +164,7 @@ namespace ClickSend.Model
                             country = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "gender":
-                            gender = new Option<string?>(utf8JsonReader.GetString()!);
+                            gender = new Option<ViewVoiceLanguagesDataInnerGender?>(JsonSerializer.Deserialize<ViewVoiceLanguagesDataInnerGender>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;
@@ -226,7 +224,10 @@ namespace ClickSend.Model
                 writer.WriteString("country", viewVoiceLanguagesDataInner.Country);
 
             if (viewVoiceLanguagesDataInner.GenderOption.IsSet)
-                writer.WriteString("gender", viewVoiceLanguagesDataInner.Gender);
+            {
+                writer.WritePropertyName("gender");
+                JsonSerializer.Serialize(writer, viewVoiceLanguagesDataInner.Gender, jsonSerializerOptions);
+            }
         }
     }
 }

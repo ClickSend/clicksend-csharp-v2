@@ -42,8 +42,8 @@ namespace ClickSend.Model
         /// <param name="custom2">Custom field 2.</param>
         /// <param name="custom3">Custom field 3.</param>
         /// <param name="custom4">Custom field 4.</param>
-        /// <param name="dateAdded">The date when the contact was added.</param>
-        /// <param name="dateUpdated">The date when the contact was last updated.</param>
+        /// <param name="dateAdded">The date when the contact was added. Returned as a plain string rather than a strict date-time since the API sometimes returns a raw Unix timestamp (e.g. \&quot;1783997542\&quot;) instead of ISO 8601.</param>
+        /// <param name="dateUpdated">The date when the contact was last updated. Returned as a plain string rather than a strict date-time since the API sometimes returns a raw Unix timestamp (e.g. \&quot;1783997542\&quot;) instead of ISO 8601.</param>
         /// <param name="faxNumber">The fax number of the contact.</param>
         /// <param name="organizationName">The organization name of the contact.</param>
         /// <param name="email">The email address of the contact.</param>
@@ -55,7 +55,7 @@ namespace ClickSend.Model
         /// <param name="addressCountry">The address country of the contact.</param>
         /// <param name="listName">The name of the list the contact belongs to.</param>
         [JsonConstructor]
-        public Contact(Option<int?> contactId = default, Option<int?> listId = default, Option<string?> phoneNumber = default, Option<string?> firstName = default, Option<string?> lastName = default, Option<string?> custom1 = default, Option<string?> custom2 = default, Option<string?> custom3 = default, Option<string?> custom4 = default, Option<DateTime?> dateAdded = default, Option<DateTime?> dateUpdated = default, Option<string?> faxNumber = default, Option<string?> organizationName = default, Option<string?> email = default, Option<string?> addressLine1 = default, Option<string?> addressLine2 = default, Option<string?> addressCity = default, Option<string?> addressState = default, Option<string?> addressPostalCode = default, Option<string?> addressCountry = default, Option<string?> listName = default)
+        public Contact(Option<int?> contactId = default, Option<int?> listId = default, Option<string?> phoneNumber = default, Option<string?> firstName = default, Option<string?> lastName = default, Option<string?> custom1 = default, Option<string?> custom2 = default, Option<string?> custom3 = default, Option<string?> custom4 = default, Option<string?> dateAdded = default, Option<string?> dateUpdated = default, Option<string?> faxNumber = default, Option<string?> organizationName = default, Option<string?> email = default, Option<string?> addressLine1 = default, Option<string?> addressLine2 = default, Option<string?> addressCity = default, Option<string?> addressState = default, Option<string?> addressPostalCode = default, Option<string?> addressCountry = default, Option<string?> listName = default)
         {
             ContactIdOption = contactId;
             ListIdOption = listId;
@@ -223,30 +223,30 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<DateTime?> DateAddedOption { get; private set; }
+        public Option<string?> DateAddedOption { get; private set; }
 
         /// <summary>
-        /// The date when the contact was added.
+        /// The date when the contact was added. Returned as a plain string rather than a strict date-time since the API sometimes returns a raw Unix timestamp (e.g. \&quot;1783997542\&quot;) instead of ISO 8601.
         /// </summary>
-        /// <value>The date when the contact was added.</value>
+        /// <value>The date when the contact was added. Returned as a plain string rather than a strict date-time since the API sometimes returns a raw Unix timestamp (e.g. \&quot;1783997542\&quot;) instead of ISO 8601.</value>
         /* <example>2015-07-05T14:51:26Z</example> */
         [JsonPropertyName("date_added")]
-        public DateTime? DateAdded { get { return this.DateAddedOption.Value; } set { this.DateAddedOption = new(value); } }
+        public string? DateAdded { get { return this.DateAddedOption.Value; } set { this.DateAddedOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of DateUpdated
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<DateTime?> DateUpdatedOption { get; private set; }
+        public Option<string?> DateUpdatedOption { get; private set; }
 
         /// <summary>
-        /// The date when the contact was last updated.
+        /// The date when the contact was last updated. Returned as a plain string rather than a strict date-time since the API sometimes returns a raw Unix timestamp (e.g. \&quot;1783997542\&quot;) instead of ISO 8601.
         /// </summary>
-        /// <value>The date when the contact was last updated.</value>
+        /// <value>The date when the contact was last updated. Returned as a plain string rather than a strict date-time since the API sometimes returns a raw Unix timestamp (e.g. \&quot;1783997542\&quot;) instead of ISO 8601.</value>
         /* <example>2015-07-05T14:51:26Z</example> */
         [JsonPropertyName("date_updated")]
-        public DateTime? DateUpdated { get { return this.DateUpdatedOption.Value; } set { this.DateUpdatedOption = new(value); } }
+        public string? DateUpdated { get { return this.DateUpdatedOption.Value; } set { this.DateUpdatedOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of FaxNumber
@@ -447,16 +447,6 @@ namespace ClickSend.Model
     public class ContactJsonConverter : JsonConverter<Contact>
     {
         /// <summary>
-        /// The format to use to serialize DateAdded
-        /// </summary>
-        public static string DateAddedFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
-
-        /// <summary>
-        /// The format to use to serialize DateUpdated
-        /// </summary>
-        public static string DateUpdatedFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
-
-        /// <summary>
         /// Deserializes json to <see cref="Contact" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -482,8 +472,8 @@ namespace ClickSend.Model
             Option<string?> custom2 = default;
             Option<string?> custom3 = default;
             Option<string?> custom4 = default;
-            Option<DateTime?> dateAdded = default;
-            Option<DateTime?> dateUpdated = default;
+            Option<string?> dateAdded = default;
+            Option<string?> dateUpdated = default;
             Option<string?> faxNumber = default;
             Option<string?> organizationName = default;
             Option<string?> email = default;
@@ -538,10 +528,10 @@ namespace ClickSend.Model
                             custom4 = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "date_added":
-                            dateAdded = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            dateAdded = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "date_updated":
-                            dateUpdated = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            dateUpdated = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "fax_number":
                             faxNumber = new Option<string?>(utf8JsonReader.GetString());
@@ -663,6 +653,12 @@ namespace ClickSend.Model
             if (contact.Custom4Option.IsSet && contact.Custom4 == null)
                 throw new ArgumentNullException(nameof(contact.Custom4), "Property is required for class Contact.");
 
+            if (contact.DateAddedOption.IsSet && contact.DateAdded == null)
+                throw new ArgumentNullException(nameof(contact.DateAdded), "Property is required for class Contact.");
+
+            if (contact.DateUpdatedOption.IsSet && contact.DateUpdated == null)
+                throw new ArgumentNullException(nameof(contact.DateUpdated), "Property is required for class Contact.");
+
             if (contact.ListNameOption.IsSet && contact.ListName == null)
                 throw new ArgumentNullException(nameof(contact.ListName), "Property is required for class Contact.");
 
@@ -694,10 +690,10 @@ namespace ClickSend.Model
                 writer.WriteString("custom_4", contact.Custom4);
 
             if (contact.DateAddedOption.IsSet)
-                writer.WriteString("date_added", contact.DateAddedOption.Value!.Value.ToString(DateAddedFormat));
+                writer.WriteString("date_added", contact.DateAdded);
 
             if (contact.DateUpdatedOption.IsSet)
-                writer.WriteString("date_updated", contact.DateUpdatedOption.Value!.Value.ToString(DateUpdatedFormat));
+                writer.WriteString("date_updated", contact.DateUpdated);
 
             if (contact.FaxNumberOption.IsSet)
                 if (contact.FaxNumberOption.Value != null)

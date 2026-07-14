@@ -124,7 +124,7 @@ namespace ClickSend.Model
         /// <summary>
         /// Gets or Sets Currency
         /// </summary>
-        [JsonPropertyName("currency")]
+        [JsonPropertyName("_currency")]
         public Currency? Currency { get { return this.CurrencyOption.Value; } set { this.CurrencyOption = new(value); } }
 
         /// <summary>
@@ -241,7 +241,7 @@ namespace ClickSend.Model
                         case "messages":
                             messages = new Option<List<Sms>?>(JsonSerializer.Deserialize<List<Sms>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
-                        case "currency":
+                        case "_currency":
                             currency = new Option<Currency?>(JsonSerializer.Deserialize<Currency>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "_summary":
@@ -329,7 +329,7 @@ namespace ClickSend.Model
             }
             if (calculateSmsPriceData.CurrencyOption.IsSet)
             {
-                writer.WritePropertyName("currency");
+                writer.WritePropertyName("_currency");
                 JsonSerializer.Serialize(writer, calculateSmsPriceData.Currency, jsonSerializerOptions);
             }
             if (calculateSmsPriceData.SummaryOption.IsSet)

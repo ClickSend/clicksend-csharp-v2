@@ -133,5 +133,14 @@ namespace ClickSend.Test.Model
         {
             // TODO unit test for the property 'Data'
         }
+
+        /// <summary>
+        /// Test the property 'Currency'
+        /// </summary>
+        [Fact]
+        public void CurrencyTest()
+        {
+            // TODO unit test for the property 'Currency'
+        }
     }
 }

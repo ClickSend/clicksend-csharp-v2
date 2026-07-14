@@ -40,6 +40,7 @@ namespace ClickSend.Model
         /// <param name="firstName">The first name of the subaccount.</param>
         /// <param name="lastName">The last name of the subaccount.</param>
         /// <param name="apiKey">The API key of the subaccount.</param>
+        /// <param name="accessSmpp">Flag indicating if the subaccount has access to SMPP.</param>
         /// <param name="accessUsers">Flag indicating if the subaccount has access to users.</param>
         /// <param name="accessBilling">Flag indicating if the subaccount has access to billing.</param>
         /// <param name="accessReporting">Flag indicating if the subaccount has access to reporting.</param>
@@ -51,11 +52,15 @@ namespace ClickSend.Model
         /// <param name="accessFax">Flag indicating if the subaccount has access to fax services.</param>
         /// <param name="accessPost">Flag indicating if the subaccount has access to post services.</param>
         /// <param name="accessReseller">Flag indicating if the subaccount has access to reseller services.</param>
+        /// <param name="accessGlobalSending">Flag indicating if the subaccount has access to global sending.</param>
         /// <param name="accessMms">Flag indicating if the subaccount has access to MMS services.</param>
+        /// <param name="hidePricing">Flag indicating if pricing is hidden for the subaccount.</param>
         /// <param name="shareCampaigns">Flag indicating if the subaccount can share campaigns.</param>
         /// <param name="notes">Additional notes for the subaccount.</param>
+        /// <param name="isMain">Flag indicating if this is the main account rather than a subaccount.</param>
+        /// <param name="signUpType">The sign-up type used to create the subaccount, if applicable.</param>
         [JsonConstructor]
-        public Subaccount(Option<int?> subaccountId = default, Option<string?> apiUsername = default, Option<string?> email = default, Option<string?> phoneNumber = default, Option<string?> firstName = default, Option<string?> lastName = default, Option<string?> apiKey = default, Option<int?> accessUsers = default, Option<int?> accessBilling = default, Option<int?> accessReporting = default, Option<int?> accessContacts = default, Option<int?> accessSettings = default, Option<int?> accessSms = default, Option<int?> accessEmail = default, Option<int?> accessVoice = default, Option<int?> accessFax = default, Option<int?> accessPost = default, Option<int?> accessReseller = default, Option<int?> accessMms = default, Option<int?> shareCampaigns = default, Option<string?> notes = default)
+        public Subaccount(Option<int?> subaccountId = default, Option<string?> apiUsername = default, Option<string?> email = default, Option<string?> phoneNumber = default, Option<string?> firstName = default, Option<string?> lastName = default, Option<string?> apiKey = default, Option<int?> accessSmpp = default, Option<int?> accessUsers = default, Option<int?> accessBilling = default, Option<int?> accessReporting = default, Option<int?> accessContacts = default, Option<int?> accessSettings = default, Option<int?> accessSms = default, Option<int?> accessEmail = default, Option<int?> accessVoice = default, Option<int?> accessFax = default, Option<int?> accessPost = default, Option<int?> accessReseller = default, Option<int?> accessGlobalSending = default, Option<int?> accessMms = default, Option<int?> hidePricing = default, Option<int?> shareCampaigns = default, Option<string?> notes = default, Option<int?> isMain = default, Option<string?> signUpType = default)
         {
             SubaccountIdOption = subaccountId;
             ApiUsernameOption = apiUsername;
@@ -64,6 +69,7 @@ namespace ClickSend.Model
             FirstNameOption = firstName;
             LastNameOption = lastName;
             ApiKeyOption = apiKey;
+            AccessSmppOption = accessSmpp;
             AccessUsersOption = accessUsers;
             AccessBillingOption = accessBilling;
             AccessReportingOption = accessReporting;
@@ -75,9 +81,13 @@ namespace ClickSend.Model
             AccessFaxOption = accessFax;
             AccessPostOption = accessPost;
             AccessResellerOption = accessReseller;
+            AccessGlobalSendingOption = accessGlobalSending;
             AccessMmsOption = accessMms;
+            HidePricingOption = hidePricing;
             ShareCampaignsOption = shareCampaigns;
             NotesOption = notes;
+            IsMainOption = isMain;
+            SignUpTypeOption = signUpType;
             OnCreated();
         }
 
@@ -187,6 +197,21 @@ namespace ClickSend.Model
         /* <example>F3702045-EB2C-0091-C211-7728048DCAE2</example> */
         [JsonPropertyName("api_key")]
         public string? ApiKey { get { return this.ApiKeyOption.Value; } set { this.ApiKeyOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of AccessSmpp
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> AccessSmppOption { get; private set; }
+
+        /// <summary>
+        /// Flag indicating if the subaccount has access to SMPP.
+        /// </summary>
+        /// <value>Flag indicating if the subaccount has access to SMPP.</value>
+        /* <example>0</example> */
+        [JsonPropertyName("access_smpp")]
+        public int? AccessSmpp { get { return this.AccessSmppOption.Value; } set { this.AccessSmppOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of AccessUsers
@@ -354,6 +379,21 @@ namespace ClickSend.Model
         public int? AccessReseller { get { return this.AccessResellerOption.Value; } set { this.AccessResellerOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of AccessGlobalSending
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> AccessGlobalSendingOption { get; private set; }
+
+        /// <summary>
+        /// Flag indicating if the subaccount has access to global sending.
+        /// </summary>
+        /// <value>Flag indicating if the subaccount has access to global sending.</value>
+        /* <example>1</example> */
+        [JsonPropertyName("access_global_sending")]
+        public int? AccessGlobalSending { get { return this.AccessGlobalSendingOption.Value; } set { this.AccessGlobalSendingOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of AccessMms
         /// </summary>
         [JsonIgnore]
@@ -367,6 +407,21 @@ namespace ClickSend.Model
         /* <example>1</example> */
         [JsonPropertyName("access_mms")]
         public int? AccessMms { get { return this.AccessMmsOption.Value; } set { this.AccessMmsOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of HidePricing
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> HidePricingOption { get; private set; }
+
+        /// <summary>
+        /// Flag indicating if pricing is hidden for the subaccount.
+        /// </summary>
+        /// <value>Flag indicating if pricing is hidden for the subaccount.</value>
+        /* <example>0</example> */
+        [JsonPropertyName("hide_pricing")]
+        public int? HidePricing { get { return this.HidePricingOption.Value; } set { this.HidePricingOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of ShareCampaigns
@@ -398,6 +453,35 @@ namespace ClickSend.Model
         public string? Notes { get { return this.NotesOption.Value; } set { this.NotesOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of IsMain
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> IsMainOption { get; private set; }
+
+        /// <summary>
+        /// Flag indicating if this is the main account rather than a subaccount.
+        /// </summary>
+        /// <value>Flag indicating if this is the main account rather than a subaccount.</value>
+        /* <example>0</example> */
+        [JsonPropertyName("is_main")]
+        public int? IsMain { get { return this.IsMainOption.Value; } set { this.IsMainOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of SignUpType
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> SignUpTypeOption { get; private set; }
+
+        /// <summary>
+        /// The sign-up type used to create the subaccount, if applicable.
+        /// </summary>
+        /// <value>The sign-up type used to create the subaccount, if applicable.</value>
+        [JsonPropertyName("sign_up_type")]
+        public string? SignUpType { get { return this.SignUpTypeOption.Value; } set { this.SignUpTypeOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -412,6 +496,7 @@ namespace ClickSend.Model
             sb.Append("  FirstName: ").Append(FirstName).Append("\n");
             sb.Append("  LastName: ").Append(LastName).Append("\n");
             sb.Append("  ApiKey: ").Append(ApiKey).Append("\n");
+            sb.Append("  AccessSmpp: ").Append(AccessSmpp).Append("\n");
             sb.Append("  AccessUsers: ").Append(AccessUsers).Append("\n");
             sb.Append("  AccessBilling: ").Append(AccessBilling).Append("\n");
             sb.Append("  AccessReporting: ").Append(AccessReporting).Append("\n");
@@ -423,9 +508,13 @@ namespace ClickSend.Model
             sb.Append("  AccessFax: ").Append(AccessFax).Append("\n");
             sb.Append("  AccessPost: ").Append(AccessPost).Append("\n");
             sb.Append("  AccessReseller: ").Append(AccessReseller).Append("\n");
+            sb.Append("  AccessGlobalSending: ").Append(AccessGlobalSending).Append("\n");
             sb.Append("  AccessMms: ").Append(AccessMms).Append("\n");
+            sb.Append("  HidePricing: ").Append(HidePricing).Append("\n");
             sb.Append("  ShareCampaigns: ").Append(ShareCampaigns).Append("\n");
             sb.Append("  Notes: ").Append(Notes).Append("\n");
+            sb.Append("  IsMain: ").Append(IsMain).Append("\n");
+            sb.Append("  SignUpType: ").Append(SignUpType).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -470,6 +559,7 @@ namespace ClickSend.Model
             Option<string?> firstName = default;
             Option<string?> lastName = default;
             Option<string?> apiKey = default;
+            Option<int?> accessSmpp = default;
             Option<int?> accessUsers = default;
             Option<int?> accessBilling = default;
             Option<int?> accessReporting = default;
@@ -481,9 +571,13 @@ namespace ClickSend.Model
             Option<int?> accessFax = default;
             Option<int?> accessPost = default;
             Option<int?> accessReseller = default;
+            Option<int?> accessGlobalSending = default;
             Option<int?> accessMms = default;
+            Option<int?> hidePricing = default;
             Option<int?> shareCampaigns = default;
             Option<string?> notes = default;
+            Option<int?> isMain = default;
+            Option<string?> signUpType = default;
 
             while (utf8JsonReader.Read())
             {
@@ -521,6 +615,9 @@ namespace ClickSend.Model
                         case "api_key":
                             apiKey = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "access_smpp":
+                            accessSmpp = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
                         case "access_users":
                             accessUsers = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
@@ -554,14 +651,26 @@ namespace ClickSend.Model
                         case "access_reseller":
                             accessReseller = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
+                        case "access_global_sending":
+                            accessGlobalSending = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
                         case "access_mms":
                             accessMms = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "hide_pricing":
+                            hidePricing = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "share_campaigns":
                             shareCampaigns = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "notes":
                             notes = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "is_main":
+                            isMain = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "sign_up_type":
+                            signUpType = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -589,6 +698,9 @@ namespace ClickSend.Model
 
             if (apiKey.IsSet && apiKey.Value == null)
                 throw new ArgumentNullException(nameof(apiKey), "Property is not nullable for class Subaccount.");
+
+            if (accessSmpp.IsSet && accessSmpp.Value == null)
+                throw new ArgumentNullException(nameof(accessSmpp), "Property is not nullable for class Subaccount.");
 
             if (accessUsers.IsSet && accessUsers.Value == null)
                 throw new ArgumentNullException(nameof(accessUsers), "Property is not nullable for class Subaccount.");
@@ -623,13 +735,22 @@ namespace ClickSend.Model
             if (accessReseller.IsSet && accessReseller.Value == null)
                 throw new ArgumentNullException(nameof(accessReseller), "Property is not nullable for class Subaccount.");
 
+            if (accessGlobalSending.IsSet && accessGlobalSending.Value == null)
+                throw new ArgumentNullException(nameof(accessGlobalSending), "Property is not nullable for class Subaccount.");
+
             if (accessMms.IsSet && accessMms.Value == null)
                 throw new ArgumentNullException(nameof(accessMms), "Property is not nullable for class Subaccount.");
+
+            if (hidePricing.IsSet && hidePricing.Value == null)
+                throw new ArgumentNullException(nameof(hidePricing), "Property is not nullable for class Subaccount.");
 
             if (shareCampaigns.IsSet && shareCampaigns.Value == null)
                 throw new ArgumentNullException(nameof(shareCampaigns), "Property is not nullable for class Subaccount.");
 
-            return new Subaccount(subaccountId, apiUsername, email, phoneNumber, firstName, lastName, apiKey, accessUsers, accessBilling, accessReporting, accessContacts, accessSettings, accessSms, accessEmail, accessVoice, accessFax, accessPost, accessReseller, accessMms, shareCampaigns, notes);
+            if (isMain.IsSet && isMain.Value == null)
+                throw new ArgumentNullException(nameof(isMain), "Property is not nullable for class Subaccount.");
+
+            return new Subaccount(subaccountId, apiUsername, email, phoneNumber, firstName, lastName, apiKey, accessSmpp, accessUsers, accessBilling, accessReporting, accessContacts, accessSettings, accessSms, accessEmail, accessVoice, accessFax, accessPost, accessReseller, accessGlobalSending, accessMms, hidePricing, shareCampaigns, notes, isMain, signUpType);
         }
 
         /// <summary>
@@ -695,6 +816,9 @@ namespace ClickSend.Model
             if (subaccount.ApiKeyOption.IsSet)
                 writer.WriteString("api_key", subaccount.ApiKey);
 
+            if (subaccount.AccessSmppOption.IsSet)
+                writer.WriteNumber("access_smpp", subaccount.AccessSmppOption.Value!.Value);
+
             if (subaccount.AccessUsersOption.IsSet)
                 writer.WriteNumber("access_users", subaccount.AccessUsersOption.Value!.Value);
 
@@ -728,8 +852,14 @@ namespace ClickSend.Model
             if (subaccount.AccessResellerOption.IsSet)
                 writer.WriteNumber("access_reseller", subaccount.AccessResellerOption.Value!.Value);
 
+            if (subaccount.AccessGlobalSendingOption.IsSet)
+                writer.WriteNumber("access_global_sending", subaccount.AccessGlobalSendingOption.Value!.Value);
+
             if (subaccount.AccessMmsOption.IsSet)
                 writer.WriteNumber("access_mms", subaccount.AccessMmsOption.Value!.Value);
+
+            if (subaccount.HidePricingOption.IsSet)
+                writer.WriteNumber("hide_pricing", subaccount.HidePricingOption.Value!.Value);
 
             if (subaccount.ShareCampaignsOption.IsSet)
                 writer.WriteNumber("share_campaigns", subaccount.ShareCampaignsOption.Value!.Value);
@@ -739,6 +869,15 @@ namespace ClickSend.Model
                     writer.WriteString("notes", subaccount.Notes);
                 else
                     writer.WriteNull("notes");
+
+            if (subaccount.IsMainOption.IsSet)
+                writer.WriteNumber("is_main", subaccount.IsMainOption.Value!.Value);
+
+            if (subaccount.SignUpTypeOption.IsSet)
+                if (subaccount.SignUpTypeOption.Value != null)
+                    writer.WriteString("sign_up_type", subaccount.SignUpType);
+                else
+                    writer.WriteNull("sign_up_type");
         }
     }
 }

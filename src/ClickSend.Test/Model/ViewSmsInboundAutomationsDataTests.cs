@@ -126,6 +126,42 @@ namespace ClickSend.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'FirstPageUrl'
+        /// </summary>
+        [Fact]
+        public void FirstPageUrlTest()
+        {
+            // TODO unit test for the property 'FirstPageUrl'
+        }
+
+        /// <summary>
+        /// Test the property 'LastPageUrl'
+        /// </summary>
+        [Fact]
+        public void LastPageUrlTest()
+        {
+            // TODO unit test for the property 'LastPageUrl'
+        }
+
+        /// <summary>
+        /// Test the property 'Path'
+        /// </summary>
+        [Fact]
+        public void PathTest()
+        {
+            // TODO unit test for the property 'Path'
+        }
+
+        /// <summary>
+        /// Test the property 'Links'
+        /// </summary>
+        [Fact]
+        public void LinksTest()
+        {
+            // TODO unit test for the property 'Links'
+        }
+
+        /// <summary>
         /// Test the property 'Data'
         /// </summary>
         [Fact]

@@ -26,52 +26,41 @@ using ClickSend.Client;
 namespace ClickSend.Model
 {
     /// <summary>
-    /// ViewStrippedStringRulesDataDataInner
+    /// The gender(s) available for this language. Returned as a single string when only one gender is available, or an array of strings when more than one is available.
     /// </summary>
-    public partial class ViewStrippedStringRulesDataDataInner : IValidatableObject
+    public partial class ViewVoiceLanguagesDataInnerGender : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ViewStrippedStringRulesDataDataInner" /> class.
+        /// Initializes a new instance of the <see cref="ViewVoiceLanguagesDataInnerGender" /> class.
         /// </summary>
-        /// <param name="ruleId">The ID of the rule.</param>
-        /// <param name="stripString">The string to be stripped.</param>
-        [JsonConstructor]
-        public ViewStrippedStringRulesDataDataInner(Option<int?> ruleId = default, Option<string?> stripString = default)
+        /// <param name="string"></param>
+        internal ViewVoiceLanguagesDataInnerGender(string @string)
         {
-            RuleIdOption = ruleId;
-            StripStringOption = stripString;
+            String = @string;
+            OnCreated();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViewVoiceLanguagesDataInnerGender" /> class.
+        /// </summary>
+        /// <param name="list"></param>
+        internal ViewVoiceLanguagesDataInnerGender(List<string> list)
+        {
+            List = list;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Used to track the state of RuleId
+        /// Gets or Sets String
         /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<int?> RuleIdOption { get; private set; }
+        public string? String { get; set; }
 
         /// <summary>
-        /// The ID of the rule.
+        /// Gets or Sets List
         /// </summary>
-        /// <value>The ID of the rule.</value>
-        [JsonPropertyName("rule_id")]
-        public int? RuleId { get { return this.RuleIdOption.Value; } set { this.RuleIdOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of StripString
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> StripStringOption { get; private set; }
-
-        /// <summary>
-        /// The string to be stripped.
-        /// </summary>
-        /// <value>The string to be stripped.</value>
-        [JsonPropertyName("strip_string")]
-        public string? StripString { get { return this.StripStringOption.Value; } set { this.StripStringOption = new(value); } }
+        public List<string>? List { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -80,9 +69,7 @@ namespace ClickSend.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class ViewStrippedStringRulesDataDataInner {\n");
-            sb.Append("  RuleId: ").Append(RuleId).Append("\n");
-            sb.Append("  StripString: ").Append(StripString).Append("\n");
+            sb.Append("class ViewVoiceLanguagesDataInnerGender {\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -99,19 +86,19 @@ namespace ClickSend.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="ViewStrippedStringRulesDataDataInner" />
+    /// A Json converter for type <see cref="ViewVoiceLanguagesDataInnerGender" />
     /// </summary>
-    public class ViewStrippedStringRulesDataDataInnerJsonConverter : JsonConverter<ViewStrippedStringRulesDataDataInner>
+    public class ViewVoiceLanguagesDataInnerGenderJsonConverter : JsonConverter<ViewVoiceLanguagesDataInnerGender>
     {
         /// <summary>
-        /// Deserializes json to <see cref="ViewStrippedStringRulesDataDataInner" />
+        /// Deserializes json to <see cref="ViewVoiceLanguagesDataInnerGender" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override ViewStrippedStringRulesDataDataInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override ViewVoiceLanguagesDataInnerGender Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -120,8 +107,27 @@ namespace ClickSend.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<int?> ruleId = default;
-            Option<string?> stripString = default;
+            string? varString = default;
+            List<string>? list = default;
+
+            Utf8JsonReader utf8JsonReaderOneOf = utf8JsonReader;
+            while (utf8JsonReaderOneOf.Read())
+            {
+                if (startingTokenType == JsonTokenType.StartObject && utf8JsonReaderOneOf.TokenType == JsonTokenType.EndObject && currentDepth == utf8JsonReaderOneOf.CurrentDepth)
+                    break;
+
+                if (startingTokenType == JsonTokenType.StartArray && utf8JsonReaderOneOf.TokenType == JsonTokenType.EndArray && currentDepth == utf8JsonReaderOneOf.CurrentDepth)
+                    break;
+
+                if (utf8JsonReaderOneOf.TokenType == JsonTokenType.PropertyName && currentDepth == utf8JsonReaderOneOf.CurrentDepth - 1)
+                {
+                    Utf8JsonReader utf8JsonReaderString = utf8JsonReader;
+                    ClientUtils.TryDeserialize<string?>(ref utf8JsonReaderString, jsonSerializerOptions, out varString);
+
+                    Utf8JsonReader utf8JsonReaderList = utf8JsonReader;
+                    ClientUtils.TryDeserialize<List<string>?>(ref utf8JsonReaderList, jsonSerializerOptions, out list);
+                }
+            }
 
             while (utf8JsonReader.Read())
             {
@@ -138,59 +144,46 @@ namespace ClickSend.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "rule_id":
-                            ruleId = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
-                            break;
-                        case "strip_string":
-                            stripString = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
                         default:
                             break;
                     }
                 }
             }
 
-            if (ruleId.IsSet && ruleId.Value == null)
-                throw new ArgumentNullException(nameof(ruleId), "Property is not nullable for class ViewStrippedStringRulesDataDataInner.");
+            if (varString != null)
+                return new ViewVoiceLanguagesDataInnerGender(varString);
 
-            if (stripString.IsSet && stripString.Value == null)
-                throw new ArgumentNullException(nameof(stripString), "Property is not nullable for class ViewStrippedStringRulesDataDataInner.");
+            if (list != null)
+                return new ViewVoiceLanguagesDataInnerGender(list);
 
-            return new ViewStrippedStringRulesDataDataInner(ruleId, stripString);
+            throw new JsonException();
         }
 
         /// <summary>
-        /// Serializes a <see cref="ViewStrippedStringRulesDataDataInner" />
+        /// Serializes a <see cref="ViewVoiceLanguagesDataInnerGender" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="viewStrippedStringRulesDataDataInner"></param>
+        /// <param name="viewVoiceLanguagesDataInnerGender"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, ViewStrippedStringRulesDataDataInner viewStrippedStringRulesDataDataInner, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, ViewVoiceLanguagesDataInnerGender viewVoiceLanguagesDataInnerGender, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, viewStrippedStringRulesDataDataInner, jsonSerializerOptions);
+            WriteProperties(writer, viewVoiceLanguagesDataInnerGender, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="ViewStrippedStringRulesDataDataInner" />
+        /// Serializes the properties of <see cref="ViewVoiceLanguagesDataInnerGender" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="viewStrippedStringRulesDataDataInner"></param>
+        /// <param name="viewVoiceLanguagesDataInnerGender"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, ViewStrippedStringRulesDataDataInner viewStrippedStringRulesDataDataInner, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, ViewVoiceLanguagesDataInnerGender viewVoiceLanguagesDataInnerGender, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (viewStrippedStringRulesDataDataInner.StripStringOption.IsSet && viewStrippedStringRulesDataDataInner.StripString == null)
-                throw new ArgumentNullException(nameof(viewStrippedStringRulesDataDataInner.StripString), "Property is required for class ViewStrippedStringRulesDataDataInner.");
 
-            if (viewStrippedStringRulesDataDataInner.RuleIdOption.IsSet)
-                writer.WriteNumber("rule_id", viewStrippedStringRulesDataDataInner.RuleIdOption.Value!.Value);
-
-            if (viewStrippedStringRulesDataDataInner.StripStringOption.IsSet)
-                writer.WriteString("strip_string", viewStrippedStringRulesDataDataInner.StripString);
         }
     }
 }

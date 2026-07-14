@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **ResponseCode** | **string** | The response code indicating the status of the operation. | [optional] 
 **ResponseMsg** | **string** | A message describing the outcome of the operation. | [optional] 
 **Data** | [**ViewAvailableNumbersData**](ViewAvailableNumbersData.md) |  | [optional] 
-**Currency** | [**Currency**](Currency.md) |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

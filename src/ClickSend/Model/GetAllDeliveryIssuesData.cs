@@ -26,12 +26,12 @@ using ClickSend.Client;
 namespace ClickSend.Model
 {
     /// <summary>
-    /// ViewAllMmsCampaignsData
+    /// GetAllDeliveryIssuesData
     /// </summary>
-    public partial class ViewAllMmsCampaignsData : IValidatableObject
+    public partial class GetAllDeliveryIssuesData : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ViewAllMmsCampaignsData" /> class.
+        /// Initializes a new instance of the <see cref="GetAllDeliveryIssuesData" /> class.
         /// </summary>
         /// <param name="total">The total number of items available for viewing.</param>
         /// <param name="perPage">The number of items returned per page. This is specified in the limit parameter. You can have 100 items at maximum, and 15 at minimum.</param>
@@ -43,7 +43,7 @@ namespace ClickSend.Model
         /// <param name="to">The number of the last result in the current page.</param>
         /// <param name="data">data</param>
         [JsonConstructor]
-        public ViewAllMmsCampaignsData(Option<int?> total = default, Option<int?> perPage = default, Option<int?> currentPage = default, Option<int?> lastPage = default, Option<string?> nextPageUrl = default, Option<string?> prevPageUrl = default, Option<int?> from = default, Option<int?> to = default, Option<List<MmsCampaign>?> data = default)
+        public GetAllDeliveryIssuesData(Option<int?> total = default, Option<int?> perPage = default, Option<int?> currentPage = default, Option<int?> lastPage = default, Option<string?> nextPageUrl = default, Option<string?> prevPageUrl = default, Option<int?> from = default, Option<int?> to = default, Option<List<DeliveryIssue>?> data = default)
         {
             TotalOption = total;
             PerPageOption = perPage;
@@ -182,13 +182,14 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<MmsCampaign>?> DataOption { get; private set; }
+        public Option<List<DeliveryIssue>?> DataOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Data
         /// </summary>
+        /* <example>[{&quot;issue_id&quot;:1,&quot;user_id&quot;:3820,&quot;message_id&quot;:&quot;B388828B-AD46-4366-8AD3-0305FF5E3FE5&quot;,&quot;type&quot;:&quot;sms&quot;,&quot;description&quot;:&quot;this is a test.&quot;,&quot;client_comments&quot;:null,&quot;support_comments&quot;:null,&quot;status&quot;:null,&quot;date_added&quot;:1481610495,&quot;resolved&quot;:0,&quot;email_address&quot;:&quot;test@user.com&quot;},{&quot;issue_id&quot;:2,&quot;user_id&quot;:3820,&quot;message_id&quot;:&quot;90396A38-146B-46C4-A455-675F620C2E05&quot;,&quot;type&quot;:&quot;sms&quot;,&quot;description&quot;:&quot;this is a test.&quot;,&quot;client_comments&quot;:null,&quot;support_comments&quot;:null,&quot;status&quot;:null,&quot;date_added&quot;:1481610495,&quot;resolved&quot;:0,&quot;email_address&quot;:&quot;test@user.com&quot;},{&quot;issue_id&quot;:3,&quot;user_id&quot;:3820,&quot;message_id&quot;:&quot;4ECFB6CB-0300-45EC-96E1-5AB189432AF5&quot;,&quot;type&quot;:&quot;sms&quot;,&quot;description&quot;:&quot;this is a test.&quot;,&quot;client_comments&quot;:null,&quot;support_comments&quot;:null,&quot;status&quot;:null,&quot;date_added&quot;:1481611389,&quot;resolved&quot;:0,&quot;email_address&quot;:&quot;test@user.com&quot;}]</example> */
         [JsonPropertyName("data")]
-        public List<MmsCampaign>? Data { get { return this.DataOption.Value; } set { this.DataOption = new(value); } }
+        public List<DeliveryIssue>? Data { get { return this.DataOption.Value; } set { this.DataOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -197,7 +198,7 @@ namespace ClickSend.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class ViewAllMmsCampaignsData {\n");
+            sb.Append("class GetAllDeliveryIssuesData {\n");
             sb.Append("  Total: ").Append(Total).Append("\n");
             sb.Append("  PerPage: ").Append(PerPage).Append("\n");
             sb.Append("  CurrentPage: ").Append(CurrentPage).Append("\n");
@@ -223,19 +224,19 @@ namespace ClickSend.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="ViewAllMmsCampaignsData" />
+    /// A Json converter for type <see cref="GetAllDeliveryIssuesData" />
     /// </summary>
-    public class ViewAllMmsCampaignsDataJsonConverter : JsonConverter<ViewAllMmsCampaignsData>
+    public class GetAllDeliveryIssuesDataJsonConverter : JsonConverter<GetAllDeliveryIssuesData>
     {
         /// <summary>
-        /// Deserializes json to <see cref="ViewAllMmsCampaignsData" />
+        /// Deserializes json to <see cref="GetAllDeliveryIssuesData" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override ViewAllMmsCampaignsData Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override GetAllDeliveryIssuesData Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -252,7 +253,7 @@ namespace ClickSend.Model
             Option<string?> prevPageUrl = default;
             Option<int?> from = default;
             Option<int?> to = default;
-            Option<List<MmsCampaign>?> data = default;
+            Option<List<DeliveryIssue>?> data = default;
 
             while (utf8JsonReader.Read())
             {
@@ -294,7 +295,7 @@ namespace ClickSend.Model
                             to = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "data":
-                            data = new Option<List<MmsCampaign>?>(JsonSerializer.Deserialize<List<MmsCampaign>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            data = new Option<List<DeliveryIssue>?>(JsonSerializer.Deserialize<List<DeliveryIssue>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;
@@ -303,90 +304,90 @@ namespace ClickSend.Model
             }
 
             if (total.IsSet && total.Value == null)
-                throw new ArgumentNullException(nameof(total), "Property is not nullable for class ViewAllMmsCampaignsData.");
+                throw new ArgumentNullException(nameof(total), "Property is not nullable for class GetAllDeliveryIssuesData.");
 
             if (perPage.IsSet && perPage.Value == null)
-                throw new ArgumentNullException(nameof(perPage), "Property is not nullable for class ViewAllMmsCampaignsData.");
+                throw new ArgumentNullException(nameof(perPage), "Property is not nullable for class GetAllDeliveryIssuesData.");
 
             if (currentPage.IsSet && currentPage.Value == null)
-                throw new ArgumentNullException(nameof(currentPage), "Property is not nullable for class ViewAllMmsCampaignsData.");
+                throw new ArgumentNullException(nameof(currentPage), "Property is not nullable for class GetAllDeliveryIssuesData.");
 
             if (lastPage.IsSet && lastPage.Value == null)
-                throw new ArgumentNullException(nameof(lastPage), "Property is not nullable for class ViewAllMmsCampaignsData.");
+                throw new ArgumentNullException(nameof(lastPage), "Property is not nullable for class GetAllDeliveryIssuesData.");
 
             if (from.IsSet && from.Value == null)
-                throw new ArgumentNullException(nameof(from), "Property is not nullable for class ViewAllMmsCampaignsData.");
+                throw new ArgumentNullException(nameof(from), "Property is not nullable for class GetAllDeliveryIssuesData.");
 
             if (to.IsSet && to.Value == null)
-                throw new ArgumentNullException(nameof(to), "Property is not nullable for class ViewAllMmsCampaignsData.");
+                throw new ArgumentNullException(nameof(to), "Property is not nullable for class GetAllDeliveryIssuesData.");
 
             if (data.IsSet && data.Value == null)
-                throw new ArgumentNullException(nameof(data), "Property is not nullable for class ViewAllMmsCampaignsData.");
+                throw new ArgumentNullException(nameof(data), "Property is not nullable for class GetAllDeliveryIssuesData.");
 
-            return new ViewAllMmsCampaignsData(total, perPage, currentPage, lastPage, nextPageUrl, prevPageUrl, from, to, data);
+            return new GetAllDeliveryIssuesData(total, perPage, currentPage, lastPage, nextPageUrl, prevPageUrl, from, to, data);
         }
 
         /// <summary>
-        /// Serializes a <see cref="ViewAllMmsCampaignsData" />
+        /// Serializes a <see cref="GetAllDeliveryIssuesData" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="viewAllMmsCampaignsData"></param>
+        /// <param name="getAllDeliveryIssuesData"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, ViewAllMmsCampaignsData viewAllMmsCampaignsData, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, GetAllDeliveryIssuesData getAllDeliveryIssuesData, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, viewAllMmsCampaignsData, jsonSerializerOptions);
+            WriteProperties(writer, getAllDeliveryIssuesData, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="ViewAllMmsCampaignsData" />
+        /// Serializes the properties of <see cref="GetAllDeliveryIssuesData" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="viewAllMmsCampaignsData"></param>
+        /// <param name="getAllDeliveryIssuesData"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, ViewAllMmsCampaignsData viewAllMmsCampaignsData, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, GetAllDeliveryIssuesData getAllDeliveryIssuesData, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (viewAllMmsCampaignsData.DataOption.IsSet && viewAllMmsCampaignsData.Data == null)
-                throw new ArgumentNullException(nameof(viewAllMmsCampaignsData.Data), "Property is required for class ViewAllMmsCampaignsData.");
+            if (getAllDeliveryIssuesData.DataOption.IsSet && getAllDeliveryIssuesData.Data == null)
+                throw new ArgumentNullException(nameof(getAllDeliveryIssuesData.Data), "Property is required for class GetAllDeliveryIssuesData.");
 
-            if (viewAllMmsCampaignsData.TotalOption.IsSet)
-                writer.WriteNumber("total", viewAllMmsCampaignsData.TotalOption.Value!.Value);
+            if (getAllDeliveryIssuesData.TotalOption.IsSet)
+                writer.WriteNumber("total", getAllDeliveryIssuesData.TotalOption.Value!.Value);
 
-            if (viewAllMmsCampaignsData.PerPageOption.IsSet)
-                writer.WriteNumber("per_page", viewAllMmsCampaignsData.PerPageOption.Value!.Value);
+            if (getAllDeliveryIssuesData.PerPageOption.IsSet)
+                writer.WriteNumber("per_page", getAllDeliveryIssuesData.PerPageOption.Value!.Value);
 
-            if (viewAllMmsCampaignsData.CurrentPageOption.IsSet)
-                writer.WriteNumber("current_page", viewAllMmsCampaignsData.CurrentPageOption.Value!.Value);
+            if (getAllDeliveryIssuesData.CurrentPageOption.IsSet)
+                writer.WriteNumber("current_page", getAllDeliveryIssuesData.CurrentPageOption.Value!.Value);
 
-            if (viewAllMmsCampaignsData.LastPageOption.IsSet)
-                writer.WriteNumber("last_page", viewAllMmsCampaignsData.LastPageOption.Value!.Value);
+            if (getAllDeliveryIssuesData.LastPageOption.IsSet)
+                writer.WriteNumber("last_page", getAllDeliveryIssuesData.LastPageOption.Value!.Value);
 
-            if (viewAllMmsCampaignsData.NextPageUrlOption.IsSet)
-                if (viewAllMmsCampaignsData.NextPageUrlOption.Value != null)
-                    writer.WriteString("next_page_url", viewAllMmsCampaignsData.NextPageUrl);
+            if (getAllDeliveryIssuesData.NextPageUrlOption.IsSet)
+                if (getAllDeliveryIssuesData.NextPageUrlOption.Value != null)
+                    writer.WriteString("next_page_url", getAllDeliveryIssuesData.NextPageUrl);
                 else
                     writer.WriteNull("next_page_url");
 
-            if (viewAllMmsCampaignsData.PrevPageUrlOption.IsSet)
-                if (viewAllMmsCampaignsData.PrevPageUrlOption.Value != null)
-                    writer.WriteString("prev_page_url", viewAllMmsCampaignsData.PrevPageUrl);
+            if (getAllDeliveryIssuesData.PrevPageUrlOption.IsSet)
+                if (getAllDeliveryIssuesData.PrevPageUrlOption.Value != null)
+                    writer.WriteString("prev_page_url", getAllDeliveryIssuesData.PrevPageUrl);
                 else
                     writer.WriteNull("prev_page_url");
 
-            if (viewAllMmsCampaignsData.FromOption.IsSet)
-                writer.WriteNumber("from", viewAllMmsCampaignsData.FromOption.Value!.Value);
+            if (getAllDeliveryIssuesData.FromOption.IsSet)
+                writer.WriteNumber("from", getAllDeliveryIssuesData.FromOption.Value!.Value);
 
-            if (viewAllMmsCampaignsData.ToOption.IsSet)
-                writer.WriteNumber("to", viewAllMmsCampaignsData.ToOption.Value!.Value);
+            if (getAllDeliveryIssuesData.ToOption.IsSet)
+                writer.WriteNumber("to", getAllDeliveryIssuesData.ToOption.Value!.Value);
 
-            if (viewAllMmsCampaignsData.DataOption.IsSet)
+            if (getAllDeliveryIssuesData.DataOption.IsSet)
             {
                 writer.WritePropertyName("data");
-                JsonSerializer.Serialize(writer, viewAllMmsCampaignsData.Data, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, getAllDeliveryIssuesData.Data, jsonSerializerOptions);
             }
         }
     }

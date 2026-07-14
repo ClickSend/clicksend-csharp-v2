@@ -4,10 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HttpCode** | **int** | The HTTP status code of the response. | [optional] 
-**ResponseCode** | **string** | The response code indicating the status of the operation. | [optional] 
-**ResponseMsg** | **string** | A message describing the outcome of the operation. | [optional] 
-**Data** | [**ViewAllMmsCampaignsData**](ViewAllMmsCampaignsData.md) |  | [optional] 
+**Total** | **int** | The total number of items available for viewing. | [optional] 
+**PerPage** | **int** | The number of items returned per page. This is specified in the limit parameter. You can have 100 items at maximum, and 15 at minimum. | [optional] 
+**CurrentPage** | **int** | The current page number. | [optional] 
+**LastPage** | **int** | The last page number. | [optional] 
+**NextPageUrl** | **string** | A URL of the next page. It will return **null** if there’s no next page. | [optional] 
+**PrevPageUrl** | **string** | A URL of the previous page. It will return **null** if there’s no previous page. | [optional] 
+**From** | **int** | The number of the first result in the current page. | [optional] 
+**To** | **int** | The number of the last result in the current page. | [optional] 
+**Data** | [**List&lt;MmsCampaign&gt;**](MmsCampaign.md) |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

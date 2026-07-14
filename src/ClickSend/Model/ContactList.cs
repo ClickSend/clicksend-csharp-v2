@@ -37,13 +37,17 @@ namespace ClickSend.Model
         /// <param name="listName">The name of the list.</param>
         /// <param name="listEmailId">The email address id of the list.</param>
         /// <param name="contactsCount">The number of contacts in the list.</param>
+        /// <param name="importInProgress">Flag indicating if a contact import is currently in progress for this list.</param>
+        /// <param name="optoutInProgress">Flag indicating if an opt-out removal is currently in progress for this list.</param>
         [JsonConstructor]
-        public ContactList(Option<int?> listId = default, Option<string?> listName = default, Option<string?> listEmailId = default, Option<int?> contactsCount = default)
+        public ContactList(Option<int?> listId = default, Option<string?> listName = default, Option<string?> listEmailId = default, Option<int?> contactsCount = default, Option<int?> importInProgress = default, Option<int?> optoutInProgress = default)
         {
             ListIdOption = listId;
             ListNameOption = listName;
             ListEmailIdOption = listEmailId;
             ContactsCountOption = contactsCount;
+            ImportInProgressOption = importInProgress;
+            OptoutInProgressOption = optoutInProgress;
             OnCreated();
         }
 
@@ -110,6 +114,36 @@ namespace ClickSend.Model
         public int? ContactsCount { get { return this.ContactsCountOption.Value; } set { this.ContactsCountOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of ImportInProgress
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> ImportInProgressOption { get; private set; }
+
+        /// <summary>
+        /// Flag indicating if a contact import is currently in progress for this list.
+        /// </summary>
+        /// <value>Flag indicating if a contact import is currently in progress for this list.</value>
+        /* <example>0</example> */
+        [JsonPropertyName("_import_in_progress")]
+        public int? ImportInProgress { get { return this.ImportInProgressOption.Value; } set { this.ImportInProgressOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of OptoutInProgress
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> OptoutInProgressOption { get; private set; }
+
+        /// <summary>
+        /// Flag indicating if an opt-out removal is currently in progress for this list.
+        /// </summary>
+        /// <value>Flag indicating if an opt-out removal is currently in progress for this list.</value>
+        /* <example>0</example> */
+        [JsonPropertyName("_optout_in_progress")]
+        public int? OptoutInProgress { get { return this.OptoutInProgressOption.Value; } set { this.OptoutInProgressOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -121,6 +155,8 @@ namespace ClickSend.Model
             sb.Append("  ListName: ").Append(ListName).Append("\n");
             sb.Append("  ListEmailId: ").Append(ListEmailId).Append("\n");
             sb.Append("  ContactsCount: ").Append(ContactsCount).Append("\n");
+            sb.Append("  ImportInProgress: ").Append(ImportInProgress).Append("\n");
+            sb.Append("  OptoutInProgress: ").Append(OptoutInProgress).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -162,6 +198,8 @@ namespace ClickSend.Model
             Option<string?> listName = default;
             Option<string?> listEmailId = default;
             Option<int?> contactsCount = default;
+            Option<int?> importInProgress = default;
+            Option<int?> optoutInProgress = default;
 
             while (utf8JsonReader.Read())
             {
@@ -190,6 +228,12 @@ namespace ClickSend.Model
                         case "_contacts_count":
                             contactsCount = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
+                        case "_import_in_progress":
+                            importInProgress = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "_optout_in_progress":
+                            optoutInProgress = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
                         default:
                             break;
                     }
@@ -208,7 +252,13 @@ namespace ClickSend.Model
             if (contactsCount.IsSet && contactsCount.Value == null)
                 throw new ArgumentNullException(nameof(contactsCount), "Property is not nullable for class ContactList.");
 
-            return new ContactList(listId, listName, listEmailId, contactsCount);
+            if (importInProgress.IsSet && importInProgress.Value == null)
+                throw new ArgumentNullException(nameof(importInProgress), "Property is not nullable for class ContactList.");
+
+            if (optoutInProgress.IsSet && optoutInProgress.Value == null)
+                throw new ArgumentNullException(nameof(optoutInProgress), "Property is not nullable for class ContactList.");
+
+            return new ContactList(listId, listName, listEmailId, contactsCount, importInProgress, optoutInProgress);
         }
 
         /// <summary>
@@ -252,6 +302,12 @@ namespace ClickSend.Model
 
             if (contactList.ContactsCountOption.IsSet)
                 writer.WriteNumber("_contacts_count", contactList.ContactsCountOption.Value!.Value);
+
+            if (contactList.ImportInProgressOption.IsSet)
+                writer.WriteNumber("_import_in_progress", contactList.ImportInProgressOption.Value!.Value);
+
+            if (contactList.OptoutInProgressOption.IsSet)
+                writer.WriteNumber("_optout_in_progress", contactList.OptoutInProgressOption.Value!.Value);
         }
     }
 }

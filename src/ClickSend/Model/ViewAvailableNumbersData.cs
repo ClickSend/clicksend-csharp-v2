@@ -42,8 +42,9 @@ namespace ClickSend.Model
         /// <param name="from">The number of the first result in the current page.</param>
         /// <param name="to">The number of the last result in the current page.</param>
         /// <param name="data">data</param>
+        /// <param name="currency">currency</param>
         [JsonConstructor]
-        public ViewAvailableNumbersData(Option<int?> total = default, Option<int?> perPage = default, Option<int?> currentPage = default, Option<int?> lastPage = default, Option<string?> nextPageUrl = default, Option<string?> prevPageUrl = default, Option<int?> from = default, Option<int?> to = default, Option<List<ViewAvailableNumbersDataAllOfDataInner>?> data = default)
+        public ViewAvailableNumbersData(Option<int?> total = default, Option<int?> perPage = default, Option<int?> currentPage = default, Option<int?> lastPage = default, Option<string?> nextPageUrl = default, Option<string?> prevPageUrl = default, Option<int?> from = default, Option<int?> to = default, Option<List<ViewAvailableNumbersDataAllOfDataInner>?> data = default, Option<Currency?> currency = default)
         {
             TotalOption = total;
             PerPageOption = perPage;
@@ -54,6 +55,7 @@ namespace ClickSend.Model
             FromOption = from;
             ToOption = to;
             DataOption = data;
+            CurrencyOption = currency;
             OnCreated();
         }
 
@@ -192,6 +194,19 @@ namespace ClickSend.Model
         public List<ViewAvailableNumbersDataAllOfDataInner>? Data { get { return this.DataOption.Value; } set { this.DataOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Currency
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<Currency?> CurrencyOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Currency
+        /// </summary>
+        [JsonPropertyName("_currency")]
+        public Currency? Currency { get { return this.CurrencyOption.Value; } set { this.CurrencyOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -208,6 +223,7 @@ namespace ClickSend.Model
             sb.Append("  From: ").Append(From).Append("\n");
             sb.Append("  To: ").Append(To).Append("\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
+            sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -254,6 +270,7 @@ namespace ClickSend.Model
             Option<int?> from = default;
             Option<int?> to = default;
             Option<List<ViewAvailableNumbersDataAllOfDataInner>?> data = default;
+            Option<Currency?> currency = default;
 
             while (utf8JsonReader.Read())
             {
@@ -297,6 +314,9 @@ namespace ClickSend.Model
                         case "data":
                             data = new Option<List<ViewAvailableNumbersDataAllOfDataInner>?>(JsonSerializer.Deserialize<List<ViewAvailableNumbersDataAllOfDataInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
+                        case "_currency":
+                            currency = new Option<Currency?>(JsonSerializer.Deserialize<Currency>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
                         default:
                             break;
                     }
@@ -324,7 +344,10 @@ namespace ClickSend.Model
             if (data.IsSet && data.Value == null)
                 throw new ArgumentNullException(nameof(data), "Property is not nullable for class ViewAvailableNumbersData.");
 
-            return new ViewAvailableNumbersData(total, perPage, currentPage, lastPage, nextPageUrl, prevPageUrl, from, to, data);
+            if (currency.IsSet && currency.Value == null)
+                throw new ArgumentNullException(nameof(currency), "Property is not nullable for class ViewAvailableNumbersData.");
+
+            return new ViewAvailableNumbersData(total, perPage, currentPage, lastPage, nextPageUrl, prevPageUrl, from, to, data, currency);
         }
 
         /// <summary>
@@ -353,6 +376,9 @@ namespace ClickSend.Model
         {
             if (viewAvailableNumbersData.DataOption.IsSet && viewAvailableNumbersData.Data == null)
                 throw new ArgumentNullException(nameof(viewAvailableNumbersData.Data), "Property is required for class ViewAvailableNumbersData.");
+
+            if (viewAvailableNumbersData.CurrencyOption.IsSet && viewAvailableNumbersData.Currency == null)
+                throw new ArgumentNullException(nameof(viewAvailableNumbersData.Currency), "Property is required for class ViewAvailableNumbersData.");
 
             if (viewAvailableNumbersData.TotalOption.IsSet)
                 writer.WriteNumber("total", viewAvailableNumbersData.TotalOption.Value!.Value);
@@ -388,6 +414,11 @@ namespace ClickSend.Model
             {
                 writer.WritePropertyName("data");
                 JsonSerializer.Serialize(writer, viewAvailableNumbersData.Data, jsonSerializerOptions);
+            }
+            if (viewAvailableNumbersData.CurrencyOption.IsSet)
+            {
+                writer.WritePropertyName("_currency");
+                JsonSerializer.Serialize(writer, viewAvailableNumbersData.Currency, jsonSerializerOptions);
             }
         }
     }
