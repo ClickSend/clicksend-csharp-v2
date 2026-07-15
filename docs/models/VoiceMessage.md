@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **Voice** | **string** | The voice of the message. | [optional] 
 **Schedule** | [**VoiceMessageSchedule**](VoiceMessageSchedule.md) |  | [optional] 
 **MessageId** | **string** | The ID of the message. | [optional] 
-**MessageParts** | **int** | The number of parts in the message. | [optional] 
+**MessageParts** | [**VoiceMessageSchedule**](VoiceMessageSchedule.md) |  | [optional] 
 **MessagePrice** | **string** | The price of the message. | [optional] 
 **CustomString** | **string** | The custom string of the message. | [optional] 
 **UserId** | **decimal** | The ID of the user. | [optional] 

@@ -44,7 +44,7 @@ namespace ClickSend.Model
         /// <param name="voice">The voice of the message.</param>
         /// <param name="schedule">schedule</param>
         /// <param name="messageId">The ID of the message.</param>
-        /// <param name="messageParts">The number of parts in the message.</param>
+        /// <param name="messageParts">messageParts</param>
         /// <param name="messagePrice">The price of the message.</param>
         /// <param name="customString">The custom string of the message.</param>
         /// <param name="userId">The ID of the user.</param>
@@ -60,7 +60,7 @@ namespace ClickSend.Model
         /// <param name="status">The status of the message.</param>
         /// <param name="apiUsername">The API username associated with the message.</param>
         [JsonConstructor]
-        public VoiceMessage(Option<string?> date = default, Option<int?> dateAdded = default, Option<string?> listId = default, Option<string?> to = default, Option<string?> toType = default, Option<string?> body = default, Option<string?> from = default, Option<string?> lang = default, Option<string?> voice = default, Option<VoiceMessageSchedule?> schedule = default, Option<string?> messageId = default, Option<int?> messageParts = default, Option<string?> messagePrice = default, Option<string?> customString = default, Option<decimal?> userId = default, Option<decimal?> subaccountId = default, Option<string?> country = default, Option<decimal?> requireInput = default, Option<decimal?> machineDetection = default, Option<decimal?> machineDetected = default, Option<string?> digits = default, Option<string?> carrier = default, Option<string?> statusCode = default, Option<string?> statusText = default, Option<string?> status = default, Option<string?> apiUsername = default)
+        public VoiceMessage(Option<string?> date = default, Option<int?> dateAdded = default, Option<string?> listId = default, Option<string?> to = default, Option<string?> toType = default, Option<string?> body = default, Option<string?> from = default, Option<string?> lang = default, Option<string?> voice = default, Option<VoiceMessageSchedule?> schedule = default, Option<string?> messageId = default, Option<VoiceMessageSchedule?> messageParts = default, Option<string?> messagePrice = default, Option<string?> customString = default, Option<decimal?> userId = default, Option<decimal?> subaccountId = default, Option<string?> country = default, Option<decimal?> requireInput = default, Option<decimal?> machineDetection = default, Option<decimal?> machineDetected = default, Option<string?> digits = default, Option<string?> carrier = default, Option<string?> statusCode = default, Option<string?> statusText = default, Option<string?> status = default, Option<string?> apiUsername = default)
         {
             DateOption = date;
             DateAddedOption = dateAdded;
@@ -259,15 +259,13 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<int?> MessagePartsOption { get; private set; }
+        public Option<VoiceMessageSchedule?> MessagePartsOption { get; private set; }
 
         /// <summary>
-        /// The number of parts in the message.
+        /// Gets or Sets MessageParts
         /// </summary>
-        /// <value>The number of parts in the message.</value>
-        /* <example>1</example> */
         [JsonPropertyName("message_parts")]
-        public int? MessageParts { get { return this.MessagePartsOption.Value; } set { this.MessagePartsOption = new(value); } }
+        public VoiceMessageSchedule? MessageParts { get { return this.MessagePartsOption.Value; } set { this.MessagePartsOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of MessagePrice
@@ -560,7 +558,7 @@ namespace ClickSend.Model
             Option<string?> voice = default;
             Option<VoiceMessageSchedule?> schedule = default;
             Option<string?> messageId = default;
-            Option<int?> messageParts = default;
+            Option<VoiceMessageSchedule?> messageParts = default;
             Option<string?> messagePrice = default;
             Option<string?> customString = default;
             Option<decimal?> userId = default;
@@ -625,7 +623,7 @@ namespace ClickSend.Model
                             messageId = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "message_parts":
-                            messageParts = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            messageParts = new Option<VoiceMessageSchedule?>(JsonSerializer.Deserialize<VoiceMessageSchedule>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "message_price":
                             messagePrice = new Option<string?>(utf8JsonReader.GetString()!);
@@ -777,6 +775,9 @@ namespace ClickSend.Model
             if (voiceMessage.MessageIdOption.IsSet && voiceMessage.MessageId == null)
                 throw new ArgumentNullException(nameof(voiceMessage.MessageId), "Property is required for class VoiceMessage.");
 
+            if (voiceMessage.MessagePartsOption.IsSet && voiceMessage.MessageParts == null)
+                throw new ArgumentNullException(nameof(voiceMessage.MessageParts), "Property is required for class VoiceMessage.");
+
             if (voiceMessage.MessagePriceOption.IsSet && voiceMessage.MessagePrice == null)
                 throw new ArgumentNullException(nameof(voiceMessage.MessagePrice), "Property is required for class VoiceMessage.");
 
@@ -837,8 +838,10 @@ namespace ClickSend.Model
                 writer.WriteString("message_id", voiceMessage.MessageId);
 
             if (voiceMessage.MessagePartsOption.IsSet)
-                writer.WriteNumber("message_parts", voiceMessage.MessagePartsOption.Value!.Value);
-
+            {
+                writer.WritePropertyName("message_parts");
+                JsonSerializer.Serialize(writer, voiceMessage.MessageParts, jsonSerializerOptions);
+            }
             if (voiceMessage.MessagePriceOption.IsSet)
                 writer.WriteString("message_price", voiceMessage.MessagePrice);
 
