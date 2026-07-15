@@ -59,7 +59,7 @@ namespace ClickSend.Model
         /// <param name="lastName">The last name of the recipient. The name will appear if you sent the message to a contact from a contact list. If you are sending directly to a phone number, the value will be **null**.</param>
         /// <param name="apiUsername">The username of the SMS sender. This can be a &lt;a href&#x3D;\&quot;https://dashboard.clicksend.com/account/subaccounts\&quot; target&#x3D;\&quot;_blank\&quot;&gt;sub-account&lt;/a&gt;.</param>
         [JsonConstructor]
-        public ViewSmsHistoryDataAllOfDataInner(Option<string?> direction = default, Option<int?> date = default, Option<string?> to = default, Option<string?> body = default, Option<string?> status = default, Option<string?> from = default, Option<string?> schedule = default, Option<string?> statusCode = default, Option<string?> statusText = default, Option<string?> errorCode = default, Option<string?> errorText = default, Option<string?> messageId = default, Option<string?> messageParts = default, Option<string?> messagePrice = default, Option<string?> fromEmail = default, Option<string?> listId = default, Option<string?> customString = default, Option<string?> contactId = default, Option<int?> userId = default, Option<int?> subaccountId = default, Option<string?> country = default, Option<string?> carrier = default, Option<string?> firstName = default, Option<string?> lastName = default, Option<string?> apiUsername = default)
+        public ViewSmsHistoryDataAllOfDataInner(Option<string?> direction = default, Option<int?> date = default, Option<string?> to = default, Option<string?> body = default, Option<string?> status = default, Option<string?> from = default, Option<string?> schedule = default, Option<string?> statusCode = default, Option<string?> statusText = default, Option<string?> errorCode = default, Option<string?> errorText = default, Option<string?> messageId = default, Option<int?> messageParts = default, Option<string?> messagePrice = default, Option<string?> fromEmail = default, Option<string?> listId = default, Option<string?> customString = default, Option<string?> contactId = default, Option<int?> userId = default, Option<int?> subaccountId = default, Option<string?> country = default, Option<string?> carrier = default, Option<string?> firstName = default, Option<string?> lastName = default, Option<string?> apiUsername = default)
         {
             DirectionOption = direction;
             DateOption = date;
@@ -272,15 +272,15 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> MessagePartsOption { get; private set; }
+        public Option<int?> MessagePartsOption { get; private set; }
 
         /// <summary>
         /// The number of parts the message was broken into. To look at how many parts your message is broken down into, use the &lt;a href&#x3D;\&quot;http://smscharactercount.com/\&quot; target&#x3D;\&quot;_blank\&quot;&gt;&lt;strong&gt;SMS Character Count&lt;/strong&gt;&lt;/a&gt;.
         /// </summary>
         /// <value>The number of parts the message was broken into. To look at how many parts your message is broken down into, use the &lt;a href&#x3D;\&quot;http://smscharactercount.com/\&quot; target&#x3D;\&quot;_blank\&quot;&gt;&lt;strong&gt;SMS Character Count&lt;/strong&gt;&lt;/a&gt;.</value>
-        /* <example>1.00</example> */
+        /* <example>1</example> */
         [JsonPropertyName("message_parts")]
-        public string? MessageParts { get { return this.MessagePartsOption.Value; } set { this.MessagePartsOption = new(value); } }
+        public int? MessageParts { get { return this.MessagePartsOption.Value; } set { this.MessagePartsOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of MessagePrice
@@ -541,7 +541,7 @@ namespace ClickSend.Model
             Option<string?> errorCode = default;
             Option<string?> errorText = default;
             Option<string?> messageId = default;
-            Option<string?> messageParts = default;
+            Option<int?> messageParts = default;
             Option<string?> messagePrice = default;
             Option<string?> fromEmail = default;
             Option<string?> listId = default;
@@ -607,7 +607,7 @@ namespace ClickSend.Model
                             messageId = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "message_parts":
-                            messageParts = new Option<string?>(utf8JsonReader.GetString()!);
+                            messageParts = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "message_price":
                             messagePrice = new Option<string?>(utf8JsonReader.GetString()!);
@@ -765,9 +765,6 @@ namespace ClickSend.Model
             if (viewSmsHistoryDataAllOfDataInner.MessageIdOption.IsSet && viewSmsHistoryDataAllOfDataInner.MessageId == null)
                 throw new ArgumentNullException(nameof(viewSmsHistoryDataAllOfDataInner.MessageId), "Property is required for class ViewSmsHistoryDataAllOfDataInner.");
 
-            if (viewSmsHistoryDataAllOfDataInner.MessagePartsOption.IsSet && viewSmsHistoryDataAllOfDataInner.MessageParts == null)
-                throw new ArgumentNullException(nameof(viewSmsHistoryDataAllOfDataInner.MessageParts), "Property is required for class ViewSmsHistoryDataAllOfDataInner.");
-
             if (viewSmsHistoryDataAllOfDataInner.MessagePriceOption.IsSet && viewSmsHistoryDataAllOfDataInner.MessagePrice == null)
                 throw new ArgumentNullException(nameof(viewSmsHistoryDataAllOfDataInner.MessagePrice), "Property is required for class ViewSmsHistoryDataAllOfDataInner.");
 
@@ -832,7 +829,7 @@ namespace ClickSend.Model
                 writer.WriteString("message_id", viewSmsHistoryDataAllOfDataInner.MessageId);
 
             if (viewSmsHistoryDataAllOfDataInner.MessagePartsOption.IsSet)
-                writer.WriteString("message_parts", viewSmsHistoryDataAllOfDataInner.MessageParts);
+                writer.WriteNumber("message_parts", viewSmsHistoryDataAllOfDataInner.MessagePartsOption.Value!.Value);
 
             if (viewSmsHistoryDataAllOfDataInner.MessagePriceOption.IsSet)
                 writer.WriteString("message_price", viewSmsHistoryDataAllOfDataInner.MessagePrice);

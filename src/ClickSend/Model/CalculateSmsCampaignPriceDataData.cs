@@ -37,7 +37,7 @@ namespace ClickSend.Model
         /// <param name="body">The message body.</param>
         /// <param name="schedule">The schedule timestamp.</param>
         [JsonConstructor]
-        public CalculateSmsCampaignPriceDataData(Option<string?> from = default, Option<string?> body = default, Option<string?> schedule = default)
+        public CalculateSmsCampaignPriceDataData(Option<string?> from = default, Option<string?> body = default, Option<int?> schedule = default)
         {
             FromOption = from;
             BodyOption = body;
@@ -82,7 +82,7 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> ScheduleOption { get; private set; }
+        public Option<int?> ScheduleOption { get; private set; }
 
         /// <summary>
         /// The schedule timestamp.
@@ -90,7 +90,7 @@ namespace ClickSend.Model
         /// <value>The schedule timestamp.</value>
         /* <example>1444381346</example> */
         [JsonPropertyName("schedule")]
-        public string? Schedule { get { return this.ScheduleOption.Value; } set { this.ScheduleOption = new(value); } }
+        public int? Schedule { get { return this.ScheduleOption.Value; } set { this.ScheduleOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -142,7 +142,7 @@ namespace ClickSend.Model
 
             Option<string?> from = default;
             Option<string?> body = default;
-            Option<string?> schedule = default;
+            Option<int?> schedule = default;
 
             while (utf8JsonReader.Read())
             {
@@ -166,7 +166,7 @@ namespace ClickSend.Model
                             body = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "schedule":
-                            schedule = new Option<string?>(utf8JsonReader.GetString()!);
+                            schedule = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         default:
                             break;
@@ -216,9 +216,6 @@ namespace ClickSend.Model
             if (calculateSmsCampaignPriceDataData.BodyOption.IsSet && calculateSmsCampaignPriceDataData.Body == null)
                 throw new ArgumentNullException(nameof(calculateSmsCampaignPriceDataData.Body), "Property is required for class CalculateSmsCampaignPriceDataData.");
 
-            if (calculateSmsCampaignPriceDataData.ScheduleOption.IsSet && calculateSmsCampaignPriceDataData.Schedule == null)
-                throw new ArgumentNullException(nameof(calculateSmsCampaignPriceDataData.Schedule), "Property is required for class CalculateSmsCampaignPriceDataData.");
-
             if (calculateSmsCampaignPriceDataData.FromOption.IsSet)
                 writer.WriteString("from", calculateSmsCampaignPriceDataData.From);
 
@@ -226,7 +223,7 @@ namespace ClickSend.Model
                 writer.WriteString("body", calculateSmsCampaignPriceDataData.Body);
 
             if (calculateSmsCampaignPriceDataData.ScheduleOption.IsSet)
-                writer.WriteString("schedule", calculateSmsCampaignPriceDataData.Schedule);
+                writer.WriteNumber("schedule", calculateSmsCampaignPriceDataData.ScheduleOption.Value!.Value);
         }
     }
 }

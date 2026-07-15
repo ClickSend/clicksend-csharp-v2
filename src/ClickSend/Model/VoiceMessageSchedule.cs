@@ -26,52 +26,41 @@ using ClickSend.Client;
 namespace ClickSend.Model
 {
     /// <summary>
-    /// ViewAccountUsageDataEmailTotal
+    /// The timestamp when the message should be sent, as a &lt;a href&#x3D;\&quot;http://help.clicksend.com/what-is-a-unix-timestamp\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Unix timestamp&lt;/a&gt;. Returned as an empty string when no schedule was set.
     /// </summary>
-    public partial class ViewAccountUsageDataEmailTotal : IValidatableObject
+    public partial class VoiceMessageSchedule : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ViewAccountUsageDataEmailTotal" /> class.
+        /// Initializes a new instance of the <see cref="VoiceMessageSchedule" /> class.
         /// </summary>
-        /// <param name="count">The total count of emails.</param>
-        /// <param name="price">The total price of emails.</param>
-        [JsonConstructor]
-        public ViewAccountUsageDataEmailTotal(Option<int?> count = default, Option<string?> price = default)
+        /// <param name="string"></param>
+        internal VoiceMessageSchedule(string @string)
         {
-            CountOption = count;
-            PriceOption = price;
+            String = @string;
+            OnCreated();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VoiceMessageSchedule" /> class.
+        /// </summary>
+        /// <param name="int"></param>
+        internal VoiceMessageSchedule(int @int)
+        {
+            Int = @int;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Used to track the state of Count
+        /// Gets or Sets String
         /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<int?> CountOption { get; private set; }
+        public string? String { get; set; }
 
         /// <summary>
-        /// The total count of emails.
+        /// Gets or Sets Int
         /// </summary>
-        /// <value>The total count of emails.</value>
-        [JsonPropertyName("count")]
-        public int? Count { get { return this.CountOption.Value; } set { this.CountOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of Price
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> PriceOption { get; private set; }
-
-        /// <summary>
-        /// The total price of emails.
-        /// </summary>
-        /// <value>The total price of emails.</value>
-        [JsonPropertyName("price")]
-        public string? Price { get { return this.PriceOption.Value; } set { this.PriceOption = new(value); } }
+        public int? Int { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -80,9 +69,7 @@ namespace ClickSend.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class ViewAccountUsageDataEmailTotal {\n");
-            sb.Append("  Count: ").Append(Count).Append("\n");
-            sb.Append("  Price: ").Append(Price).Append("\n");
+            sb.Append("class VoiceMessageSchedule {\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -99,19 +86,19 @@ namespace ClickSend.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="ViewAccountUsageDataEmailTotal" />
+    /// A Json converter for type <see cref="VoiceMessageSchedule" />
     /// </summary>
-    public class ViewAccountUsageDataEmailTotalJsonConverter : JsonConverter<ViewAccountUsageDataEmailTotal>
+    public class VoiceMessageScheduleJsonConverter : JsonConverter<VoiceMessageSchedule>
     {
         /// <summary>
-        /// Deserializes json to <see cref="ViewAccountUsageDataEmailTotal" />
+        /// Deserializes json to <see cref="VoiceMessageSchedule" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override ViewAccountUsageDataEmailTotal Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override VoiceMessageSchedule Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -120,8 +107,27 @@ namespace ClickSend.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<int?> count = default;
-            Option<string?> price = default;
+            string? varString = default;
+            int? varInt = default;
+
+            Utf8JsonReader utf8JsonReaderOneOf = utf8JsonReader;
+            while (utf8JsonReaderOneOf.Read())
+            {
+                if (startingTokenType == JsonTokenType.StartObject && utf8JsonReaderOneOf.TokenType == JsonTokenType.EndObject && currentDepth == utf8JsonReaderOneOf.CurrentDepth)
+                    break;
+
+                if (startingTokenType == JsonTokenType.StartArray && utf8JsonReaderOneOf.TokenType == JsonTokenType.EndArray && currentDepth == utf8JsonReaderOneOf.CurrentDepth)
+                    break;
+
+                if (utf8JsonReaderOneOf.TokenType == JsonTokenType.PropertyName && currentDepth == utf8JsonReaderOneOf.CurrentDepth - 1)
+                {
+                    Utf8JsonReader utf8JsonReaderString = utf8JsonReader;
+                    ClientUtils.TryDeserialize<string?>(ref utf8JsonReaderString, jsonSerializerOptions, out varString);
+
+                    Utf8JsonReader utf8JsonReaderInt = utf8JsonReader;
+                    ClientUtils.TryDeserialize<int?>(ref utf8JsonReaderInt, jsonSerializerOptions, out varInt);
+                }
+            }
 
             while (utf8JsonReader.Read())
             {
@@ -138,59 +144,46 @@ namespace ClickSend.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "count":
-                            count = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
-                            break;
-                        case "price":
-                            price = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
                         default:
                             break;
                     }
                 }
             }
 
-            if (count.IsSet && count.Value == null)
-                throw new ArgumentNullException(nameof(count), "Property is not nullable for class ViewAccountUsageDataEmailTotal.");
+            if (varString != null)
+                return new VoiceMessageSchedule(varString);
 
-            if (price.IsSet && price.Value == null)
-                throw new ArgumentNullException(nameof(price), "Property is not nullable for class ViewAccountUsageDataEmailTotal.");
+            if (varInt != null)
+                return new VoiceMessageSchedule(varInt.Value);
 
-            return new ViewAccountUsageDataEmailTotal(count, price);
+            throw new JsonException();
         }
 
         /// <summary>
-        /// Serializes a <see cref="ViewAccountUsageDataEmailTotal" />
+        /// Serializes a <see cref="VoiceMessageSchedule" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="viewAccountUsageDataEmailTotal"></param>
+        /// <param name="voiceMessageSchedule"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, ViewAccountUsageDataEmailTotal viewAccountUsageDataEmailTotal, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, VoiceMessageSchedule voiceMessageSchedule, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, viewAccountUsageDataEmailTotal, jsonSerializerOptions);
+            WriteProperties(writer, voiceMessageSchedule, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="ViewAccountUsageDataEmailTotal" />
+        /// Serializes the properties of <see cref="VoiceMessageSchedule" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="viewAccountUsageDataEmailTotal"></param>
+        /// <param name="voiceMessageSchedule"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, ViewAccountUsageDataEmailTotal viewAccountUsageDataEmailTotal, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, VoiceMessageSchedule voiceMessageSchedule, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (viewAccountUsageDataEmailTotal.PriceOption.IsSet && viewAccountUsageDataEmailTotal.Price == null)
-                throw new ArgumentNullException(nameof(viewAccountUsageDataEmailTotal.Price), "Property is required for class ViewAccountUsageDataEmailTotal.");
 
-            if (viewAccountUsageDataEmailTotal.CountOption.IsSet)
-                writer.WriteNumber("count", viewAccountUsageDataEmailTotal.CountOption.Value!.Value);
-
-            if (viewAccountUsageDataEmailTotal.PriceOption.IsSet)
-                writer.WriteString("price", viewAccountUsageDataEmailTotal.Price);
         }
     }
 }

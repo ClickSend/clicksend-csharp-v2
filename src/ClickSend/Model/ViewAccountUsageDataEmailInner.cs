@@ -39,7 +39,7 @@ namespace ClickSend.Model
         /// <param name="totalPrice">totalPrice</param>
         /// <param name="notes">Optional notes.</param>
         [JsonConstructor]
-        public ViewAccountUsageDataEmailInner(Option<int?> subaccountId = default, Option<string?> username = default, Option<int?> totalCount = default, Option<string?> totalPrice = default, Option<string?> notes = default)
+        public ViewAccountUsageDataEmailInner(Option<int?> subaccountId = default, Option<string?> username = default, Option<int?> totalCount = default, Option<decimal?> totalPrice = default, Option<string?> notes = default)
         {
             SubaccountIdOption = subaccountId;
             UsernameOption = username;
@@ -98,13 +98,13 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> TotalPriceOption { get; private set; }
+        public Option<decimal?> TotalPriceOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets TotalPrice
         /// </summary>
         [JsonPropertyName("total_price")]
-        public string? TotalPrice { get { return this.TotalPriceOption.Value; } set { this.TotalPriceOption = new(value); } }
+        public decimal? TotalPrice { get { return this.TotalPriceOption.Value; } set { this.TotalPriceOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Notes
@@ -173,7 +173,7 @@ namespace ClickSend.Model
             Option<int?> subaccountId = default;
             Option<string?> username = default;
             Option<int?> totalCount = default;
-            Option<string?> totalPrice = default;
+            Option<decimal?> totalPrice = default;
             Option<string?> notes = default;
 
             while (utf8JsonReader.Read())
@@ -201,7 +201,7 @@ namespace ClickSend.Model
                             totalCount = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "total_price":
-                            totalPrice = new Option<string?>(utf8JsonReader.GetString()!);
+                            totalPrice = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
                             break;
                         case "notes":
                             notes = new Option<string?>(utf8JsonReader.GetString());
@@ -254,9 +254,6 @@ namespace ClickSend.Model
             if (viewAccountUsageDataEmailInner.UsernameOption.IsSet && viewAccountUsageDataEmailInner.Username == null)
                 throw new ArgumentNullException(nameof(viewAccountUsageDataEmailInner.Username), "Property is required for class ViewAccountUsageDataEmailInner.");
 
-            if (viewAccountUsageDataEmailInner.TotalPriceOption.IsSet && viewAccountUsageDataEmailInner.TotalPrice == null)
-                throw new ArgumentNullException(nameof(viewAccountUsageDataEmailInner.TotalPrice), "Property is required for class ViewAccountUsageDataEmailInner.");
-
             if (viewAccountUsageDataEmailInner.SubaccountIdOption.IsSet)
                 writer.WriteNumber("subaccount_id", viewAccountUsageDataEmailInner.SubaccountIdOption.Value!.Value);
 
@@ -267,7 +264,7 @@ namespace ClickSend.Model
                 writer.WriteNumber("total_count", viewAccountUsageDataEmailInner.TotalCountOption.Value!.Value);
 
             if (viewAccountUsageDataEmailInner.TotalPriceOption.IsSet)
-                writer.WriteString("total_price", viewAccountUsageDataEmailInner.TotalPrice);
+                writer.WriteNumber("total_price", viewAccountUsageDataEmailInner.TotalPriceOption.Value!.Value);
 
             if (viewAccountUsageDataEmailInner.NotesOption.IsSet)
                 if (viewAccountUsageDataEmailInner.NotesOption.Value != null)

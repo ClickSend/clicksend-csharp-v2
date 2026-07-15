@@ -39,7 +39,7 @@ namespace ClickSend.Model
         /// <param name="body">The body of the template.</param>
         /// <param name="thumbnail">thumbnail</param>
         [JsonConstructor]
-        public MasterEmailTemplate(Option<int?> templateIdMaster = default, Option<string?> templateName = default, Option<string?> dateAdded = default, Option<string?> body = default, Option<MasterEmailTemplateThumbnail?> thumbnail = default)
+        public MasterEmailTemplate(Option<int?> templateIdMaster = default, Option<string?> templateName = default, Option<int?> dateAdded = default, Option<string?> body = default, Option<MasterEmailTemplateThumbnail?> thumbnail = default)
         {
             TemplateIdMasterOption = templateIdMaster;
             TemplateNameOption = templateName;
@@ -86,7 +86,7 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> DateAddedOption { get; private set; }
+        public Option<int?> DateAddedOption { get; private set; }
 
         /// <summary>
         /// The date the template was added.
@@ -94,7 +94,7 @@ namespace ClickSend.Model
         /// <value>The date the template was added.</value>
         /* <example>1436157486</example> */
         [JsonPropertyName("date_added")]
-        public string? DateAdded { get { return this.DateAddedOption.Value; } set { this.DateAddedOption = new(value); } }
+        public int? DateAdded { get { return this.DateAddedOption.Value; } set { this.DateAddedOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Body
@@ -185,7 +185,7 @@ namespace ClickSend.Model
 
             Option<int?> templateIdMaster = default;
             Option<string?> templateName = default;
-            Option<string?> dateAdded = default;
+            Option<int?> dateAdded = default;
             Option<string?> body = default;
             Option<MasterEmailTemplateThumbnail?> thumbnail = default;
 
@@ -211,7 +211,7 @@ namespace ClickSend.Model
                             templateName = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "date_added":
-                            dateAdded = new Option<string?>(utf8JsonReader.GetString()!);
+                            dateAdded = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "body":
                             body = new Option<string?>(utf8JsonReader.GetString());
@@ -267,9 +267,6 @@ namespace ClickSend.Model
             if (masterEmailTemplate.TemplateNameOption.IsSet && masterEmailTemplate.TemplateName == null)
                 throw new ArgumentNullException(nameof(masterEmailTemplate.TemplateName), "Property is required for class MasterEmailTemplate.");
 
-            if (masterEmailTemplate.DateAddedOption.IsSet && masterEmailTemplate.DateAdded == null)
-                throw new ArgumentNullException(nameof(masterEmailTemplate.DateAdded), "Property is required for class MasterEmailTemplate.");
-
             if (masterEmailTemplate.ThumbnailOption.IsSet && masterEmailTemplate.Thumbnail == null)
                 throw new ArgumentNullException(nameof(masterEmailTemplate.Thumbnail), "Property is required for class MasterEmailTemplate.");
 
@@ -280,7 +277,7 @@ namespace ClickSend.Model
                 writer.WriteString("template_name", masterEmailTemplate.TemplateName);
 
             if (masterEmailTemplate.DateAddedOption.IsSet)
-                writer.WriteString("date_added", masterEmailTemplate.DateAdded);
+                writer.WriteNumber("date_added", masterEmailTemplate.DateAddedOption.Value!.Value);
 
             if (masterEmailTemplate.BodyOption.IsSet)
                 if (masterEmailTemplate.BodyOption.Value != null)

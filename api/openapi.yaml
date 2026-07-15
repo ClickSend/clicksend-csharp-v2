@@ -44162,9 +44162,9 @@ components:
         list_id: 428
         from: "+61353787448"
         body: This is my new campaign message. StopMsg.me/xxxxx
-        schedule: "1444821615"
+        schedule: 1444821615
         status: Queued
-        date_added: "1444962630"
+        date_added: 1444962630
         custom_string: custom_string
         url_to_shorten: url_to_shorten
         unsubscribe_link: 0
@@ -44218,8 +44218,8 @@ components:
         schedule:
           description: The scheduled date of the message. It is in <a href="http://help.clicksend.com/what-is-a-unix-timestamp"
             target="_blank">Unix format</a>.
-          example: "1444821615"
-          type: string
+          example: 1444821615
+          type: integer
         status:
           description: |-
             The status of the SMS. Available statuses are:
@@ -44238,8 +44238,8 @@ components:
         date_added:
           description: The date you created the SMS campaign. It is in <a href="http://help.clicksend.com/what-is-a-unix-timestamp"
             target="_blank">Unix format</a>.
-          example: "1444962630"
-          type: string
+          example: 1444962630
+          type: integer
         custom_string:
           description: The custom note that was added when creating or updating the
             SMS campaign.
@@ -44292,9 +44292,9 @@ components:
           list_id: 428
           from: "+61353787448"
           body: This is my new campaign message. StopMsg.me/xxxxx
-          schedule: "1444821615"
+          schedule: 1444821615
           status: Queued
-          date_added: "1444962630"
+          date_added: 1444962630
           custom_string: custom_string
           url_to_shorten: url_to_shorten
           unsubscribe_link: 0
@@ -44333,11 +44333,11 @@ components:
         response_msg: Here is your price for your SMS Campaign.
         data:
           total_count: 1
-          total_price: 0.035
+          total_price: "0.035"
           data:
             from: "+61353787448"
             body: "John, this is your new campaign message."
-            schedule: "1444381346"
+            schedule: 1444381346
           _currency:
             currency_name_short: AUD
             currency_prefix_d: $
@@ -44374,9 +44374,9 @@ components:
           list_id: 428
           from: "+61353787448"
           body: This is my new campaign message. StopMsg.me/xxxxx
-          schedule: "1444821615"
+          schedule: 1444821615
           status: Queued
-          date_added: "1444962630"
+          date_added: 1444962630
           custom_string: custom_string
           url_to_shorten: url_to_shorten
           unsubscribe_link: 0
@@ -44423,9 +44423,9 @@ components:
           list_id: 428
           from: "+61353787448"
           body: This is my new campaign message. StopMsg.me/xxxxx
-          schedule: "1444821615"
+          schedule: 1444821615
           status: Queued
-          date_added: "1444962630"
+          date_added: 1444962630
           custom_string: custom_string
           url_to_shorten: url_to_shorten
           unsubscribe_link: 0
@@ -45524,9 +45524,9 @@ components:
         from: from
         lang: en-au
         voice: female
-        schedule: "1436874701"
+        schedule: 1436874701
         message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-        message_parts: "1.00"
+        message_parts: 1
         message_price: "0.07"
         custom_string: this is a test
         user_id: 1
@@ -45582,19 +45582,15 @@ components:
           example: female
           type: string
         schedule:
-          description: |-
-            The timestamp when the message should be sent. Returned as a string since it may be
-            an empty string when no schedule was set.
-          example: "1436874701"
-          type: string
+          $ref: "#/components/schemas/voice_message_schedule"
         message_id:
           description: The ID of the message.
           example: BF7AD270-0DE2-418B-B606-71D527D9C1AE
           type: string
         message_parts:
           description: The number of parts in the message.
-          example: "1.00"
-          type: string
+          example: 1
+          type: integer
         message_price:
           description: The price of the message.
           example: "0.07"
@@ -45676,9 +45672,9 @@ components:
             from: from
             lang: en-au
             voice: female
-            schedule: "1436874701"
+            schedule: 1436874701
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: "1.00"
+            message_parts: 1
             message_price: "0.07"
             custom_string: this is a test
             user_id: 1
@@ -45702,9 +45698,9 @@ components:
             from: from
             lang: en-au
             voice: female
-            schedule: "1436874701"
+            schedule: 1436874701
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: "1.00"
+            message_parts: 1
             message_price: "0.07"
             custom_string: this is a test
             user_id: 1
@@ -45760,9 +45756,9 @@ components:
             from: from
             lang: en-au
             voice: female
-            schedule: "1436874701"
+            schedule: 1436874701
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: "1.00"
+            message_parts: 1
             message_price: "0.07"
             custom_string: this is a test
             user_id: 1
@@ -45786,9 +45782,9 @@ components:
             from: from
             lang: en-au
             voice: female
-            schedule: "1436874701"
+            schedule: 1436874701
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: "1.00"
+            message_parts: 1
             message_price: "0.07"
             custom_string: this is a test
             user_id: 1
@@ -46038,9 +46034,9 @@ components:
             from: from
             lang: en-au
             voice: female
-            schedule: "1436874701"
+            schedule: 1436874701
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: "1.00"
+            message_parts: 1
             message_price: "0.07"
             custom_string: this is a test
             user_id: 1
@@ -46064,9 +46060,9 @@ components:
             from: from
             lang: en-au
             voice: female
-            schedule: "1436874701"
+            schedule: 1436874701
             message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-            message_parts: "1.00"
+            message_parts: 1
             message_price: "0.07"
             custom_string: this is a test
             user_id: 1
@@ -47607,7 +47603,7 @@ components:
       example:
         template_id_master: 57
         template_name: Welcome Email
-        date_added: "1436157486"
+        date_added: 1436157486
         body: |-
           <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" ...
                                </tr>
@@ -47633,8 +47629,8 @@ components:
           type: string
         date_added:
           description: The date the template was added.
-          example: "1436157486"
-          type: string
+          example: 1436157486
+          type: integer
         body:
           description: The body of the template.
           example: |-
@@ -47710,7 +47706,7 @@ components:
         data:
           template_id_master: 57
           template_name: Welcome Email
-          date_added: "1436157486"
+          date_added: 1436157486
           body: |-
             <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" ...
                                  </tr>
@@ -49665,65 +49661,65 @@ components:
           - subaccount_id: 1039
             username: gerald
             total_count: "29.00"
-            total_price: "2.1337"
+            total_price: 2.1337
           - subaccount_id: 1047
             username: user5
             total_count: "4.00"
-            total_price: "0.3080"
+            total_price: 0.308
           mms: []
           voice:
           - subaccount_id: 1039
             username: user1
             total_count: "6.00"
-            total_price: "0.1980"
+            total_price: 0.198
           - subaccount_id: 1047
             username: user5
             total_count: "1.00"
-            total_price: "0.0330"
+            total_price: 0.033
           fax:
           - subaccount_id: 1039
             username: user1
             total_count: "3.00"
-            total_price: "0.6943"
+            total_price: 0.6943
           - subaccount_id: 1047
             username: user5
             total_count: "1.00"
-            total_price: "0.2314"
+            total_price: 0.2314
           post:
           - subaccount_id: 1039
             username: user1
             total_count: "10"
-            total_price: "8.5624"
+            total_price: 8.5624
           - subaccount_id: 1047
             username: user5
             total_count: "3"
-            total_price: "2.5586"
+            total_price: 2.5586
           email:
           - subaccount_id: 1039
             username: user1
             total_count: 3992
-            total_price: "9.0020"
+            total_price: 9.002
           - subaccount_id: 1047
             username: user5
             total_count: 998
-            total_price: "0.0000"
+            total_price: 0
           email_transactional: []
           postcards: []
           sms_total:
-            count: 33
-            price: "2.4417"
+            count: 1
+            price: 0
           voice_total:
-            count: 33
-            price: "2.4417"
+            count: 1
+            price: 0
           fax_total:
-            count: 33
-            price: "2.4417"
+            count: 1
+            price: 0
           post_total:
-            count: 33
-            price: "2.4417"
+            count: 1
+            price: 0
           email_total:
-            count: 4990
-            price: "9.0020"
+            count: 1
+            price: 0
           mms_total:
             count: 1
             price: 0
@@ -49814,7 +49810,7 @@ components:
         name: Australia
         code: AU
         region: Oceania
-        agreed_at: agreed_at
+        agreed_at: 0
         registration_entity:
           id: 8
           name: Other
@@ -49855,7 +49851,7 @@ components:
         agreed_at:
           description: The date when the country was agreed upon.
           nullable: true
-          type: string
+          type: integer
           example: null
         registration_entity:
           $ref: "#/components/schemas/account__referrer_chosen"
@@ -49918,7 +49914,7 @@ components:
           name: Australia
           code: AU
           region: Oceania
-          agreed_at: agreed_at
+          agreed_at: 0
           registration_entity:
             id: 8
             name: Other
@@ -49943,7 +49939,7 @@ components:
           name: Australia
           code: AU
           region: Oceania
-          agreed_at: agreed_at
+          agreed_at: 0
           registration_entity:
             id: 8
             name: Other
@@ -49992,7 +49988,7 @@ components:
           name: Australia
           code: AU
           region: Oceania
-          agreed_at: agreed_at
+          agreed_at: 0
           registration_entity:
             id: 8
             name: Other
@@ -50017,7 +50013,7 @@ components:
           name: Australia
           code: AU
           region: Oceania
-          agreed_at: agreed_at
+          agreed_at: 0
           registration_entity:
             id: 8
             name: Other
@@ -50066,7 +50062,7 @@ components:
           name: Australia
           code: AU
           region: Oceania
-          agreed_at: agreed_at
+          agreed_at: 0
           registration_entity:
             id: 8
             name: Other
@@ -50091,7 +50087,7 @@ components:
           name: Australia
           code: AU
           region: Oceania
-          agreed_at: agreed_at
+          agreed_at: 0
           registration_entity:
             id: 8
             name: Other
@@ -51385,8 +51381,8 @@ components:
         custom_2: Custom 2
         custom_3: Custom 3
         custom_4: Custom 4
-        date_added: 2015-07-05T14:51:26Z
-        date_updated: 2015-07-05T14:51:26Z
+        date_added: 1783997542
+        date_updated: 1783997542
         fax_number: "+61477141888"
         organization_name: Awesome Company
         email: john@doe.com
@@ -51435,19 +51431,16 @@ components:
           example: Custom 4
           type: string
         date_added:
-          description: |-
-            The date when the contact was added. Returned as a plain string rather than a strict
-            date-time since the API sometimes returns a raw Unix timestamp (e.g. "1783997542")
-            instead of ISO 8601.
-          example: 2015-07-05T14:51:26Z
-          type: string
+          description: "The date when the contact was added, as a <a href=\"http://help.clicksend.com/what-is-a-unix-timestamp\"\
+            \ target=\"_blank\">Unix timestamp</a>."
+          example: 1783997542
+          type: integer
         date_updated:
-          description: |-
-            The date when the contact was last updated. Returned as a plain string rather than a
-            strict date-time since the API sometimes returns a raw Unix timestamp (e.g. "1783997542")
-            instead of ISO 8601.
-          example: 2015-07-05T14:51:26Z
-          type: string
+          description: "The date when the contact was last updated, as a <a href=\"\
+            http://help.clicksend.com/what-is-a-unix-timestamp\" target=\"_blank\"\
+            >Unix timestamp</a>."
+          example: 1783997542
+          type: integer
         fax_number:
           description: The fax number of the contact.
           example: "+61477141888"
@@ -51522,8 +51515,8 @@ components:
             custom_2: Custom 2
             custom_3: Custom 3
             custom_4: Custom 4
-            date_added: 2015-07-05T14:51:26Z
-            date_updated: 2015-07-05T14:51:26Z
+            date_added: 1783997542
+            date_updated: 1783997542
             fax_number: "+61477141888"
             organization_name: Awesome Company
             email: john@doe.com
@@ -51543,8 +51536,8 @@ components:
             custom_2: Custom 2
             custom_3: Custom 3
             custom_4: Custom 4
-            date_added: 2015-07-05T14:51:26Z
-            date_updated: 2015-07-05T14:51:26Z
+            date_added: 1783997542
+            date_updated: 1783997542
             fax_number: "+61477141888"
             organization_name: Awesome Company
             email: john@doe.com
@@ -51586,8 +51579,8 @@ components:
           custom_2: Custom 2
           custom_3: Custom 3
           custom_4: Custom 4
-          date_added: 2015-07-05T14:51:26Z
-          date_updated: 2015-07-05T14:51:26Z
+          date_added: 1783997542
+          date_updated: 1783997542
           fax_number: "+61477141888"
           organization_name: Awesome Company
           email: john@doe.com
@@ -51629,8 +51622,8 @@ components:
           custom_2: Custom 2
           custom_3: Custom 3
           custom_4: Custom 4
-          date_added: 2015-07-05T14:51:26Z
-          date_updated: 2015-07-05T14:51:26Z
+          date_added: 1783997542
+          date_updated: 1783997542
           fax_number: "+61477141888"
           organization_name: Awesome Company
           email: john@doe.com
@@ -51672,8 +51665,8 @@ components:
           custom_2: Custom 2
           custom_3: Custom 3
           custom_4: Custom 4
-          date_added: 2015-07-05T14:51:26Z
-          date_updated: 2015-07-05T14:51:26Z
+          date_added: 1783997542
+          date_updated: 1783997542
           fax_number: "+61477141888"
           organization_name: Awesome Company
           email: john@doe.com
@@ -51984,8 +51977,8 @@ components:
           custom_2: Custom 2
           custom_3: Custom 3
           custom_4: Custom 4
-          date_added: 2015-07-05T14:51:26Z
-          date_updated: 2015-07-05T14:51:26Z
+          date_added: 1783997542
+          date_updated: 1783997542
           fax_number: "+61477141888"
           organization_name: Awesome Company
           email: john@doe.com
@@ -52027,8 +52020,8 @@ components:
           custom_2: Custom 2
           custom_3: Custom 3
           custom_4: Custom 4
-          date_added: 2015-07-05T14:51:26Z
-          date_updated: 2015-07-05T14:51:26Z
+          date_added: 1783997542
+          date_updated: 1783997542
           fax_number: "+61477141888"
           organization_name: Awesome Company
           email: john@doe.com
@@ -56853,8 +56846,8 @@ components:
             \ how many parts your message is broken down into, use the <a href=\"\
             http://smscharactercount.com/\" target=\"_blank\"><strong>SMS Character\
             \ Count</strong></a>."
-          example: "1.00"
-          type: string
+          example: 1
+          type: integer
         message_price:
           description: The price of this message. This depends on the total number
             of parts of the message.
@@ -56972,7 +56965,7 @@ components:
       example:
         from: "+61353787448"
         body: "John, this is your new campaign message."
-        schedule: "1444381346"
+        schedule: 1444381346
       properties:
         from:
           description: The sender.
@@ -56984,17 +56977,17 @@ components:
           type: string
         schedule:
           description: The schedule timestamp.
-          example: "1444381346"
-          type: string
+          example: 1444381346
+          type: integer
       type: object
     calculate_sms_campaign_price_data:
       example:
         total_count: 1
-        total_price: 0.035
+        total_price: "0.035"
         data:
           from: "+61353787448"
           body: "John, this is your new campaign message."
-          schedule: "1444381346"
+          schedule: 1444381346
         _currency:
           currency_name_short: AUD
           currency_prefix_d: $
@@ -57009,8 +57002,8 @@ components:
           type: integer
         total_price:
           description: The total price of the SMS campaign.
-          example: 0.035
-          type: number
+          example: "0.035"
+          type: string
         data:
           $ref: "#/components/schemas/calculate_sms_campaign_price_data_data"
         _currency:
@@ -57716,6 +57709,14 @@ components:
         _currency:
           $ref: "#/components/schemas/currency"
       type: object
+    voice_message_schedule:
+      description: |-
+        The timestamp when the message should be sent, as a <a href="http://help.clicksend.com/what-is-a-unix-timestamp" target="_blank">Unix timestamp</a>.
+        Returned as an empty string when no schedule was set.
+      example: 1436874701
+      oneOf:
+      - type: string
+      - type: integer
     send_voice_message_data:
       example:
         total_price: 0.07
@@ -57731,9 +57732,9 @@ components:
           from: from
           lang: en-au
           voice: female
-          schedule: "1436874701"
+          schedule: 1436874701
           message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-          message_parts: "1.00"
+          message_parts: 1
           message_price: "0.07"
           custom_string: this is a test
           user_id: 1
@@ -57757,9 +57758,9 @@ components:
           from: from
           lang: en-au
           voice: female
-          schedule: "1436874701"
+          schedule: 1436874701
           message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-          message_parts: "1.00"
+          message_parts: 1
           message_price: "0.07"
           custom_string: this is a test
           user_id: 1
@@ -57912,9 +57913,9 @@ components:
           from: from
           lang: en-au
           voice: female
-          schedule: "1436874701"
+          schedule: 1436874701
           message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-          message_parts: "1.00"
+          message_parts: 1
           message_price: "0.07"
           custom_string: this is a test
           user_id: 1
@@ -57938,9 +57939,9 @@ components:
           from: from
           lang: en-au
           voice: female
-          schedule: "1436874701"
+          schedule: 1436874701
           message_id: BF7AD270-0DE2-418B-B606-71D527D9C1AE
-          message_parts: "1.00"
+          message_parts: 1
           message_price: "0.07"
           custom_string: this is a test
           user_id: 1
@@ -59473,25 +59474,6 @@ components:
           nullable: true
           type: string
       type: object
-    view_account_usage_data_mms_inner:
-      properties:
-        subaccount_id:
-          description: The subaccount identifier.
-          type: integer
-        username:
-          description: The username associated with the subaccount.
-          type: string
-        total_count:
-          description: The total count of MMS.
-          type: string
-        total_price:
-          description: The total price of MMS.
-          type: string
-        notes:
-          description: Optional notes.
-          nullable: true
-          type: string
-      type: object
     view_account_usage_data_email_inner:
       properties:
         subaccount_id:
@@ -59504,34 +59486,10 @@ components:
           description: The total count of emails.
           type: integer
         total_price:
-          type: string
+          type: number
         notes:
           description: Optional notes.
           nullable: true
-          type: string
-      type: object
-    view_account_usage_data_sms_total:
-      example:
-        count: 33
-        price: "2.4417"
-      properties:
-        count:
-          description: The total count of SMS.
-          type: string
-        price:
-          description: The total price of SMS.
-          type: string
-      type: object
-    view_account_usage_data_email_total:
-      example:
-        count: 4990
-        price: "9.0020"
-      properties:
-        count:
-          description: The total count of emails.
-          type: integer
-        price:
-          description: The total price of emails.
           type: string
       type: object
     view_account_usage_data:
@@ -59540,65 +59498,65 @@ components:
         - subaccount_id: 1039
           username: gerald
           total_count: "29.00"
-          total_price: "2.1337"
+          total_price: 2.1337
         - subaccount_id: 1047
           username: user5
           total_count: "4.00"
-          total_price: "0.3080"
+          total_price: 0.308
         mms: []
         voice:
         - subaccount_id: 1039
           username: user1
           total_count: "6.00"
-          total_price: "0.1980"
+          total_price: 0.198
         - subaccount_id: 1047
           username: user5
           total_count: "1.00"
-          total_price: "0.0330"
+          total_price: 0.033
         fax:
         - subaccount_id: 1039
           username: user1
           total_count: "3.00"
-          total_price: "0.6943"
+          total_price: 0.6943
         - subaccount_id: 1047
           username: user5
           total_count: "1.00"
-          total_price: "0.2314"
+          total_price: 0.2314
         post:
         - subaccount_id: 1039
           username: user1
           total_count: "10"
-          total_price: "8.5624"
+          total_price: 8.5624
         - subaccount_id: 1047
           username: user5
           total_count: "3"
-          total_price: "2.5586"
+          total_price: 2.5586
         email:
         - subaccount_id: 1039
           username: user1
           total_count: 3992
-          total_price: "9.0020"
+          total_price: 9.002
         - subaccount_id: 1047
           username: user5
           total_count: 998
-          total_price: "0.0000"
+          total_price: 0
         email_transactional: []
         postcards: []
         sms_total:
-          count: 33
-          price: "2.4417"
+          count: 1
+          price: 0
         voice_total:
-          count: 33
-          price: "2.4417"
+          count: 1
+          price: 0
         fax_total:
-          count: 33
-          price: "2.4417"
+          count: 1
+          price: 0
         post_total:
-          count: 33
-          price: "2.4417"
+          count: 1
+          price: 0
         email_total:
-          count: 4990
-          price: "9.0020"
+          count: 1
+          price: 0
         mms_total:
           count: 1
           price: 0
@@ -59621,68 +59579,68 @@ components:
           - subaccount_id: 1039
             username: gerald
             total_count: "29.00"
-            total_price: "2.1337"
+            total_price: 2.1337
           - subaccount_id: 1047
             username: user5
             total_count: "4.00"
-            total_price: "0.3080"
+            total_price: 0.308
           items:
             $ref: "#/components/schemas/view_account_usage_data_sms_inner"
           type: array
         mms:
           example: []
           items:
-            $ref: "#/components/schemas/view_account_usage_data_mms_inner"
+            $ref: "#/components/schemas/view_account_usage_data_sms_inner"
           type: array
         voice:
           example:
           - subaccount_id: 1039
             username: user1
             total_count: "6.00"
-            total_price: "0.1980"
+            total_price: 0.198
           - subaccount_id: 1047
             username: user5
             total_count: "1.00"
-            total_price: "0.0330"
+            total_price: 0.033
           items:
-            $ref: "#/components/schemas/view_account_usage_data_mms_inner"
+            $ref: "#/components/schemas/view_account_usage_data_sms_inner"
           type: array
         fax:
           example:
           - subaccount_id: 1039
             username: user1
             total_count: "3.00"
-            total_price: "0.6943"
+            total_price: 0.6943
           - subaccount_id: 1047
             username: user5
             total_count: "1.00"
-            total_price: "0.2314"
+            total_price: 0.2314
           items:
-            $ref: "#/components/schemas/view_account_usage_data_mms_inner"
+            $ref: "#/components/schemas/view_account_usage_data_sms_inner"
           type: array
         post:
           example:
           - subaccount_id: 1039
             username: user1
             total_count: "10"
-            total_price: "8.5624"
+            total_price: 8.5624
           - subaccount_id: 1047
             username: user5
             total_count: "3"
-            total_price: "2.5586"
+            total_price: 2.5586
           items:
-            $ref: "#/components/schemas/view_account_usage_data_mms_inner"
+            $ref: "#/components/schemas/view_account_usage_data_sms_inner"
           type: array
         email:
           example:
           - subaccount_id: 1039
             username: user1
             total_count: 3992
-            total_price: "9.0020"
+            total_price: 9.002
           - subaccount_id: 1047
             username: user5
             total_count: 998
-            total_price: "0.0000"
+            total_price: 0
           items:
             $ref: "#/components/schemas/view_account_usage_data_email_inner"
           type: array
@@ -59694,18 +59652,18 @@ components:
         postcards:
           example: []
           items:
-            $ref: "#/components/schemas/view_account_usage_data_mms_inner"
+            $ref: "#/components/schemas/view_account_usage_data_sms_inner"
           type: array
         sms_total:
-          $ref: "#/components/schemas/view_account_usage_data_sms_total"
+          $ref: "#/components/schemas/view_voice_statistics_data_total_outbound"
         voice_total:
-          $ref: "#/components/schemas/view_account_usage_data_sms_total"
+          $ref: "#/components/schemas/view_voice_statistics_data_total_outbound"
         fax_total:
-          $ref: "#/components/schemas/view_account_usage_data_sms_total"
+          $ref: "#/components/schemas/view_voice_statistics_data_total_outbound"
         post_total:
-          $ref: "#/components/schemas/view_account_usage_data_sms_total"
+          $ref: "#/components/schemas/view_voice_statistics_data_total_outbound"
         email_total:
-          $ref: "#/components/schemas/view_account_usage_data_email_total"
+          $ref: "#/components/schemas/view_voice_statistics_data_total_outbound"
         mms_total:
           $ref: "#/components/schemas/view_voice_statistics_data_total_outbound"
         email_transactional_total:
@@ -60446,8 +60404,8 @@ components:
           custom_2: Custom 2
           custom_3: Custom 3
           custom_4: Custom 4
-          date_added: 2015-07-05T14:51:26Z
-          date_updated: 2015-07-05T14:51:26Z
+          date_added: 1783997542
+          date_updated: 1783997542
           fax_number: "+61477141888"
           organization_name: Awesome Company
           email: john@doe.com
@@ -60467,8 +60425,8 @@ components:
           custom_2: Custom 2
           custom_3: Custom 3
           custom_4: Custom 4
-          date_added: 2015-07-05T14:51:26Z
-          date_updated: 2015-07-05T14:51:26Z
+          date_added: 1783997542
+          date_updated: 1783997542
           fax_number: "+61477141888"
           organization_name: Awesome Company
           email: john@doe.com

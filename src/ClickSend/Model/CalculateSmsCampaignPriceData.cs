@@ -38,7 +38,7 @@ namespace ClickSend.Model
         /// <param name="data">data</param>
         /// <param name="currency">currency</param>
         [JsonConstructor]
-        public CalculateSmsCampaignPriceData(Option<int?> totalCount = default, Option<decimal?> totalPrice = default, Option<CalculateSmsCampaignPriceDataData?> data = default, Option<Currency?> currency = default)
+        public CalculateSmsCampaignPriceData(Option<int?> totalCount = default, Option<string?> totalPrice = default, Option<CalculateSmsCampaignPriceDataData?> data = default, Option<Currency?> currency = default)
         {
             TotalCountOption = totalCount;
             TotalPriceOption = totalPrice;
@@ -69,7 +69,7 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> TotalPriceOption { get; private set; }
+        public Option<string?> TotalPriceOption { get; private set; }
 
         /// <summary>
         /// The total price of the SMS campaign.
@@ -77,7 +77,7 @@ namespace ClickSend.Model
         /// <value>The total price of the SMS campaign.</value>
         /* <example>0.035</example> */
         [JsonPropertyName("total_price")]
-        public decimal? TotalPrice { get { return this.TotalPriceOption.Value; } set { this.TotalPriceOption = new(value); } }
+        public string? TotalPrice { get { return this.TotalPriceOption.Value; } set { this.TotalPriceOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Data
@@ -155,7 +155,7 @@ namespace ClickSend.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<int?> totalCount = default;
-            Option<decimal?> totalPrice = default;
+            Option<string?> totalPrice = default;
             Option<CalculateSmsCampaignPriceDataData?> data = default;
             Option<Currency?> currency = default;
 
@@ -178,7 +178,7 @@ namespace ClickSend.Model
                             totalCount = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "total_price":
-                            totalPrice = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
+                            totalPrice = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "data":
                             data = new Option<CalculateSmsCampaignPriceDataData?>(JsonSerializer.Deserialize<CalculateSmsCampaignPriceDataData>(ref utf8JsonReader, jsonSerializerOptions)!);
@@ -231,6 +231,9 @@ namespace ClickSend.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, CalculateSmsCampaignPriceData calculateSmsCampaignPriceData, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (calculateSmsCampaignPriceData.TotalPriceOption.IsSet && calculateSmsCampaignPriceData.TotalPrice == null)
+                throw new ArgumentNullException(nameof(calculateSmsCampaignPriceData.TotalPrice), "Property is required for class CalculateSmsCampaignPriceData.");
+
             if (calculateSmsCampaignPriceData.DataOption.IsSet && calculateSmsCampaignPriceData.Data == null)
                 throw new ArgumentNullException(nameof(calculateSmsCampaignPriceData.Data), "Property is required for class CalculateSmsCampaignPriceData.");
 
@@ -241,7 +244,7 @@ namespace ClickSend.Model
                 writer.WriteNumber("total_count", calculateSmsCampaignPriceData.TotalCountOption.Value!.Value);
 
             if (calculateSmsCampaignPriceData.TotalPriceOption.IsSet)
-                writer.WriteNumber("total_price", calculateSmsCampaignPriceData.TotalPriceOption.Value!.Value);
+                writer.WriteString("total_price", calculateSmsCampaignPriceData.TotalPrice);
 
             if (calculateSmsCampaignPriceData.DataOption.IsSet)
             {

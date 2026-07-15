@@ -52,7 +52,7 @@ namespace ClickSend.Model
         /// <param name="registrationStepsUrl">URL for registration steps.</param>
         /// <param name="regulationRequirementsDescription">Description of regulation requirements.</param>
         [JsonConstructor]
-        public GlobalSending(Option<int?> id = default, Option<string?> name = default, Option<string?> code = default, Option<string?> region = default, Option<string?> agreedAt = default, Option<AccountReferrerChosen?> registrationEntity = default, Option<GlobalSendingRegistrationStatus?> registrationStatus = default, Option<string?> jotformId = default, Option<int?> smsRegistrationType = default, Option<bool?> blockRegistration = default, Option<bool?> blockLeads = default, Option<string?> trialFromAddress = default, Option<bool?> restrictedSending = default, Option<int?> trialSending = default, Option<string?> trialSendingDescription = default, Option<int?> hasRegulationRequirements = default, Option<string?> registrationStepsUrl = default, Option<string?> regulationRequirementsDescription = default)
+        public GlobalSending(Option<int?> id = default, Option<string?> name = default, Option<string?> code = default, Option<string?> region = default, Option<int?> agreedAt = default, Option<AccountReferrerChosen?> registrationEntity = default, Option<GlobalSendingRegistrationStatus?> registrationStatus = default, Option<string?> jotformId = default, Option<int?> smsRegistrationType = default, Option<bool?> blockRegistration = default, Option<bool?> blockLeads = default, Option<string?> trialFromAddress = default, Option<bool?> restrictedSending = default, Option<int?> trialSending = default, Option<string?> trialSendingDescription = default, Option<int?> hasRegulationRequirements = default, Option<string?> registrationStepsUrl = default, Option<string?> regulationRequirementsDescription = default)
         {
             IdOption = id;
             NameOption = name;
@@ -142,14 +142,14 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> AgreedAtOption { get; private set; }
+        public Option<int?> AgreedAtOption { get; private set; }
 
         /// <summary>
         /// The date when the country was agreed upon.
         /// </summary>
         /// <value>The date when the country was agreed upon.</value>
         [JsonPropertyName("agreed_at")]
-        public string? AgreedAt { get { return this.AgreedAtOption.Value; } set { this.AgreedAtOption = new(value); } }
+        public int? AgreedAt { get { return this.AgreedAtOption.Value; } set { this.AgreedAtOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of RegistrationEntity
@@ -407,7 +407,7 @@ namespace ClickSend.Model
             Option<string?> name = default;
             Option<string?> code = default;
             Option<string?> region = default;
-            Option<string?> agreedAt = default;
+            Option<int?> agreedAt = default;
             Option<AccountReferrerChosen?> registrationEntity = default;
             Option<GlobalSendingRegistrationStatus?> registrationStatus = default;
             Option<string?> jotformId = default;
@@ -450,7 +450,7 @@ namespace ClickSend.Model
                             region = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "agreed_at":
-                            agreedAt = new Option<string?>(utf8JsonReader.GetString());
+                            agreedAt = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "registration_entity":
                             registrationEntity = new Option<AccountReferrerChosen?>(JsonSerializer.Deserialize<AccountReferrerChosen>(ref utf8JsonReader, jsonSerializerOptions));
@@ -613,7 +613,7 @@ namespace ClickSend.Model
 
             if (globalSending.AgreedAtOption.IsSet)
                 if (globalSending.AgreedAtOption.Value != null)
-                    writer.WriteString("agreed_at", globalSending.AgreedAt);
+                    writer.WriteNumber("agreed_at", globalSending.AgreedAtOption.Value!.Value);
                 else
                     writer.WriteNull("agreed_at");
 

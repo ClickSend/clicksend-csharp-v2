@@ -356,10 +356,7 @@ namespace ClickSend.Client
             _jsonOptions.Converters.Add(new ViewAccountUsageJsonConverter());
             _jsonOptions.Converters.Add(new ViewAccountUsageDataJsonConverter());
             _jsonOptions.Converters.Add(new ViewAccountUsageDataEmailInnerJsonConverter());
-            _jsonOptions.Converters.Add(new ViewAccountUsageDataEmailTotalJsonConverter());
-            _jsonOptions.Converters.Add(new ViewAccountUsageDataMmsInnerJsonConverter());
             _jsonOptions.Converters.Add(new ViewAccountUsageDataSmsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new ViewAccountUsageDataSmsTotalJsonConverter());
             _jsonOptions.Converters.Add(new ViewAllEmailCampaignsJsonConverter());
             _jsonOptions.Converters.Add(new ViewAllEmailCampaignsDataJsonConverter());
             _jsonOptions.Converters.Add(new ViewAllMmsCampaignsJsonConverter());
@@ -482,6 +479,7 @@ namespace ClickSend.Client
             _jsonOptions.Converters.Add(new ViewYourReturnAddressesDataJsonConverter());
             _jsonOptions.Converters.Add(new VoiceDeliveryReceiptRuleJsonConverter());
             _jsonOptions.Converters.Add(new VoiceMessageJsonConverter());
+            _jsonOptions.Converters.Add(new VoiceMessageScheduleJsonConverter());
             _jsonOptions.Converters.Add(new VoiceReceiptJsonConverter());
             JsonSerializerOptionsProvider jsonSerializerOptionsProvider = new(_jsonOptions);
             _services.AddSingleton(jsonSerializerOptionsProvider);

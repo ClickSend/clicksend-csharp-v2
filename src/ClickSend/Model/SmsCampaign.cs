@@ -51,7 +51,7 @@ namespace ClickSend.Model
         /// <param name="totalCount">The total number of messages sent in the SMS campaign.</param>
         /// <param name="listName">The name of the contact list of the SMS campaign. This is related of the _list_id_ parameter.</param>
         [JsonConstructor]
-        public SmsCampaign(Option<int?> smsCampaignId = default, Option<string?> name = default, Option<int?> userId = default, Option<int?> subaccountId = default, Option<int?> listId = default, Option<string?> from = default, Option<string?> body = default, Option<string?> schedule = default, Option<string?> status = default, Option<string?> dateAdded = default, Option<string?> customString = default, Option<string?> urlToShorten = default, Option<int?> unsubscribeLink = default, Option<string?> source = default, Option<List<SmsCampaignSendersInner>?> senders = default, Option<int?> totalCount = default, Option<string?> listName = default)
+        public SmsCampaign(Option<int?> smsCampaignId = default, Option<string?> name = default, Option<int?> userId = default, Option<int?> subaccountId = default, Option<int?> listId = default, Option<string?> from = default, Option<string?> body = default, Option<int?> schedule = default, Option<string?> status = default, Option<int?> dateAdded = default, Option<string?> customString = default, Option<string?> urlToShorten = default, Option<int?> unsubscribeLink = default, Option<string?> source = default, Option<List<SmsCampaignSendersInner>?> senders = default, Option<int?> totalCount = default, Option<string?> listName = default)
         {
             SmsCampaignIdOption = smsCampaignId;
             NameOption = name;
@@ -185,7 +185,7 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> ScheduleOption { get; private set; }
+        public Option<int?> ScheduleOption { get; private set; }
 
         /// <summary>
         /// The scheduled date of the message. It is in &lt;a href&#x3D;\&quot;http://help.clicksend.com/what-is-a-unix-timestamp\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Unix format&lt;/a&gt;.
@@ -193,7 +193,7 @@ namespace ClickSend.Model
         /// <value>The scheduled date of the message. It is in &lt;a href&#x3D;\&quot;http://help.clicksend.com/what-is-a-unix-timestamp\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Unix format&lt;/a&gt;.</value>
         /* <example>1444821615</example> */
         [JsonPropertyName("schedule")]
-        public string? Schedule { get { return this.ScheduleOption.Value; } set { this.ScheduleOption = new(value); } }
+        public int? Schedule { get { return this.ScheduleOption.Value; } set { this.ScheduleOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Status
@@ -215,7 +215,7 @@ namespace ClickSend.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> DateAddedOption { get; private set; }
+        public Option<int?> DateAddedOption { get; private set; }
 
         /// <summary>
         /// The date you created the SMS campaign. It is in &lt;a href&#x3D;\&quot;http://help.clicksend.com/what-is-a-unix-timestamp\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Unix format&lt;/a&gt;.
@@ -223,7 +223,7 @@ namespace ClickSend.Model
         /// <value>The date you created the SMS campaign. It is in &lt;a href&#x3D;\&quot;http://help.clicksend.com/what-is-a-unix-timestamp\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Unix format&lt;/a&gt;.</value>
         /* <example>1444962630</example> */
         [JsonPropertyName("date_added")]
-        public string? DateAdded { get { return this.DateAddedOption.Value; } set { this.DateAddedOption = new(value); } }
+        public int? DateAdded { get { return this.DateAddedOption.Value; } set { this.DateAddedOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of CustomString
@@ -393,9 +393,9 @@ namespace ClickSend.Model
             Option<int?> listId = default;
             Option<string?> from = default;
             Option<string?> body = default;
-            Option<string?> schedule = default;
+            Option<int?> schedule = default;
             Option<string?> status = default;
-            Option<string?> dateAdded = default;
+            Option<int?> dateAdded = default;
             Option<string?> customString = default;
             Option<string?> urlToShorten = default;
             Option<int?> unsubscribeLink = default;
@@ -441,13 +441,13 @@ namespace ClickSend.Model
                             body = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "schedule":
-                            schedule = new Option<string?>(utf8JsonReader.GetString()!);
+                            schedule = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "status":
                             status = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "date_added":
-                            dateAdded = new Option<string?>(utf8JsonReader.GetString()!);
+                            dateAdded = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "custom_string":
                             customString = new Option<string?>(utf8JsonReader.GetString());
@@ -557,14 +557,8 @@ namespace ClickSend.Model
             if (smsCampaign.BodyOption.IsSet && smsCampaign.Body == null)
                 throw new ArgumentNullException(nameof(smsCampaign.Body), "Property is required for class SmsCampaign.");
 
-            if (smsCampaign.ScheduleOption.IsSet && smsCampaign.Schedule == null)
-                throw new ArgumentNullException(nameof(smsCampaign.Schedule), "Property is required for class SmsCampaign.");
-
             if (smsCampaign.StatusOption.IsSet && smsCampaign.Status == null)
                 throw new ArgumentNullException(nameof(smsCampaign.Status), "Property is required for class SmsCampaign.");
-
-            if (smsCampaign.DateAddedOption.IsSet && smsCampaign.DateAdded == null)
-                throw new ArgumentNullException(nameof(smsCampaign.DateAdded), "Property is required for class SmsCampaign.");
 
             if (smsCampaign.UrlToShortenOption.IsSet && smsCampaign.UrlToShorten == null)
                 throw new ArgumentNullException(nameof(smsCampaign.UrlToShorten), "Property is required for class SmsCampaign.");
@@ -597,13 +591,13 @@ namespace ClickSend.Model
                 writer.WriteString("body", smsCampaign.Body);
 
             if (smsCampaign.ScheduleOption.IsSet)
-                writer.WriteString("schedule", smsCampaign.Schedule);
+                writer.WriteNumber("schedule", smsCampaign.ScheduleOption.Value!.Value);
 
             if (smsCampaign.StatusOption.IsSet)
                 writer.WriteString("status", smsCampaign.Status);
 
             if (smsCampaign.DateAddedOption.IsSet)
-                writer.WriteString("date_added", smsCampaign.DateAdded);
+                writer.WriteNumber("date_added", smsCampaign.DateAddedOption.Value!.Value);
 
             if (smsCampaign.CustomStringOption.IsSet)
                 if (smsCampaign.CustomStringOption.Value != null)
