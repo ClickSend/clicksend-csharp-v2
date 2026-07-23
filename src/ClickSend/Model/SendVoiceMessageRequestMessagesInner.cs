@@ -33,7 +33,7 @@ namespace ClickSend.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="SendVoiceMessageRequestMessagesInner" /> class.
         /// </summary>
-        /// <param name="source">source</param>
+        /// <param name="source">source (default to &quot;sdk&quot;)</param>
         /// <param name="body">body</param>
         /// <param name="to">to</param>
         /// <param name="voice">voice</param>

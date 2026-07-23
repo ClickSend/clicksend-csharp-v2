@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Source** | **string** |  | [optional] 
+**Source** | **string** |  | [optional] [default to "sdk"]
 **To** | **string** |  | [optional] 
 **From** | **string** |  | [optional] 
 **Subject** | **string** |  | [optional] 
