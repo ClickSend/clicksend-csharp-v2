@@ -54351,7 +54351,6 @@ components:
             If your **Sender ID** has a different country code to the recipient’s, it'll be replaced by a local number, except in <a href="https://help.clicksend.com/category/mfdctha7f0-country-specific-features-and-restrictions" target="_blank">certain countries</a>. If the sender number is blocked, a different number will replace it.
           type: string
         source:
-          default: sdk
           description: "The source of the request. For example, the name of your application.\
             \ It's used to identify messages sent from various applications."
           type: string
@@ -54761,7 +54760,6 @@ components:
     send_mms_request_messages_inner:
       properties:
         source:
-          default: sdk
           type: string
         to:
           type: string
@@ -54854,7 +54852,6 @@ components:
     send_voice_message_request_messages_inner:
       properties:
         source:
-          default: sdk
           type: string
         body:
           type: string

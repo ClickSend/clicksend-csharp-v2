@@ -33,7 +33,7 @@ namespace ClickSend.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="SendMmsRequestMessagesInner" /> class.
         /// </summary>
-        /// <param name="source">source (default to &quot;sdk&quot;)</param>
+        /// <param name="source">source</param>
         /// <param name="to">to</param>
         /// <param name="from">from</param>
         /// <param name="subject">subject</param>
