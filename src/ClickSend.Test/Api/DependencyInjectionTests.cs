@@ -88,14 +88,8 @@ namespace ClickSend.Test.Api
             var emailToSmsApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IEmailToSmsApi>();
             Assert.True(emailToSmsApi.HttpClient.BaseAddress != null);
 
-            var faxApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IFaxApi>();
-            Assert.True(faxApi.HttpClient.BaseAddress != null);
-
             var internationalMessagingApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IInternationalMessagingApi>();
             Assert.True(internationalMessagingApi.HttpClient.BaseAddress != null);
-
-            var lettersApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<ILettersApi>();
-            Assert.True(lettersApi.HttpClient.BaseAddress != null);
 
             var listsApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IListsApi>();
             Assert.True(listsApi.HttpClient.BaseAddress != null);
@@ -117,9 +111,6 @@ namespace ClickSend.Test.Api
 
             var ownNumbersApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IOwnNumbersApi>();
             Assert.True(ownNumbersApi.HttpClient.BaseAddress != null);
-
-            var postcardsApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IPostcardsApi>();
-            Assert.True(postcardsApi.HttpClient.BaseAddress != null);
 
             var referralsApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IReferralsApi>();
             Assert.True(referralsApi.HttpClient.BaseAddress != null);
@@ -182,14 +173,8 @@ namespace ClickSend.Test.Api
             var emailToSmsApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IEmailToSmsApi>();
             Assert.True(emailToSmsApi.HttpClient.BaseAddress != null);
 
-            var faxApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IFaxApi>();
-            Assert.True(faxApi.HttpClient.BaseAddress != null);
-
             var internationalMessagingApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IInternationalMessagingApi>();
             Assert.True(internationalMessagingApi.HttpClient.BaseAddress != null);
-
-            var lettersApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<ILettersApi>();
-            Assert.True(lettersApi.HttpClient.BaseAddress != null);
 
             var listsApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IListsApi>();
             Assert.True(listsApi.HttpClient.BaseAddress != null);
@@ -211,9 +196,6 @@ namespace ClickSend.Test.Api
 
             var ownNumbersApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IOwnNumbersApi>();
             Assert.True(ownNumbersApi.HttpClient.BaseAddress != null);
-
-            var postcardsApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IPostcardsApi>();
-            Assert.True(postcardsApi.HttpClient.BaseAddress != null);
 
             var referralsApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IReferralsApi>();
             Assert.True(referralsApi.HttpClient.BaseAddress != null);
@@ -276,14 +258,8 @@ namespace ClickSend.Test.Api
             var emailToSmsApi = _hostUsingAddWithAClient.Services.GetRequiredService<IEmailToSmsApi>();
             Assert.True(emailToSmsApi.HttpClient.BaseAddress != null);
             
-            var faxApi = _hostUsingAddWithAClient.Services.GetRequiredService<IFaxApi>();
-            Assert.True(faxApi.HttpClient.BaseAddress != null);
-            
             var internationalMessagingApi = _hostUsingAddWithAClient.Services.GetRequiredService<IInternationalMessagingApi>();
             Assert.True(internationalMessagingApi.HttpClient.BaseAddress != null);
-            
-            var lettersApi = _hostUsingAddWithAClient.Services.GetRequiredService<ILettersApi>();
-            Assert.True(lettersApi.HttpClient.BaseAddress != null);
             
             var listsApi = _hostUsingAddWithAClient.Services.GetRequiredService<IListsApi>();
             Assert.True(listsApi.HttpClient.BaseAddress != null);
@@ -305,9 +281,6 @@ namespace ClickSend.Test.Api
             
             var ownNumbersApi = _hostUsingAddWithAClient.Services.GetRequiredService<IOwnNumbersApi>();
             Assert.True(ownNumbersApi.HttpClient.BaseAddress != null);
-            
-            var postcardsApi = _hostUsingAddWithAClient.Services.GetRequiredService<IPostcardsApi>();
-            Assert.True(postcardsApi.HttpClient.BaseAddress != null);
             
             var referralsApi = _hostUsingAddWithAClient.Services.GetRequiredService<IReferralsApi>();
             Assert.True(referralsApi.HttpClient.BaseAddress != null);
@@ -370,14 +343,8 @@ namespace ClickSend.Test.Api
             var emailToSmsApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IEmailToSmsApi>();
             Assert.True(emailToSmsApi.HttpClient.BaseAddress != null);
 
-            var faxApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IFaxApi>();
-            Assert.True(faxApi.HttpClient.BaseAddress != null);
-
             var internationalMessagingApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IInternationalMessagingApi>();
             Assert.True(internationalMessagingApi.HttpClient.BaseAddress != null);
-
-            var lettersApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<ILettersApi>();
-            Assert.True(lettersApi.HttpClient.BaseAddress != null);
 
             var listsApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IListsApi>();
             Assert.True(listsApi.HttpClient.BaseAddress != null);
@@ -399,9 +366,6 @@ namespace ClickSend.Test.Api
 
             var ownNumbersApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IOwnNumbersApi>();
             Assert.True(ownNumbersApi.HttpClient.BaseAddress != null);
-
-            var postcardsApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IPostcardsApi>();
-            Assert.True(postcardsApi.HttpClient.BaseAddress != null);
 
             var referralsApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IReferralsApi>();
             Assert.True(referralsApi.HttpClient.BaseAddress != null);
