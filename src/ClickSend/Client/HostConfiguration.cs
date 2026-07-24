@@ -553,7 +553,11 @@ namespace ClickSend.Client
             Action<IHttpClientBuilder>? builder = null)
         {
             if (client == null)
-                client = (_, c) => c.BaseAddress = new Uri(ClientUtils.BASE_ADDRESS);
+                client = (_, c) =>
+                {
+                    c.BaseAddress = new Uri(ClientUtils.BASE_ADDRESS);
+                    c.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "ClickSend-SDK/6.0.0/csharp");
+                };
 
             List<IHttpClientBuilder> builders = new List<IHttpClientBuilder>();
 
