@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickSend", "src\ClickSend\ClickSend.csproj", "{55F9D0F1-D6F3-4827-BBD9-E37F57F41B9C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickSend", "src\ClickSend\ClickSend.csproj", "{3D220710-B8A1-4D21-A9A5-B9A46904EECF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickSend.Test", "src\ClickSend.Test\ClickSend.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
 EndProject
@@ -12,10 +12,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{55F9D0F1-D6F3-4827-BBD9-E37F57F41B9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55F9D0F1-D6F3-4827-BBD9-E37F57F41B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55F9D0F1-D6F3-4827-BBD9-E37F57F41B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55F9D0F1-D6F3-4827-BBD9-E37F57F41B9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D220710-B8A1-4D21-A9A5-B9A46904EECF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D220710-B8A1-4D21-A9A5-B9A46904EECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D220710-B8A1-4D21-A9A5-B9A46904EECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D220710-B8A1-4D21-A9A5-B9A46904EECF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
