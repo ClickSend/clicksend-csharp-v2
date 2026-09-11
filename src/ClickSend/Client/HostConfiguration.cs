@@ -498,7 +498,7 @@ namespace ClickSend.Client
                 client = (_, c) =>
                 {
                     c.BaseAddress = new Uri(ClientUtils.BASE_ADDRESS);
-                    c.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "ClickSend-SDK/6.0.1/csharp");
+                    c.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "ClickSend-SDK/6.0.2/csharp");
                 };
 
             List<IHttpClientBuilder> builders = new List<IHttpClientBuilder>();
