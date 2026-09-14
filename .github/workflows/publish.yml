@@ -1,0 +1,90 @@
+name: .NET Package
+
+on:
+  release:
+    types: [published]      # publish when a GitHub Release is created
+  workflow_dispatch:        # ...or trigger manually
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore ClickSend.sln
+
+      - name: Build
+        run: dotnet build ClickSend.sln -c Release --no-restore
+
+      - name: Test
+        run: dotnet test ClickSend.sln -c Release --no-build
+
+  # Public registry: NuGet.org (https://www.nuget.org/packages/ClickSend)
+  publish-nuget:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write  # enable GitHub OIDC token issuance for Trusted Publishing
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Pack
+        run: dotnet pack src/ClickSend/ClickSend.csproj -c Release -o out
+
+      - name: NuGet login (OIDC -> temp API key)
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
+      - name: Push to NuGet.org
+        run: >
+          dotnet nuget push "out/*.nupkg"
+          --source https://api.nuget.org/v3/index.json
+          --api-key ${{ steps.login.outputs.NUGET_API_KEY }}
+          --skip-duplicate
+
+  # GitHub Packages: https://github.com/ClickSend/clicksend-csharp-v2/packages
+  publish-gpr:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Pack
+        run: dotnet pack src/ClickSend/ClickSend.csproj -c Release -o out
+
+      - name: Add GitHub Packages source
+        run: >
+          dotnet nuget add source https://nuget.pkg.github.com/ClickSend/index.json
+          --name github
+          --username ClickSend
+          --password ${{ secrets.GPR_TOKEN }}
+          --store-password-in-clear-text
+
+      - name: Push to GitHub Packages
+        run: >
+          dotnet nuget push "out/*.nupkg"
+          --source github
+          --api-key ${{ secrets.GPR_TOKEN }}
+          --skip-duplicate
